@@ -226,7 +226,7 @@ body{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:850px;
+    min-width:980px;
 }
 
 thead{
@@ -328,7 +328,8 @@ td{
     border:1px solid rgba(239,68,68,.12);
 }
 
-.save-btn{
+.save-btn,
+.manage-btn{
     border:0;
     padding:9px 13px;
     border-radius:8px;
@@ -339,7 +340,14 @@ td{
     font-weight:700;
 }
 
-.save-btn:disabled{
+.manage-btn{
+    background:rgba(168,85,247,.13);
+    border:1px solid rgba(168,85,247,.25);
+    margin-left:6px;
+}
+
+.save-btn:disabled,
+.manage-btn:disabled{
     opacity:.55;
     cursor:not-allowed;
 }
@@ -356,6 +364,217 @@ td{
 }
 
 /* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:500;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:760px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#100b1f;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+
+.modal-header{
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.modal-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.modal-subtitle{
+    color:#8f899e;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.close-btn{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.1);
+    background:#080612;
+    color:#fff;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.form-label{
+    display:block;
+    color:#aaa2b7;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.details-input{
+    width:100%;
+    min-height:150px;
+    resize:vertical;
+    padding:13px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.1);
+    background:#080612;
+    color:#fff;
+    outline:none;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.details-input:focus{
+    border-color:#a855f7;
+}
+
+.details-input::placeholder{
+    color:#625b6d;
+}
+
+.add-item-btn{
+    width:100%;
+    margin-top:12px;
+    border:0;
+    padding:13px;
+    border-radius:10px;
+    color:#fff;
+    background:linear-gradient(90deg,#9333ea,#06b6d4);
+    cursor:pointer;
+    font-size:13px;
+    font-weight:800;
+}
+
+.add-item-btn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.items-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:25px 0 12px;
+}
+
+.items-title h3{
+    font-size:14px;
+}
+
+.item-count{
+    color:#67e8f9;
+    font-size:11px;
+}
+
+.items-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.inventory-item{
+    padding:14px;
+    border-radius:12px;
+    background:#080612;
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.item-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.item-number{
+    font-size:11px;
+    font-weight:800;
+    color:#c084fc;
+}
+
+.item-status{
+    font-size:9px;
+    font-weight:800;
+    padding:5px 8px;
+    border-radius:20px;
+}
+
+.item-status.available{
+    color:#86efac;
+    background:rgba(34,197,94,.08);
+    border:1px solid rgba(34,197,94,.12);
+}
+
+.item-status.sold{
+    color:#fca5a5;
+    background:rgba(239,68,68,.08);
+    border:1px solid rgba(239,68,68,.12);
+}
+
+.item-details{
+    color:#c4bdcc;
+    font-size:12px;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.item-actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.delete-item-btn{
+    border:1px solid rgba(239,68,68,.2);
+    background:rgba(239,68,68,.07);
+    color:#fca5a5;
+    padding:7px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:700;
+}
+
+.no-items{
+    padding:25px;
+    text-align:center;
+    color:#706879;
+    border:1px dashed rgba(255,255,255,.08);
+    border-radius:12px;
+    font-size:12px;
+}
+
+/* =========================
    MOBILE
 ========================= */
 
@@ -363,7 +582,7 @@ td{
     display:none;
 }
 
-@media(max-width:900px){
+@media(max-width:1100px){
 
     .sidebar{
         width:210px;
@@ -444,6 +663,15 @@ td{
 
     .search{
         width:100%;
+    }
+
+    .modal{
+        max-height:94vh;
+        border-radius:16px;
+    }
+
+    .modal-body{
+        padding:15px;
     }
 
 }
@@ -558,7 +786,7 @@ td{
             </h1>
 
             <p>
-                Manage product stock and availability.
+                Manage product stock and customer delivery items.
             </p>
 
         </div>
@@ -741,6 +969,105 @@ td{
 </main>
 
 
+<!-- =========================
+     ITEM MANAGER MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="itemModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div
+                    class="modal-title"
+                    id="modalProductName"
+                >
+                    Product Items
+                </div>
+
+                <div class="modal-subtitle">
+                    Add the actual details customers will receive after buying this product.
+                </div>
+
+            </div>
+
+            <button
+                class="close-btn"
+                id="closeModalBtn"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <label class="form-label">
+                Product Details
+            </label>
+
+            <textarea
+                id="itemDetails"
+                class="details-input"
+                placeholder="Example:
+
+Email: customer@example.com
+Password: 123456
+Username: example123
+
+You can also add any other information the customer should receive."
+            ></textarea>
+
+
+            <button
+                class="add-item-btn"
+                id="addItemBtn"
+            >
+                ＋ Add Available Item
+            </button>
+
+
+            <div class="items-title">
+
+                <h3>
+                    Stored Items
+                </h3>
+
+                <span
+                    class="item-count"
+                    id="itemCount"
+                >
+                    0 Available
+                </span>
+
+            </div>
+
+
+            <div
+                class="items-list"
+                id="itemsList"
+            >
+
+                <div class="no-items">
+                    No items added yet.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 <script type="module">
 
 /* =========================================
@@ -761,13 +1088,15 @@ import {
     getDatabase,
     ref,
     onValue,
-    update
+    update,
+    push,
+    set,
+    remove
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 /* =========================================
    FIREBASE CONFIG
-   EXACT CONFIG FROM FIREBASE CONSOLE
 ========================================= */
 
 const firebaseConfig = {
@@ -846,6 +1175,30 @@ const outOfStock =
     document.getElementById("outOfStock");
 
 
+/* MODAL */
+
+const itemModal =
+    document.getElementById("itemModal");
+
+const modalProductName =
+    document.getElementById("modalProductName");
+
+const itemDetails =
+    document.getElementById("itemDetails");
+
+const addItemBtn =
+    document.getElementById("addItemBtn");
+
+const closeModalBtn =
+    document.getElementById("closeModalBtn");
+
+const itemsList =
+    document.getElementById("itemsList");
+
+const itemCount =
+    document.getElementById("itemCount");
+
+
 /* =========================================
    DATA
 ========================================= */
@@ -853,6 +1206,8 @@ const outOfStock =
 let currentUser = null;
 let allProducts = [];
 let unsubscribeProducts = null;
+let unsubscribeItems = null;
+let selectedProductId = null;
 
 
 /* =========================================
@@ -868,13 +1223,6 @@ onAuthStateChanged(auth, (user) => {
 
 
     if(!user){
-
-        /*
-         * Inventory is inside /admin/
-         * so the correct login page is:
-         *
-         * admin/login.html
-         */
 
         window.location.replace(
             "login.html"
@@ -1211,6 +1559,13 @@ function renderProducts(){
                             Save
                         </button>
 
+                        <button
+                            class="manage-btn"
+                            data-manage-id="${escapeAttribute(product.id)}"
+                        >
+                            Items
+                        </button>
+
                     </td>
 
                 </tr>
@@ -1231,6 +1586,24 @@ function renderProducts(){
                     saveStock(
                         button.dataset.id,
                         button
+                    );
+
+                }
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".manage-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    openItemManager(
+                        button.dataset.manageId
                     );
 
                 }
@@ -1561,6 +1934,498 @@ async function saveStock(
     }
 
 }
+
+
+/* =========================================
+   OPEN ITEM MANAGER
+========================================= */
+
+function openItemManager(productId){
+
+    selectedProductId =
+        productId;
+
+
+    const product =
+        allProducts.find(
+            item =>
+                item.id === productId
+        );
+
+
+    if(!product){
+
+        alert(
+            "Product not found."
+        );
+
+        return;
+
+    }
+
+
+    modalProductName.textContent =
+        product.name ||
+        "Product Items";
+
+
+    itemDetails.value = "";
+
+
+    itemModal.classList.add("show");
+
+
+    loadProductItems(productId);
+
+}
+
+
+/* =========================================
+   LOAD PRODUCT ITEMS
+========================================= */
+
+function loadProductItems(productId){
+
+    if(unsubscribeItems){
+
+        unsubscribeItems();
+
+    }
+
+
+    const itemsRef =
+        ref(
+            db,
+            "inventory/" + productId
+        );
+
+
+    unsubscribeItems =
+        onValue(
+            itemsRef,
+            (snapshot) => {
+
+                const data =
+                    snapshot.val();
+
+
+                const items = [];
+
+
+                if(data){
+
+                    Object.entries(data).forEach(
+                        ([id,item]) => {
+
+                            items.push({
+
+                                id:id,
+
+                                ...item
+
+                            });
+
+                        }
+                    );
+
+                }
+
+
+                items.sort(
+                    (a,b) =>
+                        (b.createdAt || 0) -
+                        (a.createdAt || 0)
+                );
+
+
+                renderItems(
+                    items
+                );
+
+            },
+            (error) => {
+
+                console.error(
+                    "Items load error:",
+                    error
+                );
+
+
+                itemsList.innerHTML = `
+
+                    <div class="no-items">
+                        Unable to load items.
+                    </div>
+
+                `;
+
+            }
+        );
+
+}
+
+
+/* =========================================
+   RENDER ITEMS
+========================================= */
+
+function renderItems(items){
+
+    const availableCount =
+        items.filter(
+            item =>
+                item.status === "available"
+        ).length;
+
+
+    const soldCount =
+        items.filter(
+            item =>
+                item.status === "sold"
+        ).length;
+
+
+    itemCount.textContent =
+        availableCount +
+        " Available • " +
+        soldCount +
+        " Sold";
+
+
+    if(items.length === 0){
+
+        itemsList.innerHTML = `
+
+            <div class="no-items">
+                No items added yet.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    itemsList.innerHTML =
+        items.map(
+            (item,index) => {
+
+                const details =
+                    escapeHTML(
+                        item.details ||
+                        ""
+                    );
+
+
+                const status =
+                    item.status === "sold"
+                    ? "sold"
+                    : "available";
+
+
+                const statusLabel =
+                    status === "sold"
+                    ? "SOLD"
+                    : "AVAILABLE";
+
+
+                return `
+
+                    <div class="inventory-item">
+
+                        <div class="item-top">
+
+                            <div class="item-number">
+                                ITEM #${items.length - index}
+                            </div>
+
+                            <span
+                                class="item-status ${status}"
+                            >
+                                ${statusLabel}
+                            </span>
+
+                        </div>
+
+
+                        <div class="item-details">
+                            ${details}
+                        </div>
+
+
+                        ${
+                            status === "available"
+                            ? `
+                                <div class="item-actions">
+
+                                    <button
+                                        class="delete-item-btn"
+                                        data-delete-id="${escapeAttribute(item.id)}"
+                                    >
+                                        Delete Item
+                                    </button>
+
+                                </div>
+                            `
+                            : ""
+                        }
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+
+    document
+        .querySelectorAll(".delete-item-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    deleteInventoryItem(
+                        button.dataset.deleteId
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================
+   ADD INVENTORY ITEM
+========================================= */
+
+addItemBtn.addEventListener(
+    "click",
+    async () => {
+
+        if(!selectedProductId){
+
+            alert(
+                "Please select a product first."
+            );
+
+            return;
+
+        }
+
+
+        const details =
+            itemDetails.value.trim();
+
+
+        if(!details){
+
+            alert(
+                "Enter the product details first."
+            );
+
+            itemDetails.focus();
+
+            return;
+
+        }
+
+
+        addItemBtn.disabled = true;
+
+        addItemBtn.textContent =
+            "Adding Item...";
+
+
+        try{
+
+            const itemsRef =
+                ref(
+                    db,
+                    "inventory/" +
+                    selectedProductId
+                );
+
+
+            const newItemRef =
+                push(itemsRef);
+
+
+            await set(
+                newItemRef,
+                {
+
+                    details:details,
+
+                    status:"available",
+
+                    createdAt:Date.now(),
+
+                    createdBy:
+                        currentUser.email
+
+                }
+            );
+
+
+            itemDetails.value = "";
+
+
+            addItemBtn.textContent =
+                "✓ Item Added";
+
+
+            setTimeout(() => {
+
+                addItemBtn.textContent =
+                    "＋ Add Available Item";
+
+                addItemBtn.disabled = false;
+
+            },900);
+
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Add item error:",
+                error
+            );
+
+
+            alert(
+                "Unable to add item: " +
+                (
+                    error.message ||
+                    "Firebase error"
+                )
+            );
+
+
+            addItemBtn.disabled = false;
+
+            addItemBtn.textContent =
+                "＋ Add Available Item";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   DELETE INVENTORY ITEM
+========================================= */
+
+async function deleteInventoryItem(itemId){
+
+    if(!selectedProductId){
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "Delete this inventory item?"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        await remove(
+            ref(
+                db,
+                "inventory/" +
+                selectedProductId +
+                "/" +
+                itemId
+            )
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Delete item error:",
+            error
+        );
+
+
+        alert(
+            "Unable to delete item: " +
+            (
+                error.message ||
+                "Firebase error"
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
+
+function closeItemManager(){
+
+    itemModal.classList.remove("show");
+
+
+    if(unsubscribeItems){
+
+        unsubscribeItems();
+
+        unsubscribeItems = null;
+
+    }
+
+
+    selectedProductId = null;
+
+    itemDetails.value = "";
+
+}
+
+
+closeModalBtn.addEventListener(
+    "click",
+    closeItemManager
+);
+
+
+itemModal.addEventListener(
+    "click",
+    (event) => {
+
+        if(
+            event.target === itemModal
+        ){
+
+            closeItemManager();
+
+        }
+
+    }
+);
 
 
 /* =========================================
