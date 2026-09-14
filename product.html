@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zavora Social | Product</title>
-
-<style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Product</title><style>
 
 *{
     box-sizing:border-box;
@@ -561,92 +552,67 @@ header{
 
 }
 
-</style>
+</style></head><body><header><div class="navbar">
 
-</head>
-
-
-<body>
-
-
-<header>
-
-    <div class="navbar">
-
-        <a
-            href="dashboard.html"
-            class="logo"
-        >
-            Zavora <span>Social</span>
-        </a>
-
-
-        <a
-            href="products.html"
-            class="back-btn"
-        >
-            ← Products
-        </a>
-
-    </div>
-
-</header>
-
-
-<main class="container">
-
-
-    <div
-        id="content"
-        class="loading"
+    <a
+        href="dashboard.html"
+        class="logo"
     >
-
-        Loading product...
-
-    </div>
+        Zavora <span>Social</span>
+    </a>
 
 
-</main>
-
-
-<div
-    id="message"
-    class="message"
->
-
-    <div class="message-box">
-
-        <div
-            id="messageIcon"
-            class="message-icon"
-        >
-            ⚠️
-        </div>
-
-
-        <h2 id="messageTitle">
-            Message
-        </h2>
-
-
-        <p id="messageText">
-            Please wait...
-        </p>
-
-
-        <button
-            id="messageButton"
-            class="message-btn"
-        >
-            Continue
-        </button>
-
-    </div>
+    <a
+        href="products.html"
+        class="back-btn"
+    >
+        ← Products
+    </a>
 
 </div>
 
+</header><main class="container"><div
+    id="content"
+    class="loading"
+>
 
-<script type="module">
+    Checking your account...
+
+</div>
+
+</main><div
+    id="message"
+    class="message"
+><div class="message-box">
+
+    <div
+        id="messageIcon"
+        class="message-icon"
+    >
+        ⚠️
+    </div>
+
+
+    <h2 id="messageTitle">
+        Message
+    </h2>
+
+
+    <p id="messageText">
+        Please wait...
+    </p>
+
+
+    <button
+        id="messageButton"
+        class="message-btn"
+    >
+        Continue
+    </button>
+
+</div>
+
+</div><script type="module">
 
 
 /* ==========================================
@@ -677,7 +643,7 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -770,22 +736,53 @@ const productId =
 
 
 /* ==========================================
-   AUTH
+   AUTHENTICATION
 ========================================== */
+
+/*
+ * IMPORTANT:
+ *
+ * We do not redirect immediately.
+ *
+ * Firebase needs a moment to restore the
+ * existing login session when moving from
+ * products.html to product.html.
+ *
+ * onAuthStateChanged fires after Firebase
+ * has completed that check.
+ */
 
 onAuthStateChanged(
     auth,
     async (user) => {
 
+        console.log(
+            "Zavora authentication:",
+            user
+                ? user.email
+                : "No authenticated user"
+        );
+
+
         if(!user){
 
-            window.location.href =
-                "login.html";
+            /*
+             * Firebase has finished checking.
+             * The customer is genuinely logged out.
+             */
+
+            window.location.replace(
+                "login.html"
+            );
 
             return;
 
         }
 
+
+        /*
+         * Customer is authenticated.
+         */
 
         if(!productId){
 
@@ -799,7 +796,7 @@ onAuthStateChanged(
         }
 
 
-        await loadProduct();
+        await loadProduct(user);
 
     }
 );
@@ -809,7 +806,7 @@ onAuthStateChanged(
    LOAD PRODUCT
 ========================================== */
 
-async function loadProduct(){
+async function loadProduct(user){
 
     try{
 
@@ -853,12 +850,19 @@ async function loadProduct(){
         }
 
 
-        renderProduct(product);
+        renderProduct(
+            product,
+            user
+        );
 
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            "Product loading error:",
+            error
+        );
+
 
         showError(
             "Unable to load product",
@@ -874,7 +878,10 @@ async function loadProduct(){
    RENDER
 ========================================== */
 
-function renderProduct(product){
+function renderProduct(
+    product,
+    user
+){
 
     const image =
         product.image ||
@@ -974,6 +981,7 @@ function renderProduct(product){
             <button
                 id="buyButton"
                 class="buy-btn"
+                type="button"
             >
 
                 Buy Now — ₦${formatNumber(price)}
@@ -996,7 +1004,9 @@ function renderProduct(product){
 
 
     document
-        .getElementById("productImage")
+        .getElementById(
+            "productImage"
+        )
         .addEventListener(
             "error",
             function(){
@@ -1008,7 +1018,16 @@ function renderProduct(product){
         );
 
 
-    loadWallet();
+    loadWallet(user);
+
+
+    /*
+     * Purchase logic is intentionally not
+     * added here yet.
+     *
+     * First we make sure authentication and
+     * product navigation work correctly.
+     */
 
 }
 
@@ -1017,18 +1036,7 @@ function renderProduct(product){
    WALLET
 ========================================== */
 
-async function loadWallet(){
-
-    const user =
-        auth.currentUser;
-
-
-    if(!user){
-
-        return;
-
-    }
-
+async function loadWallet(user){
 
     const walletBalance =
         document.getElementById(
@@ -1060,14 +1068,17 @@ async function loadWallet(){
 
         const balance =
             snapshot.exists()
-            ? Number(snapshot.val() || 0)
+            ? Number(
+                snapshot.val() || 0
+            )
             : 0;
 
 
         walletBalance.textContent =
             "₦" +
-            formatNumber(balance);
-
+            formatNumber(
+                balance
+            );
 
     }
     catch(error){
@@ -1192,20 +1203,31 @@ function escapeHtml(value){
 
     return String(value)
 
-        .replaceAll("&","&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<","&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">","&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"',"&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'","&#039;");
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
-</script>
-
-</body>
-
-</html>
+</script></body></html>
