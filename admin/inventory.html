@@ -136,6 +136,12 @@ body{
     transform:translateY(-1px);
 }
 
+.refresh-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
 /* =========================
    STATS
 ========================= */
@@ -449,9 +455,7 @@ td{
 <body>
 
 
-<!-- =========================
-     MOBILE HEADER
-========================= -->
+<!-- MOBILE HEADER -->
 
 <div class="mobile-header">
 
@@ -474,9 +478,7 @@ td{
 </div>
 
 
-<!-- =========================
-     SIDEBAR
-========================= -->
+<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -484,103 +486,66 @@ td{
         Zavora <span>Social</span>
     </div>
 
-
     <div class="nav-title">
         MAIN
     </div>
 
-    <a
-        href="index.html"
-        class="nav-link"
-    >
+    <a href="index.html" class="nav-link">
         📊 Dashboard
     </a>
 
-    <a
-        href="categories.html"
-        class="nav-link"
-    >
+    <a href="categories.html" class="nav-link">
         🗂️ Categories
     </a>
 
-    <a
-        href="products.html"
-        class="nav-link"
-    >
+    <a href="products.html" class="nav-link">
         📦 Products
     </a>
 
-    <a
-        href="inventory.html"
-        class="nav-link active"
-    >
+    <a href="inventory.html" class="nav-link active">
         🏷️ Inventory
     </a>
-
 
     <div class="nav-title">
         ORDERS
     </div>
 
-    <a
-        href="orders.html"
-        class="nav-link"
-    >
+    <a href="orders.html" class="nav-link">
         🛒 Orders
     </a>
-
 
     <div class="nav-title">
         CUSTOMERS
     </div>
 
-    <a
-        href="customers.html"
-        class="nav-link"
-    >
+    <a href="customers.html" class="nav-link">
         👥 Customers
     </a>
 
-    <a
-        href="deposits.html"
-        class="nav-link"
-    >
+    <a href="deposits.html" class="nav-link">
         💰 Deposits
     </a>
 
-    <a
-        href="transactions.html"
-        class="nav-link"
-    >
+    <a href="transactions.html" class="nav-link">
         🧾 Transactions
     </a>
-
 
     <div class="nav-title">
         SYSTEM
     </div>
 
-    <a
-        href="settings.html"
-        class="nav-link"
-    >
+    <a href="settings.html" class="nav-link">
         ⚙️ Settings
     </a>
 
-    <a
-        href="#"
-        class="nav-link logout"
-        id="logoutBtn"
-    >
+    <a href="#" class="nav-link logout" id="logoutBtn">
         🚪 Logout
     </a>
 
 </aside>
 
 
-<!-- =========================
-     MAIN
-========================= -->
+<!-- MAIN -->
 
 <main class="main">
 
@@ -608,9 +573,7 @@ td{
     </div>
 
 
-    <!-- =========================
-         STATS
-    ========================= -->
+    <!-- STATS -->
 
     <section class="stats">
 
@@ -696,9 +659,7 @@ td{
     </section>
 
 
-    <!-- =========================
-         INVENTORY
-    ========================= -->
+    <!-- INVENTORY -->
 
     <section class="inventory-box">
 
@@ -806,19 +767,19 @@ import {
 
 /* =========================================
    FIREBASE CONFIG
-   SAME CONFIG AS WORKING ADMIN PRODUCTS
+   EXACT CONFIG FROM FIREBASE CONSOLE
 ========================================= */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
 
     databaseURL:
-        "https://zavorasocial-default-rtdb.firebaseio.com/",
+        "https://zavorasocial-default-rtdb.firebaseio.com",
 
     projectId:
         "zavorasocial",
@@ -849,7 +810,7 @@ const db =
 
 
 /* =========================================
-   ADMIN EMAIL
+   ADMIN
 ========================================= */
 
 const ADMIN_EMAIL =
@@ -891,6 +852,7 @@ const outOfStock =
 
 let currentUser = null;
 let allProducts = [];
+let unsubscribeProducts = null;
 
 
 /* =========================================
@@ -900,25 +862,19 @@ let allProducts = [];
 onAuthStateChanged(auth, (user) => {
 
     console.log(
-        "Zavora admin inventory auth:",
+        "Zavora inventory auth:",
         user ? user.email : "No user"
     );
+
 
     if(!user){
 
         /*
-         IMPORTANT:
-         Inventory is inside /admin/
-
-         Therefore the correct admin
-         login page is:
-
-         /admin/login.html
-
-         NOT:
-
-         /login.html
-        */
+         * Inventory is inside /admin/
+         * so the correct login page is:
+         *
+         * admin/login.html
+         */
 
         window.location.replace(
             "login.html"
@@ -939,6 +895,7 @@ onAuthStateChanged(auth, (user) => {
             "Admin access only."
         );
 
+
         signOut(auth).finally(() => {
 
             window.location.replace(
@@ -946,6 +903,7 @@ onAuthStateChanged(auth, (user) => {
             );
 
         });
+
 
         return;
 
@@ -965,78 +923,102 @@ onAuthStateChanged(auth, (user) => {
 
 function loadProducts(){
 
+    if(unsubscribeProducts){
+
+        unsubscribeProducts();
+
+    }
+
+
     const productsRef =
         ref(db,"products");
 
-    onValue(
-        productsRef,
-        (snapshot) => {
 
-            const data =
-                snapshot.val();
+    unsubscribeProducts =
+        onValue(
+            productsRef,
+            (snapshot) => {
 
-            allProducts = [];
+                const data =
+                    snapshot.val();
 
-            if(data){
 
-                Object.entries(data).forEach(
-                    ([id,product]) => {
+                allProducts = [];
 
-                        allProducts.push({
 
-                            id,
-                            ...product
+                if(data){
 
-                        });
+                    Object.entries(data).forEach(
+                        ([id,product]) => {
 
-                    }
+                            allProducts.push({
+
+                                id:id,
+
+                                ...product
+
+                            });
+
+                        }
+                    );
+
+                }
+
+
+                allProducts.sort(
+                    (a,b) =>
+                        (b.createdAt || 0) -
+                        (a.createdAt || 0)
                 );
 
+
+                renderProducts();
+
+            },
+            (error) => {
+
+                console.error(
+                    "Inventory load error:",
+                    error
+                );
+
+
+                inventoryBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="empty"
+                        >
+
+                            <div class="empty-icon">
+                                ⚠️
+                            </div>
+
+                            <div>
+                                Unable to load inventory.
+                            </div>
+
+                            <div style="
+                                margin-top:8px;
+                                font-size:11px;
+                                color:#625b6d;
+                            ">
+                                ${escapeHTML(
+                                    error.message ||
+                                    "Firebase error"
+                                )}
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
             }
-
-            /*
-               Newest products first
-            */
-
-            allProducts.sort(
-                (a,b) =>
-                    (b.createdAt || 0) -
-                    (a.createdAt || 0)
-            );
-
-            renderProducts();
-
-        },
-        (error) => {
-
-            console.error(
-                "Inventory load error:",
-                error
-            );
-
-            inventoryBody.innerHTML = `
-
-                <tr>
-
-                    <td
-                        colspan="5"
-                        class="empty"
-                    >
-
-                        <div class="empty-icon">
-                            ⚠️
-                        </div>
-
-                        Unable to load inventory.
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
-    );
+        );
 
 }
 
@@ -1061,10 +1043,12 @@ function renderProducts(){
                     product.name || ""
                 ).toLowerCase();
 
+
             const category =
                 String(
                     product.category || ""
                 ).toLowerCase();
+
 
             return (
                 name.includes(search) ||
@@ -1115,6 +1099,7 @@ function renderProducts(){
             const stock =
                 getStockValue(product);
 
+
             const status =
                 getStockStatus(stock);
 
@@ -1143,7 +1128,9 @@ function renderProducts(){
 
 
             const price =
-                Number(product.price || 0);
+                Number(
+                    product.price || 0
+                );
 
 
             return `
@@ -1196,7 +1183,7 @@ function renderProducts(){
                             type="number"
                             min="0"
                             class="stock-input"
-                            id="stock-${product.id}"
+                            id="stock-${escapeAttribute(product.id)}"
                             value="${stock === null ? "" : stock}"
                             placeholder="Unlimited"
                         >
@@ -1233,10 +1220,6 @@ function renderProducts(){
         }).join("");
 
 
-    /*
-       Add save button events
-    */
-
     document
         .querySelectorAll(".save-btn")
         .forEach(button => {
@@ -1256,11 +1239,6 @@ function renderProducts(){
         });
 
 
-    /*
-       Update status immediately when
-       stock input changes
-    */
-
     document
         .querySelectorAll(".stock-input")
         .forEach(input => {
@@ -1272,23 +1250,31 @@ function renderProducts(){
                     const value =
                         input.value.trim();
 
+
                     const stock =
                         value === ""
                         ? null
                         : Number(value);
 
+
                     const status =
                         getStockStatus(stock);
+
 
                     const row =
                         input.closest("tr");
 
+
                     const statusElement =
-                        row.querySelector(".status");
+                        row.querySelector(
+                            ".status"
+                        );
+
 
                     statusElement.className =
                         "status " +
                         status.className;
+
 
                     statusElement.textContent =
                         status.label;
@@ -1307,11 +1293,6 @@ function renderProducts(){
 
 function getStockValue(product){
 
-    /*
-       If stock doesn't exist yet,
-       treat product as Unlimited.
-    */
-
     if(
         product.stock === undefined ||
         product.stock === null ||
@@ -1321,6 +1302,7 @@ function getStockValue(product){
         return null;
 
     }
+
 
     const value =
         Number(product.stock);
@@ -1344,10 +1326,6 @@ function getStockValue(product){
 
 function getStockStatus(stock){
 
-    /*
-       Unlimited
-    */
-
     if(stock === null){
 
         return {
@@ -1360,10 +1338,6 @@ function getStockStatus(stock){
 
     }
 
-
-    /*
-       Out of stock
-    */
 
     if(stock <= 0){
 
@@ -1378,10 +1352,6 @@ function getStockStatus(stock){
     }
 
 
-    /*
-       Low stock
-    */
-
     if(stock <= 5){
 
         return {
@@ -1394,10 +1364,6 @@ function getStockStatus(stock){
 
     }
 
-
-    /*
-       In stock
-    */
 
     return {
 
@@ -1427,12 +1393,6 @@ function updateStats(){
             getStockValue(product);
 
 
-        /*
-           Unlimited products are considered
-           available but are not counted under
-           numeric "In Stock".
-        */
-
         if(stock === null){
 
             return;
@@ -1444,11 +1404,15 @@ function updateStats(){
 
             outOfStockCount++;
 
-        }else if(stock <= 5){
+        }
+
+        else if(stock <= 5){
 
             lowStockCount++;
 
-        }else{
+        }
+
+        else{
 
             inStockCount++;
 
@@ -1460,11 +1424,14 @@ function updateStats(){
     totalProducts.textContent =
         allProducts.length;
 
+
     inStock.textContent =
         inStockCount;
 
+
     lowStock.textContent =
         lowStockCount;
+
 
     outOfStock.textContent =
         outOfStockCount;
@@ -1476,7 +1443,10 @@ function updateStats(){
    SAVE STOCK
 ========================================= */
 
-async function saveStock(productId,button){
+async function saveStock(
+    productId,
+    button
+){
 
     const input =
         document.getElementById(
@@ -1495,11 +1465,6 @@ async function saveStock(productId,button){
         input.value.trim();
 
 
-    /*
-       Empty means Unlimited.
-       We remove stock from the product.
-    */
-
     let stockValue;
 
 
@@ -1507,7 +1472,9 @@ async function saveStock(productId,button){
 
         stockValue = null;
 
-    }else{
+    }
+
+    else{
 
         stockValue =
             Number(rawValue);
@@ -1534,6 +1501,7 @@ async function saveStock(productId,button){
     const oldText =
         button.textContent;
 
+
     button.textContent =
         "Saving...";
 
@@ -1547,31 +1515,12 @@ async function saveStock(productId,button){
             );
 
 
-        if(stockValue === null){
-
-            /*
-               Firebase RTDB does not store
-               undefined. Setting null removes
-               the stock field.
-            */
-
-            await update(
-                productRef,
-                {
-                    stock:null
-                }
-            );
-
-        }else{
-
-            await update(
-                productRef,
-                {
-                    stock:stockValue
-                }
-            );
-
-        }
+        await update(
+            productRef,
+            {
+                stock:stockValue
+            }
+        );
 
 
         button.textContent =
@@ -1588,7 +1537,9 @@ async function saveStock(productId,button){
         },1000);
 
 
-    }catch(error){
+    }
+
+    catch(error){
 
         console.error(
             "Save stock error:",
@@ -1597,7 +1548,8 @@ async function saveStock(productId,button){
 
 
         alert(
-            "Unable to save stock. Please try again."
+            "Unable to save stock: " +
+            (error.message || "Firebase error")
         );
 
 
@@ -1661,20 +1613,25 @@ logoutBtn.addEventListener(
 
         event.preventDefault();
 
+
         try{
 
             await signOut(auth);
+
 
             window.location.replace(
                 "login.html"
             );
 
-        }catch(error){
+        }
+
+        catch(error){
 
             console.error(
                 "Logout error:",
                 error
             );
+
 
             alert(
                 "Unable to logout. Please try again."
