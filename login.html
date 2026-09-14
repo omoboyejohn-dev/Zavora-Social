@@ -22,9 +22,9 @@
 
 <style>
 
-/* =========================================
+/* ================================
    RESET
-========================================= */
+================================ */
 
 *{
     margin:0;
@@ -32,12 +32,13 @@
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     font-family:Inter,Arial,sans-serif;
+
+    min-height:100vh;
+
+    color:#fff;
+
     background:
         radial-gradient(
             circle at 10% 10%,
@@ -50,27 +51,30 @@ body{
             transparent 30%
         ),
         #070b14;
-    color:#fff;
-    min-height:100vh;
 }
 
 
-/* =========================================
+/* ================================
    HEADER
-========================================= */
+================================ */
 
 .header{
     width:100%;
-    border-bottom:1px solid rgba(255,255,255,.07);
+
     background:rgba(7,11,20,.75);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+
     backdrop-filter:blur(15px);
 }
 
 .header-container{
     width:100%;
     max-width:1180px;
-    margin:auto;
+
     min-height:76px;
+
+    margin:auto;
     padding:0 22px;
 
     display:flex;
@@ -84,6 +88,7 @@ body{
     gap:10px;
 
     color:#fff;
+
     text-decoration:none;
 
     font-size:20px;
@@ -105,22 +110,21 @@ body{
         #8b5cf6,
         #06b6d4
     );
-
-    box-shadow:
-        0 8px 25px rgba(139,92,246,.25);
 }
 
 .logo strong{
     color:#a78bfa;
 }
 
-.header-login{
+.header-register{
     padding:10px 18px;
 
     border:1px solid rgba(167,139,250,.3);
+
     border-radius:10px;
 
     color:#d8d0ff;
+
     text-decoration:none;
 
     font-size:13px;
@@ -129,15 +133,15 @@ body{
     transition:.2s;
 }
 
-.header-login:hover{
+.header-register:hover{
     background:rgba(139,92,246,.1);
     border-color:#8b5cf6;
 }
 
 
-/* =========================================
-   MAIN
-========================================= */
+/* ================================
+   PAGE
+================================ */
 
 .login-page{
     min-height:calc(100vh - 76px);
@@ -154,16 +158,18 @@ body{
     max-width:1100px;
 
     display:grid;
+
     grid-template-columns:1fr 440px;
 
     gap:80px;
+
     align-items:center;
 }
 
 
-/* =========================================
-   LEFT CONTENT
-========================================= */
+/* ================================
+   LEFT SIDE
+================================ */
 
 .login-intro{
     padding:20px 0;
@@ -171,6 +177,7 @@ body{
 
 .intro-badge{
     display:inline-flex;
+
     align-items:center;
     gap:8px;
 
@@ -179,6 +186,7 @@ body{
     border-radius:30px;
 
     background:rgba(139,92,246,.08);
+
     border:1px solid rgba(139,92,246,.25);
 
     color:#c4b5fd;
@@ -197,6 +205,7 @@ body{
     max-width:600px;
 
     font-size:52px;
+
     line-height:1.08;
 
     letter-spacing:-2px;
@@ -221,25 +230,30 @@ body{
     color:#9aa5ba;
 
     font-size:15px;
+
     line-height:1.8;
 
     margin-bottom:35px;
 }
 
 
-/* =========================================
+/* ================================
    BENEFITS
-========================================= */
+================================ */
 
 .benefits{
     display:flex;
+
     flex-direction:column;
+
     gap:20px;
 }
 
 .benefit{
     display:flex;
+
     align-items:center;
+
     gap:15px;
 }
 
@@ -250,12 +264,14 @@ body{
     flex-shrink:0;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:13px;
 
     background:rgba(139,92,246,.09);
+
     border:1px solid rgba(139,92,246,.18);
 
     color:#a78bfa;
@@ -263,18 +279,20 @@ body{
 
 .benefit h3{
     font-size:14px;
+
     margin-bottom:5px;
 }
 
 .benefit p{
     color:#737f95;
+
     font-size:12px;
 }
 
 
-/* =========================================
+/* ================================
    LOGIN CARD
-========================================= */
+================================ */
 
 .login-card{
     width:100%;
@@ -296,6 +314,7 @@ body{
         0 30px 80px rgba(0,0,0,.4);
 
     position:relative;
+
     overflow:hidden;
 }
 
@@ -318,9 +337,9 @@ body{
 }
 
 
-/* =========================================
+/* ================================
    CARD HEADER
-========================================= */
+================================ */
 
 .card-header{
     position:relative;
@@ -337,6 +356,7 @@ body{
     margin:0 auto 16px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -348,26 +368,25 @@ body{
         #06b6d4
     );
 
-    box-shadow:
-        0 12px 30px rgba(139,92,246,.2);
-
     font-size:20px;
 }
 
 .card-header h2{
     font-size:24px;
+
     margin-bottom:8px;
 }
 
 .card-header p{
     color:#78849a;
+
     font-size:13px;
 }
 
 
-/* =========================================
+/* ================================
    FORM
-========================================= */
+================================ */
 
 .form-group{
     margin-bottom:20px;
@@ -379,6 +398,7 @@ body{
     color:#d9deea;
 
     font-size:12px;
+
     font-weight:600;
 
     margin-bottom:8px;
@@ -386,20 +406,23 @@ body{
 
 .password-heading{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
 .forgot-password{
     color:#a78bfa;
+
     font-size:11px;
+
     text-decoration:none;
 }
 
 .forgot-password:hover{
     color:#22d3ee;
 }
-
 
 .input-box{
     position:relative;
@@ -422,6 +445,7 @@ body{
 
 .input-box input{
     width:100%;
+
     height:52px;
 
     padding:0 45px;
@@ -437,6 +461,7 @@ body{
     color:#fff;
 
     font-family:inherit;
+
     font-size:13px;
 
     transition:.2s;
@@ -454,9 +479,9 @@ body{
 }
 
 
-/* =========================================
-   PASSWORD TOGGLE
-========================================= */
+/* ================================
+   PASSWORD
+================================ */
 
 .password-toggle{
     position:absolute;
@@ -467,6 +492,7 @@ body{
     transform:translateY(-50%);
 
     border:0;
+
     background:none;
 
     color:#5e6a80;
@@ -481,12 +507,13 @@ body{
 }
 
 
-/* =========================================
+/* ================================
    REMEMBER
-========================================= */
+================================ */
 
 .remember-row{
     display:flex;
+
     align-items:center;
 
     margin:4px 0 20px;
@@ -494,6 +521,7 @@ body{
 
 .remember{
     display:flex !important;
+
     align-items:center;
 
     gap:8px;
@@ -501,6 +529,7 @@ body{
     color:#7e899d !important;
 
     font-size:12px !important;
+
     font-weight:400 !important;
 
     cursor:pointer;
@@ -514,9 +543,9 @@ body{
 }
 
 
-/* =========================================
+/* ================================
    MESSAGE
-========================================= */
+================================ */
 
 .message{
     display:none;
@@ -526,6 +555,7 @@ body{
     border-radius:10px;
 
     font-size:12px;
+
     line-height:1.5;
 
     margin-bottom:15px;
@@ -552,21 +582,25 @@ body{
 }
 
 
-/* =========================================
+/* ================================
    LOGIN BUTTON
-========================================= */
+================================ */
 
 .login-button{
     width:100%;
+
     height:52px;
 
     border:0;
+
     border-radius:12px;
 
     cursor:pointer;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     gap:10px;
@@ -574,7 +608,9 @@ body{
     color:#fff;
 
     font-family:inherit;
+
     font-size:13px;
+
     font-weight:700;
 
     background:linear-gradient(
@@ -582,9 +618,6 @@ body{
         #7c3aed,
         #06b6d4
     );
-
-    box-shadow:
-        0 12px 30px rgba(124,58,237,.16);
 
     transition:.2s;
 }
@@ -598,17 +631,20 @@ body{
 
 .login-button:disabled{
     opacity:.6;
+
     cursor:not-allowed;
+
     transform:none;
 }
 
 
-/* =========================================
+/* ================================
    DIVIDER
-========================================= */
+================================ */
 
 .divider{
     display:flex;
+
     align-items:center;
 
     gap:13px;
@@ -632,9 +668,9 @@ body{
 }
 
 
-/* =========================================
+/* ================================
    REGISTER
-========================================= */
+================================ */
 
 .register-text{
     text-align:center;
@@ -656,6 +692,7 @@ body{
     text-decoration:none;
 
     font-size:13px;
+
     font-weight:700;
 }
 
@@ -663,19 +700,16 @@ body{
     color:#22d3ee;
 }
 
-.register-link i{
-    margin-left:4px;
-    font-size:10px;
-}
 
-
-/* =========================================
+/* ================================
    SECURITY
-========================================= */
+================================ */
 
 .security-note{
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     gap:7px;
@@ -692,9 +726,9 @@ body{
 }
 
 
-/* =========================================
+/* ================================
    FOOTER
-========================================= */
+================================ */
 
 .footer{
     text-align:center;
@@ -704,14 +738,12 @@ body{
     color:#4f5a70;
 
     font-size:11px;
-
-    border-top:1px solid rgba(255,255,255,.04);
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* ================================
+   MOBILE
+================================ */
 
 @media(max-width:900px){
 
@@ -729,6 +761,7 @@ body{
 
     .login-intro h1{
         font-size:40px;
+
         letter-spacing:-1px;
     }
 
@@ -748,6 +781,7 @@ body{
 
     .header-container{
         padding:0 15px;
+
         min-height:68px;
     }
 
@@ -758,29 +792,25 @@ body{
     .logo-icon{
         width:34px;
         height:34px;
-        border-radius:10px;
     }
 
-    .header-login{
+    .header-register{
         padding:9px 13px;
+
         font-size:11px;
     }
 
     .login-page{
         padding:35px 15px;
-        min-height:calc(100vh - 68px);
     }
 
     .login-intro h1{
         font-size:32px;
     }
 
-    .login-intro > p{
-        font-size:13px;
-    }
-
     .login-card{
         padding:26px 20px;
+
         border-radius:18px;
     }
 
@@ -798,9 +828,7 @@ body{
 <body>
 
 
-<!-- =========================================
-     HEADER
-========================================= -->
+<!-- HEADER -->
 
 <header class="header">
 
@@ -819,7 +847,10 @@ body{
         </a>
 
 
-        <a href="register.html" class="header-login">
+        <a
+            href="register.html"
+            class="header-register"
+        >
             Create Account
         </a>
 
@@ -829,9 +860,7 @@ body{
 
 
 
-<!-- =========================================
-     LOGIN PAGE
-========================================= -->
+<!-- LOGIN -->
 
 <main class="login-page">
 
@@ -875,9 +904,7 @@ body{
                 <div class="benefit">
 
                     <div class="benefit-icon">
-
                         <i class="fa-solid fa-wallet"></i>
-
                     </div>
 
                     <div>
@@ -898,9 +925,7 @@ body{
                 <div class="benefit">
 
                     <div class="benefit-icon">
-
                         <i class="fa-solid fa-box-open"></i>
-
                     </div>
 
                     <div>
@@ -921,9 +946,7 @@ body{
                 <div class="benefit">
 
                     <div class="benefit-icon">
-
                         <i class="fa-solid fa-bolt"></i>
-
                     </div>
 
                     <div>
@@ -955,16 +978,12 @@ body{
             <div class="card-header">
 
                 <div class="card-logo">
-
                     <i class="fa-solid fa-bolt"></i>
-
                 </div>
-
 
                 <h2>
                     Login to your account
                 </h2>
-
 
                 <p>
                     Enter your details to continue.
@@ -984,7 +1003,6 @@ body{
                     <label for="email">
                         Email Address
                     </label>
-
 
                     <div class="input-box">
 
@@ -1029,7 +1047,6 @@ body{
 
                         <i class="fa-solid fa-lock"></i>
 
-
                         <input
                             type="password"
                             id="password"
@@ -1037,7 +1054,6 @@ body{
                             autocomplete="current-password"
                             required
                         >
-
 
                         <button
                             type="button"
@@ -1076,7 +1092,7 @@ body{
 
 
 
-                <!-- MESSAGE -->
+                <!-- ERROR / SUCCESS -->
 
                 <div
                     id="message"
@@ -1085,7 +1101,7 @@ body{
 
 
 
-                <!-- LOGIN -->
+                <!-- BUTTON -->
 
                 <button
                     type="submit"
@@ -1109,15 +1125,10 @@ body{
 
 
 
-            <!-- DIVIDER -->
-
             <div class="divider">
                 <span>OR</span>
             </div>
 
-
-
-            <!-- REGISTER -->
 
             <p class="register-text">
                 Don't have an account?
@@ -1128,16 +1139,10 @@ body{
                 href="register.html"
                 class="register-link"
             >
-
                 Create an account
-
                 <i class="fa-solid fa-arrow-right"></i>
-
             </a>
 
-
-
-            <!-- SECURITY -->
 
             <div class="security-note">
 
@@ -1159,10 +1164,6 @@ body{
 
 
 
-<!-- =========================================
-     FOOTER
-========================================= -->
-
 <footer class="footer">
 
     © <span id="year"></span> Zavora Social.
@@ -1172,64 +1173,85 @@ body{
 
 
 
-<script>
+<!-- FIREBASE LOGIN -->
+
+<script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence,
+    sendPasswordResetEmail
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 /* =========================================
-   YEAR
+   FIREBASE CONFIG
 ========================================= */
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+        "zavorasocial.firebaseapp.com",
+
+    projectId:
+        "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
+
+};
+
+
+/* =========================================
+   INITIALIZE FIREBASE
+========================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
 
 
 
 /* =========================================
-   PASSWORD SHOW / HIDE
+   ELEMENTS
 ========================================= */
 
-const password =
-    document.getElementById("password");
+const loginForm =
+    document.getElementById("loginForm");
 
-const togglePassword =
-    document.getElementById("togglePassword");
+const loginButton =
+    document.getElementById("loginButton");
 
+const buttonText =
+    document.getElementById("buttonText");
 
-togglePassword.addEventListener(
-    "click",
-    function(){
+const buttonIcon =
+    document.getElementById("buttonIcon");
 
-        const icon =
-            this.querySelector("i");
-
-
-        if(password.type === "password"){
-
-            password.type = "text";
-
-            icon.classList.remove(
-                "fa-eye"
-            );
-
-            icon.classList.add(
-                "fa-eye-slash"
-            );
-
-        }else{
-
-            password.type = "password";
-
-            icon.classList.remove(
-                "fa-eye-slash"
-            );
-
-            icon.classList.add(
-                "fa-eye"
-            );
-
-        }
-
-    }
-);
+const message =
+    document.getElementById("message");
 
 
 
@@ -1238,9 +1260,6 @@ togglePassword.addEventListener(
 ========================================= */
 
 function showMessage(text,type){
-
-    const message =
-        document.getElementById("message");
 
     message.textContent = text;
 
@@ -1251,30 +1270,48 @@ function showMessage(text,type){
 
 
 
+function clearMessage(){
+
+    message.textContent = "";
+
+    message.className =
+        "message";
+
+}
+
+
+
 /* =========================================
-   LOGIN FORM
+   LOGIN
 ========================================= */
-
-const loginForm =
-    document.getElementById("loginForm");
-
 
 loginForm.addEventListener(
     "submit",
-    function(event){
+    async function(event){
 
         event.preventDefault();
 
+        clearMessage();
+
 
         const email =
-            document.getElementById("email")
-            .value
-            .trim();
+            document
+                .getElementById("email")
+                .value
+                .trim()
+                .toLowerCase();
 
 
-        const passwordValue =
-            document.getElementById("password")
-            .value;
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        const remember =
+            document
+                .getElementById("remember")
+                .checked;
 
 
         if(!email){
@@ -1289,19 +1326,7 @@ loginForm.addEventListener(
         }
 
 
-        if(!email.includes("@")){
-
-            showMessage(
-                "Please enter a valid email address.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!passwordValue){
+        if(!password){
 
             showMessage(
                 "Please enter your password.",
@@ -1313,33 +1338,63 @@ loginForm.addEventListener(
         }
 
 
-        /*
-         * Firebase Authentication
-         * will be connected here.
-         */
+        try{
 
-        const button =
-            document.getElementById("loginButton");
+            /* Choose login persistence */
 
-        const buttonText =
-            document.getElementById("buttonText");
-
-        const buttonIcon =
-            document.getElementById("buttonIcon");
+            await setPersistence(
+                auth,
+                remember
+                    ? browserLocalPersistence
+                    : browserSessionPersistence
+            );
 
 
-        button.disabled = true;
+            /* Loading state */
 
-        buttonText.textContent =
-            "Checking...";
+            loginButton.disabled = true;
 
-        buttonIcon.className =
-            "fa-solid fa-spinner fa-spin";
+            buttonText.textContent =
+                "Signing in...";
+
+            buttonIcon.className =
+                "fa-solid fa-spinner fa-spin";
 
 
-        setTimeout(function(){
+            /* Firebase login */
 
-            button.disabled = false;
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            /* Success */
+
+            showMessage(
+                "Login successful. Redirecting...",
+                "success"
+            );
+
+
+            setTimeout(function(){
+
+                window.location.href =
+                    "dashboard.html";
+
+            },700);
+
+
+        }catch(error){
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            loginButton.disabled = false;
 
             buttonText.textContent =
                 "Login";
@@ -1348,12 +1403,71 @@ loginForm.addEventListener(
                 "fa-solid fa-arrow-right";
 
 
+            let errorMessage =
+                "Unable to login. Please try again.";
+
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                errorMessage =
+                    "Incorrect email or password.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                errorMessage =
+                    "Please enter a valid email address.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/user-disabled"
+            ){
+
+                errorMessage =
+                    "This account has been disabled.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                errorMessage =
+                    "Too many login attempts. Please try again later.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/network-request-failed"
+            ){
+
+                errorMessage =
+                    "Network error. Please check your internet connection.";
+
+            }
+
+
             showMessage(
-                "Your details are valid. Firebase login will be connected next.",
-                "success"
+                errorMessage,
+                "error"
             );
 
-        },800);
+        }
 
     }
 );
@@ -1368,15 +1482,19 @@ document
     .getElementById("forgotPassword")
     .addEventListener(
         "click",
-        function(event){
+        async function(event){
 
             event.preventDefault();
 
+            clearMessage();
+
 
             const email =
-                document.getElementById("email")
-                .value
-                .trim();
+                document
+                    .getElementById("email")
+                    .value
+                    .trim()
+                    .toLowerCase();
 
 
             if(!email){
@@ -1395,13 +1513,74 @@ document
             }
 
 
-            showMessage(
-                "Password reset will be connected to Firebase next.",
-                "success"
-            );
+            try{
+
+                await sendPasswordResetEmail(
+                    auth,
+                    email
+                );
+
+
+                showMessage(
+                    "Password reset email sent. Check your inbox.",
+                    "success"
+                );
+
+
+            }catch(error){
+
+                console.error(
+                    "Password reset error:",
+                    error
+                );
+
+
+                if(
+                    error.code ===
+                    "auth/user-not-found"
+                ){
+
+                    showMessage(
+                        "No account was found with this email address.",
+                        "error"
+                    );
+
+                }
+
+                else if(
+                    error.code ===
+                    "auth/invalid-email"
+                ){
+
+                    showMessage(
+                        "Please enter a valid email address.",
+                        "error"
+                    );
+
+                }
+
+                else{
+
+                    showMessage(
+                        "Unable to send password reset email. Please try again.",
+                        "error"
+                    );
+
+                }
+
+            }
 
         }
     );
+
+
+
+/* =========================================
+   YEAR
+========================================= */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
 </script>
 
