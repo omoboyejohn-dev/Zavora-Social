@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Wallet</title><style>
 
-<title>Zavora Social | Wallet</title>
-
-<style>
 *{
     box-sizing:border-box;
     margin:0;
@@ -14,59 +9,119 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
-    background:#080b18;
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(circle at top left,rgba(124,58,237,.16),transparent 35%),
+        radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
+        #080b16;
     color:#fff;
     min-height:100vh;
 }
 
-button,
-input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.container{
-    width:100%;
-    max-width:520px;
-    margin:auto;
-    padding:20px;
-}
-
 /* HEADER */
 
-.header{
+header{
+    width:100%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(8,11,22,.85);
+    backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.navbar{
+    max-width:900px;
+    margin:auto;
+    min-height:70px;
+    padding:0 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-bottom:25px;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:800;
+    text-decoration:none;
+    color:#fff;
+    font-size:21px;
+    font-weight:900;
 }
 
 .logo span{
-    background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 .back-btn{
-    background:#151a2d;
-    border:1px solid rgba(255,255,255,.08);
-    color:#fff;
-    padding:10px 14px;
-    border-radius:10px;
     text-decoration:none;
-    font-size:13px;
+    color:#cbd5e1;
+    font-size:14px;
+    font-weight:700;
 }
 
-/* STAGES */
+/* MAIN */
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+/* WALLET */
+
+.wallet-card{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.25),
+            rgba(6,182,212,.12)
+        );
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.wallet-label{
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.wallet-balance{
+    font-size:38px;
+    font-weight:900;
+    margin-bottom:22px;
+}
+
+.deposit-main-btn{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:15px;
+    background:linear-gradient(90deg,#7c3aed,#06b6d4);
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(124,58,237,.2);
+}
+
+.deposit-main-btn:hover{
+    opacity:.92;
+}
+
+/* STAGE BOX */
+
+.stage-box{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:35px;
+}
 
 .stage{
     display:none;
@@ -76,605 +131,641 @@ button{
     display:block;
 }
 
-/* WALLET STAGE */
-
-.wallet-card{
-    background:linear-gradient(
-        135deg,
-        #6d28d9,
-        #2563eb
-    );
-    border-radius:22px;
-    padding:28px 22px;
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
-}
-
-.wallet-label{
-    color:rgba(255,255,255,.75);
-    font-size:14px;
+.stage-title{
+    font-size:22px;
+    font-weight:900;
     margin-bottom:8px;
 }
 
-.balance{
-    font-size:36px;
-    font-weight:800;
-    margin-bottom:28px;
-}
-
-.deposit-btn{
-    width:100%;
-    border:0;
-    background:#fff;
-    color:#4c1d95;
-    padding:15px;
-    border-radius:13px;
-    font-weight:800;
-}
-
-/* GENERAL CARD */
-
-.card{
-    background:#111528;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:24px;
-}
-
-.title{
-    font-size:23px;
-    font-weight:800;
-    margin-bottom:8px;
-}
-
-.subtitle{
-    color:#8e95aa;
+.stage-subtitle{
+    color:#94a3b8;
     font-size:14px;
     line-height:1.6;
     margin-bottom:22px;
 }
 
-/* PAYMENT CHOICES */
+/* PAYMENT OPTIONS */
 
-.payment{
+.payment-options{
+    display:grid;
+    gap:12px;
+}
+
+.payment-option{
     width:100%;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:17px;
-    margin-bottom:12px;
-    border:1px solid rgba(255,255,255,.08);
-    background:#181d32;
-    border-radius:14px;
-    color:#fff;
     text-align:left;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.035);
+    color:#fff;
+    border-radius:14px;
+    padding:17px;
+    cursor:pointer;
+    transition:.2s ease;
 }
 
-.payment:hover{
-    border-color:#7c3aed;
-}
-
-.payment-icon{
-    width:45px;
-    height:45px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    background:rgba(124,58,237,.16);
-    font-size:21px;
-}
-
-.payment-info{
-    flex:1;
+.payment-option:hover{
+    border-color:rgba(139,92,246,.55);
+    background:rgba(124,58,237,.08);
 }
 
 .payment-name{
-    font-size:15px;
-    font-weight:700;
-    margin-bottom:4px;
+    font-weight:800;
+    margin-bottom:5px;
 }
 
 .payment-description{
-    color:#81889e;
+    color:#94a3b8;
     font-size:12px;
-}
-
-.arrow{
-    color:#8b5cf6;
-    font-size:20px;
 }
 
 /* ACCOUNT DETAILS */
 
 .account-box{
-    background:#0c1020;
-    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
     border-radius:15px;
     padding:18px;
-    margin-top:20px;
+    margin-bottom:18px;
 }
 
 .account-row{
-    padding:14px 0;
-    border-bottom:1px solid rgba(255,255,255,.07);
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .account-row:last-child{
     border-bottom:0;
 }
 
-.label{
-    color:#7f879d;
-    font-size:12px;
-    margin-bottom:7px;
+.account-label{
+    color:#94a3b8;
+    font-size:13px;
 }
 
-.value{
-    font-size:16px;
-    font-weight:700;
+.account-value{
+    font-weight:800;
+    text-align:right;
 }
 
-.account-number{
+.copyable{
     color:#22d3ee;
-    font-size:23px;
 }
 
-.copy-btn{
-    margin-top:10px;
-    padding:8px 12px;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:8px;
-    background:#171c30;
-    color:#fff;
-    font-size:12px;
-}
+/* BUTTONS */
 
 .primary-btn{
     width:100%;
     border:0;
     border-radius:13px;
-    padding:15px;
+    padding:14px;
     background:linear-gradient(90deg,#7c3aed,#06b6d4);
     color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.secondary-btn{
+    width:100%;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:13px;
+    padding:14px;
+    background:rgba(255,255,255,.04);
+    color:#fff;
     font-weight:800;
-    margin-top:20px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.primary-btn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
 }
 
 /* FORM */
 
 .form-group{
-    margin-bottom:17px;
+    margin-bottom:16px;
 }
 
 .form-group label{
     display:block;
-    color:#c4c8d5;
+    color:#cbd5e1;
     font-size:13px;
-    margin-bottom:8px;
+    font-weight:700;
+    margin-bottom:7px;
 }
 
 .form-group input{
     width:100%;
-    border:1px solid rgba(255,255,255,.09);
-    outline:none;
-    background:#0b0f20;
-    color:#fff;
     padding:14px;
-    border-radius:11px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(0,0,0,.18);
+    color:#fff;
+    outline:none;
+    font-size:14px;
 }
 
 .form-group input:focus{
-    border-color:#7c3aed;
+    border-color:#8b5cf6;
+    box-shadow:0 0 0 3px rgba(139,92,246,.1);
 }
 
-.error{
-    display:none;
-    background:rgba(239,68,68,.1);
-    border:1px solid rgba(239,68,68,.25);
-    color:#fca5a5;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:15px;
-    font-size:13px;
+.form-group input::placeholder{
+    color:#64748b;
 }
 
 /* SUCCESS */
 
-.success-card{
+.success-box{
     text-align:center;
-    padding:35px 22px;
+    padding:15px 5px;
 }
 
 .success-icon{
     width:65px;
     height:65px;
     border-radius:50%;
-    background:rgba(34,197,94,.12);
-    border:1px solid rgba(34,197,94,.25);
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:0 auto 20px;
-    font-size:28px;
+    margin:0 auto 18px;
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.25);
+    font-size:30px;
 }
 
-.success-card h2{
-    font-size:23px;
+.success-box h2{
+    margin-bottom:9px;
+}
+
+.success-box p{
+    color:#94a3b8;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* HISTORY */
+
+.history-section{
+    margin-top:15px;
+}
+
+.history-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.history-title{
+    font-size:21px;
+    font-weight:900;
+}
+
+.history-subtitle{
+    color:#64748b;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.history-list{
+    display:grid;
+    gap:12px;
+}
+
+.history-card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:17px;
+}
+
+.history-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:13px;
+}
+
+.history-amount{
+    font-size:19px;
+    font-weight:900;
+}
+
+.history-date{
+    color:#64748b;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:900;
+    text-transform:capitalize;
+}
+
+.status.pending{
+    color:#fbbf24;
+    background:rgba(251,191,36,.1);
+    border:1px solid rgba(251,191,36,.2);
+}
+
+.status.approved{
+    color:#4ade80;
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.2);
+}
+
+.status.rejected{
+    color:#f87171;
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.2);
+}
+
+.status.processing{
+    color:#22d3ee;
+    background:rgba(6,182,212,.1);
+    border:1px solid rgba(6,182,212,.2);
+}
+
+.history-details{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.history-detail{
+    background:rgba(0,0,0,.12);
+    border-radius:10px;
+    padding:10px;
+}
+
+.detail-label{
+    color:#64748b;
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.detail-value{
+    color:#cbd5e1;
+    font-size:12px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+.history-loading,
+.history-empty,
+.history-error{
+    text-align:center;
+    padding:35px 20px;
+    border:1px dashed rgba(255,255,255,.1);
+    border-radius:16px;
+    color:#94a3b8;
+    background:rgba(255,255,255,.025);
+}
+
+.history-empty .big,
+.history-error .big{
+    font-size:34px;
     margin-bottom:10px;
 }
 
-.success-card p{
-    color:#8e95aa;
-    line-height:1.7;
-    font-size:14px;
+.history-empty h3,
+.history-error h3{
+    color:#fff;
+    margin-bottom:6px;
+}
+
+/* FOOTER */
+
+footer{
+    max-width:900px;
+    margin:auto;
+    padding:0 20px 30px;
+    text-align:center;
+    color:#64748b;
+    font-size:12px;
 }
 
 /* MOBILE */
 
-@media(max-width:500px){
+@media(max-width:600px){
 
     .container{
-        padding:15px;
+        padding:25px 15px 50px;
     }
 
-    .balance{
+    .wallet-card{
+        padding:22px;
+    }
+
+    .wallet-balance{
         font-size:31px;
     }
 
-    .card{
+    .stage-box{
         padding:20px;
     }
 
-    .title{
-        font-size:21px;
+    .history-details{
+        grid-template-columns:1fr;
     }
+
+    .history-top{
+        align-items:flex-start;
+    }
+
 }
-</style>
-</head>
 
-<body>
+</style></head><body><!-- HEADER --><header><div class="navbar">
 
-<div class="container">
+    <a href="dashboard.html" class="logo">
+        Zavora <span>Social</span>
+    </a>
 
-    <!-- HEADER -->
+    <a href="dashboard.html" class="back-btn">
+        ← Back
+    </a>
 
-    <div class="header">
+</div>
 
-        <div class="logo">
-            <span>Zavora</span> Social
+</header><!-- MAIN --><main class="container"><!-- WALLET -->
+
+<section class="wallet-card">
+
+    <div class="wallet-label">
+        Available Wallet Balance
+    </div>
+
+    <div class="wallet-balance" id="walletBalance">
+        ₦0.00
+    </div>
+
+    <button
+        class="deposit-main-btn"
+        id="depositBtn"
+    >
+        💳 Deposit Funds
+    </button>
+
+</section>
+
+
+<!-- DEPOSIT STAGES -->
+
+<section
+    class="stage-box"
+    id="stageBox"
+    style="display:none;"
+>
+
+
+    <!-- STAGE 1 -->
+
+    <div
+        class="stage active"
+        id="stage1"
+    >
+
+        <div class="stage-title">
+            Choose Payment
         </div>
 
-        <a href="dashboard.html" class="back-btn">
-            ← Back
-        </a>
+        <div class="stage-subtitle">
+            Select one of the available payment methods below.
+        </div>
+
+
+        <div class="payment-options">
+
+
+            <button
+                class="payment-option"
+                data-payment="Payment 1"
+            >
+
+                <div class="payment-name">
+                    Payment 1
+                </div>
+
+                <div class="payment-description">
+                    Bank transfer
+                </div>
+
+            </button>
+
+
+            <button
+                class="payment-option"
+                data-payment="Payment 2"
+            >
+
+                <div class="payment-name">
+                    Payment 2
+                </div>
+
+                <div class="payment-description">
+                    Bank transfer
+                </div>
+
+            </button>
+
+
+            <button
+                class="payment-option"
+                data-payment="Payment 3"
+            >
+
+                <div class="payment-name">
+                    Payment 3
+                </div>
+
+                <div class="payment-description">
+                    Bank transfer
+                </div>
+
+            </button>
+
+        </div>
 
     </div>
 
 
-    <!-- ========================= -->
-    <!-- STAGE 1: WALLET -->
-    <!-- ========================= -->
+    <!-- STAGE 2 -->
 
-    <section
-        id="stage1"
-        class="stage active">
-
-        <div class="wallet-card">
-
-            <div class="wallet-label">
-                Available Wallet Balance
-            </div>
-
-            <div
-                class="balance"
-                id="walletBalance">
-                ₦0.00
-            </div>
-
-            <button
-                class="deposit-btn"
-                id="depositButton">
-
-                + Deposit
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- STAGE 2: PAYMENT -->
-    <!-- ========================= -->
-
-    <section
+    <div
+        class="stage"
         id="stage2"
-        class="stage">
+    >
 
-        <div class="card">
+        <div class="stage-title">
+            Make Payment
+        </div>
 
-            <h1 class="title">
-                Choose Payment
-            </h1>
-
-            <p class="subtitle">
-                Select a payment option to continue.
-            </p>
+        <div class="stage-subtitle">
+            Send your payment to the account details below.
+        </div>
 
 
-            <button
-                class="payment"
-                onclick="selectPayment('Payment 1')">
-
-                <div class="payment-icon">
-                    💳
-                </div>
-
-                <div class="payment-info">
-
-                    <div class="payment-name">
-                        Payment 1
-                    </div>
-
-                    <div class="payment-description">
-                        Bank transfer
-                    </div>
-
-                </div>
-
-                <div class="arrow">
-                    ›
-                </div>
-
-            </button>
+        <div class="account-box">
 
 
-            <button
-                class="payment"
-                onclick="selectPayment('Payment 2')">
+            <div class="account-row">
 
-                <div class="payment-icon">
-                    💰
-                </div>
+                <span class="account-label">
+                    Account Number
+                </span>
 
-                <div class="payment-info">
+                <span class="account-value copyable">
+                    5777198543
+                </span>
 
-                    <div class="payment-name">
-                        Payment 2
-                    </div>
-
-                    <div class="payment-description">
-                        Bank transfer
-                    </div>
-
-                </div>
-
-                <div class="arrow">
-                    ›
-                </div>
-
-            </button>
+            </div>
 
 
-            <button
-                class="payment"
-                onclick="selectPayment('Payment 3')">
+            <div class="account-row">
 
-                <div class="payment-icon">
-                    🏦
-                </div>
+                <span class="account-label">
+                    Bank Name
+                </span>
 
-                <div class="payment-info">
+                <span class="account-value">
+                    TENN BANK
+                </span>
 
-                    <div class="payment-name">
-                        Payment 3
-                    </div>
+            </div>
 
-                    <div class="payment-description">
-                        Bank transfer
-                    </div>
 
-                </div>
+            <div class="account-row">
 
-                <div class="arrow">
-                    ›
-                </div>
+                <span class="account-label">
+                    Account Name
+                </span>
 
-            </button>
+                <span class="account-value">
+                    Promise Adeyeye
+                </span>
+
+            </div>
+
 
         </div>
 
-    </section>
+
+        <button
+            class="primary-btn"
+            id="paidBtn"
+        >
+            I Have Paid
+        </button>
 
 
-    <!-- ========================= -->
-    <!-- STAGE 3: ACCOUNT -->
-    <!-- ========================= -->
+        <button
+            class="secondary-btn"
+            id="backToPaymentBtn"
+        >
+            ← Back
+        </button>
 
-    <section
+    </div>
+
+
+    <!-- STAGE 3 -->
+
+    <div
+        class="stage"
         id="stage3"
-        class="stage">
+    >
 
-        <div class="card">
+        <div class="stage-title">
+            Prove Your Payment
+        </div>
 
-            <h1
-                class="title"
-                id="selectedPayment">
-                Payment
-            </h1>
-
-            <p class="subtitle">
-                Send your payment to the account below.
-            </p>
+        <div class="stage-subtitle">
+            Enter the details of the payment you just made.
+        </div>
 
 
-            <div class="account-box">
+        <div class="form-group">
 
-                <div class="account-row">
+            <label>
+                Amount
+            </label>
 
-                    <div class="label">
-                        Account Number
-                    </div>
-
-                    <div
-                        class="value account-number"
-                        id="accountNumber">
-                        5777198543
-                    </div>
-
-                    <button
-                        class="copy-btn"
-                        onclick="copyAccount()">
-
-                        Copy Account Number
-
-                    </button>
-
-                </div>
-
-
-                <div class="account-row">
-
-                    <div class="label">
-                        Bank Name
-                    </div>
-
-                    <div class="value">
-                        TENN BANK
-                    </div>
-
-                </div>
-
-
-                <div class="account-row">
-
-                    <div class="label">
-                        Account Name
-                    </div>
-
-                    <div class="value">
-                        Promise Adeyeye
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <button
-                class="primary-btn"
-                onclick="showStage(4)">
-
-                I Have Paid
-
-            </button>
+            <input
+                type="number"
+                id="amount"
+                placeholder="Enter amount"
+                min="1"
+            >
 
         </div>
 
-    </section>
+
+        <div class="form-group">
+
+            <label>
+                Sender Name
+            </label>
+
+            <input
+                type="text"
+                id="senderName"
+                placeholder="Name used for payment"
+            >
+
+        </div>
 
 
-    <!-- ========================= -->
-    <!-- STAGE 4: PROOF -->
-    <!-- ========================= -->
+        <div class="form-group">
 
-    <section
+            <label>
+                Transaction Reference
+            </label>
+
+            <input
+                type="text"
+                id="transactionReference"
+                placeholder="Enter transaction reference"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            id="submitPaymentBtn"
+        >
+            Submit Payment
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            id="backToAccountBtn"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+
+    <!-- STAGE 4 -->
+
+    <div
+        class="stage"
         id="stage4"
-        class="stage">
+    >
 
-        <div class="card">
-
-            <h1 class="title">
-                Prove Your Payment
-            </h1>
-
-            <p class="subtitle">
-                Enter the details of the payment you just made.
-            </p>
-
-
-            <div
-                class="error"
-                id="formError">
-            </div>
-
-
-            <form id="depositForm">
-
-                <div class="form-group">
-
-                    <label>
-                        Amount
-                    </label>
-
-                    <input
-                        type="number"
-                        id="amount"
-                        placeholder="Enter amount"
-                        min="1"
-                        step="0.01"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Sender Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="senderName"
-                        placeholder="Enter sender name"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Transaction Reference
-                    </label>
-
-                    <input
-                        type="text"
-                        id="transactionReference"
-                        placeholder="Enter transaction reference"
-                        required>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="primary-btn"
-                    id="submitButton">
-
-                    Submit Payment
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- STAGE 5: SUCCESS -->
-    <!-- ========================= -->
-
-    <section
-        id="stage5"
-        class="stage">
-
-        <div class="card success-card">
+        <div class="success-box">
 
             <div class="success-icon">
                 ✓
@@ -685,41 +776,84 @@ button{
             </h2>
 
             <p>
-                Your payment proof has been submitted
-                successfully.
+                Your payment has been submitted successfully and is now pending review.
             </p>
 
-            <p style="margin-top:10px;">
-                Status: <strong style="color:#fbbf24;">
-                    Pending Review
-                </strong>
-            </p>
+            <br>
 
             <button
                 class="primary-btn"
-                onclick="window.location.href='dashboard.html'">
-
-                Back to Dashboard
-
+                id="closeDepositBtn"
+            >
+                Done
             </button>
 
         </div>
 
-    </section>
-
-</div>
+    </div>
 
 
-<script type="module">
+</section>
+
+
+<!-- DEPOSIT HISTORY -->
+
+<section class="history-section">
+
+    <div class="history-header">
+
+        <div>
+
+            <div class="history-title">
+                Deposit History
+            </div>
+
+            <div class="history-subtitle">
+                View all your wallet deposits and their status.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="history-list"
+        id="historyList"
+    >
+
+        <div class="history-loading">
+
+            Loading deposit history...
+
+        </div>
+
+    </div>
+
+</section>
+
+</main><footer>© <span id="year"></span> Zavora Social.
+All rights reserved.
+
+</footer><script type="module">
+
+
+/* ==========================================
+   FIREBASE
+========================================== */
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -727,10 +861,9 @@ import {
     onValue,
     push,
     set
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-
-/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -741,7 +874,7 @@ const firebaseConfig = {
         "zavorasocial.firebaseapp.com",
 
     databaseURL:
-        "https://zavorasocial-default-rtdb.firebaseio.com",
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
 
     projectId:
         "zavorasocial",
@@ -757,14 +890,73 @@ const firebaseConfig = {
 
     measurementId:
         "G-D4LNBEWH50"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
 
-const db = getDatabase(app);
+const auth =
+    getAuth(app);
+
+
+const db =
+    getDatabase(app);
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const walletBalance =
+    document.getElementById("walletBalance");
+
+const depositBtn =
+    document.getElementById("depositBtn");
+
+const stageBox =
+    document.getElementById("stageBox");
+
+const stage1 =
+    document.getElementById("stage1");
+
+const stage2 =
+    document.getElementById("stage2");
+
+const stage3 =
+    document.getElementById("stage3");
+
+const stage4 =
+    document.getElementById("stage4");
+
+const paidBtn =
+    document.getElementById("paidBtn");
+
+const backToPaymentBtn =
+    document.getElementById("backToPaymentBtn");
+
+const backToAccountBtn =
+    document.getElementById("backToAccountBtn");
+
+const submitPaymentBtn =
+    document.getElementById("submitPaymentBtn");
+
+const closeDepositBtn =
+    document.getElementById("closeDepositBtn");
+
+const amountInput =
+    document.getElementById("amount");
+
+const senderNameInput =
+    document.getElementById("senderName");
+
+const transactionReferenceInput =
+    document.getElementById("transactionReference");
+
+const historyList =
+    document.getElementById("historyList");
 
 
 let currentUser = null;
@@ -772,246 +964,641 @@ let currentUser = null;
 let selectedPayment = "";
 
 
-/* ========================= */
-/* AUTH */
-/* ========================= */
+/* ==========================================
+   AUTH
+========================================== */
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(
+    auth,
+    (user) => {
 
-    if(!user){
+        if(!user){
 
-        window.location.href = "login.html";
+            window.location.href =
+                "login.html";
 
-        return;
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        loadWallet(user.uid);
+
+        loadDepositHistory(user.uid);
+
     }
-
-    currentUser = user;
-
-    loadWallet();
-
-});
+);
 
 
-/* ========================= */
-/* LOAD WALLET */
-/* ========================= */
+/* ==========================================
+   LOAD WALLET
+========================================== */
 
-function loadWallet(){
+function loadWallet(uid){
 
     const walletRef =
         ref(
             db,
             "users/" +
-            currentUser.uid +
+            uid +
             "/walletBalance"
         );
 
-    onValue(walletRef, (snapshot) => {
 
-        const balance =
-            Number(snapshot.val() || 0);
+    onValue(
+        walletRef,
+        (snapshot) => {
 
-        document.getElementById(
-            "walletBalance"
-        ).textContent =
-            "₦" +
-            balance.toLocaleString(
-                "en-NG",
-                {
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
-                }
+            const balance =
+                Number(snapshot.val()) || 0;
+
+
+            walletBalance.textContent =
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                );
+
+        },
+        (error) => {
+
+            console.error(
+                "Wallet error:",
+                error
             );
 
-    });
+            walletBalance.textContent =
+                "₦0.00";
+
+        }
+    );
 
 }
 
 
-/* ========================= */
-/* STAGE CONTROL */
-/* ========================= */
+/* ==========================================
+   LOAD DEPOSIT HISTORY
+========================================== */
 
-window.showStage = function(stageNumber){
+function loadDepositHistory(uid){
 
-    document
-        .querySelectorAll(".stage")
-        .forEach(stage => {
-
-            stage.classList.remove("active");
-
-        });
+    const depositsRef =
+        ref(db,"deposits");
 
 
-    const selectedStage =
-        document.getElementById(
-            "stage" + stageNumber
-        );
+    onValue(
+        depositsRef,
+        (snapshot) => {
 
-    if(selectedStage){
+            const data =
+                snapshot.val();
 
-        selectedStage.classList.add("active");
 
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
+            const deposits = [];
+
+
+            if(data){
+
+                Object.entries(data)
+                    .forEach(
+                        ([id,deposit]) => {
+
+                            if(
+                                deposit &&
+                                deposit.uid === uid
+                            ){
+
+                                deposits.push({
+
+                                    id:id,
+
+                                    amount:
+                                        Number(
+                                            deposit.amount
+                                        ) || 0,
+
+                                    senderName:
+                                        deposit.senderName ||
+                                        "-",
+
+                                    transactionReference:
+                                        deposit.transactionReference ||
+                                        "-",
+
+                                    payment:
+                                        deposit.payment ||
+                                        "-",
+
+                                    status:
+                                        deposit.status ||
+                                        "pending",
+
+                                    createdAt:
+                                        Number(
+                                            deposit.createdAt
+                                        ) || 0
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+            }
+
+
+            /*
+                Newest deposits first.
+            */
+
+            deposits.sort(
+                (a,b) =>
+                    b.createdAt -
+                    a.createdAt
+            );
+
+
+            renderDepositHistory(
+                deposits
+            );
+
+        },
+        (error) => {
+
+            console.error(
+                "Deposit history error:",
+                error
+            );
+
+
+            historyList.innerHTML = `
+
+                <div class="history-error">
+
+                    <div class="big">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Unable to load history
+                    </h3>
+
+                    <p>
+                        Please refresh the page and try again.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   RENDER DEPOSIT HISTORY
+========================================== */
+
+function renderDepositHistory(deposits){
+
+    if(deposits.length === 0){
+
+        historyList.innerHTML = `
+
+            <div class="history-empty">
+
+                <div class="big">
+                    💳
+                </div>
+
+                <h3>
+                    No deposits yet
+                </h3>
+
+                <p>
+                    Your deposit history will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
 
     }
 
-};
+
+    historyList.innerHTML = "";
 
 
-/* ========================= */
-/* STAGE 1 → STAGE 2 */
-/* ========================= */
+    deposits.forEach(
+        (deposit) => {
 
-document
-    .getElementById("depositButton")
-    .addEventListener("click", () => {
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "history-card";
+
+
+            const status =
+                String(
+                    deposit.status
+                ).toLowerCase();
+
+
+            card.innerHTML = `
+
+                <div class="history-top">
+
+                    <div>
+
+                        <div class="history-amount">
+
+                            ₦${formatMoney(
+                                deposit.amount
+                            )}
+
+                        </div>
+
+                        <div class="history-date">
+
+                            ${formatDate(
+                                deposit.createdAt
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="status ${escapeHtml(status)}"
+                    >
+
+                        ${escapeHtml(status)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="history-details">
+
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Payment
+                        </div>
+
+                        <div class="detail-value">
+                            ${escapeHtml(
+                                deposit.payment
+                            )}
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Sender Name
+                        </div>
+
+                        <div class="detail-value">
+                            ${escapeHtml(
+                                deposit.senderName
+                            )}
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Transaction Reference
+                        </div>
+
+                        <div class="detail-value">
+                            ${escapeHtml(
+                                deposit.transactionReference
+                            )}
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Deposit ID
+                        </div>
+
+                        <div class="detail-value">
+                            ${escapeHtml(
+                                deposit.id
+                            )}
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            historyList.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   FORMAT MONEY
+========================================== */
+
+function formatMoney(amount){
+
+    return Number(amount || 0)
+        .toLocaleString(
+            "en-NG",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* ==========================================
+   FORMAT DATE
+========================================== */
+
+function formatDate(timestamp){
+
+    if(!timestamp){
+
+        return "Date unavailable";
+
+    }
+
+
+    return new Date(timestamp)
+        .toLocaleString(
+            "en-NG",
+            {
+                year:"numeric",
+                month:"short",
+                day:"numeric",
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+}
+
+
+/* ==========================================
+   DEPOSIT BUTTON
+========================================== */
+
+depositBtn.addEventListener(
+    "click",
+    () => {
+
+        stageBox.style.display =
+            "block";
+
+
+        showStage(1);
+
+
+        stageBox.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+);
+
+
+/* ==========================================
+   PAYMENT SELECTION
+========================================== */
+
+document.querySelectorAll(
+    ".payment-option"
+)
+.forEach(
+    (button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                selectedPayment =
+                    button.dataset.payment;
+
+
+                showStage(2);
+
+            }
+        );
+
+    }
+);
+
+
+/* ==========================================
+   I HAVE PAID
+========================================== */
+
+paidBtn.addEventListener(
+    "click",
+    () => {
+
+        showStage(3);
+
+    }
+);
+
+
+/* ==========================================
+   BACK TO PAYMENT
+========================================== */
+
+backToPaymentBtn.addEventListener(
+    "click",
+    () => {
+
+        showStage(1);
+
+    }
+);
+
+
+/* ==========================================
+   BACK TO ACCOUNT
+========================================== */
+
+backToAccountBtn.addEventListener(
+    "click",
+    () => {
 
         showStage(2);
 
-    });
+    }
+);
 
 
-/* ========================= */
-/* SELECT PAYMENT */
-/* ========================= */
+/* ==========================================
+   SHOW STAGE
+========================================== */
 
-window.selectPayment = function(payment){
+function showStage(number){
 
-    selectedPayment = payment;
+    stage1.classList.remove("active");
 
-    document.getElementById(
-        "selectedPayment"
-    ).textContent = payment;
+    stage2.classList.remove("active");
 
-    showStage(3);
+    stage3.classList.remove("active");
 
-};
+    stage4.classList.remove("active");
 
 
-/* ========================= */
-/* COPY ACCOUNT */
-/* ========================= */
+    if(number === 1){
 
-window.copyAccount = async function(){
-
-    const account =
-        document
-        .getElementById("accountNumber")
-        .textContent
-        .trim();
-
-    try{
-
-        await navigator.clipboard.writeText(account);
-
-        alert(
-            "Account number copied successfully."
-        );
-
-    }catch(error){
-
-        alert(
-            "Please copy the account number manually."
-        );
+        stage1.classList.add("active");
 
     }
 
-};
+
+    if(number === 2){
+
+        stage2.classList.add("active");
+
+    }
 
 
-/* ========================= */
-/* SUBMIT PAYMENT */
-/* ========================= */
+    if(number === 3){
 
-document
-    .getElementById("depositForm")
-    .addEventListener("submit", async (event) => {
+        stage3.classList.add("active");
 
-        event.preventDefault();
+    }
 
 
-        if(!currentUser){
+    if(number === 4){
 
-            return;
-        }
+        stage4.classList.add("active");
 
+    }
+
+}
+
+
+/* ==========================================
+   SUBMIT PAYMENT
+========================================== */
+
+submitPaymentBtn.addEventListener(
+    "click",
+    async () => {
 
         const amount =
             Number(
-                document
-                .getElementById("amount")
-                .value
+                amountInput.value
             );
 
 
         const senderName =
-            document
-            .getElementById("senderName")
-            .value
-            .trim();
+            senderNameInput.value.trim();
 
 
         const transactionReference =
-            document
-            .getElementById(
-                "transactionReference"
-            )
-            .value
-            .trim();
-
-
-        const errorBox =
-            document.getElementById(
-                "formError"
-            );
-
-
-        errorBox.style.display = "none";
+            transactionReferenceInput.value.trim();
 
 
         if(!amount || amount <= 0){
 
-            showError(
+            alert(
                 "Please enter a valid amount."
             );
 
             return;
+
         }
 
 
         if(!senderName){
 
-            showError(
+            alert(
                 "Please enter the sender name."
             );
 
             return;
+
         }
 
 
         if(!transactionReference){
 
-            showError(
+            alert(
                 "Please enter the transaction reference."
             );
 
             return;
+
         }
 
 
-        const submitButton =
-            document.getElementById(
-                "submitButton"
+        if(!selectedPayment){
+
+            alert(
+                "Please select a payment method."
             );
 
+            return;
 
-        submitButton.disabled = true;
+        }
 
-        submitButton.textContent =
+
+        if(!currentUser){
+
+            alert(
+                "Your session has expired. Please login again."
+            );
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        submitPaymentBtn.disabled =
+            true;
+
+        submitPaymentBtn.textContent =
             "Submitting...";
 
 
@@ -1019,7 +1606,10 @@ document
 
             const depositRef =
                 push(
-                    ref(db, "deposits")
+                    ref(
+                        db,
+                        "deposits"
+                    )
                 );
 
 
@@ -1064,45 +1654,107 @@ document
             );
 
 
-            showStage(5);
+            showStage(4);
+
+
+            amountInput.value =
+                "";
+
+            senderNameInput.value =
+                "";
+
+            transactionReferenceInput.value =
+                "";
 
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Payment submission error:",
+                error
+            );
 
-            showError(
+
+            alert(
                 "Unable to submit your payment. Please try again."
             );
 
-            submitButton.disabled = false;
+        }finally{
 
-            submitButton.textContent =
+            submitPaymentBtn.disabled =
+                false;
+
+            submitPaymentBtn.textContent =
                 "Submit Payment";
 
         }
 
-    });
+    }
+);
 
 
-/* ========================= */
-/* ERROR */
-/* ========================= */
+/* ==========================================
+   DONE
+========================================== */
 
-function showError(message){
+closeDepositBtn.addEventListener(
+    "click",
+    () => {
 
-    const errorBox =
-        document.getElementById(
-            "formError"
+        stageBox.style.display =
+            "none";
+
+
+        showStage(1);
+
+    }
+);
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
         );
-
-    errorBox.textContent = message;
-
-    errorBox.style.display = "block";
 
 }
 
-</script>
 
-</body>
+/* ==========================================
+   YEAR
+========================================== */
+
+document.getElementById("year")
+    .textContent =
+    new Date().getFullYear();
+
+
+</script></body>
 </html>
