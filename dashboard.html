@@ -53,7 +53,9 @@ body{
 }
 
 @keyframes spin{
-    to{transform:rotate(360deg);}
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 /* HEADER */
@@ -318,9 +320,27 @@ header{
     font-size:12px;
 }
 
+/* CATEGORY LOADING */
+
+.category-loading{
+    grid-column:1/-1;
+    padding:45px 20px;
+    border:1px dashed rgba(255,255,255,.13);
+    border-radius:18px;
+    text-align:center;
+    color:#94a3b8;
+    background:rgba(255,255,255,.025);
+}
+
+.category-loading .big{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
 /* EMPTY */
 
 .empty-marketplace{
+    grid-column:1/-1;
     padding:45px 20px;
     border:1px dashed rgba(255,255,255,.13);
     border-radius:18px;
@@ -425,6 +445,7 @@ footer{
 </head>
 
 <body>
+
 
 <!-- LOADING SCREEN -->
 
@@ -667,213 +688,34 @@ footer{
 
 
         <!--
+            CATEGORIES ARE NOW LOADED FROM FIREBASE.
 
-            IMPORTANT:
-
-            These categories are temporary placeholders.
-
-            Later, the admin dashboard will control these categories
-            from Firestore.
-
-            Example:
-
-            Facebook
-            Instagram
-            Reddit
-            TikTok
-            X/Twitter
-            Twitch
-            Amazon
-            VPN
-            Email
-
+            Admin adds a category
+                    ↓
+            Firebase Realtime Database
+                    ↓
+            This section updates automatically.
         -->
 
-        <div class="category-grid" id="categoryGrid">
+        <div
+            class="category-grid"
+            id="categoryGrid"
+        >
 
+            <div class="category-loading">
 
-            <div class="category-card"
-                 onclick="openCategory('Facebook')">
-
-                <div class="category-icon">
-                    📘
+                <div class="big">
+                    🗂️
                 </div>
 
-                <div class="category-name">
-                    Facebook
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('Instagram')">
-
-                <div class="category-icon">
-                    📸
-                </div>
-
-                <div class="category-name">
-                    Instagram
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('Reddit')">
-
-                <div class="category-icon">
-                    👽
-                </div>
-
-                <div class="category-name">
-                    Reddit
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('TikTok')">
-
-                <div class="category-icon">
-                    🎵
-                </div>
-
-                <div class="category-name">
-                    TikTok
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('X/Twitter')">
-
-                <div class="category-icon">
-                    𝕏
-                </div>
-
-                <div class="category-name">
-                    X / Twitter
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('Twitch')">
-
-                <div class="category-icon">
-                    🎮
-                </div>
-
-                <div class="category-name">
-                    Twitch
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('Amazon')">
-
-                <div class="category-icon">
-                    📦
-                </div>
-
-                <div class="category-name">
-                    Amazon
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('VPN')">
-
-                <div class="category-icon">
-                    🔐
-                </div>
-
-                <div class="category-name">
-                    VPN
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('Email')">
-
-                <div class="category-icon">
-                    ✉️
-                </div>
-
-                <div class="category-name">
-                    Email
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
-
-            </div>
-
-
-            <div class="category-card"
-                 onclick="openCategory('Other')">
-
-                <div class="category-icon">
-                    ✨
-                </div>
-
-                <div class="category-name">
-                    Other
-                </div>
-
-                <div class="category-count">
-                    Browse products →
-                </div>
+                Loading categories...
 
             </div>
 
         </div>
 
     </section>
+
 
 </main>
 
@@ -888,9 +730,10 @@ footer{
 
 <script type="module">
 
-/* ================================
+
+/* ==========================================
    FIREBASE
-================================ */
+========================================== */
 
 import {
     initializeApp
@@ -906,6 +749,14 @@ import {
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
+import {
+    getDatabase,
+    ref,
+    onValue
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
 const firebaseConfig = {
 
     apiKey:
@@ -913,6 +764,9 @@ const firebaseConfig = {
 
     authDomain:
         "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
 
     projectId:
         "zavorasocial",
@@ -932,141 +786,402 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+
+const auth =
+    getAuth(app);
 
 
-/* ================================
+const db =
+    getDatabase(app);
+
+
+/* ==========================================
    ELEMENTS
-================================ */
+========================================== */
 
 const loadingScreen =
     document.getElementById("loadingScreen");
 
+
 const userName =
     document.getElementById("userName");
 
+
 const welcomeName =
     document.getElementById("welcomeName");
+
 
 const logoutBtn =
     document.getElementById("logoutBtn");
 
 
-/* ================================
-   AUTH CHECK
-================================ */
+const categoryGrid =
+    document.getElementById("categoryGrid");
 
-onAuthStateChanged(auth, (user) => {
 
-    if(!user){
+/* ==========================================
+   AUTHENTICATION
+========================================== */
 
-        window.location.href = "login.html";
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        let displayName =
+            user.displayName;
+
+
+        if(!displayName){
+
+            displayName =
+                user.email
+                    ? user.email.split("@")[0]
+                    : "User";
+
+        }
+
+
+        userName.textContent =
+            displayName;
+
+
+        welcomeName.textContent =
+            displayName;
+
+
+        loadingScreen.style.display =
+            "none";
+
+
+        /*
+            Start listening to categories
+            only after the customer is logged in.
+        */
+
+        loadCategories();
+
+    }
+);
+
+
+/* ==========================================
+   LOAD CATEGORIES
+========================================== */
+
+function loadCategories(){
+
+    const categoriesRef =
+        ref(db,"categories");
+
+
+    onValue(
+        categoriesRef,
+        (snapshot) => {
+
+            const data =
+                snapshot.val();
+
+
+            const categories = [];
+
+
+            if(data){
+
+                Object.entries(data)
+                    .forEach(
+                        ([id,category]) => {
+
+                            /*
+                                Only active categories
+                                are shown to customers.
+                            */
+
+                            if(
+                                category &&
+                                category.active === true
+                            ){
+
+                                categories.push({
+
+                                    id: id,
+
+                                    name:
+                                        category.name ||
+                                        "Unnamed",
+
+                                    icon:
+                                        category.icon ||
+                                        "📦",
+
+                                    createdAt:
+                                        category.createdAt ||
+                                        0
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+            }
+
+
+            /*
+                Newest category will appear
+                at the end of the list.
+            */
+
+            categories.sort(
+                (a,b) =>
+                    a.createdAt -
+                    b.createdAt
+            );
+
+
+            renderCategories(categories);
+
+        },
+        (error) => {
+
+            console.error(
+                "Category loading error:",
+                error
+            );
+
+
+            categoryGrid.innerHTML = `
+
+                <div class="empty-marketplace">
+
+                    <div class="big">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Categories unavailable
+                    </h3>
+
+                    <p>
+                        We could not load the marketplace categories.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   RENDER CATEGORIES
+========================================== */
+
+function renderCategories(categories){
+
+    if(categories.length === 0){
+
+        categoryGrid.innerHTML = `
+
+            <div class="empty-marketplace">
+
+                <div class="big">
+                    🗂️
+                </div>
+
+                <h3>
+                    No categories available
+                </h3>
+
+                <p>
+                    New marketplace categories will appear here.
+                </p>
+
+            </div>
+
+        `;
 
         return;
 
     }
 
 
-    let displayName =
-        user.displayName;
+    categoryGrid.innerHTML = "";
 
 
-    if(!displayName){
+    categories.forEach(
+        (category) => {
 
-        displayName =
-            user.email
-                ? user.email.split("@")[0]
-                : "User";
-
-    }
+            const card =
+                document.createElement("div");
 
 
-    userName.textContent =
-        displayName;
+            card.className =
+                "category-card";
 
 
-    welcomeName.textContent =
-        displayName;
+            card.innerHTML = `
+
+                <div class="category-icon">
+
+                    ${escapeHtml(category.icon)}
+
+                </div>
+
+                <div class="category-name">
+
+                    ${escapeHtml(category.name)}
+
+                </div>
+
+                <div class="category-count">
+
+                    Browse products →
+
+                </div>
+
+            `;
 
 
-    loadingScreen.style.display =
-        "none";
+            card.addEventListener(
+                "click",
+                () => {
 
-});
+                    openCategory(
+                        category.name
+                    );
 
-
-/* ================================
-   LOGOUT
-================================ */
-
-logoutBtn.addEventListener("click", async () => {
-
-    logoutBtn.disabled = true;
-
-    logoutBtn.textContent =
-        "Logging out...";
+                }
+            );
 
 
-    try{
+            categoryGrid.appendChild(card);
 
-        await signOut(auth);
+        }
+    );
 
-        window.location.href =
-            "login.html";
+}
 
-    }catch(error){
 
-        console.error(error);
+/* ==========================================
+   SECURITY: ESCAPE TEXT
+========================================== */
 
-        logoutBtn.disabled = false;
+function escapeHtml(value){
 
-        logoutBtn.textContent =
-            "Logout";
+    return String(value)
 
-        alert(
-            "Unable to logout. Please try again."
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
         );
 
+}
+
+
+/* ==========================================
+   OPEN CATEGORY
+========================================== */
+
+window.openCategory =
+    function(category){
+
+        window.location.href =
+            "products.html?category=" +
+            encodeURIComponent(category);
+
+    };
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+        logoutBtn.disabled =
+            true;
+
+        logoutBtn.textContent =
+            "Logging out...";
+
+
+        try{
+
+            await signOut(auth);
+
+
+            window.location.href =
+                "login.html";
+
+        }catch(error){
+
+            console.error(error);
+
+
+            logoutBtn.disabled =
+                false;
+
+            logoutBtn.textContent =
+                "Logout";
+
+
+            alert(
+                "Unable to logout. Please try again."
+            );
+
+        }
+
     }
+);
 
-});
 
-
-/* ================================
+/* ==========================================
    YEAR
-================================ */
+========================================== */
 
 document.getElementById("year")
     .textContent =
     new Date().getFullYear();
 
-
-/* ================================
-   CATEGORY
-================================ */
-
-window.openCategory = function(category){
-
-    /*
-       Products page will later receive
-       the selected category and load
-       products from Firestore.
-
-       Example:
-
-       products.html?category=Facebook
-
-       For now this sends the customer
-       to the products page.
-    */
-
-    window.location.href =
-        "products.html?category=" +
-        encodeURIComponent(category);
-
-};
 
 </script>
 
