@@ -286,6 +286,7 @@ input:focus{
 
 </div>
 
+
 <script type="module">
 
 import {
@@ -295,19 +296,20 @@ import {
 import {
     getAuth,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
+    setPersistence,
+    browserLocalPersistence,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
-/* ================================
+/* =====================================
    FIREBASE CONFIG
-================================ */
+===================================== */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -330,13 +332,24 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
 
 
-/* ================================
+/* =====================================
+   ADMIN ACCOUNT
+===================================== */
+
+const ADMIN_EMAIL =
+    "omoboyejohn@gmail.com";
+
+
+/* =====================================
    ELEMENTS
-================================ */
+===================================== */
 
 const loginForm =
     document.getElementById("loginForm");
@@ -357,34 +370,50 @@ const togglePassword =
     document.getElementById("togglePassword");
 
 
-/* ================================
-   PASSWORD SHOW/HIDE
-================================ */
+/* =====================================
+   PASSWORD TOGGLE
+===================================== */
 
-togglePassword.addEventListener("click", () => {
+togglePassword.addEventListener(
+    "click",
+    () => {
 
-    if(passwordInput.type === "password"){
+        if(
+            passwordInput.type ===
+            "password"
+        ){
 
-        passwordInput.type = "text";
-        togglePassword.textContent = "Hide";
+            passwordInput.type =
+                "text";
 
-    }else{
+            togglePassword.textContent =
+                "Hide";
 
-        passwordInput.type = "password";
-        togglePassword.textContent = "Show";
+        }else{
+
+            passwordInput.type =
+                "password";
+
+            togglePassword.textContent =
+                "Show";
+
+        }
 
     }
+);
 
-});
 
-
-/* ================================
+/* =====================================
    MESSAGE
-================================ */
+===================================== */
 
-function showMessage(text,type){
+function showMessage(
+    text,
+    type
+){
 
-    message.textContent = text;
+    message.textContent =
+        text;
 
     message.className =
         "message " + type;
@@ -392,143 +421,248 @@ function showMessage(text,type){
 }
 
 
-/* ================================
-   LOGIN
-================================ */
+/* =====================================
+   CHECK EXISTING ADMIN SESSION
+===================================== */
 
-loginForm.addEventListener("submit", async (event) => {
+onAuthStateChanged(
+    auth,
+    (user) => {
 
-    event.preventDefault();
+        if(!user){
 
-    const email =
-        emailInput.value.trim();
-
-    const password =
-        passwordInput.value;
-
-    if(!email || !password){
-
-        showMessage(
-            "Please enter your email and password.",
-            "error"
-        );
-
-        return;
-
-    }
-
-    loginButton.disabled = true;
-    loginButton.textContent = "Signing in...";
-
-    try{
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-        showMessage(
-            "Login successful. Opening admin dashboard...",
-            "success"
-        );
-
-        setTimeout(() => {
-
-            window.location.href =
-                "index.html";
-
-        },700);
-
-    }catch(error){
-
-        console.error(error);
-
-        let errorMessage =
-            "Unable to sign in.";
-
-        if(
-            error.code ===
-            "auth/invalid-credential"
-        ){
-
-            errorMessage =
-                "Invalid admin email or password.";
-
-        }else if(
-            error.code ===
-            "auth/user-not-found"
-        ){
-
-            errorMessage =
-                "No account exists with this email.";
-
-        }else if(
-            error.code ===
-            "auth/wrong-password"
-        ){
-
-            errorMessage =
-                "Incorrect password.";
-
-        }else if(
-            error.code ===
-            "auth/too-many-requests"
-        ){
-
-            errorMessage =
-                "Too many attempts. Please wait and try again.";
-
-        }else if(
-            error.code ===
-            "auth/network-request-failed"
-        ){
-
-            errorMessage =
-                "Network error. Check your internet connection.";
+            return;
 
         }
 
-        showMessage(
-            errorMessage,
-            "error"
+
+        /*
+           If another account is already
+           signed in, do NOT allow it into
+           the admin panel.
+        */
+
+        if(
+            !user.email ||
+            user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            return;
+
+        }
+
+
+        /*
+           Already authenticated admin.
+           Send directly to admin dashboard.
+        */
+
+        window.location.replace(
+            "index.html"
         );
 
-        loginButton.disabled = false;
+    }
+);
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+            emailInput.value
+                .trim()
+                .toLowerCase();
+
+        const password =
+            passwordInput.value;
+
+
+        if(
+            !email ||
+            !password
+        ){
+
+            showMessage(
+                "Please enter your email and password.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Prevent unauthorized email
+           before contacting Firebase.
+        */
+
+        if(
+            email !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            showMessage(
+                "This account is not authorized for the admin panel.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        loginButton.disabled =
+            true;
+
         loginButton.textContent =
-            "Login to Admin";
+            "Signing in...";
+
+
+        try{
+
+            /*
+               IMPORTANT FIX
+
+               Explicitly save Firebase Auth
+               session in browser local storage.
+
+               This allows:
+
+               admin/login.html
+                    ↓
+               admin/index.html
+                    ↓
+               admin/inventory.html
+
+               to share the same login session.
+            */
+
+            await setPersistence(
+                auth,
+                browserLocalPersistence
+            );
+
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            showMessage(
+                "Login successful. Opening admin dashboard...",
+                "success"
+            );
+
+
+            /*
+               Give Firebase a moment to finish
+               updating the current user before
+               changing pages.
+            */
+
+            setTimeout(
+                () => {
+
+                    window.location.replace(
+                        "index.html"
+                    );
+
+                },
+                500
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Admin login error:",
+                error
+            );
+
+
+            let errorMessage =
+                "Unable to sign in.";
+
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                errorMessage =
+                    "Invalid admin email or password.";
+
+            }else if(
+                error.code ===
+                "auth/user-not-found"
+            ){
+
+                errorMessage =
+                    "No account exists with this email.";
+
+            }else if(
+                error.code ===
+                "auth/wrong-password"
+            ){
+
+                errorMessage =
+                    "Incorrect password.";
+
+            }else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                errorMessage =
+                    "Too many attempts. Please wait and try again.";
+
+            }else if(
+                error.code ===
+                "auth/network-request-failed"
+            ){
+
+                errorMessage =
+                    "Network error. Check your internet connection.";
+
+            }else if(
+                error.code ===
+                "auth/user-disabled"
+            ){
+
+                errorMessage =
+                    "This administrator account has been disabled.";
+
+            }
+
+
+            showMessage(
+                errorMessage,
+                "error"
+            );
+
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "Login to Admin";
+
+        }
 
     }
-
-});
-
-
-/* ================================
-   AUTH CHECK
-================================ */
-
-onAuthStateChanged(auth,(user) => {
-
-    /*
-       If someone is already signed in,
-       we can take them directly to the
-       admin dashboard.
-
-       IMPORTANT:
-       Proper admin authorization will
-       be added before we allow access
-       to sensitive admin operations.
-    */
-
-    if(user){
-
-        // Don't automatically redirect while
-        // the login page is first loading.
-        // The login form handles successful login.
-
-    }
-
-});
+);
 
 </script>
 
