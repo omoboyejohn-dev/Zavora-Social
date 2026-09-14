@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Zavora Social</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 20% 0%,
+            rgba(124,58,237,.12),
+            transparent 30%
+        ),
+        #070b14;
+
+    color:#fff;
+}
+
+
+/* HEADER */
+
+.header{
+    height:72px;
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+
+    background:rgba(7,11,20,.85);
+
+    backdrop-filter:blur(15px);
+
+    position:sticky;
+    top:0;
+
+    z-index:100;
+}
+
+.header-inner{
+    height:100%;
+
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:0 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:19px;
+
+    font-weight:800;
+}
+
+.logo-icon{
+    width:37px;
+    height:37px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #06b6d4
+    );
+}
+
+.logo strong{
+    color:#a78bfa;
+}
+
+.header-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+.user-name{
+    color:#aab3c5;
+
+    font-size:12px;
+}
+
+.logout-button{
+    height:37px;
+
+    padding:0 14px;
+
+    border:1px solid rgba(239,68,68,.2);
+
+    background:rgba(239,68,68,.06);
+
+    color:#fca5a5;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+.logout-button:hover{
+    background:rgba(239,68,68,.12);
+}
+
+
+/* MAIN */
+
+.dashboard{
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:35px 20px 60px;
+}
+
+
+/* WELCOME */
+
+.welcome{
+    margin-bottom:30px;
+}
+
+.welcome small{
+    color:#7d899e;
+
+    font-size:12px;
+}
+
+.welcome h1{
+    font-size:30px;
+
+    margin-top:6px;
+
+    letter-spacing:-.7px;
+}
+
+.welcome h1 span{
+    background:linear-gradient(
+        90deg,
+        #a78bfa,
+        #22d3ee
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+
+/* CARDS */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:16px;
+
+    margin-bottom:30px;
+}
+
+.stat-card{
+    padding:21px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,27,43,.95),
+            rgba(12,17,29,.95)
+        );
+}
+
+.stat-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:17px;
+}
+
+.stat-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:rgba(139,92,246,.1);
+
+    color:#a78bfa;
+}
+
+.stat-label{
+    color:#78849a;
+
+    font-size:11px;
+}
+
+.stat-value{
+    font-size:22px;
+
+    font-weight:700;
+}
+
+.stat-description{
+    color:#566177;
+
+    font-size:10px;
+
+    margin-top:5px;
+}
+
+
+/* QUICK ACTIONS */
+
+.section-title{
+    font-size:17px;
+
+    margin-bottom:15px;
+}
+
+.actions{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:32px;
+}
+
+.action{
+    min-height:125px;
+
+    padding:20px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:16px;
+
+    background:#0d1422;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    transition:.2s;
+}
+
+.action:hover{
+    transform:translateY(-2px);
+
+    border-color:rgba(139,92,246,.4);
+
+    background:#111a2c;
+}
+
+.action-icon{
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(139,92,246,.1);
+
+    color:#a78bfa;
+
+    margin-bottom:14px;
+}
+
+.action h3{
+    font-size:13px;
+
+    margin-bottom:5px;
+}
+
+.action p{
+    color:#68758b;
+
+    font-size:10px;
+
+    line-height:1.5;
+}
+
+
+/* MARKETPLACE */
+
+.marketplace{
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,27,43,.7),
+            rgba(12,17,29,.7)
+        );
+}
+
+.marketplace-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.marketplace-header h2{
+    font-size:17px;
+}
+
+.view-products{
+    color:#a78bfa;
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+.view-products:hover{
+    color:#22d3ee;
+}
+
+.categories{
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:12px;
+}
+
+.category{
+    padding:18px 12px;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    background:#0a101c;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    transition:.2s;
+}
+
+.category:hover{
+    border-color:rgba(139,92,246,.35);
+}
+
+.category i{
+    display:block;
+
+    color:#a78bfa;
+
+    font-size:20px;
+
+    margin-bottom:9px;
+}
+
+.category span{
+    color:#8994a8;
+
+    font-size:10px;
+}
+
+
+/* LOADING */
+
+.loading{
+    position:fixed;
+
+    inset:0;
+
+    z-index:999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#070b14;
+}
+
+.loading-box{
+    text-align:center;
+}
+
+.loading-icon{
+    width:50px;
+    height:50px;
+
+    margin:auto auto 15px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #06b6d4
+    );
+}
+
+.loading-box p{
+    color:#78849a;
+
+    font-size:12px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .actions{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .categories{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header{
+        height:65px;
+    }
+
+    .header-inner{
+        padding:0 14px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .logo-icon{
+        width:33px;
+        height:33px;
+    }
+
+    .user-name{
+        display:none;
+    }
+
+    .dashboard{
+        padding:25px 14px 45px;
+    }
+
+    .welcome h1{
+        font-size:25px;
+    }
+
+    .stats{
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:16px;
+    }
+
+    .stat-value{
+        font-size:18px;
+    }
+
+    .actions{
+        gap:10px;
+    }
+
+    .action{
+        padding:15px;
+        min-height:110px;
+    }
+
+    .marketplace{
+        padding:18px;
+    }
+
+    .categories{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- AUTH LOADING -->
+
+<div class="loading" id="loadingScreen">
+
+    <div class="loading-box">
+
+        <div class="loading-icon">
+
+            <i class="fa-solid fa-bolt"></i>
+
+        </div>
+
+        <p>
+            Checking your account...
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="header-inner">
+
+<a href="dashboard.html" class="logo">
+
+<span class="logo-icon">
+
+<i class="fa-solid fa-bolt"></i>
+
+</span>
+
+<span>
+Zavora <strong>Social</strong>
+</span>
+
+</a>
+
+
+<div class="header-right">
+
+<span
+class="user-name"
+id="headerUserName"
+>
+Loading...
+</span>
+
+
+<button
+class="logout-button"
+id="logoutButton"
+>
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+ Logout
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- DASHBOARD -->
+
+<main class="dashboard">
+
+
+<section class="welcome">
+
+<small>
+Customer Dashboard
+</small>
+
+<h1>
+
+Welcome back,
+
+<span id="welcomeName">
+User
+</span>
+
+👋
+
+</h1>
+
+</section>
+
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<span class="stat-label">
+Wallet
+</span>
+
+</div>
+
+<div class="stat-value">
+₦0.00
+</div>
+
+<div class="stat-description">
+Available balance
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+</div>
+
+<span class="stat-label">
+Orders
+</span>
+
+</div>
+
+<div class="stat-value">
+0
+</div>
+
+<div class="stat-description">
+Total orders
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-box-open"></i>
+
+</div>
+
+<span class="stat-label">
+Products
+</span>
+
+</div>
+
+<div class="stat-value">
+0
+</div>
+
+<div class="stat-description">
+Purchased products
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+
+<i class="fa-solid fa-bell"></i>
+
+</div>
+
+<span class="stat-label">
+Notifications
+</span>
+
+</div>
+
+<div class="stat-value">
+0
+</div>
+
+<div class="stat-description">
+New notifications
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- QUICK ACTIONS -->
+
+<h2 class="section-title">
+Quick Actions
+</h2>
+
+
+<section class="actions">
+
+
+<a
+href="products.html"
+class="action"
+>
+
+<div class="action-icon">
+
+<i class="fa-solid fa-store"></i>
+
+</div>
+
+<h3>
+Browse Products
+</h3>
+
+<p>
+Explore available products and services.
+</p>
+
+</a>
+
+
+
+<a
+href="wallet.html"
+class="action"
+>
+
+<div class="action-icon">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<h3>
+Fund Wallet
+</h3>
+
+<p>
+Add funds to your Zavora Social wallet.
+</p>
+
+</a>
+
+
+
+<a
+href="orders.html"
+class="action"
+>
+
+<div class="action-icon">
+
+<i class="fa-solid fa-box"></i>
+
+</div>
+
+<h3>
+My Orders
+</h3>
+
+<p>
+View and manage your orders.
+</p>
+
+</a>
+
+
+
+<a
+href="profile.html"
+class="action"
+>
+
+<div class="action-icon">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<h3>
+My Profile
+</h3>
+
+<p>
+Manage your account information.
+</p>
+
+</a>
+
+
+</section>
+
+
+
+<!-- MARKETPLACE -->
+
+<section class="marketplace">
+
+
+<div class="marketplace-header">
+
+<h2>
+Marketplace Categories
+</h2>
+
+<a
+href="products.html"
+class="view-products"
+>
+View All
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+
+<div class="categories">
+
+
+<a
+href="products.html?category=facebook"
+class="category"
+>
+
+<i class="fa-brands fa-facebook"></i>
+
+<span>
+Facebook
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=instagram"
+class="category"
+>
+
+<i class="fa-brands fa-instagram"></i>
+
+<span>
+Instagram
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=snapchat"
+class="category"
+>
+
+<i class="fa-brands fa-snapchat"></i>
+
+<span>
+Snapchat
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=tiktok"
+class="category"
+>
+
+<i class="fa-brands fa-tiktok"></i>
+
+<span>
+TikTok
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=x"
+class="category"
+>
+
+<i class="fa-brands fa-x-twitter"></i>
+
+<span>
+X / Twitter
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=twitch"
+class="category"
+>
+
+<i class="fa-brands fa-twitch"></i>
+
+<span>
+Twitch
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=amazon"
+class="category"
+>
+
+<i class="fa-brands fa-amazon"></i>
+
+<span>
+Amazon
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=vpn"
+class="category"
+>
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<span>
+VPN
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=email"
+class="category"
+>
+
+<i class="fa-solid fa-envelope"></i>
+
+<span>
+Email
+</span>
+
+</a>
+
+
+<a
+href="products.html?category=reddit"
+class="category"
+>
+
+<i class="fa-brands fa-reddit"></i>
+
+<span>
+Reddit
+</span>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+    "zavorasocial.firebaseapp.com",
+
+    projectId:
+    "zavorasocial",
+
+    storageBucket:
+    "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+    "447170165246",
+
+    appId:
+    "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+    "G-D4LNBEWH50"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+
+/* ELEMENTS */
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+const welcomeName =
+    document.getElementById("welcomeName");
+
+const headerUserName =
+    document.getElementById("headerUserName");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+/* AUTH CHECK */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+        }
+
+
+        /* Get user's name */
+
+        const name =
+            user.displayName ||
+            user.email.split("@")[0];
+
+
+        welcomeName.textContent =
+            name;
+
+        headerUserName.textContent =
+            name;
+
+
+        /* Show dashboard */
+
+        loadingScreen.style.display =
+            "none";
+
+    }
+);
+
+
+/* LOGOUT */
+
+logoutButton.addEventListener(
+    "click",
+    async function(){
+
+        try{
+
+            await signOut(auth);
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }catch(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            alert(
+                "Unable to logout. Please try again."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
