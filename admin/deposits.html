@@ -29,8 +29,6 @@ a{
     text-decoration:none;
 }
 
-/* LAYOUT */
-
 .layout{
     display:flex;
     min-height:100vh;
@@ -108,8 +106,6 @@ a{
     padding:30px;
 }
 
-/* HEADER */
-
 .topbar{
     display:flex;
     justify-content:space-between;
@@ -179,6 +175,7 @@ a{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:15px;
 }
 
 .table-title{
@@ -203,7 +200,7 @@ a{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1000px;
+    min-width:1050px;
 }
 
 th{
@@ -259,6 +256,11 @@ td{
     color:#fbbf24;
 }
 
+.processing{
+    background:rgba(59,130,246,.12);
+    color:#60a5fa;
+}
+
 .approved{
     background:rgba(34,197,94,.12);
     color:#4ade80;
@@ -303,6 +305,12 @@ td{
     background:#dc2626;
 }
 
+.approve-btn:disabled,
+.reject-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
 .done{
     color:#737b92;
     font-size:12px;
@@ -320,8 +328,6 @@ td{
     font-size:35px;
     margin-bottom:12px;
 }
-
-/* LOADING */
 
 .loading{
     padding:45px;
@@ -546,7 +552,7 @@ td{
         </div>
 
 
-        <!-- DEPOSITS -->
+        <!-- TABLE -->
 
         <div class="table-card">
 
@@ -570,8 +576,11 @@ td{
                 <div
                     class="loading"
                     id="loading">
+
                     Loading deposits...
+
                 </div>
+
 
                 <table
                     id="depositTable"
@@ -621,6 +630,7 @@ td{
 
                 </table>
 
+
                 <div
                     class="empty"
                     id="emptyState"
@@ -660,7 +670,9 @@ import {
 import {
     getDatabase,
     ref,
-    onValue
+    onValue,
+    runTransaction,
+    update
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
@@ -708,6 +720,9 @@ const db =
     getDatabase(app);
 
 
+let deposits = [];
+
+
 /* ELEMENTS */
 
 const loading =
@@ -724,9 +739,6 @@ const emptyState =
 
 const searchInput =
     document.getElementById("searchInput");
-
-
-let deposits = [];
 
 
 /* AUTH */
@@ -760,7 +772,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
-/* LOAD DEPOSITS */
+/* LOAD */
 
 function loadDeposits(){
 
@@ -779,7 +791,7 @@ function loadDeposits(){
 
                 deposits.push({
 
-                    id: child.key,
+                    id:child.key,
 
                     ...child.val()
 
@@ -829,10 +841,6 @@ function loadDeposits(){
 
 function updateStats(){
 
-    const total =
-        deposits.length;
-
-
     const pending =
         deposits.filter(
             deposit =>
@@ -840,10 +848,10 @@ function updateStats(){
         );
 
 
-    const pendingTotal =
+    const pendingAmount =
         pending.reduce(
-            (sum,deposit) =>
-                sum +
+            (total,deposit) =>
+                total +
                 Number(deposit.amount || 0),
             0
         );
@@ -851,7 +859,8 @@ function updateStats(){
 
     document.getElementById(
         "totalDeposits"
-    ).textContent = total;
+    ).textContent =
+        deposits.length;
 
 
     document.getElementById(
@@ -863,7 +872,7 @@ function updateStats(){
     document.getElementById(
         "pendingAmount"
     ).textContent =
-        formatMoney(pendingTotal);
+        formatMoney(pendingAmount);
 
 }
 
@@ -881,9 +890,11 @@ function renderDeposits(){
     const filtered =
         deposits.filter((deposit) => {
 
-            const text = [
+            const searchable = [
 
                 deposit.email,
+
+                deposit.uid,
 
                 deposit.senderName,
 
@@ -898,7 +909,7 @@ function renderDeposits(){
             .toLowerCase();
 
 
-            return text.includes(search);
+            return searchable.includes(search);
 
         });
 
@@ -936,10 +947,6 @@ function renderDeposits(){
             deposit.status || "pending";
 
 
-        const date =
-            formatDate(deposit.createdAt);
-
-
         let actionHTML = "";
 
 
@@ -971,12 +978,24 @@ function renderDeposits(){
 
             `;
 
+        }else if(status === "processing"){
+
+            actionHTML = `
+
+                <span class="done">
+                    Processing...
+                </span>
+
+            `;
+
         }else{
 
             actionHTML = `
+
                 <span class="done">
                     Reviewed
                 </span>
+
             `;
 
         }
@@ -1017,12 +1036,9 @@ function renderDeposits(){
 
 
             <td>
-
                 ${escapeHTML(
-                    deposit.senderName ||
-                    "-"
+                    deposit.senderName || "-"
                 )}
-
             </td>
 
 
@@ -1030,8 +1046,7 @@ function renderDeposits(){
 
                 <span class="reference">
                     ${escapeHTML(
-                        deposit.transactionReference ||
-                        "-"
+                        deposit.transactionReference || "-"
                     )}
                 </span>
 
@@ -1039,19 +1054,18 @@ function renderDeposits(){
 
 
             <td>
-
                 ${escapeHTML(
-                    deposit.payment ||
-                    "-"
+                    deposit.payment || "-"
                 )}
-
             </td>
 
 
             <td>
 
                 <span class="date">
-                    ${date}
+                    ${formatDate(
+                        deposit.createdAt
+                    )}
                 </span>
 
             </td>
@@ -1067,9 +1081,7 @@ function renderDeposits(){
 
 
             <td>
-
                 ${actionHTML}
-
             </td>
 
         `;
@@ -1094,18 +1106,21 @@ searchInput.addEventListener(
 
 document
     .getElementById("refreshBtn")
-    .addEventListener("click", () => {
+    .addEventListener(
+        "click",
+        () => {
 
-        loadDeposits();
+            loadDeposits();
 
-    });
+        }
+    );
 
 
 /* ACTIONS */
 
 depositList.addEventListener(
     "click",
-    (event) => {
+    async (event) => {
 
         const button =
             event.target.closest("button");
@@ -1138,19 +1153,20 @@ depositList.addEventListener(
 
         if(action === "approve"){
 
-            alert(
-                "Deposit selected for approval. Wallet crediting will be connected in the next step."
+            await approveDeposit(
+                deposit,
+                button
             );
 
             return;
-
         }
 
 
         if(action === "reject"){
 
-            alert(
-                "Deposit selected for rejection. Rejection handling will be connected in the next step."
+            await rejectDeposit(
+                deposit,
+                button
             );
 
         }
@@ -1159,18 +1175,362 @@ depositList.addEventListener(
 );
 
 
+/* ========================= */
+/* APPROVE DEPOSIT */
+/* ========================= */
+
+async function approveDeposit(
+    deposit,
+    button
+){
+
+    if(deposit.status !== "pending"){
+
+        alert(
+            "This deposit has already been reviewed."
+        );
+
+        return;
+    }
+
+
+    const amount =
+        Number(deposit.amount);
+
+
+    if(!amount || amount <= 0){
+
+        alert(
+            "This deposit has an invalid amount."
+        );
+
+        return;
+    }
+
+
+    if(!deposit.uid){
+
+        alert(
+            "This deposit does not have a customer UID."
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "Approve " +
+            formatMoney(amount) +
+            " and credit this customer's wallet?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Processing...";
+
+
+    try{
+
+        /*
+         * STEP 1
+         * Change pending → processing.
+         *
+         * This prevents a second click from
+         * processing the same deposit.
+         */
+
+        const depositRef =
+            ref(
+                db,
+                "deposits/" +
+                deposit.id
+            );
+
+
+        const lockResult =
+            await runTransaction(
+                depositRef,
+                (currentData) => {
+
+                    if(!currentData){
+
+                        return;
+
+                    }
+
+
+                    if(
+                        currentData.status !==
+                        "pending"
+                    ){
+
+                        return;
+
+                    }
+
+
+                    return {
+
+                        ...currentData,
+
+                        status:
+                            "processing",
+
+                        processingAt:
+                            Date.now(),
+
+                        processingBy:
+                            auth.currentUser.email
+
+                    };
+
+                }
+            );
+
+
+        if(!lockResult.committed){
+
+            throw new Error(
+                "This deposit is already being processed."
+            );
+
+        }
+
+
+        /*
+         * STEP 2
+         * Add the deposit amount to the
+         * customer's wallet.
+         */
+
+        const walletRef =
+            ref(
+                db,
+                "users/" +
+                deposit.uid +
+                "/walletBalance"
+            );
+
+
+        await runTransaction(
+            walletRef,
+            (currentBalance) => {
+
+                const balance =
+                    Number(
+                        currentBalance || 0
+                    );
+
+
+                return balance + amount;
+
+            }
+        );
+
+
+        /*
+         * STEP 3
+         * Mark the deposit approved.
+         */
+
+        await update(
+            depositRef,
+            {
+
+                status:
+                    "approved",
+
+                approvedAt:
+                    Date.now(),
+
+                approvedBy:
+                    auth.currentUser.email,
+
+                creditedAmount:
+                    amount
+
+            }
+        );
+
+
+        alert(
+            "Deposit approved successfully. " +
+            formatMoney(amount) +
+            " has been added to the customer's wallet."
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Approval error:",
+            error
+        );
+
+
+        /*
+         * If something failed after the
+         * deposit was locked, return it to
+         * pending so the admin can review it.
+         */
+
+        try{
+
+            await update(
+                ref(
+                    db,
+                    "deposits/" +
+                    deposit.id
+                ),
+                {
+
+                    status:
+                        "pending",
+
+                    processingAt:
+                        null,
+
+                    processingBy:
+                        null
+
+                }
+            );
+
+        }catch(resetError){
+
+            console.error(
+                "Unable to reset deposit:",
+                resetError
+            );
+
+        }
+
+
+        alert(
+            "Unable to approve this deposit. " +
+            "Please try again."
+        );
+
+
+    }finally{
+
+        button.disabled = false;
+
+        button.textContent =
+            "Approve";
+
+    }
+
+}
+
+
+/* ========================= */
+/* REJECT DEPOSIT */
+/* ========================= */
+
+async function rejectDeposit(
+    deposit,
+    button
+){
+
+    if(deposit.status !== "pending"){
+
+        alert(
+            "This deposit has already been reviewed."
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "Reject this deposit?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Rejecting...";
+
+
+    try{
+
+        await update(
+            ref(
+                db,
+                "deposits/" +
+                deposit.id
+            ),
+            {
+
+                status:
+                    "rejected",
+
+                rejectedAt:
+                    Date.now(),
+
+                rejectedBy:
+                    auth.currentUser.email
+
+            }
+        );
+
+
+        alert(
+            "Deposit rejected."
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Unable to reject this deposit."
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+        button.textContent =
+            "Reject";
+
+    }
+
+}
+
+
 /* LOGOUT */
 
 document
     .getElementById("logoutBtn")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        await signOut(auth);
+            await signOut(auth);
 
-        window.location.href =
-            "login.html";
+            window.location.href =
+                "login.html";
 
-    });
+        }
+    );
 
 
 /* HELPERS */
@@ -1197,13 +1557,9 @@ function formatDate(timestamp){
     }
 
 
-    const date =
-        new Date(
-            Number(timestamp)
-        );
-
-
-    return date.toLocaleString(
+    return new Date(
+        Number(timestamp)
+    ).toLocaleString(
         "en-NG",
         {
             dateStyle:"medium",
