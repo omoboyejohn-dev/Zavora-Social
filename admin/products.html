@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Admin Products</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
+        radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
+        #080b16;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(8,11,22,.88);
+    backdrop-filter:blur(18px);
+}
+
+.navbar{
+    max-width:1250px;
+    min-height:70px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
+}
+
+.logo span{
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.admin-badge{
+    padding:8px 12px;
+    border-radius:9px;
+    background:rgba(139,92,246,.12);
+    border:1px solid rgba(139,92,246,.25);
+    color:#c4b5fd;
+    font-size:12px;
+    font-weight:800;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:30px 20px 60px;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:#94a3b8;
+    font-size:14px;
+}
+
+/* FORM CARD */
+
+.form-card{
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:30px;
+}
+
+.form-card h2{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    color:#cbd5e1;
+    font-size:13px;
+    font-weight:700;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid rgba(255,255,255,.1);
+    outline:none;
+    background:#111827;
+    color:#fff;
+    padding:13px 14px;
+    border-radius:11px;
+    font-size:14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#8b5cf6;
+    box-shadow:0 0 0 3px rgba(139,92,246,.1);
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+select option{
+    background:#111827;
+    color:#fff;
+}
+
+/* IMAGE PREVIEW */
+
+.image-preview{
+    display:none;
+    margin-top:10px;
+    width:120px;
+    height:100px;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.1);
+    background:#0f172a;
+}
+
+.image-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.form-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+    border:none;
+    padding:13px 18px;
+    border-radius:11px;
+    cursor:pointer;
+    font-weight:800;
+    font-size:14px;
+}
+
+.primary-btn{
+    color:#fff;
+    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+}
+
+.primary-btn:hover{
+    opacity:.9;
+}
+
+.primary-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.secondary-btn{
+    color:#cbd5e1;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* STATUS */
+
+.message{
+    display:none;
+    margin-bottom:18px;
+    padding:13px 15px;
+    border-radius:11px;
+    font-size:14px;
+}
+
+.message.success{
+    display:block;
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.25);
+    color:#86efac;
+}
+
+.message.error{
+    display:block;
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.25);
+    color:#fca5a5;
+}
+
+/* PRODUCTS */
+
+.products-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.products-header h2{
+    font-size:21px;
+}
+
+.product-count{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.product-card{
+    overflow:hidden;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.045);
+}
+
+.product-image{
+    width:100%;
+    height:180px;
+    background:#111827;
+    position:relative;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.status-badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+    backdrop-filter:blur(10px);
+}
+
+.status-active{
+    background:rgba(34,197,94,.15);
+    color:#86efac;
+    border:1px solid rgba(34,197,94,.25);
+}
+
+.status-inactive{
+    background:rgba(239,68,68,.15);
+    color:#fca5a5;
+    border:1px solid rgba(239,68,68,.25);
+}
+
+.product-info{
+    padding:16px;
+}
+
+.product-name{
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:7px;
+    line-height:1.35;
+}
+
+.product-price{
+    font-size:18px;
+    font-weight:900;
+    color:#67e8f9;
+    margin-bottom:7px;
+}
+
+.product-category{
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.product-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.edit-btn,
+.delete-btn,
+.toggle-btn{
+    border:none;
+    cursor:pointer;
+    padding:10px 8px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.edit-btn{
+    color:#c4b5fd;
+    background:rgba(139,92,246,.12);
+    border:1px solid rgba(139,92,246,.2);
+}
+
+.toggle-btn{
+    color:#67e8f9;
+    background:rgba(6,182,212,.1);
+    border:1px solid rgba(6,182,212,.2);
+}
+
+.delete-btn{
+    color:#fca5a5;
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.2);
+    grid-column:1/-1;
+}
+
+.empty-products{
+    grid-column:1/-1;
+    text-align:center;
+    padding:55px 20px;
+    border:1px dashed rgba(255,255,255,.12);
+    border-radius:18px;
+    color:#94a3b8;
+}
+
+.empty-products .big{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.empty-products h3{
+    color:#fff;
+    margin-bottom:7px;
+}
+
+/* LOADING */
+
+.loading{
+    grid-column:1/-1;
+    padding:45px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+    .products-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:750px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    .container{
+        padding:25px 14px 50px;
+    }
+
+    .navbar{
+        padding:0 14px;
+    }
+
+    .page-title h1{
+        font-size:25px;
+    }
+
+    .form-card{
+        padding:18px;
+    }
+
+    .products-grid{
+        grid-template-columns:1fr;
+    }
+
+    .product-image{
+        height:210px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="navbar">
+
+        <a href="../dashboard.html" class="logo">
+            Zavora <span>Social</span>
+        </a>
+
+        <div class="admin-badge">
+            ADMIN PRODUCTS
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        <h1>
+            Products
+        </h1>
+
+        <p>
+            Add and manage the products available in your Zavora Social marketplace.
+        </p>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+    <!-- PRODUCT FORM -->
+
+    <section class="form-card">
+
+        <h2 id="formTitle">
+            Add New Product
+        </h2>
+
+
+        <form id="productForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- PRODUCT NAME -->
+
+                <div class="form-group">
+
+                    <label for="productName">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Example: Facebook Marketing Tool"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label for="productPrice">
+                        Price (₦)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        placeholder="2500"
+                        min="0"
+                        step="1"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="productCategory">
+                        Category
+                    </label>
+
+                    <select
+                        id="productCategory"
+                        required
+                    >
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- IMAGE URL -->
+
+                <div class="form-group">
+
+                    <label for="productImage">
+                        Product Image URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="productImage"
+                        placeholder="https://example.com/image.jpg"
+                        required
+                    >
+
+                    <div
+                        class="image-preview"
+                        id="imagePreview"
+                    >
+
+                        <img
+                            id="previewImage"
+                            src=""
+                            alt="Preview"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group full">
+
+                    <label for="productDescription">
+                        Product Description
+                    </label>
+
+                    <textarea
+                        id="productDescription"
+                        placeholder="Describe this product..."
+                        maxlength="1000"
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                    id="saveBtn"
+                >
+                    Add Product
+                </button>
+
+
+                <button
+                    type="button"
+                    class="secondary-btn hidden"
+                    id="cancelBtn"
+                >
+                    Cancel Edit
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- PRODUCT LIST -->
+
+    <section>
+
+
+        <div class="products-header">
+
+            <h2>
+                All Products
+            </h2>
+
+            <div
+                class="product-count"
+                id="productCount"
+            >
+                0 products
+            </div>
+
+        </div>
+
+
+        <div
+            class="products-grid"
+            id="productsGrid"
+        >
+
+            <div class="loading">
+                Loading products...
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script type="module">
+
+
+/* ==========================================
+   FIREBASE
+========================================== */
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    update,
+    remove,
+    onValue,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+        "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
+
+    projectId:
+        "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getDatabase(app);
+
+
+/* ==========================================
+   ADMIN EMAIL
+========================================== */
+
+const ADMIN_EMAIL =
+    "omoboyejohn@gmail.com";
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const productForm =
+    document.getElementById("productForm");
+
+const productName =
+    document.getElementById("productName");
+
+const productPrice =
+    document.getElementById("productPrice");
+
+const productCategory =
+    document.getElementById("productCategory");
+
+const productImage =
+    document.getElementById("productImage");
+
+const productDescription =
+    document.getElementById("productDescription");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+const cancelBtn =
+    document.getElementById("cancelBtn");
+
+const formTitle =
+    document.getElementById("formTitle");
+
+const productsGrid =
+    document.getElementById("productsGrid");
+
+const productCount =
+    document.getElementById("productCount");
+
+const message =
+    document.getElementById("message");
+
+const imagePreview =
+    document.getElementById("imagePreview");
+
+const previewImage =
+    document.getElementById("previewImage");
+
+
+/* ==========================================
+   STATE
+========================================== */
+
+let currentUser = null;
+
+let editingProductId = null;
+
+let categoriesData = {};
+
+let productsData = {};
+
+
+/* ==========================================
+   AUTH CHECK
+========================================== */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if(!user){
+
+            window.location.href =
+                "../login.html";
+
+            return;
+
+        }
+
+
+        if(
+            user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            alert(
+                "Access denied. Admin account required."
+            );
+
+            window.location.href =
+                "../dashboard.html";
+
+            return;
+
+        }
+
+
+        currentUser = user;
+
+
+        loadCategories();
+
+        loadProducts();
+
+    }
+);
+
+
+/* ==========================================
+   LOAD CATEGORIES
+========================================== */
+
+function loadCategories(){
+
+    const categoriesRef =
+        ref(db,"categories");
+
+
+    onValue(
+        categoriesRef,
+        (snapshot) => {
+
+            categoriesData =
+                snapshot.val() || {};
+
+
+            productCategory.innerHTML = `
+
+                <option value="">
+                    Select category
+                </option>
+
+            `;
+
+
+            Object.entries(categoriesData)
+                .forEach(
+                    ([id,category]) => {
+
+                        if(
+                            !category ||
+                            category.active !== true
+                        ){
+
+                            return;
+
+                        }
+
+
+                        const option =
+                            document.createElement("option");
+
+
+                        option.value =
+                            category.name;
+
+
+                        option.textContent =
+                            category.icon +
+                            " " +
+                            category.name;
+
+
+                        productCategory.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+        },
+        (error) => {
+
+            console.error(error);
+
+            showMessage(
+                "Unable to load categories.",
+                "error"
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   LOAD PRODUCTS
+========================================== */
+
+function loadProducts(){
+
+    const productsRef =
+        ref(db,"products");
+
+
+    onValue(
+        productsRef,
+        (snapshot) => {
+
+            productsData =
+                snapshot.val() || {};
+
+
+            renderProducts();
+
+        },
+        (error) => {
+
+            console.error(error);
+
+            productsGrid.innerHTML = `
+
+                <div class="empty-products">
+
+                    <div class="big">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Unable to load products
+                    </h3>
+
+                    <p>
+                        Check your Firebase Realtime Database rules.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   RENDER PRODUCTS
+========================================== */
+
+function renderProducts(){
+
+    const products =
+        Object.entries(productsData);
+
+
+    productCount.textContent =
+        products.length +
+        (products.length === 1
+            ? " product"
+            : " products");
+
+
+    if(products.length === 0){
+
+        productsGrid.innerHTML = `
+
+            <div class="empty-products">
+
+                <div class="big">
+                    📦
+                </div>
+
+                <h3>
+                    No products yet
+                </h3>
+
+                <p>
+                    Add your first product using the form above.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+        Newest products first.
+    */
+
+    products.sort(
+        ([,a],[,b]) =>
+            (b.createdAt || 0) -
+            (a.createdAt || 0)
+    );
+
+
+    productsGrid.innerHTML = "";
+
+
+    products.forEach(
+        ([id,product]) => {
+
+            if(!product){
+
+                return;
+
+            }
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "product-card";
+
+
+            const active =
+                product.active === true;
+
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    <img
+                        src="${escapeHtml(product.image || "")}"
+                        alt="${escapeHtml(product.name || "Product")}"
+                        onerror="this.style.display='none'"
+                    >
+
+                    <span
+                        class="status-badge ${
+                            active
+                                ? "status-active"
+                                : "status-inactive"
+                        }"
+                    >
+                        ${
+                            active
+                                ? "ACTIVE"
+                                : "INACTIVE"
+                        }
+                    </span>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+
+                        ${escapeHtml(
+                            product.name ||
+                            "Unnamed Product"
+                        )}
+
+                    </div>
+
+
+                    <div class="product-price">
+
+                        ₦${formatNumber(
+                            product.price || 0
+                        )}
+
+                    </div>
+
+
+                    <div class="product-category">
+
+                        📁 ${
+                            escapeHtml(
+                                product.category ||
+                                "No category"
+                            )
+                        }
+
+                    </div>
+
+
+                    <div class="product-actions">
+
+                        <button
+                            class="edit-btn"
+                            data-action="edit"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="toggle-btn"
+                            data-action="toggle"
+                        >
+                            ${
+                                active
+                                    ? "Deactivate"
+                                    : "Activate"
+                            }
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            data-action="delete"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const editButton =
+                card.querySelector(
+                    '[data-action="edit"]'
+                );
+
+
+            const toggleButton =
+                card.querySelector(
+                    '[data-action="toggle"]'
+                );
+
+
+            const deleteButton =
+                card.querySelector(
+                    '[data-action="delete"]'
+                );
+
+
+            editButton.addEventListener(
+                "click",
+                () => {
+
+                    editProduct(
+                        id,
+                        product
+                    );
+
+                }
+            );
+
+
+            toggleButton.addEventListener(
+                "click",
+                () => {
+
+                    toggleProduct(
+                        id,
+                        product
+                    );
+
+                }
+            );
+
+
+            deleteButton.addEventListener(
+                "click",
+                () => {
+
+                    deleteProduct(
+                        id,
+                        product
+                    );
+
+                }
+            );
+
+
+            productsGrid.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   ADD / UPDATE PRODUCT
+========================================== */
+
+productForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        if(!currentUser){
+
+            showMessage(
+                "Admin account not ready.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const name =
+            productName.value.trim();
+
+
+        const price =
+            Number(productPrice.value);
+
+
+        const category =
+            productCategory.value;
+
+
+        const image =
+            productImage.value.trim();
+
+
+        const description =
+            productDescription.value.trim();
+
+
+        if(!name){
+
+            showMessage(
+                "Enter a product name.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(price) ||
+            price < 0
+        ){
+
+            showMessage(
+                "Enter a valid product price.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!category){
+
+            showMessage(
+                "Select a category.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!image){
+
+            showMessage(
+                "Enter a product image URL.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        saveBtn.disabled =
+            true;
+
+
+        saveBtn.textContent =
+            editingProductId
+                ? "Updating..."
+                : "Adding...";
+
+
+        try{
+
+            if(editingProductId){
+
+                const productRef =
+                    ref(
+                        db,
+                        "products/" +
+                        editingProductId
+                    );
+
+
+                await update(
+                    productRef,
+                    {
+
+                        name:
+                            name,
+
+                        price:
+                            price,
+
+                        category:
+                            category,
+
+                        image:
+                            image,
+
+                        description:
+                            description,
+
+                        updatedAt:
+                            serverTimestamp(),
+
+                        updatedBy:
+                            currentUser.email
+
+                    }
+                );
+
+
+                showMessage(
+                    "Product updated successfully.",
+                    "success"
+                );
+
+            }else{
+
+                const productsRef =
+                    ref(db,"products");
+
+
+                const newProductRef =
+                    push(productsRef);
+
+
+                await set(
+                    newProductRef,
+                    {
+
+                        name:
+                            name,
+
+                        price:
+                            price,
+
+                        category:
+                            category,
+
+                        image:
+                            image,
+
+                        description:
+                            description,
+
+                        active:
+                            true,
+
+                        createdAt:
+                            serverTimestamp(),
+
+                        createdBy:
+                            currentUser.email
+
+                    }
+                );
+
+
+                showMessage(
+                    "Product added successfully.",
+                    "success"
+                );
+
+            }
+
+
+            resetForm();
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                error.message ||
+                "Something went wrong.",
+                "error"
+            );
+
+        }finally{
+
+            saveBtn.disabled =
+                false;
+
+            if(editingProductId){
+
+                saveBtn.textContent =
+                    "Update Product";
+
+            }else{
+
+                saveBtn.textContent =
+                    "Add Product";
+
+            }
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   EDIT PRODUCT
+========================================== */
+
+function editProduct(
+    id,
+    product
+){
+
+    editingProductId =
+        id;
+
+
+    productName.value =
+        product.name || "";
+
+
+    productPrice.value =
+        product.price || "";
+
+
+    productCategory.value =
+        product.category || "";
+
+
+    productImage.value =
+        product.image || "";
+
+
+    productDescription.value =
+        product.description || "";
+
+
+    formTitle.textContent =
+        "Edit Product";
+
+
+    saveBtn.textContent =
+        "Update Product";
+
+
+    cancelBtn.classList.remove(
+        "hidden"
+    );
+
+
+    updateImagePreview();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ==========================================
+   CANCEL EDIT
+========================================== */
+
+cancelBtn.addEventListener(
+    "click",
+    () => {
+
+        resetForm();
+
+    }
+);
+
+
+/* ==========================================
+   RESET FORM
+========================================== */
+
+function resetForm(){
+
+    editingProductId =
+        null;
+
+
+    productForm.reset();
+
+
+    formTitle.textContent =
+        "Add New Product";
+
+
+    saveBtn.textContent =
+        "Add Product";
+
+
+    cancelBtn.classList.add(
+        "hidden"
+    );
+
+
+    imagePreview.style.display =
+        "none";
+
+}
+
+
+/* ==========================================
+   TOGGLE PRODUCT
+========================================== */
+
+async function toggleProduct(
+    id,
+    product
+){
+
+    const newStatus =
+        product.active !== true;
+
+
+    try{
+
+        await update(
+            ref(
+                db,
+                "products/" + id
+            ),
+            {
+
+                active:
+                    newStatus,
+
+                updatedAt:
+                    serverTimestamp(),
+
+                updatedBy:
+                    currentUser.email
+
+            }
+        );
+
+
+        showMessage(
+            newStatus
+                ? "Product activated."
+                : "Product deactivated.",
+            "success"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            error.message ||
+            "Unable to change product status.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   DELETE PRODUCT
+========================================== */
+
+async function deleteProduct(
+    id,
+    product
+){
+
+    const productNameText =
+        product.name ||
+        "this product";
+
+
+    const confirmed =
+        confirm(
+            "Delete " +
+            productNameText +
+            " permanently?"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        await remove(
+            ref(
+                db,
+                "products/" + id
+            )
+        );
+
+
+        showMessage(
+            "Product deleted successfully.",
+            "success"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            error.message ||
+            "Unable to delete product.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   IMAGE PREVIEW
+========================================== */
+
+productImage.addEventListener(
+    "input",
+    updateImagePreview
+);
+
+
+function updateImagePreview(){
+
+    const url =
+        productImage.value.trim();
+
+
+    if(!url){
+
+        imagePreview.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    previewImage.src =
+        url;
+
+
+    previewImage.onload =
+        () => {
+
+            imagePreview.style.display =
+                "block";
+
+        };
+
+
+    previewImage.onerror =
+        () => {
+
+            imagePreview.style.display =
+                "none";
+
+        };
+
+}
+
+
+/* ==========================================
+   FORMAT NUMBER
+========================================== */
+
+function formatNumber(
+    value
+){
+
+    return Number(value)
+        .toLocaleString(
+            "en-NG",
+            {
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHtml(
+    value
+){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "message " + type;
+
+
+    setTimeout(
+        () => {
+
+            message.className =
+                "message";
+
+        },
+        4000
+    );
+
+}
+
+</script>
+
+</body>
+</html>
