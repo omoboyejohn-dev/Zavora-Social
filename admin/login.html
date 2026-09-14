@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Admin Login</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(168,85,247,.18),transparent 35%),
+        radial-gradient(circle at 80% 80%,rgba(34,211,238,.12),transparent 35%),
+        #080612;
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    background:#100b1f;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:34px;
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.logo span{
+    background:linear-gradient(90deg,#a855f7,#22d3ee);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.admin-label{
+    text-align:center;
+    color:#a855f7;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    margin-bottom:30px;
+}
+
+h1{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#8f899e;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    color:#b5aec1;
+    margin-bottom:8px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+input{
+    width:100%;
+    padding:14px 45px 14px 14px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.1);
+    background:#080612;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#a855f7;
+    box-shadow:0 0 0 3px rgba(168,85,247,.1);
+}
+
+.password-toggle{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:none;
+    color:#8f899e;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.login-btn{
+    width:100%;
+    border:0;
+    border-radius:11px;
+    padding:14px;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    background:linear-gradient(90deg,#9333ea,#06b6d4);
+    margin-top:5px;
+    transition:.2s;
+}
+
+.login-btn:hover{
+    transform:translateY(-1px);
+}
+
+.login-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.message{
+    display:none;
+    margin-top:16px;
+    padding:12px 14px;
+    border-radius:10px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.message.error{
+    display:block;
+    color:#fca5a5;
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.2);
+}
+
+.message.success{
+    display:block;
+    color:#86efac;
+    background:rgba(34,197,94,.1);
+    border:1px solid rgba(34,197,94,.2);
+}
+
+.back-link{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    color:#8f899e;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back-link:hover{
+    color:#fff;
+}
+
+.security-note{
+    margin-top:24px;
+    padding:13px;
+    border-radius:11px;
+    background:rgba(34,211,238,.05);
+    border:1px solid rgba(34,211,238,.1);
+    color:#8f899e;
+    font-size:11px;
+    line-height:1.6;
+    text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">
+        Zavora <span>Social</span>
+    </div>
+
+    <div class="admin-label">
+        ADMIN PANEL
+    </div>
+
+    <h1>
+        Admin Login
+    </h1>
+
+    <p class="subtitle">
+        Sign in with your authorized administrator account.
+    </p>
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label for="email">
+                Admin Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="admin@example.com"
+                autocomplete="username"
+                required
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <div class="input-wrap">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    id="togglePassword"
+                >
+                    Show
+                </button>
+
+            </div>
+
+        </div>
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginButton"
+        >
+            Login to Admin
+        </button>
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+    </form>
+
+    <a
+        href="../index.html"
+        class="back-link"
+    >
+        ← Back to Zavora Social
+    </a>
+
+    <div class="security-note">
+        🔐 Admin access is restricted to authorized accounts.
+    </div>
+
+</div>
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+/* ================================
+   FIREBASE CONFIG
+================================ */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+        "zavorasocial.firebaseapp.com",
+
+    projectId:
+        "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+/* ================================
+   ELEMENTS
+================================ */
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const message =
+    document.getElementById("message");
+
+const togglePassword =
+    document.getElementById("togglePassword");
+
+
+/* ================================
+   PASSWORD SHOW/HIDE
+================================ */
+
+togglePassword.addEventListener("click", () => {
+
+    if(passwordInput.type === "password"){
+
+        passwordInput.type = "text";
+        togglePassword.textContent = "Hide";
+
+    }else{
+
+        passwordInput.type = "password";
+        togglePassword.textContent = "Show";
+
+    }
+
+});
+
+
+/* ================================
+   MESSAGE
+================================ */
+
+function showMessage(text,type){
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+/* ================================
+   LOGIN
+================================ */
+
+loginForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+    if(!email || !password){
+
+        showMessage(
+            "Please enter your email and password.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing in...";
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        showMessage(
+            "Login successful. Opening admin dashboard...",
+            "success"
+        );
+
+        setTimeout(() => {
+
+            window.location.href =
+                "index.html";
+
+        },700);
+
+    }catch(error){
+
+        console.error(error);
+
+        let errorMessage =
+            "Unable to sign in.";
+
+        if(
+            error.code ===
+            "auth/invalid-credential"
+        ){
+
+            errorMessage =
+                "Invalid admin email or password.";
+
+        }else if(
+            error.code ===
+            "auth/user-not-found"
+        ){
+
+            errorMessage =
+                "No account exists with this email.";
+
+        }else if(
+            error.code ===
+            "auth/wrong-password"
+        ){
+
+            errorMessage =
+                "Incorrect password.";
+
+        }else if(
+            error.code ===
+            "auth/too-many-requests"
+        ){
+
+            errorMessage =
+                "Too many attempts. Please wait and try again.";
+
+        }else if(
+            error.code ===
+            "auth/network-request-failed"
+        ){
+
+            errorMessage =
+                "Network error. Check your internet connection.";
+
+        }
+
+        showMessage(
+            errorMessage,
+            "error"
+        );
+
+        loginButton.disabled = false;
+        loginButton.textContent =
+            "Login to Admin";
+
+    }
+
+});
+
+
+/* ================================
+   AUTH CHECK
+================================ */
+
+onAuthStateChanged(auth,(user) => {
+
+    /*
+       If someone is already signed in,
+       we can take them directly to the
+       admin dashboard.
+
+       IMPORTANT:
+       Proper admin authorization will
+       be added before we allow access
+       to sensitive admin operations.
+    */
+
+    if(user){
+
+        // Don't automatically redirect while
+        // the login page is first loading.
+        // The login form handles successful login.
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
