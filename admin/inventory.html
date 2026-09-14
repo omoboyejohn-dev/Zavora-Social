@@ -1,0 +1,1028 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Inventory</title><style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#080b18;
+    color:#fff;
+    min-height:100vh;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+.header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    background:#0d1022;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+    background:linear-gradient(90deg,#9b5cff,#00e5ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.admin-badge{
+    font-size:12px;
+    color:#aeb7d4;
+}
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 70px);
+}
+
+.sidebar{
+    width:245px;
+    background:#0b0e1c;
+    border-right:1px solid rgba(255,255,255,.07);
+    padding:25px 15px;
+}
+
+.sidebar-title{
+    color:#68718f;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin:0 10px 12px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.nav a{
+    padding:13px 14px;
+    border-radius:11px;
+    color:#aeb6d1;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:linear-gradient(
+        90deg,
+        rgba(155,92,255,.18),
+        rgba(0,229,255,.08)
+    );
+    color:#fff;
+}
+
+.main{
+    flex:1;
+    padding:30px;
+    overflow:hidden;
+}
+
+.page-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:28px;
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:#858eaa;
+    font-size:14px;
+}
+
+.refresh-btn{
+    border:1px solid rgba(255,255,255,.1);
+    background:#12162a;
+    color:#fff;
+    padding:11px 16px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.refresh-btn:hover{
+    border-color:#8e5cff;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:#0f1325;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:15px;
+    padding:20px;
+}
+
+.stat-label{
+    color:#858eaa;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:800;
+}
+
+.products-box{
+    background:#0f1325;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.box-header{
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.box-header h2{
+    font-size:17px;
+}
+
+.search{
+    width:240px;
+    background:#080b18;
+    border:1px solid rgba(255,255,255,.1);
+    color:#fff;
+    border-radius:9px;
+    padding:10px 12px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#8f5cff;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    text-align:left;
+    color:#747d9a;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    padding:15px 18px;
+    background:#0c1020;
+}
+
+td{
+    padding:15px 18px;
+    border-top:1px solid rgba(255,255,255,.05);
+    font-size:13px;
+    color:#dce1f1;
+}
+
+.product-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.product-img{
+    width:46px;
+    height:46px;
+    border-radius:9px;
+    object-fit:cover;
+    background:#181d32;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.product-name{
+    font-weight:700;
+    color:#fff;
+    margin-bottom:4px;
+}
+
+.product-category{
+    color:#737c99;
+    font-size:11px;
+}
+
+.price{
+    font-weight:700;
+}
+
+.stock-control{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.stock-input{
+    width:80px;
+    background:#080b18;
+    border:1px solid rgba(255,255,255,.1);
+    color:#fff;
+    border-radius:8px;
+    padding:8px;
+    outline:none;
+    text-align:center;
+}
+
+.stock-input:focus{
+    border-color:#8e5cff;
+}
+
+.save-btn{
+    background:linear-gradient(90deg,#8f52ff,#00cfff);
+    border:none;
+    color:#fff;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:700;
+}
+
+.save-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.status.in{
+    background:rgba(0,220,150,.12);
+    color:#42e6ac;
+}
+
+.status.low{
+    background:rgba(255,193,7,.12);
+    color:#ffc928;
+}
+
+.status.out{
+    background:rgba(255,70,100,.12);
+    color:#ff7187;
+}
+
+.status.unlimited{
+    background:rgba(0,210,255,.12);
+    color:#35dfff;
+}
+
+.empty{
+    padding:50px 20px;
+    text-align:center;
+    color:#747d99;
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+.message{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    padding:14px 18px;
+    border-radius:11px;
+    background:#171c31;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+    display:none;
+    z-index:100;
+    font-size:13px;
+}
+
+.message.show{
+    display:block;
+}
+
+@media(max-width:900px){
+    .sidebar{
+        display:none;
+    }
+
+    .main{
+        padding:20px 14px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:550px){
+    .header{
+        padding:0 15px;
+    }
+
+    .page-top{
+        align-items:flex-start;
+    }
+
+    .page-title h1{
+        font-size:23px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:15px;
+    }
+
+    .stat-value{
+        font-size:20px;
+    }
+
+    .box-header{
+        align-items:stretch;
+        flex-direction:column;
+    }
+
+    .search{
+        width:100%;
+    }
+}
+</style></head><body><header class="header">
+    <div class="logo">Zavora Social</div>
+    <div class="admin-badge">Admin Panel</div>
+</header><div class="layout"><aside class="sidebar">
+
+    <div class="sidebar-title">Management</div>
+
+    <nav class="nav">
+        <a href="index.html">📊 Dashboard</a>
+        <a href="categories.html">📁 Categories</a>
+        <a href="products.html">📦 Products</a>
+        <a href="inventory.html" class="active">🗃️ Inventory</a>
+        <a href="orders.html">🛒 Orders</a>
+        <a href="customers.html">👥 Customers</a>
+        <a href="deposits.html">💰 Deposits</a>
+        <a href="transactions.html">📜 Transactions</a>
+        <a href="settings.html">⚙️ Settings</a>
+    </nav>
+
+</aside>
+
+<main class="main">
+
+    <div class="page-top">
+
+        <div class="page-title">
+            <h1>Inventory</h1>
+            <p>Manage product stock and availability.</p>
+        </div>
+
+        <button class="refresh-btn" id="refreshBtn">
+            ↻ Refresh
+        </button>
+
+    </div>
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <div class="stat-label">Total Products</div>
+            <div class="stat-value" id="totalProducts">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">In Stock</div>
+            <div class="stat-value" id="inStock">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Low Stock</div>
+            <div class="stat-value" id="lowStock">0</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Out of Stock</div>
+            <div class="stat-value" id="outStock">0</div>
+        </div>
+
+    </section>
+
+    <section class="products-box">
+
+        <div class="box-header">
+            <h2>Product Inventory</h2>
+
+            <input
+                type="search"
+                id="searchInput"
+                class="search"
+                placeholder="Search products..."
+            >
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="inventoryBody">
+
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty">
+                                Loading inventory...
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+</div><div id="message" class="message"></div><script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    onValue,
+    update
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBzj9_rGQPW21duk4sxyLUO3hy3-6GwGs",
+    authDomain: "zavorasocial.firebaseapp.com",
+    databaseURL: "https://zavorasocial-default-rtdb.firebaseio.com/",
+    projectId: "zavorasocial",
+    storageBucket: "zavorasocial.firebasestorage.app",
+    messagingSenderId: "447170165246",
+    appId: "1:447170165246:web:982649e6533257ea0f28af",
+    measurementId: "G-D4LNBEWH50"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+
+/* =========================
+   ADMIN EMAIL
+========================= */
+
+const ADMIN_EMAIL = "omoboyejohn@gmail.com";
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const inventoryBody = document.getElementById("inventoryBody");
+const searchInput = document.getElementById("searchInput");
+const refreshBtn = document.getElementById("refreshBtn");
+
+const totalProducts = document.getElementById("totalProducts");
+const inStock = document.getElementById("inStock");
+const lowStock = document.getElementById("lowStock");
+const outStock = document.getElementById("outStock");
+
+const message = document.getElementById("message");
+
+
+/* =========================
+   STATE
+========================= */
+
+let products = {};
+let currentUser = null;
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(text){
+
+    message.textContent = text;
+    message.classList.add("show");
+
+    setTimeout(() => {
+        message.classList.remove("show");
+    }, 2500);
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* =========================
+   FORMAT PRICE
+========================= */
+
+function formatPrice(price){
+
+    return "₦" + Number(price || 0).toLocaleString("en-NG");
+}
+
+
+/* =========================
+   STOCK STATUS
+========================= */
+
+function getStockStatus(stock){
+
+    if(stock === null || stock === undefined || stock === ""){
+        return {
+            className:"unlimited",
+            text:"Unlimited"
+        };
+    }
+
+    const number = Number(stock);
+
+    if(number <= 0){
+        return {
+            className:"out",
+            text:"Out of Stock"
+        };
+    }
+
+    if(number <= 5){
+        return {
+            className:"low",
+            text:"Low Stock"
+        };
+    }
+
+    return {
+        className:"in",
+        text:"In Stock"
+    };
+}
+
+
+/* =========================
+   LOAD PRODUCTS
+========================= */
+
+function loadProducts(){
+
+    const productsRef = ref(db,"products");
+
+    onValue(
+        productsRef,
+        snapshot => {
+
+            products = snapshot.val() || {};
+
+            renderInventory();
+
+        },
+        error => {
+
+            console.error(error);
+
+            inventoryBody.innerHTML = `
+                <tr>
+                    <td colspan="5">
+                        <div class="empty">
+                            Unable to load inventory.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+        }
+    );
+}
+
+
+/* =========================
+   RENDER INVENTORY
+========================= */
+
+function renderInventory(){
+
+    const search = searchInput.value
+        .trim()
+        .toLowerCase();
+
+    const entries = Object.entries(products);
+
+    const filtered = entries.filter(([id, product]) => {
+
+        const name = String(product.name || "").toLowerCase();
+        const category = String(product.category || "").toLowerCase();
+
+        return (
+            name.includes(search) ||
+            category.includes(search)
+        );
+
+    });
+
+
+    /* =========================
+       STATS
+    ========================= */
+
+    let total = entries.length;
+    let inCount = 0;
+    let lowCount = 0;
+    let outCount = 0;
+
+    entries.forEach(([id,product]) => {
+
+        const stock = product.stock;
+
+        if(stock === null || stock === undefined || stock === ""){
+            inCount++;
+            return;
+        }
+
+        const number = Number(stock);
+
+        if(number <= 0){
+            outCount++;
+        }
+        else if(number <= 5){
+            lowCount++;
+        }
+        else{
+            inCount++;
+        }
+
+    });
+
+    totalProducts.textContent = total;
+    inStock.textContent = inCount;
+    lowStock.textContent = lowCount;
+    outStock.textContent = outCount;
+
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    if(filtered.length === 0){
+
+        inventoryBody.innerHTML = `
+            <tr>
+                <td colspan="5">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">📦</div>
+
+                        ${
+                            entries.length === 0
+                            ? "No products found."
+                            : "No products match your search."
+                        }
+
+                    </div>
+
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    inventoryBody.innerHTML = filtered.map(
+        ([id,product]) => {
+
+            const stock =
+                product.stock === undefined ||
+                product.stock === null ||
+                product.stock === ""
+                    ? ""
+                    : Number(product.stock);
+
+            const status = getStockStatus(
+                product.stock
+            );
+
+            const image =
+                product.image ||
+                "https://placehold.co/100x100/11162a/ffffff?text=Product";
+
+            return `
+
+                <tr>
+
+                    <td>
+
+                        <div class="product-info">
+
+                            <img
+                                class="product-img"
+                                src="${escapeHtml(image)}"
+                                alt="${escapeHtml(product.name)}"
+                                onerror="this.src='https://placehold.co/100x100/11162a/ffffff?text=Product'"
+                            >
+
+                            <div>
+
+                                <div class="product-name">
+                                    ${escapeHtml(product.name || "Unnamed Product")}
+                                </div>
+
+                                <div class="product-category">
+                                    ${escapeHtml(product.category || "Uncategorized")}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="price">
+                            ${formatPrice(product.price)}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="stock-control">
+
+                            <input
+                                type="number"
+                                min="0"
+                                class="stock-input"
+                                id="stock-${escapeHtml(id)}"
+                                value="${stock}"
+                                placeholder="∞"
+                            >
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status ${status.className}">
+                            ${status.text}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="save-btn"
+                            data-id="${escapeHtml(id)}"
+                        >
+                            Save
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    ).join("");
+
+
+    /* =========================
+       SAVE BUTTONS
+    ========================= */
+
+    document.querySelectorAll(".save-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => saveStock(button.dataset.id)
+            );
+
+        });
+
+}
+
+
+/* =========================
+   SAVE STOCK
+========================= */
+
+async function saveStock(productId){
+
+    if(!currentUser){
+        showMessage("Admin session not found.");
+        return;
+    }
+
+    const input = document.getElementById(
+        "stock-" + productId
+    );
+
+    if(!input){
+        return;
+    }
+
+    const value = input.value.trim();
+
+
+    if(value === ""){
+        showMessage("Enter a stock quantity.");
+        return;
+    }
+
+
+    const stock = Number(value);
+
+
+    if(!Number.isFinite(stock) || stock < 0){
+        showMessage("Enter a valid stock quantity.");
+        return;
+    }
+
+
+    try{
+
+        await update(
+            ref(db,"products/" + productId),
+            {
+                stock: Math.floor(stock)
+            }
+        );
+
+        showMessage("Stock updated successfully.");
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Unable to update stock."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+searchInput.addEventListener(
+    "input",
+    renderInventory
+);
+
+
+/* =========================
+   REFRESH
+========================= */
+
+refreshBtn.addEventListener(
+    "click",
+    () => {
+
+        renderInventory();
+
+        showMessage("Inventory refreshed.");
+
+    }
+);
+
+
+/* =========================
+   AUTH GUARD
+========================= */
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(!user){
+
+            window.location.replace("../login.html");
+
+            return;
+        }
+
+
+        if(
+            !user.email ||
+            user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            alert("Admin access only.");
+
+            window.location.replace("../dashboard.html");
+
+            return;
+        }
+
+
+        currentUser = user;
+
+        loadProducts();
+
+    }
+);
+
+</script></body>
+</html>
