@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zavora Social | Admin Categories</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -14,7 +16,7 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#080612;
     color:#fff;
     min-height:100vh;
@@ -41,7 +43,6 @@ input{
 .logo{
     font-size:22px;
     font-weight:800;
-    letter-spacing:.3px;
 }
 
 .logo span{
@@ -90,7 +91,6 @@ input{
     color:#aaa3b8;
     text-decoration:none;
     font-size:14px;
-    transition:.2s;
 }
 
 .nav-link:hover,
@@ -176,12 +176,11 @@ input{
     font-weight:700;
     cursor:pointer;
     background:linear-gradient(90deg,#9333ea,#06b6d4);
-    transition:.2s;
 }
 
-.add-btn:hover{
-    transform:translateY(-1px);
-    opacity:.95;
+.add-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 .message{
@@ -275,11 +274,6 @@ input{
     font-size:12px;
 }
 
-.action-btn:hover{
-    background:#1d172c;
-    color:#fff;
-}
-
 .delete-btn{
     color:#f87171;
 }
@@ -293,6 +287,12 @@ input{
 .empty-icon{
     font-size:40px;
     margin-bottom:12px;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#8f899e;
 }
 
 .mobile-menu{
@@ -334,6 +334,7 @@ input{
     .header{
         padding:0 16px;
     }
+
 }
 
 @media(max-width:500px){
@@ -349,8 +350,11 @@ input{
     .actions{
         flex-direction:column;
     }
+
 }
+
 </style>
+
 </head>
 
 <body>
@@ -358,11 +362,18 @@ input{
 <header class="header">
 
     <div style="display:flex;align-items:center;gap:14px;">
-        <button class="mobile-menu" id="mobileMenu">☰</button>
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+            ☰
+        </button>
 
         <div class="logo">
             Zavora <span>Social</span>
         </div>
+
     </div>
 
     <div class="admin-badge">
@@ -371,309 +382,302 @@ input{
 
 </header>
 
+
 <div class="layout">
 
-    <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-title">Management</div>
+<aside class="sidebar" id="sidebar">
 
-        <a href="index.html" class="nav-link">
-            📊 Dashboard
-        </a>
+    <div class="sidebar-title">
+        Management
+    </div>
 
-        <a href="categories.html" class="nav-link active">
-            🗂️ Categories
-        </a>
+    <a href="index.html" class="nav-link">
+        📊 Dashboard
+    </a>
 
-        <a href="products.html" class="nav-link">
-            📦 Products
-        </a>
+    <a href="categories.html" class="nav-link active">
+        🗂️ Categories
+    </a>
 
-        <a href="inventory.html" class="nav-link">
-            🏷️ Inventory
-        </a>
+    <a href="products.html" class="nav-link">
+        📦 Products
+    </a>
 
-        <a href="orders.html" class="nav-link">
-            🛒 Orders
-        </a>
+    <a href="inventory.html" class="nav-link">
+        🏷️ Inventory
+    </a>
 
-        <a href="customers.html" class="nav-link">
-            👥 Customers
-        </a>
+    <a href="orders.html" class="nav-link">
+        🛒 Orders
+    </a>
 
-        <a href="deposits.html" class="nav-link">
-            💰 Deposits
-        </a>
+    <a href="customers.html" class="nav-link">
+        👥 Customers
+    </a>
 
-        <a href="transactions.html" class="nav-link">
-            📈 Transactions
-        </a>
+    <a href="deposits.html" class="nav-link">
+        💰 Deposits
+    </a>
 
-        <a href="settings.html" class="nav-link">
-            ⚙️ Settings
-        </a>
+    <a href="transactions.html" class="nav-link">
+        📈 Transactions
+    </a>
 
-    </aside>
+    <a href="settings.html" class="nav-link">
+        ⚙️ Settings
+    </a>
 
-    <main class="main">
+</aside>
 
-        <h1 class="page-title">
-            Categories
-        </h1>
 
-        <p class="page-subtitle">
-            Create and manage the categories that appear throughout Zavora Social.
-        </p>
+<main class="main">
 
-        <div class="top-grid">
+    <h1 class="page-title">
+        Categories
+    </h1>
 
-            <section class="card">
+    <p class="page-subtitle">
+        Create and manage categories shown on the Zavora Social customer dashboard.
+    </p>
 
-                <h2>
-                    Add Category
-                </h2>
 
-                <form id="categoryForm">
+    <div class="top-grid">
 
-                    <div class="form-group">
-
-                        <label for="categoryName">
-                            Category Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="categoryName"
-                            placeholder="e.g. Facebook"
-                            maxlength="50"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label for="categoryIcon">
-                            Category Icon
-                        </label>
-
-                        <input
-                            type="text"
-                            id="categoryIcon"
-                            placeholder="e.g. 📘"
-                            maxlength="10"
-                            value="📦"
-                        >
-
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="add-btn"
-                        id="addButton"
-                    >
-                        Add Category
-                    </button>
-
-                    <div
-                        class="message"
-                        id="message"
-                    ></div>
-
-                </form>
-
-            </section>
-
-            <section class="card">
-
-                <h2>
-                    Category System
-                </h2>
-
-                <p style="color:#8f899e;font-size:14px;line-height:1.7;">
-                    Categories will control how products are organized
-                    throughout the Zavora Social marketplace.
-                </p>
-
-                <div style="
-                    margin-top:20px;
-                    padding:15px;
-                    border-radius:12px;
-                    background:rgba(34,211,238,.06);
-                    border:1px solid rgba(34,211,238,.12);
-                    color:#9eeaf5;
-                    font-size:13px;
-                    line-height:1.6;
-                ">
-                    💡 You will be able to create unlimited categories
-                    such as Facebook, Instagram, Reddit, TikTok,
-                    Snapchat, VPN, Email and more.
-                </div>
-
-            </section>
-
-        </div>
 
         <section class="card">
 
             <h2>
-                All Categories
+                Add Category
             </h2>
 
-            <div
-                class="category-count"
-                id="categoryCount"
-            >
-                0 categories
-            </div>
+            <form id="categoryForm">
 
-            <div
-                class="category-list"
-                id="categoryList"
-            >
+                <div class="form-group">
 
-                <div class="empty">
+                    <label>
+                        Category Name
+                    </label>
 
-                    <div class="empty-icon">
-                        🗂️
-                    </div>
-
-                    No categories added yet.
+                    <input
+                        type="text"
+                        id="categoryName"
+                        placeholder="e.g. Facebook"
+                        maxlength="50"
+                        required
+                    >
 
                 </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Category Icon
+                    </label>
+
+                    <input
+                        type="text"
+                        id="categoryIcon"
+                        placeholder="e.g. 📘"
+                        maxlength="10"
+                        value="📦"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="add-btn"
+                    id="addButton"
+                >
+                    Add Category
+                </button>
+
+
+                <div
+                    class="message"
+                    id="message"
+                ></div>
+
+            </form>
+
+        </section>
+
+
+        <section class="card">
+
+            <h2>
+                Live Category System
+            </h2>
+
+            <p style="color:#8f899e;font-size:14px;line-height:1.7;">
+
+                Categories are now stored in Firebase.
+                Any active category you create here can be displayed
+                automatically on the customer dashboard.
+
+            </p>
+
+
+            <div style="
+                margin-top:20px;
+                padding:15px;
+                border-radius:12px;
+                background:rgba(34,211,238,.06);
+                border:1px solid rgba(34,211,238,.12);
+                color:#9eeaf5;
+                font-size:13px;
+                line-height:1.6;
+            ">
+
+                ⚡ Live database connection enabled.
 
             </div>
 
         </section>
 
-    </main>
+    </div>
+
+
+    <section class="card">
+
+        <h2>
+            All Categories
+        </h2>
+
+        <div
+            class="category-count"
+            id="categoryCount"
+        >
+            Loading...
+        </div>
+
+
+        <div
+            class="category-list"
+            id="categoryList"
+        >
+
+            <div class="loading">
+                Loading categories...
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
 
 </div>
 
+
 <script type="module">
 
-/*
-    ZAVORA SOCIAL
-    ADMIN CATEGORIES
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-    The database is intentionally NOT connected yet.
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-    Your Realtime Database currently has:
-    .read  = false
-    .write = false
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    update,
+    remove,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-    We will connect this page after proper admin
-    authorization has been established.
-*/
 
-const form = document.getElementById("categoryForm");
-const categoryName = document.getElementById("categoryName");
-const categoryIcon = document.getElementById("categoryIcon");
-const message = document.getElementById("message");
-const categoryList = document.getElementById("categoryList");
-const categoryCount = document.getElementById("categoryCount");
-const sidebar = document.getElementById("sidebar");
-const mobileMenu = document.getElementById("mobileMenu");
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain: "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
+
+    projectId: "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+
+const form =
+    document.getElementById("categoryForm");
+
+const categoryName =
+    document.getElementById("categoryName");
+
+const categoryIcon =
+    document.getElementById("categoryIcon");
+
+const message =
+    document.getElementById("message");
+
+const categoryList =
+    document.getElementById("categoryList");
+
+const categoryCount =
+    document.getElementById("categoryCount");
+
+const addButton =
+    document.getElementById("addButton");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
 
 let categories = [];
 
+let currentUser = null;
+
+
 mobileMenu.addEventListener("click", () => {
+
     sidebar.classList.toggle("open");
+
 });
 
-function showMessage(text, type){
+
+function showMessage(text,type){
 
     message.textContent = text;
 
-    message.className = "message " + type;
+    message.className =
+        "message " + type;
 
 }
 
-function renderCategories(){
-
-    categoryCount.textContent =
-        categories.length +
-        (categories.length === 1 ? " category" : " categories");
-
-    if(categories.length === 0){
-
-        categoryList.innerHTML = `
-            <div class="empty">
-
-                <div class="empty-icon">
-                    🗂️
-                </div>
-
-                No categories added yet.
-
-            </div>
-        `;
-
-        return;
-    }
-
-    categoryList.innerHTML = "";
-
-    categories.forEach((category, index) => {
-
-        const item = document.createElement("div");
-
-        item.className = "category-item";
-
-        item.innerHTML = `
-
-            <div class="category-left">
-
-                <div class="category-icon">
-                    ${escapeHtml(category.icon)}
-                </div>
-
-                <div>
-
-                    <div class="category-name">
-                        ${escapeHtml(category.name)}
-                    </div>
-
-                    <div class="category-status ${category.active ? "" : "disabled"}">
-                        ${category.active ? "Active" : "Disabled"}
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="actions">
-
-                <button
-                    class="action-btn"
-                    onclick="editCategory(${index})"
-                >
-                    Edit
-                </button>
-
-                <button
-                    class="action-btn"
-                    onclick="toggleCategory(${index})"
-                >
-                    ${category.active ? "Disable" : "Enable"}
-                </button>
-
-                <button
-                    class="action-btn delete-btn"
-                    onclick="deleteCategory(${index})"
-                >
-                    Delete
-                </button>
-
-            </div>
-
-        `;
-
-        categoryList.appendChild(item);
-
-    });
-
-}
 
 function escapeHtml(value){
 
@@ -686,12 +690,171 @@ function escapeHtml(value){
 
 }
 
-form.addEventListener("submit", (event) => {
 
-    event.preventDefault();
+function renderCategories(){
 
-    const name = categoryName.value.trim();
-    const icon = categoryIcon.value.trim() || "📦";
+    categoryCount.textContent =
+        categories.length +
+        (
+            categories.length === 1
+            ? " category"
+            : " categories"
+        );
+
+
+    if(categories.length === 0){
+
+        categoryList.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🗂️
+                </div>
+
+                No categories added yet.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    categoryList.innerHTML = "";
+
+
+    categories.forEach(category => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "category-item";
+
+
+        item.innerHTML = `
+
+            <div class="category-left">
+
+                <div class="category-icon">
+
+                    ${escapeHtml(category.icon || "📦")}
+
+                </div>
+
+                <div>
+
+                    <div class="category-name">
+
+                        ${escapeHtml(category.name)}
+
+                    </div>
+
+                    <div class="category-status ${
+                        category.active
+                        ? ""
+                        : "disabled"
+                    }">
+
+                        ${
+                            category.active
+                            ? "Active"
+                            : "Disabled"
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="action-btn edit-btn"
+                    data-id="${category.id}"
+                >
+                    Edit
+                </button>
+
+                <button
+                    class="action-btn toggle-btn"
+                    data-id="${category.id}"
+                >
+                    ${
+                        category.active
+                        ? "Disable"
+                        : "Enable"
+                    }
+                </button>
+
+                <button
+                    class="action-btn delete-btn"
+                    data-id="${category.id}"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        `;
+
+
+        categoryList.appendChild(item);
+
+    });
+
+
+    document
+        .querySelectorAll(".edit-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => editCategory(button.dataset.id)
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".toggle-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => toggleCategory(button.dataset.id)
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".delete-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => deleteCategory(button.dataset.id)
+            );
+
+        });
+
+}
+
+
+async function addCategory(){
+
+    const name =
+        categoryName.value.trim();
+
+    const icon =
+        categoryIcon.value.trim() || "📦";
+
 
     if(!name){
 
@@ -701,13 +864,18 @@ form.addEventListener("submit", (event) => {
         );
 
         return;
+
     }
 
-    const exists = categories.some(category =>
-        category.name.toLowerCase() === name.toLowerCase()
-    );
 
-    if(exists){
+    const duplicate =
+        categories.some(category =>
+            category.name.toLowerCase() ===
+            name.toLowerCase()
+        );
+
+
+    if(duplicate){
 
         showMessage(
             "This category already exists.",
@@ -715,88 +883,347 @@ form.addEventListener("submit", (event) => {
         );
 
         return;
+
     }
 
-    /*
-        Temporary local preview.
 
-        Firebase saving will be connected after
-        secure admin authorization is configured.
-    */
+    addButton.disabled = true;
 
-    categories.push({
-        name: name,
-        icon: icon,
-        active: true
-    });
+    addButton.textContent =
+        "Adding...";
 
-    form.reset();
 
-    categoryIcon.value = "📦";
+    try{
 
-    renderCategories();
+        const categoryRef =
+            push(ref(db,"categories"));
 
-    showMessage(
-        "Category added to the preview.",
-        "success"
-    );
 
-});
+        await set(categoryRef,{
 
-window.editCategory = function(index){
+            name: name,
 
-    const category = categories[index];
+            icon: icon,
 
-    const newName = prompt(
-        "Enter the new category name:",
-        category.name
-    );
+            active: true,
+
+            createdAt: Date.now()
+
+        });
+
+
+        form.reset();
+
+        categoryIcon.value =
+            "📦";
+
+
+        showMessage(
+            "Category added successfully.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Could not add category. Check your Firebase rules.",
+            "error"
+        );
+
+    }
+
+
+    addButton.disabled = false;
+
+    addButton.textContent =
+        "Add Category";
+
+}
+
+
+form.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        addCategory();
+
+    }
+);
+
+
+async function editCategory(id){
+
+    const category =
+        categories.find(
+            item => item.id === id
+        );
+
+
+    if(!category){
+        return;
+    }
+
+
+    const newName =
+        prompt(
+            "Enter the new category name:",
+            category.name
+        );
+
 
     if(newName === null){
         return;
     }
 
-    const name = newName.trim();
+
+    const name =
+        newName.trim();
+
 
     if(!name){
-        alert("Category name cannot be empty.");
+
+        alert(
+            "Category name cannot be empty."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await update(
+            ref(db,`categories/${id}`),
+            {
+                name: name
+            }
+        );
+
+
+        showMessage(
+            "Category updated.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Could not update category.",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function toggleCategory(id){
+
+    const category =
+        categories.find(
+            item => item.id === id
+        );
+
+
+    if(!category){
         return;
     }
 
-    category.name = name;
 
-    renderCategories();
+    try{
 
-};
+        await update(
+            ref(db,`categories/${id}`),
+            {
+                active: !category.active
+            }
+        );
 
-window.toggleCategory = function(index){
 
-    categories[index].active =
-        !categories[index].active;
+    }catch(error){
 
-    renderCategories();
+        console.error(error);
 
-};
+        showMessage(
+            "Could not change category status.",
+            "error"
+        );
 
-window.deleteCategory = function(index){
+    }
 
-    const category = categories[index];
+}
 
-    const confirmed = confirm(
-        `Delete "${category.name}"?`
-    );
+
+async function deleteCategory(id){
+
+    const category =
+        categories.find(
+            item => item.id === id
+        );
+
+
+    if(!category){
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            `Delete "${category.name}"?`
+        );
+
 
     if(!confirmed){
         return;
     }
 
-    categories.splice(index, 1);
 
-    renderCategories();
+    try{
 
-};
+        await remove(
+            ref(db,`categories/${id}`)
+        );
 
-renderCategories();
+
+        showMessage(
+            "Category deleted.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Could not delete category.",
+            "error"
+        );
+
+    }
+
+}
+
+
+function startCategoryListener(){
+
+    const categoriesRef =
+        ref(db,"categories");
+
+
+    onValue(
+        categoriesRef,
+        snapshot => {
+
+            const data =
+                snapshot.val();
+
+
+            categories = [];
+
+
+            if(data){
+
+                Object.entries(data)
+                    .forEach(([id,category]) => {
+
+                        categories.push({
+
+                            id: id,
+
+                            ...category
+
+                        });
+
+                    });
+
+            }
+
+
+            categories.sort(
+                (a,b) =>
+                    (a.createdAt || 0) -
+                    (b.createdAt || 0)
+            );
+
+
+            renderCategories();
+
+        },
+        error => {
+
+            console.error(error);
+
+            categoryCount.textContent =
+                "Unable to load categories.";
+
+            categoryList.innerHTML = `
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        ⚠️
+                    </div>
+
+                    Could not load categories.
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        currentUser = user;
+
+
+        if(
+            user.email !==
+            "omoboyejohn@gmail.com"
+        ){
+
+            alert(
+                "You are not authorized to access the admin panel."
+            );
+
+            window.location.href =
+                "../dashboard.html";
+
+            return;
+
+        }
+
+
+        startCategoryListener();
+
+    }
+);
 
 </script>
 
