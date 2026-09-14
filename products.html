@@ -1,51 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zavora Social | Products</title>
+<title>Zavora Social | Marketplace</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
     font-family:Inter,Arial,sans-serif;
-    background:
-        radial-gradient(circle at top left,rgba(124,58,237,.16),transparent 35%),
-        radial-gradient(circle at top right,rgba(6,182,212,.10),transparent 30%),
-        #080b16;
     color:#fff;
     min-height:100vh;
+    background:
+    radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
+    radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
+    #080b16;
 }
-
-/* HEADER */
 
 header{
     position:sticky;
     top:0;
     z-index:100;
-    border-bottom:1px solid rgba(255,255,255,.08);
     background:rgba(8,11,22,.88);
     backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .navbar{
-    max-width:1250px;
-    min-height:70px;
+    max-width:1200px;
+    min-height:72px;
     margin:auto;
     padding:0 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:20px;
 }
 
 .logo{
@@ -61,174 +50,94 @@ header{
     -webkit-text-fill-color:transparent;
 }
 
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.nav-btn{
-    text-decoration:none;
+.back{
     color:#cbd5e1;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    padding:10px 14px;
-    border-radius:10px;
-    font-size:13px;
+    text-decoration:none;
+    font-size:14px;
     font-weight:700;
 }
 
-.nav-btn:hover{
-    border-color:rgba(139,92,246,.4);
-    color:#fff;
-}
-
-/* MAIN */
-
 .container{
-    max-width:1250px;
+    max-width:1200px;
     margin:auto;
-    padding:30px 20px 60px;
+    padding:35px 20px 60px;
 }
 
-/* TITLE */
-
-.page-top{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:20px;
+.heading{
     margin-bottom:25px;
 }
 
-.page-title h1{
+.heading h1{
     font-size:32px;
     margin-bottom:7px;
 }
 
-.page-title p{
+.heading p{
     color:#94a3b8;
-    font-size:14px;
 }
 
-.category-name{
-    color:#67e8f9;
-}
-
-/* FILTER */
-
-.filter-area{
+.category-bar{
     display:flex;
     gap:10px;
-    flex-wrap:wrap;
+    overflow-x:auto;
+    padding-bottom:12px;
     margin-bottom:25px;
 }
 
-.filter-btn{
-    border:1px solid rgba(255,255,255,.1);
+.category-btn{
+    white-space:nowrap;
+    border:1px solid rgba(255,255,255,.09);
     background:rgba(255,255,255,.045);
     color:#cbd5e1;
-    padding:10px 14px;
-    border-radius:10px;
+    border-radius:12px;
+    padding:11px 17px;
     cursor:pointer;
-    font-size:13px;
     font-weight:700;
 }
 
-.filter-btn:hover{
-    border-color:rgba(139,92,246,.4);
+.category-btn:hover,
+.category-btn.active{
     color:#fff;
+    border-color:#8b5cf6;
+    background:rgba(124,58,237,.18);
 }
-
-.filter-btn.active{
-    color:#fff;
-    border-color:rgba(139,92,246,.5);
-    background:linear-gradient(
-        135deg,
-        rgba(124,58,237,.35),
-        rgba(6,182,212,.18)
-    );
-}
-
-/* PRODUCTS GRID */
 
 .products-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:18px;
+    gap:17px;
 }
-
-/* CARD */
 
 .product-card{
     overflow:hidden;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
     border-radius:18px;
-    transition:.2s ease;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.045);
 }
-
-.product-card:hover{
-    transform:translateY(-4px);
-    border-color:rgba(139,92,246,.4);
-    box-shadow:0 18px 40px rgba(0,0,0,.22);
-}
-
-/* IMAGE */
 
 .product-image{
     width:100%;
-    height:210px;
-    background:#111827;
-    position:relative;
-    overflow:hidden;
-}
-
-.product-image img{
-    width:100%;
-    height:100%;
+    height:190px;
     object-fit:cover;
-    display:block;
-    transition:.25s ease;
+    background:#111827;
 }
 
-.product-card:hover .product-image img{
-    transform:scale(1.04);
-}
-
-/* CATEGORY BADGE */
-
-.category-badge{
-    position:absolute;
-    left:10px;
-    top:10px;
-    padding:6px 9px;
-    border-radius:8px;
-    background:rgba(8,11,22,.78);
-    border:1px solid rgba(255,255,255,.1);
-    color:#e2e8f0;
-    font-size:11px;
-    font-weight:800;
-    backdrop-filter:blur(10px);
-}
-
-/* PRODUCT INFO */
-
-.product-info{
+.product-body{
     padding:17px;
 }
 
-.product-name{
-    font-size:17px;
-    font-weight:850;
-    line-height:1.35;
+.product-category{
+    color:#22d3ee;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
     margin-bottom:8px;
 }
 
-.product-price{
-    font-size:20px;
-    font-weight:900;
-    color:#67e8f9;
+.product-name{
+    font-size:16px;
+    font-weight:800;
+    line-height:1.4;
     margin-bottom:10px;
 }
 
@@ -236,956 +145,166 @@ header{
     color:#94a3b8;
     font-size:13px;
     line-height:1.5;
-    min-height:40px;
-    margin-bottom:16px;
+    margin-bottom:15px;
 }
 
-/* BUY */
+.product-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.price{
+    font-size:18px;
+    font-weight:900;
+}
 
 .buy-btn{
-    width:100%;
-    border:none;
+    border:0;
     color:#fff;
-    padding:12px;
-    border-radius:10px;
     cursor:pointer;
-    font-size:14px;
+    padding:10px 14px;
+    border-radius:10px;
     font-weight:800;
     background:linear-gradient(135deg,#7c3aed,#06b6d4);
-    transition:.2s ease;
 }
 
 .buy-btn:hover{
     opacity:.9;
-    transform:translateY(-1px);
 }
 
-/* LOADING */
-
-.loading-box{
-    grid-column:1/-1;
-    text-align:center;
+.empty{
     padding:60px 20px;
-    color:#94a3b8;
-}
-
-.spinner{
-    width:42px;
-    height:42px;
-    margin:0 auto 15px;
-    border:4px solid rgba(255,255,255,.1);
-    border-top-color:#8b5cf6;
-    border-right-color:#06b6d4;
-    border-radius:50%;
-    animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* EMPTY */
-
-.empty-box{
-    grid-column:1/-1;
     text-align:center;
-    padding:60px 20px;
-    border:1px dashed rgba(255,255,255,.12);
-    border-radius:18px;
+    border:1px dashed rgba(255,255,255,.13);
+    border-radius:20px;
     background:rgba(255,255,255,.025);
-    color:#94a3b8;
 }
 
-.empty-box .big{
+.empty-icon{
     font-size:45px;
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 
-.empty-box h3{
-    color:#fff;
-    margin-bottom:7px;
+.empty h2{
+    margin-bottom:8px;
 }
 
-/* ERROR */
+.empty p{
+    color:#94a3b8;
+    max-width:500px;
+    margin:auto;
+    line-height:1.6;
+}
 
-.error-box{
-    grid-column:1/-1;
+footer{
     text-align:center;
-    padding:50px 20px;
-    border:1px solid rgba(239,68,68,.2);
-    border-radius:18px;
-    background:rgba(239,68,68,.06);
-    color:#fca5a5;
+    color:#64748b;
+    font-size:13px;
+    padding:0 20px 30px;
 }
-
-.error-box .big{
-    font-size:40px;
-    margin-bottom:10px;
-}
-
-.error-box h3{
-    color:#fff;
-    margin-bottom:7px;
-}
-
-/* MOBILE */
 
 @media(max-width:1000px){
-
-    .products-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
+    .products-grid{grid-template-columns:repeat(3,1fr)}
 }
 
-@media(max-width:750px){
-
-    .products-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:12px;
-    }
-
-    .product-image{
-        height:190px;
-    }
-
+@media(max-width:700px){
+    .products-grid{grid-template-columns:repeat(2,1fr)}
+    .container{padding:28px 15px 50px}
+    .heading h1{font-size:27px}
 }
 
-@media(max-width:500px){
-
-    .container{
-        padding:25px 14px 50px;
-    }
-
-    .navbar{
-        padding:0 14px;
-    }
-
-    .page-title h1{
-        font-size:27px;
-    }
-
-    .nav-btn{
-        padding:9px 10px;
-        font-size:12px;
-    }
-
-    .products-grid{
-        grid-template-columns:1fr;
-    }
-
-    .product-image{
-        height:230px;
-    }
-
+@media(max-width:450px){
+    .products-grid{grid-template-columns:1fr}
 }
-
 </style>
-
 </head>
 
 <body>
 
-
-<!-- HEADER -->
-
 <header>
-
     <div class="navbar">
-
-        <a
-            href="dashboard.html"
-            class="logo"
-        >
+        <a href="dashboard.html" class="logo">
             Zavora <span>Social</span>
         </a>
 
-
-        <div class="nav-right">
-
-            <a
-                href="dashboard.html"
-                class="nav-btn"
-            >
-                Dashboard
-            </a>
-
-
-            <a
-                href="orders.html"
-                class="nav-btn"
-            >
-                Orders
-            </a>
-
-        </div>
-
+        <a href="dashboard.html" class="back">
+            ← Dashboard
+        </a>
     </div>
-
 </header>
-
-
-<!-- MAIN -->
 
 <main class="container">
 
+    <div class="heading">
+        <h1>Marketplace</h1>
+        <p>Browse available products and services.</p>
+    </div>
 
-    <!-- PAGE TITLE -->
+    <div class="category-bar" id="categoryBar">
+        <button class="category-btn active">All Products</button>
+    </div>
 
-    <div class="page-top">
+    <div id="productsArea">
 
-        <div class="page-title">
+        <div class="empty">
+            <div class="empty-icon">🛍️</div>
 
-            <h1>
-                Products
-            </h1>
+            <h2>Marketplace is ready</h2>
 
             <p>
-                Browse available products on Zavora Social.
+                Products added by the Zavora Social administration
+                will appear here.
             </p>
-
         </div>
 
     </div>
-
-
-    <!-- CATEGORY FILTERS -->
-
-    <div
-        class="filter-area"
-        id="filterArea"
-    >
-
-        <button
-            class="filter-btn active"
-            data-category="all"
-        >
-            All Products
-        </button>
-
-    </div>
-
-
-    <!-- PRODUCTS -->
-
-    <div
-        class="products-grid"
-        id="productsGrid"
-    >
-
-        <div class="loading-box">
-
-            <div class="spinner"></div>
-
-            Loading products...
-
-        </div>
-
-    </div>
-
 
 </main>
 
+<footer>
+    © <span id="year"></span> Zavora Social. All rights reserved.
+</footer>
 
 <script type="module">
 
-
-/* ==========================================
-   FIREBASE
-========================================== */
-
 import {
     initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-
-import {
-    getDatabase,
-    ref,
-    onValue
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
-
-    authDomain:
-        "zavorasocial.firebaseapp.com",
-
-    databaseURL:
-        "https://zavorasocial-default-rtdb.firebaseio.com/",
-
-    projectId:
-        "zavorasocial",
-
-    storageBucket:
-        "zavorasocial.firebasestorage.app",
-
-    messagingSenderId:
-        "447170165246",
-
-    appId:
-        "1:447170165246:web:982649e6533257ea0f28af",
-
-    measurementId:
-        "G-D4LNBEWH50"
-
+    apiKey:"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+    authDomain:"zavorasocial.firebaseapp.com",
+    projectId:"zavorasocial",
+    storageBucket:"zavorasocial.firebasestorage.app",
+    messagingSenderId:"447170165246",
+    appId:"1:447170165246:web:982649e6533257ea0f28af",
+    measurementId:"G-D4LNBEWH50"
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const app =
-    initializeApp(firebaseConfig);
+onAuthStateChanged(auth,(user)=>{
 
-
-const auth =
-    getAuth(app);
-
-
-const db =
-    getDatabase(app);
-
-
-/* ==========================================
-   ELEMENTS
-========================================== */
-
-const productsGrid =
-    document.getElementById(
-        "productsGrid"
-    );
-
-
-const filterArea =
-    document.getElementById(
-        "filterArea"
-    );
-
-
-/* ==========================================
-   STATE
-========================================== */
-
-let allProducts = [];
-
-let selectedCategory = "all";
-
-
-/* ==========================================
-   AUTH
-========================================== */
-
-onAuthStateChanged(
-    auth,
-    (user) => {
-
-        if(!user){
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-
-        loadProducts();
-
-        loadCategories();
-
-    }
-);
-
-
-/* ==========================================
-   LOAD PRODUCTS
-========================================== */
-
-function loadProducts(){
-
-    const productsRef =
-        ref(
-            db,
-            "products"
-        );
-
-
-    onValue(
-        productsRef,
-        (snapshot) => {
-
-            const data =
-                snapshot.val() || {};
-
-
-            allProducts =
-                Object.entries(data)
-
-                    .map(
-                        ([id,product]) => ({
-
-                            id:id,
-
-                            ...product
-
-                        })
-                    )
-
-                    /*
-                        Customers only see
-                        ACTIVE products.
-                    */
-
-                    .filter(
-                        product =>
-                            product.active === true
-                    );
-
-
-            /*
-                Newest products first.
-            */
-
-            allProducts.sort(
-                (a,b) =>
-                    (b.createdAt || 0) -
-                    (a.createdAt || 0)
-            );
-
-
-            renderProducts();
-
-        },
-        (error) => {
-
-            console.error(
-                "Products error:",
-                error
-            );
-
-
-            productsGrid.innerHTML = `
-
-                <div class="error-box">
-
-                    <div class="big">
-                        ⚠️
-                    </div>
-
-                    <h3>
-                        Products unavailable
-                    </h3>
-
-                    <p>
-                        We could not load the marketplace products.
-                    </p>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   LOAD CATEGORIES
-========================================== */
-
-function loadCategories(){
-
-    const categoriesRef =
-        ref(
-            db,
-            "categories"
-        );
-
-
-    onValue(
-        categoriesRef,
-        (snapshot) => {
-
-            const data =
-                snapshot.val() || {};
-
-
-            const categories = [];
-
-
-            Object.values(data)
-                .forEach(
-                    category => {
-
-                        if(
-                            category &&
-                            category.active === true &&
-                            category.name
-                        ){
-
-                            categories.push(
-                                category
-                            );
-
-                        }
-
-                    }
-                );
-
-
-            /*
-                Remove duplicate names.
-            */
-
-            const uniqueCategories =
-                [];
-
-
-            categories.forEach(
-                category => {
-
-                    const exists =
-                        uniqueCategories.some(
-                            item =>
-                                item.name.toLowerCase() ===
-                                category.name.toLowerCase()
-                        );
-
-
-                    if(!exists){
-
-                        uniqueCategories.push(
-                            category
-                        );
-
-                    }
-
-                }
-            );
-
-
-            uniqueCategories.sort(
-                (a,b) =>
-                    a.name.localeCompare(
-                        b.name
-                    )
-            );
-
-
-            uniqueCategories.forEach(
-                category => {
-
-                    const button =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    button.className =
-                        "filter-btn";
-
-
-                    button.dataset.category =
-                        category.name;
-
-
-                    button.textContent =
-                        (
-                            category.icon ||
-                            "📦"
-                        ) +
-                        " " +
-                        category.name;
-
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            selectedCategory =
-                                category.name;
-
-
-                            updateFilterButtons();
-
-                            renderProducts();
-
-                        }
-                    );
-
-
-                    filterArea.appendChild(
-                        button
-                    );
-
-                }
-            );
-
-
-            updateFilterButtons();
-
-        },
-        (error) => {
-
-            console.error(
-                "Category error:",
-                error
-            );
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   RENDER PRODUCTS
-========================================== */
-
-function renderProducts(){
-
-    let products =
-        allProducts;
-
-
-    if(
-        selectedCategory !==
-        "all"
-    ){
-
-        products =
-            allProducts.filter(
-                product =>
-                    String(
-                        product.category || ""
-                    ).toLowerCase() ===
-                    String(
-                        selectedCategory
-                    ).toLowerCase()
-            );
-
-    }
-
-
-    if(products.length === 0){
-
-        productsGrid.innerHTML = `
-
-            <div class="empty-box">
-
-                <div class="big">
-                    📦
-                </div>
-
-                <h3>
-                    No products available
-                </h3>
-
-                <p>
-                    ${
-                        selectedCategory === "all"
-                            ? "New products will appear here."
-                            : "There are no products in this category yet."
-                    }
-                </p>
-
-            </div>
-
-        `;
-
+    if(!user){
+        window.location.href="login.html";
         return;
-
     }
 
+});
 
-    productsGrid.innerHTML = "";
-
-
-    products.forEach(
-        product => {
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "product-card";
-
-
-            const image =
-                product.image ||
-                "https://via.placeholder.com/600x500?text=Zavora+Social";
-
-
-            const description =
-                product.description ||
-                "Quality digital product available on Zavora Social.";
-
-
-            card.innerHTML = `
-
-                <div class="product-image">
-
-                    <img
-                        src="${escapeHtml(image)}"
-                        alt="${escapeHtml(product.name || "Product")}"
-                    >
-
-                    <div class="category-badge">
-
-                        📦
-                        ${escapeHtml(
-                            product.category ||
-                            "Product"
-                        )}
-
-                    </div>
-
-                </div>
-
-
-                <div class="product-info">
-
-                    <div class="product-name">
-
-                        ${escapeHtml(
-                            product.name ||
-                            "Unnamed Product"
-                        )}
-
-                    </div>
-
-
-                    <div class="product-price">
-
-                        ₦${formatNumber(
-                            product.price || 0
-                        )}
-
-                    </div>
-
-
-                    <div class="product-description">
-
-                        ${escapeHtml(
-                            description
-                        )}
-
-                    </div>
-
-
-                    <button
-                        class="buy-btn"
-                        data-product-id="${escapeHtml(product.id)}"
-                    >
-                        Buy Now
-                    </button>
-
-                </div>
-
-            `;
-
-
-            const buyButton =
-                card.querySelector(
-                    ".buy-btn"
-                );
-
-
-            buyButton.addEventListener(
-                "click",
-                () => {
-
-                    buyProduct(
-                        product
-                    );
-
-                }
-            );
-
-
-            const imageElement =
-                card.querySelector(
-                    "img"
-                );
-
-
-            imageElement.addEventListener(
-                "error",
-                () => {
-
-                    imageElement.src =
-                        "https://via.placeholder.com/600x500?text=Zavora+Social";
-
-                }
-            );
-
-
-            productsGrid.appendChild(
-                card
-            );
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   BUY PRODUCT
-========================================== */
-
-function buyProduct(
-    product
-){
-
-    /*
-        For now we send the customer
-        to the product page with the
-        product ID.
-
-        The actual wallet deduction
-        and instant delivery will be
-        connected in the next step.
-    */
-
-    window.location.href =
-        "product.html?id=" +
-        encodeURIComponent(
-            product.id
-        );
-
-}
-
-
-/* ==========================================
-   FILTER BUTTONS
-========================================== */
-
-function updateFilterButtons(){
-
-    const buttons =
-        filterArea.querySelectorAll(
-            ".filter-btn"
-        );
-
-
-    buttons.forEach(
-        button => {
-
-            const category =
-                button.dataset.category;
-
-
-            button.classList.toggle(
-                "active",
-                category ===
-                selectedCategory
-            );
-
-        }
-    );
-
-}
-
-
-/* ==========================================
-   ALL PRODUCTS BUTTON
-========================================== */
-
-filterArea
-    .querySelector(
-        '[data-category="all"]'
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            selectedCategory =
-                "all";
-
-
-            updateFilterButtons();
-
-            renderProducts();
-
-        }
-    );
-
-
-/* ==========================================
-   FORMAT PRICE
-========================================== */
-
-function formatNumber(
-    value
-){
-
-    return Number(value)
-        .toLocaleString(
-            "en-NG",
-            {
-                maximumFractionDigits:2
-            }
-        );
-
-}
-
-
-/* ==========================================
-   ESCAPE HTML
-========================================== */
-
-function escapeHtml(
-    value
-){
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
 </script>
 
 </body>
-
 </html>
