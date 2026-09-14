@@ -344,6 +344,7 @@ td{
 }
 
 @media(max-width:900px){
+
     .sidebar{
         display:none;
     }
@@ -358,6 +359,7 @@ td{
 }
 
 @media(max-width:550px){
+
     .header{
         padding:0 15px;
     }
@@ -400,62 +402,147 @@ td{
     <div class="sidebar-title">Management</div>
 
     <nav class="nav">
-        <a href="index.html">📊 Dashboard</a>
-        <a href="categories.html">📁 Categories</a>
-        <a href="products.html">📦 Products</a>
-        <a href="inventory.html" class="active">🗃️ Inventory</a>
-        <a href="orders.html">🛒 Orders</a>
-        <a href="customers.html">👥 Customers</a>
-        <a href="deposits.html">💰 Deposits</a>
-        <a href="transactions.html">📜 Transactions</a>
-        <a href="settings.html">⚙️ Settings</a>
+
+        <a href="index.html">
+            📊 Dashboard
+        </a>
+
+        <a href="categories.html">
+            📁 Categories
+        </a>
+
+        <a href="products.html">
+            📦 Products
+        </a>
+
+        <a href="inventory.html" class="active">
+            🗃️ Inventory
+        </a>
+
+        <a href="orders.html">
+            🛒 Orders
+        </a>
+
+        <a href="customers.html">
+            👥 Customers
+        </a>
+
+        <a href="deposits.html">
+            💰 Deposits
+        </a>
+
+        <a href="transactions.html">
+            📜 Transactions
+        </a>
+
+        <a href="settings.html">
+            ⚙️ Settings
+        </a>
+
     </nav>
 
 </aside>
+
 
 <main class="main">
 
     <div class="page-top">
 
         <div class="page-title">
+
             <h1>Inventory</h1>
-            <p>Manage product stock and availability.</p>
+
+            <p>
+                Manage product stock and availability.
+            </p>
+
         </div>
 
-        <button class="refresh-btn" id="refreshBtn">
+        <button
+            class="refresh-btn"
+            id="refreshBtn"
+        >
             ↻ Refresh
         </button>
 
     </div>
 
+
     <section class="stats">
 
         <div class="stat-card">
-            <div class="stat-label">Total Products</div>
-            <div class="stat-value" id="totalProducts">0</div>
+
+            <div class="stat-label">
+                Total Products
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalProducts"
+            >
+                0
+            </div>
+
         </div>
 
-        <div class="stat-card">
-            <div class="stat-label">In Stock</div>
-            <div class="stat-value" id="inStock">0</div>
-        </div>
 
         <div class="stat-card">
-            <div class="stat-label">Low Stock</div>
-            <div class="stat-value" id="lowStock">0</div>
+
+            <div class="stat-label">
+                In Stock
+            </div>
+
+            <div
+                class="stat-value"
+                id="inStock"
+            >
+                0
+            </div>
+
         </div>
 
+
         <div class="stat-card">
-            <div class="stat-label">Out of Stock</div>
-            <div class="stat-value" id="outStock">0</div>
+
+            <div class="stat-label">
+                Low Stock
+            </div>
+
+            <div
+                class="stat-value"
+                id="lowStock"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Out of Stock
+            </div>
+
+            <div
+                class="stat-value"
+                id="outStock"
+            >
+                0
+            </div>
+
         </div>
 
     </section>
 
+
     <section class="products-box">
 
         <div class="box-header">
-            <h2>Product Inventory</h2>
+
+            <h2>
+                Product Inventory
+            </h2>
 
             <input
                 type="search"
@@ -463,13 +550,16 @@ td{
                 class="search"
                 placeholder="Search products..."
             >
+
         </div>
+
 
         <div class="table-wrap">
 
             <table>
 
                 <thead>
+
                     <tr>
                         <th>Product</th>
                         <th>Price</th>
@@ -477,16 +567,22 @@ td{
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
+
                 </thead>
+
 
                 <tbody id="inventoryBody">
 
                     <tr>
+
                         <td colspan="5">
+
                             <div class="empty">
-                                Loading inventory...
+                                Checking admin session...
                             </div>
+
                         </td>
+
                     </tr>
 
                 </tbody>
@@ -499,10 +595,12 @@ td{
 
 </main>
 
-</div><div id="message" class="message"></div><script type="module">
+</div><div
+    id="message"
+    class="message"
+></div><script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
     getAuth,
@@ -517,75 +615,116 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* =========================================
+   FIREBASE
+========================================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBzj9_rGQPW21duk4sxyLUO3hy3-6GwGs",
-    authDomain: "zavorasocial.firebaseapp.com",
-    databaseURL: "https://zavorasocial-default-rtdb.firebaseio.com/",
-    projectId: "zavorasocial",
-    storageBucket: "zavorasocial.firebasestorage.app",
-    messagingSenderId: "447170165246",
-    appId: "1:447170165246:web:982649e6533257ea0f28af",
-    measurementId: "G-D4LNBEWH50"
+
+    apiKey:
+        "AIzaSyBzj9_rGQPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+        "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
+
+    projectId:
+        "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
 };
 
+
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getDatabase(app);
 
 
-/* =========================
-   ADMIN EMAIL
-========================= */
+/* =========================================
+   ADMIN
+========================================= */
 
-const ADMIN_EMAIL = "omoboyejohn@gmail.com";
+const ADMIN_EMAIL =
+    "omoboyejohn@gmail.com";
 
 
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
 
-const inventoryBody = document.getElementById("inventoryBody");
-const searchInput = document.getElementById("searchInput");
-const refreshBtn = document.getElementById("refreshBtn");
+const inventoryBody =
+    document.getElementById("inventoryBody");
 
-const totalProducts = document.getElementById("totalProducts");
-const inStock = document.getElementById("inStock");
-const lowStock = document.getElementById("lowStock");
-const outStock = document.getElementById("outStock");
+const searchInput =
+    document.getElementById("searchInput");
 
-const message = document.getElementById("message");
+const refreshBtn =
+    document.getElementById("refreshBtn");
+
+const totalProducts =
+    document.getElementById("totalProducts");
+
+const inStock =
+    document.getElementById("inStock");
+
+const lowStock =
+    document.getElementById("lowStock");
+
+const outStock =
+    document.getElementById("outStock");
+
+const message =
+    document.getElementById("message");
 
 
-/* =========================
+/* =========================================
    STATE
-========================= */
+========================================= */
 
 let products = {};
+
 let currentUser = null;
 
+let authChecked = false;
 
-/* =========================
+let authTimer = null;
+
+
+/* =========================================
    MESSAGE
-========================= */
+========================================= */
 
 function showMessage(text){
 
     message.textContent = text;
+
     message.classList.add("show");
 
     setTimeout(() => {
+
         message.classList.remove("show");
-    }, 2500);
+
+    },2500);
 }
 
 
-/* =========================
+/* =========================================
    ESCAPE HTML
-========================= */
+========================================= */
 
 function escapeHtml(value){
 
@@ -598,164 +737,262 @@ function escapeHtml(value){
 }
 
 
-/* =========================
-   FORMAT PRICE
-========================= */
+/* =========================================
+   PRICE
+========================================= */
 
 function formatPrice(price){
 
-    return "₦" + Number(price || 0).toLocaleString("en-NG");
+    return "₦" +
+        Number(price || 0)
+        .toLocaleString("en-NG");
 }
 
 
-/* =========================
+/* =========================================
    STOCK STATUS
-========================= */
+========================================= */
 
 function getStockStatus(stock){
 
-    if(stock === null || stock === undefined || stock === ""){
+    if(
+        stock === null ||
+        stock === undefined ||
+        stock === ""
+    ){
+
         return {
+
             className:"unlimited",
+
             text:"Unlimited"
+
         };
+
     }
 
-    const number = Number(stock);
+
+    const number =
+        Number(stock);
+
 
     if(number <= 0){
+
         return {
+
             className:"out",
+
             text:"Out of Stock"
+
         };
+
     }
+
 
     if(number <= 5){
+
         return {
+
             className:"low",
+
             text:"Low Stock"
+
         };
+
     }
 
+
     return {
+
         className:"in",
+
         text:"In Stock"
+
     };
+
 }
 
 
-/* =========================
+/* =========================================
    LOAD PRODUCTS
-========================= */
+========================================= */
 
 function loadProducts(){
 
-    const productsRef = ref(db,"products");
+    const productsRef =
+        ref(db,"products");
+
 
     onValue(
+
         productsRef,
+
         snapshot => {
 
-            products = snapshot.val() || {};
+            products =
+                snapshot.val() || {};
 
             renderInventory();
 
         },
+
         error => {
 
-            console.error(error);
+            console.error(
+                "Inventory error:",
+                error
+            );
+
 
             inventoryBody.innerHTML = `
+
                 <tr>
+
                     <td colspan="5">
+
                         <div class="empty">
+
                             Unable to load inventory.
+
                         </div>
+
                     </td>
+
                 </tr>
+
             `;
 
         }
+
     );
+
 }
 
 
-/* =========================
-   RENDER INVENTORY
-========================= */
+/* =========================================
+   RENDER
+========================================= */
 
 function renderInventory(){
 
-    const search = searchInput.value
+    const search =
+        searchInput.value
         .trim()
         .toLowerCase();
 
-    const entries = Object.entries(products);
 
-    const filtered = entries.filter(([id, product]) => {
+    const entries =
+        Object.entries(products);
 
-        const name = String(product.name || "").toLowerCase();
-        const category = String(product.category || "").toLowerCase();
 
-        return (
-            name.includes(search) ||
-            category.includes(search)
+    const filtered =
+        entries.filter(
+            ([id,product]) => {
+
+                const name =
+                    String(
+                        product.name || ""
+                    ).toLowerCase();
+
+
+                const category =
+                    String(
+                        product.category || ""
+                    ).toLowerCase();
+
+
+                return (
+
+                    name.includes(search) ||
+
+                    category.includes(search)
+
+                );
+
+            }
         );
 
-    });
 
+    let total =
+        entries.length;
 
-    /* =========================
-       STATS
-    ========================= */
-
-    let total = entries.length;
     let inCount = 0;
+
     let lowCount = 0;
+
     let outCount = 0;
 
-    entries.forEach(([id,product]) => {
 
-        const stock = product.stock;
+    entries.forEach(
+        ([id,product]) => {
 
-        if(stock === null || stock === undefined || stock === ""){
-            inCount++;
-            return;
+            const stock =
+                product.stock;
+
+
+            if(
+                stock === null ||
+                stock === undefined ||
+                stock === ""
+            ){
+
+                inCount++;
+
+                return;
+
+            }
+
+
+            const number =
+                Number(stock);
+
+
+            if(number <= 0){
+
+                outCount++;
+
+            }
+            else if(number <= 5){
+
+                lowCount++;
+
+            }
+            else{
+
+                inCount++;
+
+            }
+
         }
-
-        const number = Number(stock);
-
-        if(number <= 0){
-            outCount++;
-        }
-        else if(number <= 5){
-            lowCount++;
-        }
-        else{
-            inCount++;
-        }
-
-    });
-
-    totalProducts.textContent = total;
-    inStock.textContent = inCount;
-    lowStock.textContent = lowCount;
-    outStock.textContent = outCount;
+    );
 
 
-    /* =========================
-       EMPTY
-    ========================= */
+    totalProducts.textContent =
+        total;
+
+    inStock.textContent =
+        inCount;
+
+    lowStock.textContent =
+        lowCount;
+
+    outStock.textContent =
+        outCount;
+
 
     if(filtered.length === 0){
 
         inventoryBody.innerHTML = `
+
             <tr>
+
                 <td colspan="5">
 
                     <div class="empty">
 
-                        <div class="empty-icon">📦</div>
+                        <div class="empty-icon">
+                            📦
+                        </div>
 
                         ${
                             entries.length === 0
@@ -766,132 +1003,162 @@ function renderInventory(){
                     </div>
 
                 </td>
+
             </tr>
+
         `;
 
         return;
+
     }
 
 
-    /* =========================
-       TABLE
-    ========================= */
+    inventoryBody.innerHTML =
 
-    inventoryBody.innerHTML = filtered.map(
-        ([id,product]) => {
+        filtered.map(
+            ([id,product]) => {
 
-            const stock =
-                product.stock === undefined ||
-                product.stock === null ||
-                product.stock === ""
+                const stock =
+
+                    product.stock === undefined ||
+                    product.stock === null ||
+                    product.stock === ""
+
                     ? ""
+
                     : Number(product.stock);
 
-            const status = getStockStatus(
-                product.stock
-            );
 
-            const image =
-                product.image ||
-                "https://placehold.co/100x100/11162a/ffffff?text=Product";
+                const status =
+                    getStockStatus(
+                        product.stock
+                    );
 
-            return `
 
-                <tr>
+                const image =
+                    product.image ||
 
-                    <td>
+                    "https://placehold.co/100x100/11162a/ffffff?text=Product";
 
-                        <div class="product-info">
 
-                            <img
-                                class="product-img"
-                                src="${escapeHtml(image)}"
-                                alt="${escapeHtml(product.name)}"
-                                onerror="this.src='https://placehold.co/100x100/11162a/ffffff?text=Product'"
-                            >
+                return `
 
-                            <div>
+                    <tr>
 
-                                <div class="product-name">
-                                    ${escapeHtml(product.name || "Unnamed Product")}
-                                </div>
+                        <td>
 
-                                <div class="product-category">
-                                    ${escapeHtml(product.category || "Uncategorized")}
+                            <div class="product-info">
+
+                                <img
+                                    class="product-img"
+                                    src="${escapeHtml(image)}"
+                                    alt="${escapeHtml(product.name)}"
+                                    onerror="this.src='https://placehold.co/100x100/11162a/ffffff?text=Product'"
+                                >
+
+                                <div>
+
+                                    <div class="product-name">
+
+                                        ${escapeHtml(
+                                            product.name ||
+                                            "Unnamed Product"
+                                        )}
+
+                                    </div>
+
+                                    <div class="product-category">
+
+                                        ${escapeHtml(
+                                            product.category ||
+                                            "Uncategorized"
+                                        )}
+
+                                    </div>
+
                                 </div>
 
                             </div>
 
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <span class="price">
-                            ${formatPrice(product.price)}
-                        </span>
+                            <span class="price">
 
-                    </td>
+                                ${formatPrice(
+                                    product.price
+                                )}
+
+                            </span>
+
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <div class="stock-control">
+                            <div class="stock-control">
 
-                            <input
-                                type="number"
-                                min="0"
-                                class="stock-input"
-                                id="stock-${escapeHtml(id)}"
-                                value="${stock}"
-                                placeholder="∞"
+                                <input
+                                    type="number"
+                                    min="0"
+                                    class="stock-input"
+                                    id="stock-${escapeHtml(id)}"
+                                    value="${stock}"
+                                    placeholder="∞"
+                                >
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${status.className}"
                             >
 
-                        </div>
+                                ${status.text}
 
-                    </td>
+                            </span>
 
-
-                    <td>
-
-                        <span class="status ${status.className}">
-                            ${status.text}
-                        </span>
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <button
-                            class="save-btn"
-                            data-id="${escapeHtml(id)}"
-                        >
-                            Save
-                        </button>
+                            <button
+                                class="save-btn"
+                                data-id="${escapeHtml(id)}"
+                            >
+                                Save
+                            </button>
 
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
-            `;
+                `;
 
-        }
-    ).join("");
+            }
+        ).join("");
 
 
-    /* =========================
-       SAVE BUTTONS
-    ========================= */
-
-    document.querySelectorAll(".save-btn")
+    document
+        .querySelectorAll(".save-btn")
         .forEach(button => {
 
             button.addEventListener(
                 "click",
-                () => saveStock(button.dataset.id)
+                () => {
+
+                    saveStock(
+                        button.dataset.id
+                    );
+
+                }
             );
 
         });
@@ -899,58 +1166,98 @@ function renderInventory(){
 }
 
 
-/* =========================
+/* =========================================
    SAVE STOCK
-========================= */
+========================================= */
 
 async function saveStock(productId){
 
     if(!currentUser){
-        showMessage("Admin session not found.");
+
+        showMessage(
+            "Admin session not ready."
+        );
+
         return;
+
     }
 
-    const input = document.getElementById(
-        "stock-" + productId
-    );
+
+    const input =
+        document.getElementById(
+            "stock-" + productId
+        );
+
 
     if(!input){
+
         return;
+
     }
 
-    const value = input.value.trim();
+
+    const value =
+        input.value.trim();
 
 
     if(value === ""){
-        showMessage("Enter a stock quantity.");
+
+        showMessage(
+            "Enter a stock quantity."
+        );
+
         return;
+
     }
 
 
-    const stock = Number(value);
+    const stock =
+        Number(value);
 
 
-    if(!Number.isFinite(stock) || stock < 0){
-        showMessage("Enter a valid stock quantity.");
+    if(
+        !Number.isFinite(stock) ||
+        stock < 0
+    ){
+
+        showMessage(
+            "Enter a valid stock quantity."
+        );
+
         return;
+
     }
 
 
     try{
 
         await update(
-            ref(db,"products/" + productId),
+
+            ref(
+                db,
+                "products/" + productId
+            ),
+
             {
-                stock: Math.floor(stock)
+                stock:
+                    Math.floor(stock)
             }
+
         );
 
-        showMessage("Stock updated successfully.");
+
+        showMessage(
+            "Stock updated successfully."
+        );
 
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            "Save stock error:",
+            error
+        );
+
 
         showMessage(
             "Unable to update stock."
@@ -961,9 +1268,9 @@ async function saveStock(productId){
 }
 
 
-/* =========================
+/* =========================================
    SEARCH
-========================= */
+========================================= */
 
 searchInput.addEventListener(
     "input",
@@ -971,9 +1278,9 @@ searchInput.addEventListener(
 );
 
 
-/* =========================
+/* =========================================
    REFRESH
-========================= */
+========================================= */
 
 refreshBtn.addEventListener(
     "click",
@@ -981,25 +1288,87 @@ refreshBtn.addEventListener(
 
         renderInventory();
 
-        showMessage("Inventory refreshed.");
+        showMessage(
+            "Inventory refreshed."
+        );
 
     }
 );
 
 
-/* =========================
-   AUTH GUARD
-========================= */
+/* =========================================
+   AUTH CHECK
+========================================= */
 
 onAuthStateChanged(
     auth,
     user => {
 
+        console.log(
+            "Zavora inventory auth:",
+            user
+                ? user.email
+                : "No user yet"
+        );
+
+
+        authChecked = true;
+
+
+        if(authTimer){
+
+            clearTimeout(authTimer);
+
+            authTimer = null;
+
+        }
+
+
         if(!user){
 
-            window.location.replace("../login.html");
+            /*
+             * Firebase can briefly take time
+             * to restore the existing session.
+             * Do not redirect immediately.
+             */
+
+            inventoryBody.innerHTML = `
+
+                <tr>
+
+                    <td colspan="5">
+
+                        <div class="empty">
+
+                            Checking admin session...
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            authTimer = setTimeout(
+                () => {
+
+                    if(!auth.currentUser){
+
+                        window.location.replace(
+                            "../login.html"
+                        );
+
+                    }
+
+                },
+                2500
+            );
+
 
             return;
+
         }
 
 
@@ -1009,15 +1378,42 @@ onAuthStateChanged(
             ADMIN_EMAIL.toLowerCase()
         ){
 
-            alert("Admin access only.");
+            alert(
+                "Admin access only."
+            );
 
-            window.location.replace("../dashboard.html");
+
+            window.location.replace(
+                "../dashboard.html"
+            );
+
 
             return;
+
         }
 
 
         currentUser = user;
+
+
+        inventoryBody.innerHTML = `
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="empty">
+
+                        Loading inventory...
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
 
         loadProducts();
 
