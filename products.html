@@ -1,6 +1,4 @@
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Products</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Products</title><style>
 
 *{
     box-sizing:border-box;
@@ -11,12 +9,25 @@
 body{
     font-family:Inter,Arial,sans-serif;
     background:
-        radial-gradient(circle at top left,rgba(124,58,237,.16),transparent 35%),
-        radial-gradient(circle at top right,rgba(6,182,212,.10),transparent 30%),
+        radial-gradient(
+            circle at top left,
+            rgba(124,58,237,.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at top right,
+            rgba(6,182,212,.10),
+            transparent 30%
+        ),
         #080b16;
     color:#fff;
     min-height:100vh;
 }
+
+
+/* ==============================
+   HEADER
+============================== */
 
 header{
     position:sticky;
@@ -32,21 +43,30 @@ header{
     min-height:70px;
     margin:auto;
     padding:0 20px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:20px;
 }
 
 .logo{
     color:#fff;
     text-decoration:none;
+
     font-size:22px;
     font-weight:900;
 }
 
 .logo span{
-    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    background:
+        linear-gradient(
+            90deg,
+            #a78bfa,
+            #22d3ee
+        );
+
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
@@ -58,272 +78,571 @@ header{
 
 .nav-btn{
     text-decoration:none;
+
     color:#cbd5e1;
+
     background:rgba(255,255,255,.05);
+
     border:1px solid rgba(255,255,255,.08);
+
     padding:10px 14px;
+
     border-radius:10px;
+
     font-size:13px;
+
     font-weight:700;
 }
 
+
+/* ==============================
+   CONTAINER
+============================== */
+
 .container{
-    max-width:1250px;
+    max-width:900px;
+
     margin:auto;
-    padding:30px 20px 60px;
+
+    padding:28px 15px 60px;
 }
 
+
+/* ==============================
+   TITLE
+============================== */
+
 .page-title{
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .page-title h1{
-    font-size:32px;
-    margin-bottom:7px;
+    font-size:30px;
+
+    margin-bottom:6px;
 }
 
 .page-title p{
     color:#94a3b8;
+
+    font-size:13px;
 }
+
+
+/* ==============================
+   FILTERS
+============================== */
 
 .filter-area{
     display:flex;
-    gap:10px;
+
+    gap:8px;
+
     flex-wrap:wrap;
-    margin-bottom:25px;
+
+    margin-bottom:20px;
 }
 
 .filter-btn{
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.10);
+
     background:rgba(255,255,255,.045);
+
     color:#cbd5e1;
-    padding:10px 14px;
-    border-radius:10px;
+
+    padding:9px 12px;
+
+    border-radius:9px;
+
     cursor:pointer;
-    font-size:13px;
+
+    font-size:12px;
+
     font-weight:700;
 }
 
 .filter-btn.active{
     color:#fff;
+
     border-color:#8b5cf6;
-    background:linear-gradient(
-        135deg,
-        rgba(124,58,237,.35),
-        rgba(6,182,212,.18)
-    );
-}
 
-.products-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.product-card{
-    overflow:hidden;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    transition:.2s;
-}
-
-.product-card:hover{
-    transform:translateY(-4px);
-    border-color:rgba(139,92,246,.5);
-}
-
-.product-image{
-    width:100%;
-    height:210px;
-    background:#111827;
-    overflow:hidden;
-}
-
-.product-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-.product-info{
-    padding:17px;
-}
-
-.product-category{
-    color:#67e8f9;
-    font-size:11px;
-    font-weight:800;
-    text-transform:uppercase;
-    margin-bottom:8px;
-}
-
-.product-name{
-    font-size:17px;
-    font-weight:850;
-    margin-bottom:8px;
-}
-
-.product-price{
-    font-size:20px;
-    font-weight:900;
-    color:#67e8f9;
-    margin-bottom:10px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.35),
+            rgba(6,182,212,.18)
+        );
 }
 
 
 /* ==============================
-   STOCK STATUS
+   PRODUCTS LIST
 ============================== */
 
-.stock-status{
-    display:inline-flex;
+.products-grid{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:9px;
+}
+
+
+/* ==============================
+   PRODUCT ROW
+============================== */
+
+.product-card{
+
+    width:100%;
+
+    min-height:76px;
+
+    display:flex;
+
     align-items:center;
-    gap:6px;
-    padding:6px 9px;
-    border-radius:8px;
-    font-size:11px;
+
+    gap:12px;
+
+    padding:9px 10px;
+
+    background:#111522;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:13px;
+
+    transition:.2s;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.16);
+}
+
+.product-card:hover{
+
+    border-color:
+        rgba(139,92,246,.45);
+
+    transform:translateY(-1px);
+}
+
+
+/* ==============================
+   SMALL PRODUCT IMAGE
+============================== */
+
+.product-image{
+
+    width:52px;
+
+    height:52px;
+
+    min-width:52px;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:#1a2030;
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.product-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+/* ==============================
+   PRODUCT INFORMATION
+============================== */
+
+.product-info{
+
+    min-width:0;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+
+/* PRODUCT NAME */
+
+.product-name{
+
+    color:#fff;
+
+    font-size:14px;
+
+    line-height:1.2;
+
     font-weight:800;
-    margin-bottom:12px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+/* ==============================
+   BOTTOM INFORMATION
+============================== */
+
+.product-bottom{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    flex-wrap:wrap;
+}
+
+
+/* PRICE */
+
+.product-price{
+
+    color:#67e8f9;
+
+    background:rgba(6,182,212,.10);
+
+    border:1px solid rgba(6,182,212,.18);
+
+    padding:4px 8px;
+
+    border-radius:6px;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+
+/* STOCK */
+
+.stock-status{
+
+    padding:4px 8px;
+
+    border-radius:6px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    white-space:nowrap;
 }
 
 .stock-status.in-stock{
+
     color:#86efac;
+
     background:rgba(34,197,94,.10);
-    border:1px solid rgba(34,197,94,.20);
+
+    border:1px solid rgba(34,197,94,.18);
 }
 
 .stock-status.low-stock{
+
     color:#fde68a;
+
     background:rgba(234,179,8,.10);
-    border:1px solid rgba(234,179,8,.20);
+
+    border:1px solid rgba(234,179,8,.18);
 }
 
 .stock-status.out-stock{
+
     color:#fca5a5;
+
     background:rgba(239,68,68,.10);
-    border:1px solid rgba(239,68,68,.20);
+
+    border:1px solid rgba(239,68,68,.18);
 }
 
 .stock-status.unlimited{
+
     color:#67e8f9;
+
     background:rgba(6,182,212,.10);
-    border:1px solid rgba(6,182,212,.20);
+
+    border:1px solid rgba(6,182,212,.18);
 }
 
 
-.product-description{
-    color:#94a3b8;
-    font-size:13px;
-    line-height:1.5;
-    min-height:40px;
-    margin-bottom:16px;
-}
+/* ==============================
+   BUY BUTTON
+============================== */
 
 .buy-btn{
-    width:100%;
+
     border:none;
+
     color:#fff;
-    padding:12px;
-    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #06b6d4
+        );
+
+    padding:9px 13px;
+
+    border-radius:8px;
+
     cursor:pointer;
-    font-weight:800;
-    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+
+    font-size:11px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    transition:.2s;
+}
+
+.buy-btn:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 5px 15px
+        rgba(124,58,237,.25);
 }
 
 .buy-btn.disabled{
-    background:#374151;
-    color:#9ca3af;
+
+    background:#303747;
+
+    color:#8b95a7;
+
     cursor:not-allowed;
-    opacity:.8;
+
+    opacity:.75;
 }
+
+
+/* ==============================
+   LOADING / EMPTY / ERROR
+============================== */
 
 .loading,
 .empty,
 .error{
-    grid-column:1/-1;
+
+    width:100%;
+
     text-align:center;
-    padding:60px 20px;
-    border-radius:18px;
+
+    padding:50px 20px;
+
+    border-radius:15px;
 }
 
 .loading{
+
     color:#94a3b8;
 }
 
 .empty{
+
     border:1px dashed rgba(255,255,255,.12);
+
     color:#94a3b8;
 }
 
 .empty h2,
 .error h2{
+
     color:#fff;
+
     margin-bottom:8px;
 }
 
 .error{
+
     background:rgba(239,68,68,.06);
-    border:1px solid rgba(239,68,68,.2);
+
+    border:
+        1px solid
+        rgba(239,68,68,.20);
+
     color:#fca5a5;
 }
 
-@media(max-width:1000px){
 
-    .products-grid{
-        grid-template-columns:repeat(3,1fr);
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:600px){
+
+    .navbar{
+
+        padding:0 12px;
     }
 
-}
+    .logo{
 
-@media(max-width:700px){
-
-    .products-grid{
-        grid-template-columns:repeat(2,1fr);
+        font-size:19px;
     }
 
-}
+    .nav-btn{
 
-@media(max-width:480px){
+        padding:8px 10px;
 
-    .products-grid{
-        grid-template-columns:1fr;
+        font-size:11px;
     }
 
     .container{
-        padding:25px 14px 50px;
+
+        padding:
+            22px 10px 50px;
     }
 
     .page-title h1{
-        font-size:27px;
+
+        font-size:25px;
+    }
+
+    .product-card{
+
+        min-height:70px;
+
+        padding:8px;
+
+        gap:10px;
+    }
+
+    .product-image{
+
+        width:48px;
+
+        height:48px;
+
+        min-width:48px;
+    }
+
+    .product-name{
+
+        font-size:13px;
+    }
+
+    .product-bottom{
+
+        gap:5px;
+    }
+
+    .product-price{
+
+        font-size:10px;
+
+        padding:4px 7px;
+    }
+
+    .stock-status{
+
+        font-size:9px;
+
+        padding:4px 7px;
+    }
+
+    .buy-btn{
+
+        padding:8px 10px;
+
+        font-size:10px;
     }
 
 }
 
-</style></head><body><header><div class="navbar"><a href="dashboard.html" class="logo">
+
+/* VERY SMALL PHONES */
+
+@media(max-width:380px){
+
+    .product-card{
+
+        gap:7px;
+    }
+
+    .product-image{
+
+        width:44px;
+
+        height:44px;
+
+        min-width:44px;
+    }
+
+    .buy-btn{
+
+        padding:7px 8px;
+
+        font-size:9px;
+    }
+
+}
+
+</style></head><body><header><div class="navbar"><a
+    href="dashboard.html"
+    class="logo"
+>
     Zavora <span>Social</span>
 </a>
 
+
 <div class="nav-right">
 
-    <a href="dashboard.html" class="nav-btn">
+    <a
+        href="dashboard.html"
+        class="nav-btn"
+    >
         Dashboard
     </a>
 
-    <a href="orders.html" class="nav-btn">
+
+    <a
+        href="orders.html"
+        class="nav-btn"
+    >
         Orders
     </a>
 
 </div>
 
-</div></header><main class="container"><div class="page-title"><h1>Products</h1>
+</div></header><main class="container"><div class="page-title"><h1>
+    Products
+</h1>
+
 
 <p>
     Browse available products on Zavora Social.
 </p>
 
-</div><div class="filter-area" id="filterArea"><button
+</div><div
+    class="filter-area"
+    id="filterArea"
+><button
     class="filter-btn active"
     data-category="all"
 >
@@ -334,29 +653,45 @@ header{
     class="products-grid"
     id="productsGrid"
 ><div class="loading">
+
     Checking your account...
+
 </div>
 
 </div></main><script type="module">
 
+
+/* ==============================
+   FIREBASE IMPORTS
+============================== */
+
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
     ref,
     onValue
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
 
 
 /* ==============================
-   FIREBASE
+   FIREBASE CONFIG
 ============================== */
 
 const firebaseConfig = {
@@ -388,32 +723,47 @@ const firebaseConfig = {
 };
 
 
+
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
+
 
 const auth =
     getAuth(app);
+
 
 const db =
     getDatabase(app);
 
 
+
 const productsGrid =
-    document.getElementById("productsGrid");
+    document.getElementById(
+        "productsGrid"
+    );
+
 
 const filterArea =
-    document.getElementById("filterArea");
+    document.getElementById(
+        "filterArea"
+    );
+
 
 
 let allProducts = [];
 
-let selectedCategory = "all";
+let selectedCategory =
+    "all";
 
-let authResolved = false;
+let authResolved =
+    false;
+
 
 
 /* ==============================
-   GET CATEGORY FROM URL
+   URL CATEGORY
 ============================== */
 
 const urlParams =
@@ -421,8 +771,11 @@ const urlParams =
         window.location.search
     );
 
+
 const requestedCategory =
-    urlParams.get("category");
+    urlParams.get(
+        "category"
+    );
 
 
 if(requestedCategory){
@@ -435,15 +788,19 @@ if(requestedCategory){
 }
 
 
+
 /* ==============================
    AUTH
 ============================== */
 
 onAuthStateChanged(
+
     auth,
+
     (user) => {
 
-        authResolved = true;
+        authResolved =
+            true;
 
 
         if(!user){
@@ -462,7 +819,9 @@ onAuthStateChanged(
         loadCategories();
 
     }
+
 );
+
 
 
 /* ==============================
@@ -489,10 +848,13 @@ function loadProducts(){
 
 
             allProducts =
-                Object.entries(data)
+
+                Object.entries(
+                    data
+                )
 
                 .map(
-                    ([id, product]) => ({
+                    ([id,product]) => ({
 
                         id:id,
 
@@ -503,12 +865,16 @@ function loadProducts(){
 
                 .filter(
                     product =>
+
                         product &&
+
                         product.active === true
+
                 );
 
 
             allProducts.sort(
+
                 (a,b) => {
 
                     const aTime =
@@ -516,20 +882,24 @@ function loadProducts(){
                             a.createdAt || 0
                         );
 
+
                     const bTime =
                         Number(
                             b.createdAt || 0
                         );
 
+
                     return bTime - aTime;
 
                 }
+
             );
 
 
             renderProducts();
 
         },
+
 
         (error) => {
 
@@ -562,6 +932,7 @@ function loadProducts(){
 }
 
 
+
 /* ==============================
    LOAD CATEGORIES
 ============================== */
@@ -585,14 +956,21 @@ function loadCategories(){
                 snapshot.val() || {};
 
 
-            Object.entries(data)
+            Object.entries(
+                data
+            )
             .forEach(
-                ([id, category]) => {
+
+                ([id,category]) => {
 
                     if(
+
                         !category ||
+
                         category.active !== true ||
+
                         !category.name
+
                     ){
 
                         return;
@@ -601,23 +979,29 @@ function loadCategories(){
 
 
                     const exists =
+
                         [
                             ...filterArea.children
                         ]
+
                         .some(
+
                             button => {
 
                                 return String(
                                     button.dataset.category
                                 )
                                 .toLowerCase()
+
                                 ===
+
                                 String(
                                     category.name
                                 )
                                 .toLowerCase();
 
                             }
+
                         );
 
 
@@ -643,26 +1027,33 @@ function loadCategories(){
 
 
                     button.textContent =
+
                         (
                             category.icon ||
                             "📦"
                         )
+
                         + " "
+
                         + category.name;
 
 
                     button.addEventListener(
+
                         "click",
+
                         () => {
 
                             selectedCategory =
                                 category.name;
+
 
                             updateButtons();
 
                             renderProducts();
 
                         }
+
                     );
 
 
@@ -671,6 +1062,7 @@ function loadCategories(){
                     );
 
                 }
+
             );
 
 
@@ -679,6 +1071,7 @@ function loadCategories(){
             renderProducts();
 
         },
+
 
         (error) => {
 
@@ -694,28 +1087,34 @@ function loadCategories(){
 }
 
 
+
 /* ==============================
-   STOCK STATUS
+   STOCK
 ============================== */
 
 function getStockInfo(product){
 
     /*
-     * If stock does not exist,
-     * the product is treated as unlimited.
+     * No stock field = Unlimited
      */
 
     if(
+
         product.stock === undefined ||
+
         product.stock === null ||
+
         product.stock === ""
+
     ){
 
         return {
 
-            type:"unlimited",
+            type:
+                "unlimited",
 
-            text:"✓ Unlimited"
+            text:
+                "Unlimited"
 
         };
 
@@ -723,7 +1122,9 @@ function getStockInfo(product){
 
 
     const stock =
-        Number(product.stock);
+        Number(
+            product.stock
+        );
 
 
     if(
@@ -732,9 +1133,11 @@ function getStockInfo(product){
 
         return {
 
-            type:"unlimited",
+            type:
+                "unlimited",
 
-            text:"✓ Unlimited"
+            text:
+                "Unlimited"
 
         };
 
@@ -745,29 +1148,11 @@ function getStockInfo(product){
 
         return {
 
-            type:"out-stock",
-
-            text:"● Out of Stock"
-
-        };
-
-    }
-
-
-    if(stock <= 5){
-
-        return {
-
-            type:"low-stock",
+            type:
+                "out-stock",
 
             text:
-                "⚠ " +
-                stock +
-                (
-                    stock === 1
-                    ? " left"
-                    : " left"
-                )
+                "Out of Stock"
 
         };
 
@@ -776,16 +1161,18 @@ function getStockInfo(product){
 
     return {
 
-        type:"in-stock",
+        type:
+            stock <= 5
+            ? "low-stock"
+            : "in-stock",
 
         text:
-            "✓ " +
-            stock +
-            " available"
+            stock + " Pcs"
 
     };
 
 }
+
 
 
 /* ==============================
@@ -806,28 +1193,37 @@ function renderProducts(){
 
 
     if(
+
         selectedCategory &&
+
         selectedCategory !== "all"
+
     ){
 
         products =
+
             allProducts.filter(
+
                 product => {
 
                     return String(
                         product.category || ""
                     )
                     .toLowerCase()
+
                     ===
+
                     String(
                         selectedCategory
                     )
                     .toLowerCase();
 
                 }
+
             );
 
     }
+
 
 
     if(products.length === 0){
@@ -836,20 +1232,32 @@ function renderProducts(){
 
             <div class="empty">
 
-                <div style="font-size:45px">
+                <div
+                    style="
+                        font-size:40px;
+                        margin-bottom:10px;
+                    "
+                >
                     📦
                 </div>
+
 
                 <h2>
                     No products available
                 </h2>
 
+
                 <p>
+
                     ${
                         selectedCategory === "all"
+
                         ? "New products will appear here."
+
                         : "There are no products in this category yet."
+
                     }
+
                 </p>
 
             </div>
@@ -861,10 +1269,13 @@ function renderProducts(){
     }
 
 
+
     productsGrid.innerHTML = "";
 
 
+
     products.forEach(
+
         product => {
 
             const card =
@@ -877,22 +1288,25 @@ function renderProducts(){
                 "product-card";
 
 
+
             const image =
+
                 product.image ||
-                "https://via.placeholder.com/600x500?text=Zavora";
 
+                "https://via.placeholder.com/100x100?text=Zavora";
 
-            const description =
-                product.description ||
-                "Quality digital product available on Zavora Social.";
 
 
             const stockInfo =
-                getStockInfo(product);
+                getStockInfo(
+                    product
+                );
 
 
             const isOutOfStock =
-                stockInfo.type === "out-stock";
+                stockInfo.type ===
+                "out-stock";
+
 
 
             card.innerHTML = `
@@ -900,28 +1314,23 @@ function renderProducts(){
                 <div class="product-image">
 
                     <img
-                        src="${escapeHtml(image)}"
+
+                        src="${escapeHtml(
+                            image
+                        )}"
+
                         alt="${escapeHtml(
                             product.name ||
                             "Product"
                         )}"
+
                     >
 
                 </div>
 
 
+
                 <div class="product-info">
-
-                    <div class="product-category">
-
-                        📦
-                        ${escapeHtml(
-                            product.category ||
-                            "Product"
-                        )}
-
-                    </div>
-
 
                     <div class="product-name">
 
@@ -933,57 +1342,69 @@ function renderProducts(){
                     </div>
 
 
-                    <div class="product-price">
 
-                        ₦${formatNumber(
-                            product.price || 0
-                        )}
+                    <div class="product-bottom">
+
+
+                        <div class="product-price">
+
+                            ₦${formatNumber(
+                                product.price || 0
+                            )}
+
+                        </div>
+
+
+
+                        <div
+                            class="
+                                stock-status
+                                ${stockInfo.type}
+                            "
+                        >
+
+                            ${escapeHtml(
+                                stockInfo.text
+                            )}
+
+                        </div>
+
 
                     </div>
-
-
-                    <div class="stock-status ${stockInfo.type}">
-
-                        ${escapeHtml(
-                            stockInfo.text
-                        )}
-
-                    </div>
-
-
-                    <div class="product-description">
-
-                        ${escapeHtml(
-                            description
-                        )}
-
-                    </div>
-
-
-                    <button
-                        class="buy-btn ${
-                            isOutOfStock
-                            ? "disabled"
-                            : ""
-                        }"
-                        ${
-                            isOutOfStock
-                            ? "disabled"
-                            : ""
-                        }
-                    >
-
-                        ${
-                            isOutOfStock
-                            ? "Out of Stock"
-                            : "Buy Now"
-                        }
-
-                    </button>
 
                 </div>
 
+
+
+                <button
+
+                    class="
+                        buy-btn
+                        ${
+                            isOutOfStock
+                            ? "disabled"
+                            : ""
+                        }
+                    "
+
+                    ${
+                        isOutOfStock
+                        ? "disabled"
+                        : ""
+                    }
+
+                >
+
+                    ${
+                        isOutOfStock
+                        ? "SOLD"
+                        : "BUY"
+                    }
+
+                </button>
+
             `;
+
 
 
             const buyButton =
@@ -992,37 +1413,53 @@ function renderProducts(){
                 );
 
 
+
             if(!isOutOfStock){
 
                 buyButton.addEventListener(
+
                     "click",
+
                     () => {
 
                         window.location.href =
-                            "product.html?id=" +
+
+                            "product.html?id="
+
+                            +
+
                             encodeURIComponent(
                                 product.id
                             );
 
                     }
+
                 );
 
             }
 
 
+
             const imageElement =
-                card.querySelector("img");
+                card.querySelector(
+                    "img"
+                );
+
 
 
             imageElement.addEventListener(
+
                 "error",
+
                 () => {
 
                     imageElement.src =
-                        "https://via.placeholder.com/600x500?text=Zavora";
+                        "https://via.placeholder.com/100x100?text=Zavora";
 
                 }
+
             );
+
 
 
             productsGrid.appendChild(
@@ -1030,9 +1467,11 @@ function renderProducts(){
             );
 
         }
+
     );
 
 }
+
 
 
 /* ==============================
@@ -1048,43 +1487,55 @@ function updateButtons(){
 
 
     buttons.forEach(
+
         button => {
 
             button.classList.toggle(
+
                 "active",
 
                 String(
                     button.dataset.category
                 )
                 .toLowerCase()
+
                 ===
+
                 String(
                     selectedCategory
                 )
                 .toLowerCase()
+
             );
 
         }
+
     );
 
 }
 
 
+
 /* ==============================
-   FORMAT NUMBER
+   NUMBER FORMAT
 ============================== */
 
 function formatNumber(value){
 
     return Number(value)
+
         .toLocaleString(
+
             "en-NG",
+
             {
                 maximumFractionDigits:2
             }
+
         );
 
 }
+
 
 
 /* ==============================
@@ -1122,5 +1573,4 @@ function escapeHtml(value){
 
 }
 
-</script></body>
-</html>
+</script></body></html>
