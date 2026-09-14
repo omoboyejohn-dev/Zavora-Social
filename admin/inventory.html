@@ -1,7 +1,15 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Inventory</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Inventory</title>
+
+<style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -356,6 +364,7 @@ td{
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 @media(max-width:550px){
@@ -393,13 +402,37 @@ td{
     .search{
         width:100%;
     }
-}
-</style></head><body><header class="header">
-    <div class="logo">Zavora Social</div>
-    <div class="admin-badge">Admin Panel</div>
-</header><div class="layout"><aside class="sidebar">
 
-    <div class="sidebar-title">Management</div>
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+        Zavora Social
+    </div>
+
+    <div class="admin-badge">
+        Admin Panel
+    </div>
+
+</header>
+
+
+<div class="layout">
+
+
+<aside class="sidebar">
+
+    <div class="sidebar-title">
+        Management
+    </div>
 
     <nav class="nav">
 
@@ -446,11 +479,14 @@ td{
 
 <main class="main">
 
+
     <div class="page-top">
 
         <div class="page-title">
 
-            <h1>Inventory</h1>
+            <h1>
+                Inventory
+            </h1>
 
             <p>
                 Manage product stock and availability.
@@ -469,6 +505,7 @@ td{
 
 
     <section class="stats">
+
 
         <div class="stat-card">
 
@@ -533,10 +570,12 @@ td{
 
         </div>
 
+
     </section>
 
 
     <section class="products-box">
+
 
         <div class="box-header">
 
@@ -561,11 +600,27 @@ td{
                 <thead>
 
                     <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Status</th>
-                        <th>Action</th>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Stock
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
                     </tr>
 
                 </thead>
@@ -578,7 +633,7 @@ td{
                         <td colspan="5">
 
                             <div class="empty">
-                                Checking admin session...
+                                Loading inventory...
                             </div>
 
                         </td>
@@ -593,19 +648,35 @@ td{
 
     </section>
 
+
 </main>
 
-</div><div
+</div>
+
+
+<div
     id="message"
     class="message"
-></div><script type="module">
+></div>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+<script type="module">
+
+
+/* =========================================
+   FIREBASE
+========================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -616,13 +687,14 @@ import {
 
 
 /* =========================================
-   FIREBASE
+   IMPORTANT:
+   THIS CONFIG MUST MATCH PRODUCTS.HTML
 ========================================= */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzj9_rGQPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -644,14 +716,20 @@ const firebaseConfig = {
 
     measurementId:
         "G-D4LNBEWH50"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
 
-const db = getDatabase(app);
+const auth =
+    getAuth(app);
+
+
+const db =
+    getDatabase(app);
 
 
 /* =========================================
@@ -667,28 +745,44 @@ const ADMIN_EMAIL =
 ========================================= */
 
 const inventoryBody =
-    document.getElementById("inventoryBody");
+    document.getElementById(
+        "inventoryBody"
+    );
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
 
 const refreshBtn =
-    document.getElementById("refreshBtn");
+    document.getElementById(
+        "refreshBtn"
+    );
 
 const totalProducts =
-    document.getElementById("totalProducts");
+    document.getElementById(
+        "totalProducts"
+    );
 
 const inStock =
-    document.getElementById("inStock");
+    document.getElementById(
+        "inStock"
+    );
 
 const lowStock =
-    document.getElementById("lowStock");
+    document.getElementById(
+        "lowStock"
+    );
 
 const outStock =
-    document.getElementById("outStock");
+    document.getElementById(
+        "outStock"
+    );
 
 const message =
-    document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
 
 /* =========================================
@@ -699,10 +793,6 @@ let products = {};
 
 let currentUser = null;
 
-let authChecked = false;
-
-let authTimer = null;
-
 
 /* =========================================
    MESSAGE
@@ -710,15 +800,24 @@ let authTimer = null;
 
 function showMessage(text){
 
-    message.textContent = text;
+    message.textContent =
+        text;
 
-    message.classList.add("show");
+    message.classList.add(
+        "show"
+    );
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        message.classList.remove("show");
+            message.classList.remove(
+                "show"
+            );
 
-    },2500);
+        },
+        2500
+    );
+
 }
 
 
@@ -728,12 +827,35 @@ function showMessage(text){
 
 function escapeHtml(value){
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
 }
 
 
@@ -744,8 +866,13 @@ function escapeHtml(value){
 function formatPrice(price){
 
     return "₦" +
-        Number(price || 0)
-        .toLocaleString("en-NG");
+
+        Number(
+            price || 0
+        ).toLocaleString(
+            "en-NG"
+        );
+
 }
 
 
@@ -763,9 +890,11 @@ function getStockStatus(stock){
 
         return {
 
-            className:"unlimited",
+            className:
+                "unlimited",
 
-            text:"Unlimited"
+            text:
+                "Unlimited"
 
         };
 
@@ -780,9 +909,11 @@ function getStockStatus(stock){
 
         return {
 
-            className:"out",
+            className:
+                "out",
 
-            text:"Out of Stock"
+            text:
+                "Out of Stock"
 
         };
 
@@ -793,9 +924,11 @@ function getStockStatus(stock){
 
         return {
 
-            className:"low",
+            className:
+                "low",
 
-            text:"Low Stock"
+            text:
+                "Low Stock"
 
         };
 
@@ -804,9 +937,11 @@ function getStockStatus(stock){
 
     return {
 
-        className:"in",
+        className:
+            "in",
 
-        text:"In Stock"
+        text:
+            "In Stock"
 
     };
 
@@ -820,23 +955,27 @@ function getStockStatus(stock){
 function loadProducts(){
 
     const productsRef =
-        ref(db,"products");
+        ref(
+            db,
+            "products"
+        );
 
 
     onValue(
 
         productsRef,
 
-        snapshot => {
+        (snapshot) => {
 
             products =
                 snapshot.val() || {};
+
 
             renderInventory();
 
         },
 
-        error => {
+        (error) => {
 
             console.error(
                 "Inventory error:",
@@ -870,7 +1009,7 @@ function loadProducts(){
 
 
 /* =========================================
-   RENDER
+   RENDER INVENTORY
 ========================================= */
 
 function renderInventory(){
@@ -882,7 +1021,9 @@ function renderInventory(){
 
 
     const entries =
-        Object.entries(products);
+        Object.entries(
+            products
+        );
 
 
     const filtered =
@@ -891,21 +1032,25 @@ function renderInventory(){
 
                 const name =
                     String(
-                        product.name || ""
+                        product?.name || ""
                     ).toLowerCase();
 
 
                 const category =
                     String(
-                        product.category || ""
+                        product?.category || ""
                     ).toLowerCase();
 
 
                 return (
 
-                    name.includes(search) ||
+                    name.includes(
+                        search
+                    ) ||
 
-                    category.includes(search)
+                    category.includes(
+                        search
+                    )
 
                 );
 
@@ -927,7 +1072,7 @@ function renderInventory(){
         ([id,product]) => {
 
             const stock =
-                product.stock;
+                product?.stock;
 
 
             if(
@@ -1026,7 +1171,9 @@ function renderInventory(){
 
                     ? ""
 
-                    : Number(product.stock);
+                    : Number(
+                        product.stock
+                    );
 
 
                 const status =
@@ -1052,7 +1199,7 @@ function renderInventory(){
                                 <img
                                     class="product-img"
                                     src="${escapeHtml(image)}"
-                                    alt="${escapeHtml(product.name)}"
+                                    alt="${escapeHtml(product.name || "Product")}"
                                     onerror="this.src='https://placehold.co/100x100/11162a/ffffff?text=Product'"
                                 >
 
@@ -1147,21 +1294,25 @@ function renderInventory(){
 
 
     document
-        .querySelectorAll(".save-btn")
-        .forEach(button => {
+        .querySelectorAll(
+            ".save-btn"
+        )
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+                button.addEventListener(
+                    "click",
+                    () => {
 
-                    saveStock(
-                        button.dataset.id
-                    );
+                        saveStock(
+                            button.dataset.id
+                        );
 
-                }
-            );
+                    }
+                );
 
-        });
+            }
+        );
 
 }
 
@@ -1170,7 +1321,9 @@ function renderInventory(){
    SAVE STOCK
 ========================================= */
 
-async function saveStock(productId){
+async function saveStock(
+    productId
+){
 
     if(!currentUser){
 
@@ -1185,7 +1338,8 @@ async function saveStock(productId){
 
     const input =
         document.getElementById(
-            "stock-" + productId
+            "stock-" +
+            productId
         );
 
 
@@ -1235,12 +1389,17 @@ async function saveStock(productId){
 
             ref(
                 db,
-                "products/" + productId
+                "products/" +
+                productId
             ),
 
             {
+
                 stock:
-                    Math.floor(stock)
+                    Math.floor(
+                        stock
+                    )
+
             }
 
         );
@@ -1251,6 +1410,7 @@ async function saveStock(productId){
         );
 
     }
+
     catch(error){
 
         console.error(
@@ -1260,6 +1420,7 @@ async function saveStock(productId){
 
 
         showMessage(
+            error.message ||
             "Unable to update stock."
         );
 
@@ -1297,75 +1458,18 @@ refreshBtn.addEventListener(
 
 
 /* =========================================
-   AUTH CHECK
+   AUTH
+   SAME PATTERN AS PRODUCTS.HTML
 ========================================= */
 
 onAuthStateChanged(
     auth,
-    user => {
-
-        console.log(
-            "Zavora inventory auth:",
-            user
-                ? user.email
-                : "No user yet"
-        );
-
-
-        authChecked = true;
-
-
-        if(authTimer){
-
-            clearTimeout(authTimer);
-
-            authTimer = null;
-
-        }
-
+    (user) => {
 
         if(!user){
 
-            /*
-             * Firebase can briefly take time
-             * to restore the existing session.
-             * Do not redirect immediately.
-             */
-
-            inventoryBody.innerHTML = `
-
-                <tr>
-
-                    <td colspan="5">
-
-                        <div class="empty">
-
-                            Checking admin session...
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-
-            authTimer = setTimeout(
-                () => {
-
-                    if(!auth.currentUser){
-
-                        window.location.replace(
-                            "../login.html"
-                        );
-
-                    }
-
-                },
-                2500
-            );
-
+            window.location.href =
+                "../login.html";
 
             return;
 
@@ -1379,40 +1483,19 @@ onAuthStateChanged(
         ){
 
             alert(
-                "Admin access only."
+                "Access denied. Admin account required."
             );
 
-
-            window.location.replace(
-                "../dashboard.html"
-            );
-
+            window.location.href =
+                "../dashboard.html";
 
             return;
 
         }
 
 
-        currentUser = user;
-
-
-        inventoryBody.innerHTML = `
-
-            <tr>
-
-                <td colspan="5">
-
-                    <div class="empty">
-
-                        Loading inventory...
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
+        currentUser =
+            user;
 
 
         loadProducts();
@@ -1420,5 +1503,8 @@ onAuthStateChanged(
     }
 );
 
-</script></body>
+</script>
+
+</body>
+
 </html>
