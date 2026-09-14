@@ -172,6 +172,47 @@ header{
     margin-bottom:10px;
 }
 
+
+/* ==============================
+   STOCK STATUS
+============================== */
+
+.stock-status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.stock-status.in-stock{
+    color:#86efac;
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.20);
+}
+
+.stock-status.low-stock{
+    color:#fde68a;
+    background:rgba(234,179,8,.10);
+    border:1px solid rgba(234,179,8,.20);
+}
+
+.stock-status.out-stock{
+    color:#fca5a5;
+    background:rgba(239,68,68,.10);
+    border:1px solid rgba(239,68,68,.20);
+}
+
+.stock-status.unlimited{
+    color:#67e8f9;
+    background:rgba(6,182,212,.10);
+    border:1px solid rgba(6,182,212,.20);
+}
+
+
 .product-description{
     color:#94a3b8;
     font-size:13px;
@@ -189,6 +230,13 @@ header{
     cursor:pointer;
     font-weight:800;
     background:linear-gradient(135deg,#7c3aed,#06b6d4);
+}
+
+.buy-btn.disabled{
+    background:#374151;
+    color:#9ca3af;
+    cursor:not-allowed;
+    opacity:.8;
 }
 
 .loading,
@@ -222,18 +270,23 @@ header{
 }
 
 @media(max-width:1000px){
+
     .products-grid{
         grid-template-columns:repeat(3,1fr);
     }
+
 }
 
 @media(max-width:700px){
+
     .products-grid{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 @media(max-width:480px){
+
     .products-grid{
         grid-template-columns:1fr;
     }
@@ -245,63 +298,46 @@ header{
     .page-title h1{
         font-size:27px;
     }
+
 }
 
-</style></head><body><header><div class="navbar">
+</style></head><body><header><div class="navbar"><a href="dashboard.html" class="logo">
+    Zavora <span>Social</span>
+</a>
 
-    <a href="dashboard.html" class="logo">
-        Zavora <span>Social</span>
+<div class="nav-right">
+
+    <a href="dashboard.html" class="nav-btn">
+        Dashboard
     </a>
 
-    <div class="nav-right">
-
-        <a href="dashboard.html" class="nav-btn">
-            Dashboard
-        </a>
-
-        <a href="orders.html" class="nav-btn">
-            Orders
-        </a>
-
-    </div>
+    <a href="orders.html" class="nav-btn">
+        Orders
+    </a>
 
 </div>
 
-</header><main class="container"><div class="page-title">
+</div></header><main class="container"><div class="page-title"><h1>Products</h1>
 
-    <h1>Products</h1>
+<p>
+    Browse available products on Zavora Social.
+</p>
 
-    <p>
-        Browse available products on Zavora Social.
-    </p>
+</div><div class="filter-area" id="filterArea"><button
+    class="filter-btn active"
+    data-category="all"
+>
+    All Products
+</button>
 
-</div>
-
-
-<div class="filter-area" id="filterArea">
-
-    <button
-        class="filter-btn active"
-        data-category="all"
-    >
-        All Products
-    </button>
-
-</div>
-
-
-<div
+</div><div
     class="products-grid"
     id="productsGrid"
->
-
-    <div class="loading">
-        Checking your account...
-    </div>
-
+><div class="loading">
+    Checking your account...
 </div>
 
-</main><script type="module">
+</div></main><script type="module">
 
 import {
     initializeApp
@@ -318,6 +354,10 @@ import {
     onValue
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
+
+/* ==============================
+   FIREBASE
+============================== */
 
 const firebaseConfig = {
 
@@ -403,20 +443,10 @@ onAuthStateChanged(
     auth,
     (user) => {
 
-        /*
-         * Firebase has now finished checking
-         * whether a customer is logged in.
-         */
-
         authResolved = true;
 
 
         if(!user){
-
-            /*
-             * Only redirect after Firebase has
-             * finished restoring the session.
-             */
 
             window.location.replace(
                 "login.html"
@@ -426,10 +456,6 @@ onAuthStateChanged(
 
         }
 
-
-        /*
-         * User is authenticated.
-         */
 
         loadProducts();
 
@@ -669,15 +695,104 @@ function loadCategories(){
 
 
 /* ==============================
+   STOCK STATUS
+============================== */
+
+function getStockInfo(product){
+
+    /*
+     * If stock does not exist,
+     * the product is treated as unlimited.
+     */
+
+    if(
+        product.stock === undefined ||
+        product.stock === null ||
+        product.stock === ""
+    ){
+
+        return {
+
+            type:"unlimited",
+
+            text:"✓ Unlimited"
+
+        };
+
+    }
+
+
+    const stock =
+        Number(product.stock);
+
+
+    if(
+        !Number.isFinite(stock)
+    ){
+
+        return {
+
+            type:"unlimited",
+
+            text:"✓ Unlimited"
+
+        };
+
+    }
+
+
+    if(stock <= 0){
+
+        return {
+
+            type:"out-stock",
+
+            text:"● Out of Stock"
+
+        };
+
+    }
+
+
+    if(stock <= 5){
+
+        return {
+
+            type:"low-stock",
+
+            text:
+                "⚠ " +
+                stock +
+                (
+                    stock === 1
+                    ? " left"
+                    : " left"
+                )
+
+        };
+
+    }
+
+
+    return {
+
+        type:"in-stock",
+
+        text:
+            "✓ " +
+            stock +
+            " available"
+
+    };
+
+}
+
+
+/* ==============================
    RENDER PRODUCTS
 ============================== */
 
 function renderProducts(){
-
-    /*
-     * Don't render marketplace data
-     * before authentication is resolved.
-     */
 
     if(!authResolved){
 
@@ -772,6 +887,14 @@ function renderProducts(){
                 "Quality digital product available on Zavora Social.";
 
 
+            const stockInfo =
+                getStockInfo(product);
+
+
+            const isOutOfStock =
+                stockInfo.type === "out-stock";
+
+
             card.innerHTML = `
 
                 <div class="product-image">
@@ -819,6 +942,15 @@ function renderProducts(){
                     </div>
 
 
+                    <div class="stock-status ${stockInfo.type}">
+
+                        ${escapeHtml(
+                            stockInfo.text
+                        )}
+
+                    </div>
+
+
                     <div class="product-description">
 
                         ${escapeHtml(
@@ -829,9 +961,24 @@ function renderProducts(){
 
 
                     <button
-                        class="buy-btn"
+                        class="buy-btn ${
+                            isOutOfStock
+                            ? "disabled"
+                            : ""
+                        }"
+                        ${
+                            isOutOfStock
+                            ? "disabled"
+                            : ""
+                        }
                     >
-                        Buy Now
+
+                        ${
+                            isOutOfStock
+                            ? "Out of Stock"
+                            : "Buy Now"
+                        }
+
                     </button>
 
                 </div>
@@ -839,9 +986,15 @@ function renderProducts(){
             `;
 
 
-            card
-                .querySelector(".buy-btn")
-                .addEventListener(
+            const buyButton =
+                card.querySelector(
+                    ".buy-btn"
+                );
+
+
+            if(!isOutOfStock){
+
+                buyButton.addEventListener(
                     "click",
                     () => {
 
@@ -853,6 +1006,8 @@ function renderProducts(){
 
                     }
                 );
+
+            }
 
 
             const imageElement =
