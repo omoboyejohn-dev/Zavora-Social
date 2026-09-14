@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Zavora Social</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container nav-container">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </span>
+
+            <span>Zavora <strong>Social</strong></span>
+        </a>
+
+        <a href="register.html" class="nav-register">
+            Create Account
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="auth-page">
+
+    <div class="auth-wrapper">
+
+        <!-- LEFT SIDE -->
+
+        <section class="auth-info">
+
+            <div class="auth-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                Secure Login
+            </div>
+
+            <h1>
+                Welcome back to
+                <span>Zavora Social.</span>
+            </h1>
+
+            <p>
+                Login to access your account, wallet, orders,
+                digital products and more.
+            </p>
+
+
+            <div class="auth-features">
+
+                <div class="auth-feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <div>
+                        <h3>Manage Your Wallet</h3>
+                        <p>Fund your wallet and manage your balance.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+
+                    <div>
+                        <h3>Track Your Orders</h3>
+                        <p>View your purchases and order history.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+
+                    <div>
+                        <h3>Fast & Simple</h3>
+                        <p>Access your marketplace account quickly.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOGIN CARD -->
+
+        <section class="auth-card">
+
+            <div class="auth-card-header">
+
+                <div class="auth-logo">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <h2>Login to your account</h2>
+
+                <p>
+                    Enter your details to continue.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <div class="password-label">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="#" id="forgotPassword">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REMEMBER -->
+
+                <div class="remember-row">
+
+                    <label class="remember-label">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <span>Remember me</span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="loginMessage"
+                    class="auth-message"
+                    style="display:none;"
+                ></div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                    id="loginButton"
+                >
+
+                    <span id="loginButtonText">
+                        Login
+                    </span>
+
+                    <i
+                        class="fa-solid fa-arrow-right"
+                        id="loginButtonIcon"
+                    ></i>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <div class="auth-divider">
+                <span>OR</span>
+            </div>
+
+
+            <div class="auth-bottom">
+
+                <p>
+                    Don't have an account?
+                </p>
+
+                <a href="register.html">
+                    Create an account
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="secure-note">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Your account information is protected.
+                </span>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="auth-footer">
+
+    <p>
+        © <span id="year"></span> Zavora Social. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* =========================
+       CURRENT YEAR
+    ========================= */
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    /* =========================
+       SHOW / HIDE PASSWORD
+    ========================= */
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+
+    togglePassword.addEventListener("click", function(){
+
+        const icon =
+            this.querySelector("i");
+
+        if(passwordInput.type === "password"){
+
+            passwordInput.type = "text";
+
+            icon.classList.remove("fa-eye");
+
+            icon.classList.add("fa-eye-slash");
+
+            this.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }else{
+
+            passwordInput.type = "password";
+
+            icon.classList.remove("fa-eye-slash");
+
+            icon.classList.add("fa-eye");
+
+            this.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    });
+
+
+    /* =========================
+       LOGIN FORM
+    ========================= */
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const loginButtonText =
+        document.getElementById("loginButtonText");
+
+    const loginButtonIcon =
+        document.getElementById("loginButtonIcon");
+
+
+    loginForm.addEventListener("submit", function(event){
+
+        event.preventDefault();
+
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+
+        loginMessage.style.display = "none";
+
+
+        if(!email || !password){
+
+            showMessage(
+                "Please enter your email and password.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!email.includes("@")){
+
+            showMessage(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Firebase Authentication will be connected here.
+         */
+
+        loginButton.disabled = true;
+
+        loginButtonText.textContent =
+            "Checking...";
+
+        loginButtonIcon.className =
+            "fa-solid fa-spinner fa-spin";
+
+
+        setTimeout(function(){
+
+            loginButton.disabled = false;
+
+            loginButtonText.textContent =
+                "Login";
+
+            loginButtonIcon.className =
+                "fa-solid fa-arrow-right";
+
+
+            showMessage(
+                "Your details are valid. Firebase login will be connected next.",
+                "success"
+            );
+
+        }, 800);
+
+    });
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    function showMessage(message, type){
+
+        loginMessage.textContent =
+            message;
+
+        loginMessage.className =
+            "auth-message " + type;
+
+        loginMessage.style.display =
+            "block";
+
+    }
+
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================= */
+
+    document
+        .getElementById("forgotPassword")
+        .addEventListener("click", function(event){
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+
+            if(!email){
+
+                showMessage(
+                    "Enter your email address first, then we can send you a password reset link.",
+                    "error"
+                );
+
+                document
+                    .getElementById("email")
+                    .focus();
+
+                return;
+
+            }
+
+
+            showMessage(
+                "Password reset will be connected to Firebase next.",
+                "success"
+            );
+
+        });
+
+</script>
+
+</body>
+</html>
