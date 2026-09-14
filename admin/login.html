@@ -147,6 +147,7 @@ input:focus{
     border-radius:10px;
     font-size:13px;
     line-height:1.5;
+    word-break:break-word;
 }
 
 .message.error{
@@ -297,8 +298,7 @@ import {
     getAuth,
     signInWithEmailAndPassword,
     setPersistence,
-    browserLocalPersistence,
-    onAuthStateChanged
+    browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
@@ -340,7 +340,7 @@ const auth =
 
 
 /* =====================================
-   ADMIN ACCOUNT
+   ADMIN EMAIL
 ===================================== */
 
 const ADMIN_EMAIL =
@@ -378,24 +378,15 @@ togglePassword.addEventListener(
     "click",
     () => {
 
-        if(
-            passwordInput.type ===
-            "password"
-        ){
+        if(passwordInput.type === "password"){
 
-            passwordInput.type =
-                "text";
-
-            togglePassword.textContent =
-                "Hide";
+            passwordInput.type = "text";
+            togglePassword.textContent = "Hide";
 
         }else{
 
-            passwordInput.type =
-                "password";
-
-            togglePassword.textContent =
-                "Show";
+            passwordInput.type = "password";
+            togglePassword.textContent = "Show";
 
         }
 
@@ -407,63 +398,14 @@ togglePassword.addEventListener(
    MESSAGE
 ===================================== */
 
-function showMessage(
-    text,
-    type
-){
+function showMessage(text,type){
 
-    message.textContent =
-        text;
+    message.textContent = text;
 
     message.className =
         "message " + type;
 
 }
-
-
-/* =====================================
-   CHECK EXISTING ADMIN SESSION
-===================================== */
-
-onAuthStateChanged(
-    auth,
-    (user) => {
-
-        if(!user){
-
-            return;
-
-        }
-
-
-        /*
-           If another account is already
-           signed in, do NOT allow it into
-           the admin panel.
-        */
-
-        if(
-            !user.email ||
-            user.email.toLowerCase() !==
-            ADMIN_EMAIL.toLowerCase()
-        ){
-
-            return;
-
-        }
-
-
-        /*
-           Already authenticated admin.
-           Send directly to admin dashboard.
-        */
-
-        window.location.replace(
-            "index.html"
-        );
-
-    }
-);
 
 
 /* =====================================
@@ -486,10 +428,7 @@ loginForm.addEventListener(
             passwordInput.value;
 
 
-        if(
-            !email ||
-            !password
-        ){
+        if(!email || !password){
 
             showMessage(
                 "Please enter your email and password.",
@@ -500,11 +439,6 @@ loginForm.addEventListener(
 
         }
 
-
-        /*
-           Prevent unauthorized email
-           before contacting Firebase.
-        */
 
         if(
             email !==
@@ -521,8 +455,7 @@ loginForm.addEventListener(
         }
 
 
-        loginButton.disabled =
-            true;
+        loginButton.disabled = true;
 
         loginButton.textContent =
             "Signing in...";
@@ -531,21 +464,9 @@ loginForm.addEventListener(
         try{
 
             /*
-               IMPORTANT FIX
-
-               Explicitly save Firebase Auth
-               session in browser local storage.
-
-               This allows:
-
-               admin/login.html
-                    ↓
-               admin/index.html
-                    ↓
-               admin/inventory.html
-
-               to share the same login session.
-            */
+             * Keep the Firebase session after
+             * moving between admin pages.
+             */
 
             await setPersistence(
                 auth,
@@ -566,12 +487,6 @@ loginForm.addEventListener(
             );
 
 
-            /*
-               Give Firebase a moment to finish
-               updating the current user before
-               changing pages.
-            */
-
             setTimeout(
                 () => {
 
@@ -580,69 +495,96 @@ loginForm.addEventListener(
                     );
 
                 },
-                500
+                700
             );
 
 
         }catch(error){
 
             console.error(
-                "Admin login error:",
+                "FULL ADMIN LOGIN ERROR:",
                 error
             );
 
 
+            /*
+             * IMPORTANT:
+             * Show the actual Firebase error code.
+             * This will tell us exactly what is wrong.
+             */
+
             let errorMessage =
-                "Unable to sign in.";
+                "Firebase error: " +
+                (error.code || "unknown-error");
 
 
-            if(
-                error.code ===
-                "auth/invalid-credential"
-            ){
+            if(error.code === "auth/invalid-credential"){
 
                 errorMessage =
-                    "Invalid admin email or password.";
+                    "Invalid email or password.";
 
-            }else if(
-                error.code ===
-                "auth/user-not-found"
-            ){
+            }
 
-                errorMessage =
-                    "No account exists with this email.";
-
-            }else if(
-                error.code ===
-                "auth/wrong-password"
-            ){
+            else if(error.code === "auth/user-not-found"){
 
                 errorMessage =
-                    "Incorrect password.";
+                    "This Firebase account does not exist.";
 
-            }else if(
-                error.code ===
-                "auth/too-many-requests"
-            ){
+            }
+
+            else if(error.code === "auth/wrong-password"){
 
                 errorMessage =
-                    "Too many attempts. Please wait and try again.";
+                    "The password is incorrect.";
 
-            }else if(
-                error.code ===
-                "auth/network-request-failed"
-            ){
+            }
+
+            else if(error.code === "auth/invalid-email"){
+
+                errorMessage =
+                    "The email address is invalid.";
+
+            }
+
+            else if(error.code === "auth/user-disabled"){
+
+                errorMessage =
+                    "This Firebase account has been disabled.";
+
+            }
+
+            else if(error.code === "auth/too-many-requests"){
+
+                errorMessage =
+                    "Too many login attempts. Please wait and try again.";
+
+            }
+
+            else if(error.code === "auth/network-request-failed"){
 
                 errorMessage =
                     "Network error. Check your internet connection.";
 
-            }else if(
-                error.code ===
-                "auth/user-disabled"
-            ){
+            }
+
+            else if(error.code === "auth/operation-not-allowed"){
 
                 errorMessage =
-                    "This administrator account has been disabled.";
+                    "Email/password authentication is disabled in Firebase.";
+
+            }
+
+            else if(error.code === "auth/unauthorized-domain"){
+
+                errorMessage =
+                    "This website domain is not authorized in Firebase.";
+
+            }
+
+            else if(error.code === "auth/popup-blocked"){
+
+                errorMessage =
+                    "Firebase popup was blocked by the browser.";
 
             }
 
@@ -653,8 +595,7 @@ loginForm.addEventListener(
             );
 
 
-            loginButton.disabled =
-                false;
+            loginButton.disabled = false;
 
             loginButton.textContent =
                 "Login to Admin";
