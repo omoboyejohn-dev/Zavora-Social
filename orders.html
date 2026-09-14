@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Zavora Social | My Orders</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    color:#fff;
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
+    radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
+    #080b16;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,11,22,.88);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+    max-width:1100px;
+    min-height:72px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
+}
+
+.logo span{
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.back{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:32px;
+    margin-bottom:7px;
+}
+
+.heading p{
+    color:#94a3b8;
+}
+
+.order-card{
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:13px;
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.order-name{
+    font-weight:800;
+    font-size:16px;
+}
+
+.order-id{
+    color:#64748b;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.status{
+    height:max-content;
+    padding:7px 11px;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:800;
+    background:rgba(34,211,238,.1);
+    color:#67e8f9;
+}
+
+.order-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.info{
+    padding:13px;
+    border-radius:11px;
+    background:rgba(255,255,255,.035);
+}
+
+.info small{
+    display:block;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.info strong{
+    font-size:14px;
+}
+
+.empty{
+    padding:65px 20px;
+    text-align:center;
+    border:1px dashed rgba(255,255,255,.13);
+    border-radius:20px;
+    background:rgba(255,255,255,.025);
+}
+
+.empty-icon{
+    font-size:48px;
+    margin-bottom:12px;
+}
+
+.empty h2{
+    margin-bottom:8px;
+}
+
+.empty p{
+    color:#94a3b8;
+    line-height:1.6;
+}
+
+.shop-btn{
+    display:inline-block;
+    margin-top:20px;
+    text-decoration:none;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:11px;
+    font-weight:800;
+    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+}
+
+footer{
+    text-align:center;
+    color:#64748b;
+    font-size:13px;
+    padding:0 20px 30px;
+}
+
+@media(max-width:650px){
+
+    .container{
+        padding:28px 15px 50px;
+    }
+
+    .heading h1{
+        font-size:27px;
+    }
+
+    .order-top{
+        flex-direction:column;
+    }
+
+    .order-info{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="navbar">
+
+        <a href="dashboard.html" class="logo">
+            Zavora <span>Social</span>
+        </a>
+
+        <a href="dashboard.html" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="heading">
+
+        <h1>My Orders</h1>
+
+        <p>
+            View your purchases and order status.
+        </p>
+
+    </div>
+
+
+    <div id="ordersArea">
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h2>No orders yet</h2>
+
+            <p>
+                Your purchases will appear here after
+                you place an order.
+            </p>
+
+            <a href="products.html" class="shop-btn">
+                Browse Products
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+    © <span id="year"></span> Zavora Social. All rights reserved.
+</footer>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+    apiKey:"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+    authDomain:"zavorasocial.firebaseapp.com",
+    projectId:"zavorasocial",
+    storageBucket:"zavorasocial.firebasestorage.app",
+    messagingSenderId:"447170165246",
+    appId:"1:447170165246:web:982649e6533257ea0f28af",
+    measurementId:"G-D4LNBEWH50"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(!user){
+
+        window.location.href="login.html";
+
+        return;
+    }
+
+});
+
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
