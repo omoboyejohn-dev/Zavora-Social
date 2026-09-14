@@ -14,39 +14,10 @@
 }
 
 body{
-    font-family:Inter,Arial,sans-serif;
+    font-family:Arial, sans-serif;
     background:#080b18;
     color:#fff;
     min-height:100vh;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    width:450px;
-    height:450px;
-    background:rgba(124,58,237,.18);
-    filter:blur(100px);
-    top:-180px;
-    right:-150px;
-    pointer-events:none;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    width:350px;
-    height:350px;
-    background:rgba(6,182,212,.10);
-    filter:blur(100px);
-    bottom:-150px;
-    left:-120px;
-    pointer-events:none;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
 }
 
 button,
@@ -58,13 +29,11 @@ button{
     cursor:pointer;
 }
 
-.page{
+.container{
     width:100%;
-    max-width:900px;
+    max-width:520px;
     margin:auto;
     padding:20px;
-    position:relative;
-    z-index:1;
 }
 
 /* HEADER */
@@ -73,14 +42,12 @@ button{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
     margin-bottom:25px;
 }
 
 .logo{
-    font-size:23px;
+    font-size:22px;
     font-weight:800;
-    letter-spacing:-.5px;
 }
 
 .logo span{
@@ -90,23 +57,36 @@ button{
 }
 
 .back-btn{
-    border:1px solid rgba(255,255,255,.10);
-    background:rgba(255,255,255,.05);
+    background:#151a2d;
+    border:1px solid rgba(255,255,255,.08);
     color:#fff;
-    padding:10px 15px;
-    border-radius:12px;
-    font-size:14px;
+    padding:10px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:13px;
 }
 
-/* WALLET */
+/* STAGES */
+
+.stage{
+    display:none;
+}
+
+.stage.active{
+    display:block;
+}
+
+/* WALLET STAGE */
 
 .wallet-card{
-    background:
-        linear-gradient(135deg,rgba(124,58,237,.95),rgba(37,99,235,.85));
+    background:linear-gradient(
+        135deg,
+        #6d28d9,
+        #2563eb
+    );
     border-radius:22px;
-    padding:25px;
-    margin-bottom:22px;
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    padding:28px 22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
 }
 
 .wallet-label{
@@ -116,121 +96,107 @@ button{
 }
 
 .balance{
-    font-size:34px;
+    font-size:36px;
+    font-weight:800;
+    margin-bottom:28px;
+}
+
+.deposit-btn{
+    width:100%;
+    border:0;
+    background:#fff;
+    color:#4c1d95;
+    padding:15px;
+    border-radius:13px;
     font-weight:800;
 }
 
-.deposit-main{
-    width:100%;
-    background:linear-gradient(90deg,#7c3aed,#06b6d4);
-    border:0;
-    color:#fff;
-    padding:15px;
-    border-radius:14px;
-    font-weight:700;
-    margin-top:20px;
-}
+/* GENERAL CARD */
 
-/* SECTION */
-
-.section-title{
-    font-size:22px;
-    margin-bottom:7px;
-}
-
-.section-text{
-    color:#9298ad;
-    font-size:14px;
-    line-height:1.6;
-    margin-bottom:20px;
-}
-
-/* PAYMENT OPTIONS */
-
-.payment-options{
-    display:none;
-}
-
-.payment-options.active{
-    display:block;
-}
-
-.payment-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:14px;
-}
-
-.payment-option{
+.card{
     background:#111528;
     border:1px solid rgba(255,255,255,.08);
-    border-radius:17px;
-    padding:20px;
-    transition:.2s;
+    border-radius:20px;
+    padding:24px;
 }
 
-.payment-option:hover{
-    transform:translateY(-2px);
-    border-color:rgba(139,92,246,.6);
+.title{
+    font-size:23px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#8e95aa;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:22px;
+}
+
+/* PAYMENT CHOICES */
+
+.payment{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:17px;
+    margin-bottom:12px;
+    border:1px solid rgba(255,255,255,.08);
+    background:#181d32;
+    border-radius:14px;
+    color:#fff;
+    text-align:left;
+}
+
+.payment:hover{
+    border-color:#7c3aed;
 }
 
 .payment-icon{
     width:45px;
     height:45px;
-    border-radius:13px;
+    flex-shrink:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(124,58,237,.15);
+    border-radius:12px;
+    background:rgba(124,58,237,.16);
     font-size:21px;
-    margin-bottom:14px;
 }
 
-.payment-option h3{
-    font-size:16px;
-    margin-bottom:6px;
+.payment-info{
+    flex:1;
 }
 
-.payment-option p{
-    color:#858ca2;
-    font-size:13px;
-    margin-bottom:16px;
-}
-
-.payment-btn{
-    width:100%;
-    padding:11px;
-    border:0;
-    border-radius:10px;
-    color:#fff;
-    background:#20263d;
+.payment-name{
+    font-size:15px;
     font-weight:700;
+    margin-bottom:4px;
 }
 
-/* PAYMENT DETAILS */
-
-.payment-details{
-    display:none;
+.payment-description{
+    color:#81889e;
+    font-size:12px;
 }
 
-.payment-details.active{
-    display:block;
+.arrow{
+    color:#8b5cf6;
+    font-size:20px;
 }
 
-.account-card{
-    background:#111528;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:23px;
-}
+/* ACCOUNT DETAILS */
 
-.account-title{
-    font-size:19px;
-    margin-bottom:18px;
+.account-box{
+    background:#0c1020;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:15px;
+    padding:18px;
+    margin-top:20px;
 }
 
 .account-row{
-    padding:15px 0;
+    padding:14px 0;
     border-bottom:1px solid rgba(255,255,255,.07);
 }
 
@@ -238,72 +204,44 @@ button{
     border-bottom:0;
 }
 
-.account-label{
-    color:#858ca2;
+.label{
+    color:#7f879d;
     font-size:12px;
-    margin-bottom:6px;
+    margin-bottom:7px;
 }
 
-.account-value{
-    font-size:17px;
+.value{
+    font-size:16px;
     font-weight:700;
-    word-break:break-word;
 }
 
 .account-number{
     color:#22d3ee;
-    font-size:24px;
+    font-size:23px;
 }
 
 .copy-btn{
-    margin-top:12px;
-    background:#1b2137;
-    color:#fff;
+    margin-top:10px;
+    padding:8px 12px;
     border:1px solid rgba(255,255,255,.08);
-    padding:9px 13px;
-    border-radius:9px;
-    font-size:13px;
+    border-radius:8px;
+    background:#171c30;
+    color:#fff;
+    font-size:12px;
 }
 
-.paid-btn{
+.primary-btn{
     width:100%;
-    margin-top:22px;
-    padding:15px;
     border:0;
     border-radius:13px;
-    color:#fff;
+    padding:15px;
     background:linear-gradient(90deg,#7c3aed,#06b6d4);
+    color:#fff;
     font-weight:800;
+    margin-top:20px;
 }
 
-/* PROOF FORM */
-
-.payment-proof{
-    display:none;
-}
-
-.payment-proof.active{
-    display:block;
-}
-
-.form-card{
-    background:#111528;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:23px;
-}
-
-.form-title{
-    font-size:19px;
-    margin-bottom:7px;
-}
-
-.form-description{
-    color:#858ca2;
-    font-size:13px;
-    line-height:1.6;
-    margin-bottom:20px;
-}
+/* FORM */
 
 .form-group{
     margin-bottom:17px;
@@ -318,72 +256,77 @@ button{
 
 .form-group input{
     width:100%;
-    padding:14px;
-    border-radius:11px;
-    border:1px solid rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.09);
     outline:none;
     background:#0b0f20;
     color:#fff;
+    padding:14px;
+    border-radius:11px;
 }
 
 .form-group input:focus{
     border-color:#7c3aed;
 }
 
-.submit-btn{
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:13px;
-    background:linear-gradient(90deg,#7c3aed,#06b6d4);
-    color:#fff;
-    font-weight:800;
-}
-
-.notice{
-    display:none;
-    margin-top:18px;
-    padding:15px;
-    border-radius:12px;
-    background:rgba(34,211,238,.08);
-    border:1px solid rgba(34,211,238,.18);
-    color:#9eeaf5;
-    font-size:13px;
-    line-height:1.6;
-}
-
 .error{
     display:none;
-    margin-bottom:16px;
-    padding:13px;
-    border-radius:11px;
-    background:rgba(239,68,68,.10);
+    background:rgba(239,68,68,.1);
     border:1px solid rgba(239,68,68,.25);
     color:#fca5a5;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
     font-size:13px;
+}
+
+/* SUCCESS */
+
+.success-card{
+    text-align:center;
+    padding:35px 22px;
+}
+
+.success-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+    font-size:28px;
+}
+
+.success-card h2{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.success-card p{
+    color:#8e95aa;
+    line-height:1.7;
+    font-size:14px;
 }
 
 /* MOBILE */
 
-@media(max-width:650px){
+@media(max-width:500px){
 
-    .page{
+    .container{
         padding:15px;
     }
 
-    .payment-grid{
-        grid-template-columns:1fr;
-    }
-
     .balance{
-        font-size:29px;
+        font-size:31px;
     }
 
-    .wallet-card{
-        padding:21px;
+    .card{
+        padding:20px;
     }
 
-    .account-number{
+    .title{
         font-size:21px;
     }
 }
@@ -392,176 +335,49 @@ button{
 
 <body>
 
-<div class="page">
+<div class="container">
 
-    <header class="header">
+    <!-- HEADER -->
+
+    <div class="header">
+
         <div class="logo">
             <span>Zavora</span> Social
         </div>
 
         <a href="dashboard.html" class="back-btn">
-            ← Dashboard
+            ← Back
         </a>
-    </header>
+
+    </div>
 
 
-    <!-- WALLET BALANCE -->
+    <!-- ========================= -->
+    <!-- STAGE 1: WALLET -->
+    <!-- ========================= -->
 
-    <section class="wallet-card">
+    <section
+        id="stage1"
+        class="stage active">
 
-        <div class="wallet-label">
-            Available Wallet Balance
-        </div>
+        <div class="wallet-card">
 
-        <div class="balance" id="walletBalance">
-            ₦0.00
-        </div>
-
-        <button class="deposit-main" id="startDeposit">
-            + Deposit Money
-        </button>
-
-    </section>
-
-
-    <!-- PAYMENT OPTIONS -->
-
-    <section class="payment-options" id="paymentOptions">
-
-        <h2 class="section-title">
-            Choose Payment
-        </h2>
-
-        <p class="section-text">
-            Select one of the available payment options below to continue your deposit.
-        </p>
-
-        <div class="payment-grid">
-
-            <div class="payment-option">
-
-                <div class="payment-icon">
-                    💳
-                </div>
-
-                <h3>Payment 1</h3>
-
-                <p>
-                    Bank transfer payment
-                </p>
-
-                <button
-                    class="payment-btn"
-                    onclick="openPaymentDetails()">
-                    Payment
-                </button>
-
+            <div class="wallet-label">
+                Available Wallet Balance
             </div>
 
-
-            <div class="payment-option">
-
-                <div class="payment-icon">
-                    💰
-                </div>
-
-                <h3>Payment 2</h3>
-
-                <p>
-                    Bank transfer payment
-                </p>
-
-                <button
-                    class="payment-btn"
-                    onclick="openPaymentDetails()">
-                    Payment
-                </button>
-
+            <div
+                class="balance"
+                id="walletBalance">
+                ₦0.00
             </div>
-
-
-            <div class="payment-option">
-
-                <div class="payment-icon">
-                    🏦
-                </div>
-
-                <h3>Payment 3</h3>
-
-                <p>
-                    Bank transfer payment
-                </p>
-
-                <button
-                    class="payment-btn"
-                    onclick="openPaymentDetails()">
-                    Payment
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- BANK ACCOUNT -->
-
-    <section class="payment-details" id="paymentDetails">
-
-        <div class="account-card">
-
-            <h2 class="account-title">
-                Make Your Payment
-            </h2>
-
-            <div class="account-row">
-
-                <div class="account-label">
-                    Account Number
-                </div>
-
-                <div class="account-value account-number" id="accountNumber">
-                    5777198543
-                </div>
-
-                <button class="copy-btn" onclick="copyAccountNumber()">
-                    Copy Account Number
-                </button>
-
-            </div>
-
-
-            <div class="account-row">
-
-                <div class="account-label">
-                    Bank Name
-                </div>
-
-                <div class="account-value">
-                    TENN BANK
-                </div>
-
-            </div>
-
-
-            <div class="account-row">
-
-                <div class="account-label">
-                    Account Name
-                </div>
-
-                <div class="account-value">
-                    Promise Adeyeye
-                </div>
-
-            </div>
-
 
             <button
-                class="paid-btn"
-                onclick="showPaymentProof()">
-                I Have Paid
+                class="deposit-btn"
+                id="depositButton">
+
+                + Deposit
+
             </button>
 
         </div>
@@ -569,29 +385,227 @@ button{
     </section>
 
 
-    <!-- PAYMENT PROOF -->
+    <!-- ========================= -->
+    <!-- STAGE 2: PAYMENT -->
+    <!-- ========================= -->
 
-    <section class="payment-proof" id="paymentProof">
+    <section
+        id="stage2"
+        class="stage">
 
-        <div class="form-card">
+        <div class="card">
 
-            <h2 class="form-title">
-                Prove Your Payment
-            </h2>
+            <h1 class="title">
+                Choose Payment
+            </h1>
 
-            <p class="form-description">
-                Enter the details of the payment you just made.
-                Your payment will be reviewed by Zavora Social administration.
+            <p class="subtitle">
+                Select a payment option to continue.
             </p>
 
-            <div class="error" id="formError"></div>
+
+            <button
+                class="payment"
+                onclick="selectPayment('Payment 1')">
+
+                <div class="payment-icon">
+                    💳
+                </div>
+
+                <div class="payment-info">
+
+                    <div class="payment-name">
+                        Payment 1
+                    </div>
+
+                    <div class="payment-description">
+                        Bank transfer
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </button>
+
+
+            <button
+                class="payment"
+                onclick="selectPayment('Payment 2')">
+
+                <div class="payment-icon">
+                    💰
+                </div>
+
+                <div class="payment-info">
+
+                    <div class="payment-name">
+                        Payment 2
+                    </div>
+
+                    <div class="payment-description">
+                        Bank transfer
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </button>
+
+
+            <button
+                class="payment"
+                onclick="selectPayment('Payment 3')">
+
+                <div class="payment-icon">
+                    🏦
+                </div>
+
+                <div class="payment-info">
+
+                    <div class="payment-name">
+                        Payment 3
+                    </div>
+
+                    <div class="payment-description">
+                        Bank transfer
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- STAGE 3: ACCOUNT -->
+    <!-- ========================= -->
+
+    <section
+        id="stage3"
+        class="stage">
+
+        <div class="card">
+
+            <h1
+                class="title"
+                id="selectedPayment">
+                Payment
+            </h1>
+
+            <p class="subtitle">
+                Send your payment to the account below.
+            </p>
+
+
+            <div class="account-box">
+
+                <div class="account-row">
+
+                    <div class="label">
+                        Account Number
+                    </div>
+
+                    <div
+                        class="value account-number"
+                        id="accountNumber">
+                        5777198543
+                    </div>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyAccount()">
+
+                        Copy Account Number
+
+                    </button>
+
+                </div>
+
+
+                <div class="account-row">
+
+                    <div class="label">
+                        Bank Name
+                    </div>
+
+                    <div class="value">
+                        TENN BANK
+                    </div>
+
+                </div>
+
+
+                <div class="account-row">
+
+                    <div class="label">
+                        Account Name
+                    </div>
+
+                    <div class="value">
+                        Promise Adeyeye
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="showStage(4)">
+
+                I Have Paid
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- STAGE 4: PROOF -->
+    <!-- ========================= -->
+
+    <section
+        id="stage4"
+        class="stage">
+
+        <div class="card">
+
+            <h1 class="title">
+                Prove Your Payment
+            </h1>
+
+            <p class="subtitle">
+                Enter the details of the payment you just made.
+            </p>
+
+
+            <div
+                class="error"
+                id="formError">
+            </div>
 
 
             <form id="depositForm">
 
                 <div class="form-group">
 
-                    <label for="amount">
+                    <label>
                         Amount
                     </label>
 
@@ -608,14 +622,14 @@ button{
 
                 <div class="form-group">
 
-                    <label for="senderName">
+                    <label>
                         Sender Name
                     </label>
 
                     <input
                         type="text"
                         id="senderName"
-                        placeholder="Name used for the transfer"
+                        placeholder="Enter sender name"
                         required>
 
                 </div>
@@ -623,7 +637,7 @@ button{
 
                 <div class="form-group">
 
-                    <label for="transactionReference">
+                    <label>
                         Transaction Reference
                     </label>
 
@@ -638,27 +652,56 @@ button{
 
                 <button
                     type="submit"
-                    class="submit-btn"
-                    id="submitBtn">
+                    class="primary-btn"
+                    id="submitButton">
+
                     Submit Payment
+
                 </button>
 
             </form>
 
+        </div>
 
-            <div class="notice" id="successNotice">
+    </section>
 
-                Your payment proof has been submitted successfully.
 
-                <br><br>
+    <!-- ========================= -->
+    <!-- STAGE 5: SUCCESS -->
+    <!-- ========================= -->
 
-                Status: <strong>Pending Review</strong>
+    <section
+        id="stage5"
+        class="stage">
 
-                <br><br>
+        <div class="card success-card">
 
-                Zavora Social administration will review your payment.
-
+            <div class="success-icon">
+                ✓
             </div>
+
+            <h2>
+                Payment Submitted
+            </h2>
+
+            <p>
+                Your payment proof has been submitted
+                successfully.
+            </p>
+
+            <p style="margin-top:10px;">
+                Status: <strong style="color:#fbbf24;">
+                    Pending Review
+                </strong>
+            </p>
+
+            <button
+                class="primary-btn"
+                onclick="window.location.href='dashboard.html'">
+
+                Back to Dashboard
+
+            </button>
 
         </div>
 
@@ -691,22 +734,29 @@ import {
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
-    authDomain: "zavorasocial.firebaseapp.com",
+    authDomain:
+        "zavorasocial.firebaseapp.com",
 
-    databaseURL: "https://zavorasocial-default-rtdb.firebaseio.com",
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com",
 
-    projectId: "zavorasocial",
+    projectId:
+        "zavorasocial",
 
-    storageBucket: "zavorasocial.firebasestorage.app",
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
 
-    messagingSenderId: "447170165246",
+    messagingSenderId:
+        "447170165246",
 
-    appId: "1:447170165246:web:982649e6533257ea0f28af",
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
 
-    measurementId: "G-D4LNBEWH50"
-
+    measurementId:
+        "G-D4LNBEWH50"
 };
 
 
@@ -719,38 +769,12 @@ const db = getDatabase(app);
 
 let currentUser = null;
 
-
-/* ELEMENTS */
-
-const walletBalance =
-    document.getElementById("walletBalance");
-
-const startDeposit =
-    document.getElementById("startDeposit");
-
-const paymentOptions =
-    document.getElementById("paymentOptions");
-
-const paymentDetails =
-    document.getElementById("paymentDetails");
-
-const paymentProof =
-    document.getElementById("paymentProof");
-
-const depositForm =
-    document.getElementById("depositForm");
-
-const submitBtn =
-    document.getElementById("submitBtn");
-
-const formError =
-    document.getElementById("formError");
-
-const successNotice =
-    document.getElementById("successNotice");
+let selectedPayment = "";
 
 
+/* ========================= */
 /* AUTH */
+/* ========================= */
 
 onAuthStateChanged(auth, (user) => {
 
@@ -768,22 +792,30 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
+/* ========================= */
 /* LOAD WALLET */
+/* ========================= */
 
 function loadWallet(){
 
-    if(!currentUser) return;
-
     const walletRef =
-        ref(db, "users/" + currentUser.uid + "/walletBalance");
+        ref(
+            db,
+            "users/" +
+            currentUser.uid +
+            "/walletBalance"
+        );
 
     onValue(walletRef, (snapshot) => {
 
         const balance =
             Number(snapshot.val() || 0);
 
-        walletBalance.textContent =
-            "₦" + balance.toLocaleString(
+        document.getElementById(
+            "walletBalance"
+        ).textContent =
+            "₦" +
+            balance.toLocaleString(
                 "en-NG",
                 {
                     minimumFractionDigits:2,
@@ -796,190 +828,277 @@ function loadWallet(){
 }
 
 
-/* START DEPOSIT */
+/* ========================= */
+/* STAGE CONTROL */
+/* ========================= */
 
-startDeposit.addEventListener("click", () => {
+window.showStage = function(stageNumber){
 
-    paymentOptions.classList.add("active");
+    document
+        .querySelectorAll(".stage")
+        .forEach(stage => {
 
-    paymentDetails.classList.remove("active");
-
-    paymentProof.classList.remove("active");
-
-    paymentOptions.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
-
-});
-
-
-/* PAYMENT DETAILS */
-
-window.openPaymentDetails = function(){
-
-    paymentDetails.classList.add("active");
-
-    paymentProof.classList.remove("active");
-
-    paymentDetails.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
-
-};
-
-
-/* I HAVE PAID */
-
-window.showPaymentProof = function(){
-
-    paymentProof.classList.add("active");
-
-    paymentProof.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
-
-};
-
-
-/* COPY ACCOUNT NUMBER */
-
-window.copyAccountNumber = async function(){
-
-    const number =
-        document.getElementById("accountNumber").textContent.trim();
-
-    try{
-
-        await navigator.clipboard.writeText(number);
-
-        alert("Account number copied.");
-
-    }catch(error){
-
-        alert("Copy failed. Please copy the account number manually.");
-
-    }
-
-};
-
-
-/* SUBMIT PAYMENT */
-
-depositForm.addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-
-    if(!currentUser){
-
-        return;
-    }
-
-
-    const amount =
-        Number(document.getElementById("amount").value);
-
-    const senderName =
-        document.getElementById("senderName").value.trim();
-
-    const transactionReference =
-        document.getElementById("transactionReference").value.trim();
-
-
-    formError.style.display = "none";
-
-
-    if(!amount || amount <= 0){
-
-        showError("Please enter a valid payment amount.");
-
-        return;
-    }
-
-
-    if(!senderName){
-
-        showError("Please enter the sender name.");
-
-        return;
-    }
-
-
-    if(!transactionReference){
-
-        showError("Please enter the transaction reference.");
-
-        return;
-    }
-
-
-    submitBtn.disabled = true;
-
-    submitBtn.textContent = "Submitting...";
-
-
-    try{
-
-        const depositRef =
-            push(ref(db, "deposits"));
-
-
-        await set(depositRef, {
-
-            uid: currentUser.uid,
-
-            email: currentUser.email || "",
-
-            amount: amount,
-
-            senderName: senderName,
-
-            transactionReference: transactionReference,
-
-            paymentMethod: "Payment",
-
-            accountNumber: "5777198543",
-
-            bankName: "TENN BANK",
-
-            accountName: "Promise Adeyeye",
-
-            status: "pending",
-
-            createdAt: Date.now()
+            stage.classList.remove("active");
 
         });
 
 
-        depositForm.style.display = "none";
-
-        successNotice.style.display = "block";
-
-
-    }catch(error){
-
-        console.error(error);
-
-        showError(
-            "Unable to submit your payment right now. Please try again."
+    const selectedStage =
+        document.getElementById(
+            "stage" + stageNumber
         );
 
-        submitBtn.disabled = false;
+    if(selectedStage){
 
-        submitBtn.textContent = "Submit Payment";
+        selectedStage.classList.add("active");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
     }
 
-});
+};
 
+
+/* ========================= */
+/* STAGE 1 → STAGE 2 */
+/* ========================= */
+
+document
+    .getElementById("depositButton")
+    .addEventListener("click", () => {
+
+        showStage(2);
+
+    });
+
+
+/* ========================= */
+/* SELECT PAYMENT */
+/* ========================= */
+
+window.selectPayment = function(payment){
+
+    selectedPayment = payment;
+
+    document.getElementById(
+        "selectedPayment"
+    ).textContent = payment;
+
+    showStage(3);
+
+};
+
+
+/* ========================= */
+/* COPY ACCOUNT */
+/* ========================= */
+
+window.copyAccount = async function(){
+
+    const account =
+        document
+        .getElementById("accountNumber")
+        .textContent
+        .trim();
+
+    try{
+
+        await navigator.clipboard.writeText(account);
+
+        alert(
+            "Account number copied successfully."
+        );
+
+    }catch(error){
+
+        alert(
+            "Please copy the account number manually."
+        );
+
+    }
+
+};
+
+
+/* ========================= */
+/* SUBMIT PAYMENT */
+/* ========================= */
+
+document
+    .getElementById("depositForm")
+    .addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+
+        if(!currentUser){
+
+            return;
+        }
+
+
+        const amount =
+            Number(
+                document
+                .getElementById("amount")
+                .value
+            );
+
+
+        const senderName =
+            document
+            .getElementById("senderName")
+            .value
+            .trim();
+
+
+        const transactionReference =
+            document
+            .getElementById(
+                "transactionReference"
+            )
+            .value
+            .trim();
+
+
+        const errorBox =
+            document.getElementById(
+                "formError"
+            );
+
+
+        errorBox.style.display = "none";
+
+
+        if(!amount || amount <= 0){
+
+            showError(
+                "Please enter a valid amount."
+            );
+
+            return;
+        }
+
+
+        if(!senderName){
+
+            showError(
+                "Please enter the sender name."
+            );
+
+            return;
+        }
+
+
+        if(!transactionReference){
+
+            showError(
+                "Please enter the transaction reference."
+            );
+
+            return;
+        }
+
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Submitting...";
+
+
+        try{
+
+            const depositRef =
+                push(
+                    ref(db, "deposits")
+                );
+
+
+            await set(
+                depositRef,
+                {
+
+                    uid:
+                        currentUser.uid,
+
+                    email:
+                        currentUser.email || "",
+
+                    amount:
+                        amount,
+
+                    senderName:
+                        senderName,
+
+                    transactionReference:
+                        transactionReference,
+
+                    payment:
+                        selectedPayment,
+
+                    accountNumber:
+                        "5777198543",
+
+                    bankName:
+                        "TENN BANK",
+
+                    accountName:
+                        "Promise Adeyeye",
+
+                    status:
+                        "pending",
+
+                    createdAt:
+                        Date.now()
+
+                }
+            );
+
+
+            showStage(5);
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showError(
+                "Unable to submit your payment. Please try again."
+            );
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Submit Payment";
+
+        }
+
+    });
+
+
+/* ========================= */
+/* ERROR */
+/* ========================= */
 
 function showError(message){
 
-    formError.textContent = message;
+    const errorBox =
+        document.getElementById(
+            "formError"
+        );
 
-    formError.style.display = "block";
+    errorBox.textContent = message;
+
+    errorBox.style.display = "block";
 
 }
 
