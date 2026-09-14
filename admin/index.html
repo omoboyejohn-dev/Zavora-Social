@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Admin Dashboard</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#080612;
+    color:#fff;
+    min-height:100vh;
+}
+
+button{
+    font:inherit;
+}
+
+.header{
+    height:70px;
+    background:#0e0a1d;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.logo span{
+    background:linear-gradient(90deg,#a855f7,#22d3ee);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.mobile-menu{
+    display:none;
+    border:0;
+    background:none;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.admin-badge{
+    padding:7px 12px;
+    border-radius:20px;
+    background:rgba(168,85,247,.12);
+    border:1px solid rgba(168,85,247,.25);
+    color:#c084fc;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 70px);
+}
+
+.sidebar{
+    width:240px;
+    flex-shrink:0;
+    background:#0d0919;
+    border-right:1px solid rgba(255,255,255,.07);
+    padding:22px 14px;
+}
+
+.sidebar-title{
+    color:#77718b;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin:8px 12px 12px;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px 14px;
+    margin-bottom:5px;
+    border-radius:11px;
+    color:#aaa3b8;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    background:linear-gradient(
+        90deg,
+        rgba(168,85,247,.18),
+        rgba(34,211,238,.08)
+    );
+    color:#fff;
+}
+
+.logout{
+    margin-top:25px;
+    width:100%;
+    border:1px solid rgba(239,68,68,.2);
+    background:rgba(239,68,68,.06);
+    color:#fca5a5;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.logout:hover{
+    background:rgba(239,68,68,.12);
+}
+
+.main{
+    flex:1;
+    min-width:0;
+    padding:30px;
+    max-width:1500px;
+}
+
+.page-title{
+    font-size:29px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.page-subtitle{
+    color:#8f899e;
+    font-size:14px;
+    margin-bottom:28px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+    gap:16px;
+    margin-bottom:28px;
+}
+
+.stat-card{
+    background:#100b1f;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:17px;
+    padding:20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-card::after{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:rgba(168,85,247,.07);
+    right:-35px;
+    top:-35px;
+}
+
+.stat-icon{
+    font-size:23px;
+    margin-bottom:14px;
+}
+
+.stat-label{
+    color:#8f899e;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:800;
+}
+
+.content-grid{
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:20px;
+}
+
+.card{
+    background:#100b1f;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:18px;
+    padding:22px;
+}
+
+.card-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.card-title h2{
+    font-size:17px;
+}
+
+.view-all{
+    color:#a855f7;
+    text-decoration:none;
+    font-size:12px;
+}
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+    gap:12px;
+}
+
+.quick-action{
+    text-decoration:none;
+    color:#fff;
+    background:#0b0715;
+    border:1px solid rgba(255,255,255,.06);
+    padding:17px;
+    border-radius:13px;
+    transition:.2s;
+}
+
+.quick-action:hover{
+    border-color:rgba(168,85,247,.3);
+    transform:translateY(-2px);
+}
+
+.quick-icon{
+    font-size:23px;
+    margin-bottom:11px;
+}
+
+.quick-title{
+    font-size:13px;
+    font-weight:700;
+}
+
+.quick-description{
+    color:#77718b;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.activity{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    background:#0b0715;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.activity-icon{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(168,85,247,.1);
+}
+
+.activity-text{
+    flex:1;
+}
+
+.activity-title{
+    font-size:12px;
+    font-weight:700;
+}
+
+.activity-sub{
+    color:#77718b;
+    font-size:10px;
+    margin-top:4px;
+}
+
+.empty{
+    text-align:center;
+    padding:30px 15px;
+    color:#77718b;
+    font-size:13px;
+}
+
+.loading{
+    position:fixed;
+    inset:0;
+    background:#080612;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:12px;
+}
+
+.spinner{
+    width:35px;
+    height:35px;
+    border:3px solid rgba(255,255,255,.1);
+    border-top-color:#a855f7;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@media(max-width:1050px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:850px){
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .sidebar{
+        position:fixed;
+        top:70px;
+        bottom:0;
+        left:-260px;
+        z-index:50;
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        left:0;
+    }
+
+    .main{
+        padding:22px 16px;
+    }
+
+    .header{
+        padding:0 16px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .quick-actions{
+        grid-template-columns:1fr;
+    }
+
+    .page-title{
+        font-size:24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="loading" id="loading">
+
+    <div class="spinner"></div>
+
+    <div style="color:#8f899e;font-size:13px;">
+        Checking administrator...
+    </div>
+
+</div>
+
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button
+            class="mobile-menu"
+            id="mobileMenu"
+        >
+            ☰
+        </button>
+
+        <div class="logo">
+            Zavora <span>Social</span>
+        </div>
+
+    </div>
+
+    <div class="admin-badge">
+        ADMIN PANEL
+    </div>
+
+</header>
+
+
+<div class="layout">
+
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-title">
+            Management
+        </div>
+
+        <a
+            href="index.html"
+            class="nav-link active"
+        >
+            📊 Dashboard
+        </a>
+
+        <a
+            href="categories.html"
+            class="nav-link"
+        >
+            🗂️ Categories
+        </a>
+
+        <a
+            href="products.html"
+            class="nav-link"
+        >
+            📦 Products
+        </a>
+
+        <a
+            href="inventory.html"
+            class="nav-link"
+        >
+            🏷️ Inventory
+        </a>
+
+        <a
+            href="orders.html"
+            class="nav-link"
+        >
+            🛒 Orders
+        </a>
+
+        <a
+            href="customers.html"
+            class="nav-link"
+        >
+            👥 Customers
+        </a>
+
+        <a
+            href="deposits.html"
+            class="nav-link"
+        >
+            💰 Deposits
+        </a>
+
+        <a
+            href="transactions.html"
+            class="nav-link"
+        >
+            📈 Transactions
+        </a>
+
+        <a
+            href="settings.html"
+            class="nav-link"
+        >
+            ⚙️ Settings
+        </a>
+
+        <button
+            class="logout"
+            id="logoutButton"
+        >
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <main class="main">
+
+        <h1 class="page-title">
+            Admin Dashboard
+        </h1>
+
+        <p class="page-subtitle">
+            Manage your Zavora Social marketplace from one place.
+        </p>
+
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div class="stat-label">
+                    CUSTOMERS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="customersCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <div class="stat-label">
+                    PRODUCTS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="productsCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🛒
+                </div>
+
+                <div class="stat-label">
+                    ORDERS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="ordersCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div class="stat-label">
+                    PENDING DEPOSITS
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="depositsCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="content-grid">
+
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <h2>
+                        Quick Management
+                    </h2>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a
+                        href="categories.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-icon">
+                            🗂️
+                        </div>
+
+                        <div class="quick-title">
+                            Categories
+                        </div>
+
+                        <div class="quick-description">
+                            Add and manage marketplace categories
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="products.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-icon">
+                            📦
+                        </div>
+
+                        <div class="quick-title">
+                            Products
+                        </div>
+
+                        <div class="quick-description">
+                            Add and manage marketplace products
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="inventory.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-icon">
+                            🏷️
+                        </div>
+
+                        <div class="quick-title">
+                            Inventory
+                        </div>
+
+                        <div class="quick-description">
+                            Manage available product stock
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="orders.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-icon">
+                            🛒
+                        </div>
+
+                        <div class="quick-title">
+                            Orders
+                        </div>
+
+                        <div class="quick-description">
+                            View and manage customer orders
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="customers.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-icon">
+                            👥
+                        </div>
+
+                        <div class="quick-title">
+                            Customers
+                        </div>
+
+                        <div class="quick-description">
+                            View registered customers
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="deposits.html"
+                        class="quick-action"
+                    >
+
+                        <div class="quick-icon">
+                            💰
+                        </div>
+
+                        <div class="quick-title">
+                            Deposits
+                        </div>
+
+                        <div class="quick-description">
+                            Review pending wallet deposits
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <h2>
+                        System Status
+                    </h2>
+
+                </div>
+
+
+                <div class="activity">
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon">
+                            🔐
+                        </div>
+
+                        <div class="activity-text">
+
+                            <div class="activity-title">
+                                Authentication
+                            </div>
+
+                            <div class="activity-sub">
+                                Firebase Authentication active
+                            </div>
+
+                        </div>
+
+                        <div style="color:#4ade80;">
+                            ●
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon">
+                            🗄️
+                        </div>
+
+                        <div class="activity-text">
+
+                            <div class="activity-title">
+                                Database
+                            </div>
+
+                            <div class="activity-sub">
+                                Realtime Database connected
+                            </div>
+
+                        </div>
+
+                        <div style="color:#4ade80;">
+                            ●
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon">
+                            🛍️
+                        </div>
+
+                        <div class="activity-text">
+
+                            <div class="activity-title">
+                                Marketplace
+                            </div>
+
+                            <div class="activity-sub">
+                                Ready for products
+                            </div>
+
+                        </div>
+
+                        <div style="color:#facc15;">
+                            ●
+                        </div>
+
+                    </div>
+
+
+                    <div class="empty">
+                        More live statistics will appear here
+                        after database integration.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+/* =====================================
+   FIREBASE
+===================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+        "zavorasocial.firebaseapp.com",
+
+    projectId:
+        "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const loading =
+    document.getElementById("loading");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+/* =====================================
+   MOBILE MENU
+===================================== */
+
+mobileMenu.addEventListener("click",() => {
+
+    sidebar.classList.toggle("open");
+
+});
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+logoutButton.addEventListener("click",async () => {
+
+    try{
+
+        await signOut(auth);
+
+        window.location.href =
+            "login.html";
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Unable to logout. Please try again."
+        );
+
+    }
+
+});
+
+
+/* =====================================
+   AUTH CHECK
+===================================== */
+
+onAuthStateChanged(auth,(user) => {
+
+    if(!user){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+    /*
+        The user is authenticated.
+
+        IMPORTANT:
+        Admin authorization will be added
+        before sensitive database operations
+        are enabled.
+
+        For now this page confirms that the
+        Firebase account is signed in.
+    */
+
+    loading.style.display = "none";
+
+});
+
+
+/* =====================================
+   PLACEHOLDER STATISTICS
+===================================== */
+
+document.getElementById(
+    "customersCount"
+).textContent = "0";
+
+document.getElementById(
+    "productsCount"
+).textContent = "0";
+
+document.getElementById(
+    "ordersCount"
+).textContent = "0";
+
+document.getElementById(
+    "depositsCount"
+).textContent = "0";
+
+</script>
+
+</body>
+</html>
