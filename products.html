@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zavora Social | Products</title>
-
-<style>
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Products</title><style>
 
 *{
     box-sizing:border-box;
@@ -254,79 +247,61 @@ header{
     }
 }
 
-</style>
+</style></head><body><header><div class="navbar">
 
-</head>
+    <a href="dashboard.html" class="logo">
+        Zavora <span>Social</span>
+    </a>
 
-<body>
+    <div class="nav-right">
 
-<header>
-
-    <div class="navbar">
-
-        <a href="dashboard.html" class="logo">
-            Zavora <span>Social</span>
+        <a href="dashboard.html" class="nav-btn">
+            Dashboard
         </a>
 
-        <div class="nav-right">
-
-            <a href="dashboard.html" class="nav-btn">
-                Dashboard
-            </a>
-
-            <a href="orders.html" class="nav-btn">
-                Orders
-            </a>
-
-        </div>
+        <a href="orders.html" class="nav-btn">
+            Orders
+        </a>
 
     </div>
 
-</header>
+</div>
+
+</header><main class="container"><div class="page-title">
+
+    <h1>Products</h1>
+
+    <p>
+        Browse available products on Zavora Social.
+    </p>
+
+</div>
 
 
-<main class="container">
+<div class="filter-area" id="filterArea">
 
-    <div class="page-title">
-
-        <h1>Products</h1>
-
-        <p>
-            Browse available products on Zavora Social.
-        </p>
-
-    </div>
-
-
-    <div class="filter-area" id="filterArea">
-
-        <button
-            class="filter-btn active"
-            data-category="all"
-        >
-            All Products
-        </button>
-
-    </div>
-
-
-    <div
-        class="products-grid"
-        id="productsGrid"
+    <button
+        class="filter-btn active"
+        data-category="all"
     >
+        All Products
+    </button>
 
-        <div class="loading">
+</div>
 
-            Loading products...
 
-        </div>
+<div
+    class="products-grid"
+    id="productsGrid"
+>
 
+    <div class="loading">
+        Checking your account...
     </div>
 
-</main>
+</div>
 
-
-<script type="module">
+</main><script type="module">
 
 import {
     initializeApp
@@ -347,7 +322,7 @@ import {
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -373,11 +348,14 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+    getAuth(app);
 
-const db = getDatabase(app);
+const db =
+    getDatabase(app);
 
 
 const productsGrid =
@@ -391,26 +369,7 @@ let allProducts = [];
 
 let selectedCategory = "all";
 
-
-/* ==============================
-   AUTH
-============================== */
-
-onAuthStateChanged(auth, (user) => {
-
-    if(!user){
-
-        window.location.href = "login.html";
-
-        return;
-
-    }
-
-    loadProducts();
-
-    loadCategories();
-
-});
+let authResolved = false;
 
 
 /* ==============================
@@ -418,7 +377,9 @@ onAuthStateChanged(auth, (user) => {
 ============================== */
 
 const urlParams =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 const requestedCategory =
     urlParams.get("category");
@@ -427,9 +388,55 @@ const requestedCategory =
 if(requestedCategory){
 
     selectedCategory =
-        decodeURIComponent(requestedCategory);
+        decodeURIComponent(
+            requestedCategory
+        );
 
 }
+
+
+/* ==============================
+   AUTH
+============================== */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        /*
+         * Firebase has now finished checking
+         * whether a customer is logged in.
+         */
+
+        authResolved = true;
+
+
+        if(!user){
+
+            /*
+             * Only redirect after Firebase has
+             * finished restoring the session.
+             */
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * User is authenticated.
+         */
+
+        loadProducts();
+
+        loadCategories();
+
+    }
+);
 
 
 /* ==============================
@@ -439,10 +446,14 @@ if(requestedCategory){
 function loadProducts(){
 
     const productsRef =
-        ref(db, "products");
+        ref(
+            db,
+            "products"
+        );
 
 
     onValue(
+
         productsRef,
 
         (snapshot) => {
@@ -454,32 +465,40 @@ function loadProducts(){
             allProducts =
                 Object.entries(data)
 
-                .map(([id, product]) => ({
+                .map(
+                    ([id, product]) => ({
 
-                    id:id,
+                        id:id,
 
-                    ...product
+                        ...product
 
-                }))
+                    })
+                )
 
-                .filter(product => {
+                .filter(
+                    product =>
+                        product &&
+                        product.active === true
+                );
 
-                    return product.active === true;
 
-                });
+            allProducts.sort(
+                (a,b) => {
 
+                    const aTime =
+                        Number(
+                            a.createdAt || 0
+                        );
 
-            allProducts.sort((a,b) => {
+                    const bTime =
+                        Number(
+                            b.createdAt || 0
+                        );
 
-                const aTime =
-                    Number(a.createdAt || 0);
+                    return bTime - aTime;
 
-                const bTime =
-                    Number(b.createdAt || 0);
-
-                return bTime - aTime;
-
-            });
+                }
+            );
 
 
             renderProducts();
@@ -488,7 +507,11 @@ function loadProducts(){
 
         (error) => {
 
-            console.error(error);
+            console.error(
+                "Product loading error:",
+                error
+            );
+
 
             productsGrid.innerHTML = `
 
@@ -520,10 +543,14 @@ function loadProducts(){
 function loadCategories(){
 
     const categoriesRef =
-        ref(db, "categories");
+        ref(
+            db,
+            "categories"
+        );
 
 
     onValue(
+
         categoriesRef,
 
         (snapshot) => {
@@ -532,7 +559,8 @@ function loadCategories(){
                 snapshot.val() || {};
 
 
-            Object.entries(data).forEach(
+            Object.entries(data)
+            .forEach(
                 ([id, category]) => {
 
                     if(
@@ -547,18 +575,24 @@ function loadCategories(){
 
 
                     const exists =
-                        [...filterArea.children]
-                        .some(button => {
+                        [
+                            ...filterArea.children
+                        ]
+                        .some(
+                            button => {
 
-                            return String(
-                                button.dataset.category
-                            ).toLowerCase()
-                            ===
-                            String(
-                                category.name
-                            ).toLowerCase();
+                                return String(
+                                    button.dataset.category
+                                )
+                                .toLowerCase()
+                                ===
+                                String(
+                                    category.name
+                                )
+                                .toLowerCase();
 
-                        });
+                            }
+                        );
 
 
                     if(exists){
@@ -569,7 +603,9 @@ function loadCategories(){
 
 
                     const button =
-                        document.createElement("button");
+                        document.createElement(
+                            "button"
+                        );
 
 
                     button.className =
@@ -581,7 +617,10 @@ function loadCategories(){
 
 
                     button.textContent =
-                        (category.icon || "📦")
+                        (
+                            category.icon ||
+                            "📦"
+                        )
                         + " "
                         + category.name;
 
@@ -601,7 +640,9 @@ function loadCategories(){
                     );
 
 
-                    filterArea.appendChild(button);
+                    filterArea.appendChild(
+                        button
+                    );
 
                 }
             );
@@ -616,7 +657,7 @@ function loadCategories(){
         (error) => {
 
             console.error(
-                "Category error:",
+                "Category loading error:",
                 error
             );
 
@@ -633,6 +674,18 @@ function loadCategories(){
 
 function renderProducts(){
 
+    /*
+     * Don't render marketplace data
+     * before authentication is resolved.
+     */
+
+    if(!authResolved){
+
+        return;
+
+    }
+
+
     let products =
         allProducts;
 
@@ -643,17 +696,21 @@ function renderProducts(){
     ){
 
         products =
-            allProducts.filter(product => {
+            allProducts.filter(
+                product => {
 
-                return String(
-                    product.category || ""
-                ).toLowerCase()
-                ===
-                String(
-                    selectedCategory
-                ).toLowerCase();
+                    return String(
+                        product.category || ""
+                    )
+                    .toLowerCase()
+                    ===
+                    String(
+                        selectedCategory
+                    )
+                    .toLowerCase();
 
-            });
+                }
+            );
 
     }
 
@@ -692,113 +749,133 @@ function renderProducts(){
     productsGrid.innerHTML = "";
 
 
-    products.forEach(product => {
+    products.forEach(
+        product => {
 
-        const card =
-            document.createElement("article");
-
-
-        card.className =
-            "product-card";
-
-
-        const image =
-            product.image ||
-            "https://via.placeholder.com/600x500?text=Zavora";
+            const card =
+                document.createElement(
+                    "article"
+                );
 
 
-        const description =
-            product.description ||
-            "Quality digital product available on Zavora Social.";
+            card.className =
+                "product-card";
 
 
-        card.innerHTML = `
-
-            <div class="product-image">
-
-                <img
-                    src="${escapeHtml(image)}"
-                    alt="${escapeHtml(product.name || "Product")}"
-                >
-
-            </div>
+            const image =
+                product.image ||
+                "https://via.placeholder.com/600x500?text=Zavora";
 
 
-            <div class="product-info">
+            const description =
+                product.description ||
+                "Quality digital product available on Zavora Social.";
 
-                <div class="product-category">
 
-                    📦
-                    ${escapeHtml(
-                        product.category || "Product"
-                    )}
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    <img
+                        src="${escapeHtml(image)}"
+                        alt="${escapeHtml(
+                            product.name ||
+                            "Product"
+                        )}"
+                    >
 
                 </div>
 
 
-                <div class="product-name">
+                <div class="product-info">
 
-                    ${escapeHtml(
-                        product.name || "Unnamed Product"
-                    )}
+                    <div class="product-category">
+
+                        📦
+                        ${escapeHtml(
+                            product.category ||
+                            "Product"
+                        )}
+
+                    </div>
+
+
+                    <div class="product-name">
+
+                        ${escapeHtml(
+                            product.name ||
+                            "Unnamed Product"
+                        )}
+
+                    </div>
+
+
+                    <div class="product-price">
+
+                        ₦${formatNumber(
+                            product.price || 0
+                        )}
+
+                    </div>
+
+
+                    <div class="product-description">
+
+                        ${escapeHtml(
+                            description
+                        )}
+
+                    </div>
+
+
+                    <button
+                        class="buy-btn"
+                    >
+                        Buy Now
+                    </button>
 
                 </div>
 
-
-                <div class="product-price">
-
-                    ₦${formatNumber(product.price || 0)}
-
-                </div>
+            `;
 
 
-                <div class="product-description">
+            card
+                .querySelector(".buy-btn")
+                .addEventListener(
+                    "click",
+                    () => {
 
-                    ${escapeHtml(description)}
+                        window.location.href =
+                            "product.html?id=" +
+                            encodeURIComponent(
+                                product.id
+                            );
 
-                </div>
-
-
-                <button
-                    class="buy-btn"
-                >
-                    Buy Now
-                </button>
-
-            </div>
-
-        `;
+                    }
+                );
 
 
-        card
-        .querySelector(".buy-btn")
-        .addEventListener("click", () => {
-
-            window.location.href =
-                "product.html?id=" +
-                encodeURIComponent(product.id);
-
-        });
+            const imageElement =
+                card.querySelector("img");
 
 
-        const imageElement =
-            card.querySelector("img");
+            imageElement.addEventListener(
+                "error",
+                () => {
+
+                    imageElement.src =
+                        "https://via.placeholder.com/600x500?text=Zavora";
+
+                }
+            );
 
 
-        imageElement.addEventListener(
-            "error",
-            () => {
+            productsGrid.appendChild(
+                card
+            );
 
-                imageElement.src =
-                    "https://via.placeholder.com/600x500?text=Zavora";
-
-            }
-        );
-
-
-        productsGrid.appendChild(card);
-
-    });
+        }
+    );
 
 }
 
@@ -815,26 +892,31 @@ function updateButtons(){
         );
 
 
-    buttons.forEach(button => {
+    buttons.forEach(
+        button => {
 
-        button.classList.toggle(
-            "active",
-            String(
-                button.dataset.category
-            ).toLowerCase()
-            ===
-            String(
-                selectedCategory
-            ).toLowerCase()
-        );
+            button.classList.toggle(
+                "active",
 
-    });
+                String(
+                    button.dataset.category
+                )
+                .toLowerCase()
+                ===
+                String(
+                    selectedCategory
+                )
+                .toLowerCase()
+            );
+
+        }
+    );
 
 }
 
 
 /* ==============================
-   FORMAT
+   FORMAT NUMBER
 ============================== */
 
 function formatNumber(value){
@@ -851,26 +933,39 @@ function formatNumber(value){
 
 
 /* ==============================
-   ESCAPE
+   ESCAPE HTML
 ============================== */
 
 function escapeHtml(value){
 
     return String(value)
 
-        .replaceAll("&","&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<","&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">","&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"',"&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'","&#039;");
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
-</script>
-
-</body>
+</script></body>
 </html>
