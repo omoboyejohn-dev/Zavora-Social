@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zavora Social | Dashboard</title>
-
-<style>
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Dashboard</title><style>
 
 *{
     box-sizing:border-box;
@@ -440,295 +433,250 @@ footer{
 
 }
 
-</style>
+</style></head><body><!-- LOADING SCREEN --><div class="loading-screen" id="loadingScreen"><div class="loader-box">
 
-</head>
+    <div class="loader"></div>
 
-<body>
+    <p>Checking your account...</p>
 
+</div>
 
-<!-- LOADING SCREEN -->
+</div><!-- HEADER --><header><div class="navbar">
 
-<div class="loading-screen" id="loadingScreen">
+    <a href="dashboard.html" class="logo">
+        Zavora <span>Social</span>
+    </a>
 
-    <div class="loader-box">
+    <div class="user-area">
 
-        <div class="loader"></div>
+        <span class="user-name" id="userName">
+            Loading...
+        </span>
 
-        <p>Checking your account...</p>
+        <button class="logout-btn" id="logoutBtn">
+            Logout
+        </button>
 
     </div>
 
 </div>
 
+</header><!-- MAIN --><main class="container"><!-- WELCOME -->
 
-<!-- HEADER -->
+<section class="welcome">
 
-<header>
+    <h1>
+        Welcome back,
+        <span id="welcomeName">User</span> 👋
+    </h1>
 
-    <div class="navbar">
+    <p>
+        Manage your wallet, orders and marketplace purchases from one place.
+    </p>
 
-        <a href="dashboard.html" class="logo">
-            Zavora <span>Social</span>
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            💰
+        </div>
+
+        <div class="stat-title">
+            Wallet Balance
+        </div>
+
+        <div class="stat-value" id="walletBalance">
+            ₦0.00
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🛍️
+        </div>
+
+        <div class="stat-title">
+            Orders
+        </div>
+
+        <div class="stat-value">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📦
+        </div>
+
+        <div class="stat-title">
+            Available Products
+        </div>
+
+        <div class="stat-value">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🔔
+        </div>
+
+        <div class="stat-title">
+            Notifications
+        </div>
+
+        <div class="stat-value">
+            0
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK ACTIONS -->
+
+<section>
+
+    <h2 class="section-title">
+        Quick Actions
+    </h2>
+
+    <div class="quick-actions">
+
+        <a href="products.html" class="quick-card">
+
+            <div class="quick-icon">
+                🛒
+            </div>
+
+            <strong>
+                Browse Products
+            </strong>
+
+            <small>
+                Explore the marketplace
+            </small>
+
         </a>
 
-        <div class="user-area">
 
-            <span class="user-name" id="userName">
-                Loading...
-            </span>
+        <a href="wallet.html" class="quick-card">
 
-            <button class="logout-btn" id="logoutBtn">
-                Logout
-            </button>
+            <div class="quick-icon">
+                💳
+            </div>
+
+            <strong>
+                Fund Wallet
+            </strong>
+
+            <small>
+                Add money to your wallet
+            </small>
+
+        </a>
+
+
+        <a href="orders.html" class="quick-card">
+
+            <div class="quick-icon">
+                📦
+            </div>
+
+            <strong>
+                My Orders
+            </strong>
+
+            <small>
+                View your purchases
+            </small>
+
+        </a>
+
+
+        <a href="profile.html" class="quick-card">
+
+            <div class="quick-icon">
+                👤
+            </div>
+
+            <strong>
+                My Profile
+            </strong>
+
+            <small>
+                Manage your account
+            </small>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- MARKETPLACE CATEGORIES -->
+
+<section>
+
+    <div class="marketplace-header">
+
+        <div>
+
+            <h2 class="section-title">
+                Marketplace Categories
+            </h2>
+
+            <p>
+                Choose a category to browse available products.
+            </p>
 
         </div>
 
     </div>
 
-</header>
 
+    <div
+        class="category-grid"
+        id="categoryGrid"
+    >
 
-<!-- MAIN -->
+        <div class="category-loading">
 
-<main class="container">
-
-
-    <!-- WELCOME -->
-
-    <section class="welcome">
-
-        <h1>
-            Welcome back,
-            <span id="welcomeName">User</span> 👋
-        </h1>
-
-        <p>
-            Manage your wallet, orders and marketplace purchases from one place.
-        </p>
-
-    </section>
-
-
-    <!-- STATS -->
-
-    <section class="stats">
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                💰
+            <div class="big">
+                🗂️
             </div>
 
-            <div class="stat-title">
-                Wallet Balance
-            </div>
-
-            <div class="stat-value">
-                ₦0.00
-            </div>
+            Loading categories...
 
         </div>
 
+    </div>
 
-        <div class="stat-card">
+</section>
 
-            <div class="stat-icon">
-                🛍️
-            </div>
+</main><footer>© <span id="year"></span> Zavora Social.
+All rights reserved.
 
-            <div class="stat-title">
-                Orders
-            </div>
-
-            <div class="stat-value">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                📦
-            </div>
-
-            <div class="stat-title">
-                Available Products
-            </div>
-
-            <div class="stat-value">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🔔
-            </div>
-
-            <div class="stat-title">
-                Notifications
-            </div>
-
-            <div class="stat-value">
-                0
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- QUICK ACTIONS -->
-
-    <section>
-
-        <h2 class="section-title">
-            Quick Actions
-        </h2>
-
-        <div class="quick-actions">
-
-            <a href="products.html" class="quick-card">
-
-                <div class="quick-icon">
-                    🛒
-                </div>
-
-                <strong>
-                    Browse Products
-                </strong>
-
-                <small>
-                    Explore the marketplace
-                </small>
-
-            </a>
-
-
-            <a href="wallet.html" class="quick-card">
-
-                <div class="quick-icon">
-                    💳
-                </div>
-
-                <strong>
-                    Fund Wallet
-                </strong>
-
-                <small>
-                    Add money to your wallet
-                </small>
-
-            </a>
-
-
-            <a href="orders.html" class="quick-card">
-
-                <div class="quick-icon">
-                    📦
-                </div>
-
-                <strong>
-                    My Orders
-                </strong>
-
-                <small>
-                    View your purchases
-                </small>
-
-            </a>
-
-
-            <a href="profile.html" class="quick-card">
-
-                <div class="quick-icon">
-                    👤
-                </div>
-
-                <strong>
-                    My Profile
-                </strong>
-
-                <small>
-                    Manage your account
-                </small>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- MARKETPLACE CATEGORIES -->
-
-    <section>
-
-        <div class="marketplace-header">
-
-            <div>
-
-                <h2 class="section-title">
-                    Marketplace Categories
-                </h2>
-
-                <p>
-                    Choose a category to browse available products.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!--
-            CATEGORIES ARE NOW LOADED FROM FIREBASE.
-
-            Admin adds a category
-                    ↓
-            Firebase Realtime Database
-                    ↓
-            This section updates automatically.
-        -->
-
-        <div
-            class="category-grid"
-            id="categoryGrid"
-        >
-
-            <div class="category-loading">
-
-                <div class="big">
-                    🗂️
-                </div>
-
-                Loading categories...
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-<footer>
-
-    © <span id="year"></span> Zavora Social.
-    All rights reserved.
-
-</footer>
-
-
-<script type="module">
+</footer><script type="module">
 
 
 /* ==========================================
@@ -822,6 +770,10 @@ const categoryGrid =
     document.getElementById("categoryGrid");
 
 
+const walletBalance =
+    document.getElementById("walletBalance");
+
+
 /* ==========================================
    AUTHENTICATION
 ========================================== */
@@ -867,14 +819,70 @@ onAuthStateChanged(
 
 
         /*
-            Start listening to categories
-            only after the customer is logged in.
+            Start listening to the
+            customer's wallet.
+        */
+
+        loadWallet(user.uid);
+
+
+        /*
+            Start listening to categories.
         */
 
         loadCategories();
 
     }
 );
+
+
+/* ==========================================
+   LOAD CUSTOMER WALLET
+========================================== */
+
+function loadWallet(uid){
+
+    const walletRef =
+        ref(
+            db,
+            "users/" + uid + "/walletBalance"
+        );
+
+
+    onValue(
+        walletRef,
+        (snapshot) => {
+
+            const balance =
+                Number(snapshot.val()) || 0;
+
+
+            walletBalance.textContent =
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                );
+
+        },
+        (error) => {
+
+            console.error(
+                "Wallet loading error:",
+                error
+            );
+
+
+            walletBalance.textContent =
+                "₦0.00";
+
+        }
+    );
+
+}
 
 
 /* ==========================================
@@ -904,11 +912,6 @@ function loadCategories(){
                     .forEach(
                         ([id,category]) => {
 
-                            /*
-                                Only active categories
-                                are shown to customers.
-                            */
-
                             if(
                                 category &&
                                 category.active === true
@@ -916,7 +919,7 @@ function loadCategories(){
 
                                 categories.push({
 
-                                    id: id,
+                                    id:id,
 
                                     name:
                                         category.name ||
@@ -939,11 +942,6 @@ function loadCategories(){
 
             }
 
-
-            /*
-                Newest category will appear
-                at the end of the list.
-            */
 
             categories.sort(
                 (a,b) =>
@@ -1183,7 +1181,5 @@ document.getElementById("year")
     new Date().getFullYear();
 
 
-</script>
-
-</body>
+</script></body>
 </html>
