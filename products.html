@@ -1,723 +1,578 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Products</title><style>  *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Products</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-font-family:Inter,Arial,sans-serif;
-background:
-radial-gradient(
-circle at top left,
-rgba(124,58,237,.16),
-transparent 35%
-),
-radial-gradient(
-circle at top right,
-rgba(6,182,212,.10),
-transparent 30%
-),
-#080b16;
-color:#fff;
-min-height:100vh;
+    font-family:Inter,Arial,sans-serif;
+    background:#ffffff;
+    color:#111827;
+    min-height:100vh;
 }
 
-/* ==============================
-HEADER
-============================== */
-
 header{
-position:sticky;
-top:0;
-z-index:100;
-border-bottom:1px solid rgba(255,255,255,.08);
-background:rgba(8,11,22,.88);
-backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    border-bottom:1px solid #e5e7eb;
+    background:#ffffff;
 }
 
 .navbar{
-max-width:1250px;
-min-height:70px;
-margin:auto;
-padding:0 20px;
+    max-width:1250px;
+    min-height:70px;
+    margin:auto;
+    padding:0 20px;
 
-display:flex;  
-align-items:center;  
-justify-content:space-between;  
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-gap:20px;
-
+    gap:20px;
 }
 
 .logo{
-color:#fff;
-text-decoration:none;
-
-font-size:22px;  
-font-weight:900;
-
+    color:#111827;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
 }
 
 .logo span{
-background:
-linear-gradient(
-90deg,
-#a78bfa,
-#22d3ee
-);
-
--webkit-background-clip:text;  
--webkit-text-fill-color:transparent;
-
+    color:#16a34a;
 }
 
 .nav-right{
-display:flex;
-gap:10px;
+    display:flex;
+    gap:10px;
 }
 
 .nav-btn{
-text-decoration:none;
+    text-decoration:none;
 
-color:#cbd5e1;  
+    color:#ffffff;
 
-background:rgba(255,255,255,.05);  
+    background:#16a34a;
 
-border:1px solid rgba(255,255,255,.08);  
+    border:1px solid #15803d;
 
-padding:10px 14px;  
+    padding:10px 14px;
 
-border-radius:10px;  
+    border-radius:10px;
 
-font-size:13px;  
+    font-size:13px;
+    font-weight:700;
 
-font-weight:700;
-
+    transition:.2s;
 }
 
-/* ==============================
-CONTAINER
-============================== */
+.nav-btn:hover{
+    background:#15803d;
+    transform:translateY(-1px);
+}
 
 .container{
-max-width:900px;
-
-margin:auto;  
-
-padding:28px 15px 60px;
-
+    max-width:900px;
+    margin:auto;
+    padding:28px 15px 60px;
 }
 
-/* ==============================
-TITLE
-============================== */
-
 .page-title{
-margin-bottom:22px;
+    margin-bottom:22px;
 }
 
 .page-title h1{
-font-size:30px;
-
-margin-bottom:6px;
-
+    font-size:30px;
+    color:#111827;
+    margin-bottom:6px;
 }
 
 .page-title p{
-color:#94a3b8;
-
-font-size:13px;
-
+    color:#64748b;
+    font-size:13px;
 }
 
-/* ==============================
-FILTERS
-============================== */
-
 .filter-area{
-display:flex;
-
-gap:8px;  
-
-flex-wrap:wrap;  
-
-margin-bottom:20px;
-
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
 .filter-btn{
-border:1px solid rgba(255,255,255,.10);
+    border:1px solid #bbf7d0;
 
-background:rgba(255,255,255,.045);  
+    background:#f0fdf4;
 
-color:#cbd5e1;  
+    color:#15803d;
 
-padding:9px 12px;  
+    padding:9px 12px;
 
-border-radius:9px;  
+    border-radius:9px;
 
-cursor:pointer;  
+    cursor:pointer;
 
-font-size:12px;  
+    font-size:12px;
+    font-weight:700;
 
-font-weight:700;
+    transition:.2s;
+}
 
+.filter-btn:hover{
+    background:#dcfce7;
 }
 
 .filter-btn.active{
-color:#fff;
+    color:#ffffff;
 
-border-color:#8b5cf6;  
+    border-color:#15803d;
 
-background:  
-    linear-gradient(  
-        135deg,  
-        rgba(124,58,237,.35),  
-        rgba(6,182,212,.18)  
-    );
+    background:#16a34a;
 
+    box-shadow:0 5px 15px rgba(22,163,74,.15);
 }
-
-/* ==============================
-PRODUCTS LIST
-============================== */
 
 .products-grid{
-display:flex;
-
-flex-direction:column;  
-
-gap:9px;
-
+    display:flex;
+    flex-direction:column;
+    gap:9px;
 }
 
-/* ==============================
-PRODUCT ROW
-============================== */
-
 .product-card{
+    width:100%;
+    min-height:76px;
 
-width:100%;  
+    display:flex;
+    align-items:center;
 
-min-height:76px;  
+    gap:12px;
 
-display:flex;  
+    padding:9px 10px;
 
-align-items:center;  
+    background:#ffffff;
 
-gap:12px;  
+    border:1px solid #e5e7eb;
 
-padding:9px 10px;  
+    border-radius:13px;
 
-background:#111522;  
+    transition:.2s;
 
-border:1px solid rgba(255,255,255,.08);  
-
-border-radius:13px;  
-
-transition:.2s;  
-
-box-shadow:  
-    0 4px 15px rgba(0,0,0,.16);
-
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
 }
 
 .product-card:hover{
+    border-color:#86efac;
+    transform:translateY(-1px);
 
-border-color:  
-    rgba(139,92,246,.45);  
-
-transform:translateY(-1px);
-
+    box-shadow:0 8px 22px rgba(22,163,74,.10);
 }
 
-/* ==============================
-SMALL PRODUCT IMAGE
-============================== */
-
 .product-image{
+    width:52px;
+    height:52px;
+    min-width:52px;
 
-width:52px;  
+    border-radius:10px;
 
-height:52px;  
+    overflow:hidden;
 
-min-width:52px;  
+    background:#f0fdf4;
 
-border-radius:10px;  
-
-overflow:hidden;  
-
-background:#1a2030;  
-
-border:1px solid rgba(255,255,255,.08);
-
+    border:1px solid #dcfce7;
 }
 
 .product-image img{
+    width:100%;
+    height:100%;
 
-width:100%;  
+    object-fit:cover;
 
-height:100%;  
-
-object-fit:cover;  
-
-display:block;
-
+    display:block;
 }
-
-/* ==============================
-PRODUCT INFORMATION
-============================== */
 
 .product-info{
+    min-width:0;
+    flex:1;
 
-min-width:0;  
-
-flex:1;  
-
-display:flex;  
-
-flex-direction:column;  
-
-gap:7px;
-
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 }
-
-/* PRODUCT NAME */
 
 .product-name{
+    color:#111827;
 
-color:#fff;  
+    font-size:14px;
 
-font-size:14px;  
+    line-height:1.2;
 
-line-height:1.2;  
+    font-weight:800;
 
-font-weight:800;  
+    white-space:nowrap;
 
-white-space:nowrap;  
+    overflow:hidden;
 
-overflow:hidden;  
-
-text-overflow:ellipsis;
-
+    text-overflow:ellipsis;
 }
-
-/* ==============================
-BOTTOM INFORMATION
-============================== */
 
 .product-bottom{
-
-display:flex;  
-
-align-items:center;  
-
-gap:7px;  
-
-flex-wrap:wrap;
-
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
 }
-
-/* PRICE */
 
 .product-price{
+    color:#ffffff;
 
-color:#67e8f9;  
+    background:#16a34a;
 
-background:rgba(6,182,212,.10);  
+    border:1px solid #15803d;
 
-border:1px solid rgba(6,182,212,.18);  
+    padding:4px 8px;
 
-padding:4px 8px;  
+    border-radius:6px;
 
-border-radius:6px;  
+    font-size:11px;
 
-font-size:11px;  
+    font-weight:900;
 
-font-weight:900;  
-
-white-space:nowrap;
-
+    white-space:nowrap;
 }
 
-/* STOCK */
-
 .stock-status{
+    padding:4px 8px;
 
-padding:4px 8px;  
+    border-radius:6px;
 
-border-radius:6px;  
+    font-size:10px;
 
-font-size:10px;  
+    font-weight:800;
 
-font-weight:800;  
-
-white-space:nowrap;
-
+    white-space:nowrap;
 }
 
 .stock-status.in-stock{
+    color:#15803d;
 
-color:#86efac;  
+    background:#f0fdf4;
 
-background:rgba(34,197,94,.10);  
-
-border:1px solid rgba(34,197,94,.18);
-
+    border:1px solid #bbf7d0;
 }
 
 .stock-status.low-stock{
+    color:#a16207;
 
-color:#fde68a;  
+    background:#fefce8;
 
-background:rgba(234,179,8,.10);  
-
-border:1px solid rgba(234,179,8,.18);
-
+    border:1px solid #fde68a;
 }
 
 .stock-status.out-stock{
+    color:#dc2626;
 
-color:#fca5a5;  
+    background:#fef2f2;
 
-background:rgba(239,68,68,.10);  
-
-border:1px solid rgba(239,68,68,.18);
-
+    border:1px solid #fecaca;
 }
 
 .stock-status.unlimited{
+    color:#15803d;
 
-color:#67e8f9;  
+    background:#f0fdf4;
 
-background:rgba(6,182,212,.10);  
-
-border:1px solid rgba(6,182,212,.18);
-
+    border:1px solid #bbf7d0;
 }
 
-/* ==============================
-BUY BUTTON
-============================== */
-
 .buy-btn{
+    border:none;
 
-border:none;  
+    color:#ffffff;
 
-color:#fff;  
+    background:#16a34a;
 
-background:  
-    linear-gradient(  
-        135deg,  
-        #7c3aed,  
-        #06b6d4  
-    );  
+    padding:9px 13px;
 
-padding:9px 13px;  
+    border-radius:8px;
 
-border-radius:8px;  
+    cursor:pointer;
 
-cursor:pointer;  
+    font-size:11px;
 
-font-size:11px;  
+    font-weight:900;
 
-font-weight:900;  
+    white-space:nowrap;
 
-white-space:nowrap;  
-
-transition:.2s;
-
+    transition:.2s;
 }
 
 .buy-btn:hover{
+    background:#15803d;
 
-transform:scale(1.03);  
+    transform:scale(1.03);
 
-box-shadow:  
-    0 5px 15px  
-    rgba(124,58,237,.25);
-
+    box-shadow:0 5px 15px rgba(22,163,74,.20);
 }
 
 .buy-btn.disabled{
+    background:#d1d5db;
 
-background:#303747;  
+    color:#6b7280;
 
-color:#8b95a7;  
+    cursor:not-allowed;
 
-cursor:not-allowed;  
-
-opacity:.75;
-
+    opacity:.75;
 }
-
-/* ==============================
-LOADING / EMPTY / ERROR
-============================== */
 
 .loading,
 .empty,
 .error{
-
-width:100%;  
-
-text-align:center;  
-
-padding:50px 20px;  
-
-border-radius:15px;
-
+    width:100%;
+    text-align:center;
+    padding:50px 20px;
+    border-radius:15px;
 }
 
 .loading{
-
-color:#94a3b8;
-
+    color:#64748b;
 }
 
 .empty{
-
-border:1px dashed rgba(255,255,255,.12);  
-
-color:#94a3b8;
-
+    border:1px dashed #d1d5db;
+    color:#64748b;
+    background:#fafafa;
 }
 
 .empty h2,
 .error h2{
-
-color:#fff;  
-
-margin-bottom:8px;
-
+    color:#111827;
+    margin-bottom:8px;
 }
 
 .error{
+    background:#fef2f2;
 
-background:rgba(239,68,68,.06);  
+    border:1px solid #fecaca;
 
-border:  
-    1px solid  
-    rgba(239,68,68,.20);  
-
-color:#fca5a5;
-
+    color:#dc2626;
 }
-
-/* ==============================
-MOBILE
-============================== */
 
 @media(max-width:600px){
 
-.navbar{  
+    .navbar{
+        padding:0 12px;
+    }
 
-    padding:0 12px;  
-}  
+    .logo{
+        font-size:19px;
+    }
 
-.logo{  
+    .nav-btn{
+        padding:8px 10px;
+        font-size:11px;
+    }
 
-    font-size:19px;  
-}  
+    .container{
+        padding:22px 10px 50px;
+    }
 
-.nav-btn{  
+    .page-title h1{
+        font-size:25px;
+    }
 
-    padding:8px 10px;  
+    .product-card{
+        min-height:70px;
+        padding:8px;
+        gap:10px;
+    }
 
-    font-size:11px;  
-}  
+    .product-image{
+        width:48px;
+        height:48px;
+        min-width:48px;
+    }
 
-.container{  
+    .product-name{
+        font-size:13px;
+    }
 
-    padding:  
-        22px 10px 50px;  
-}  
+    .product-bottom{
+        gap:5px;
+    }
 
-.page-title h1{  
+    .product-price{
+        font-size:10px;
+        padding:4px 7px;
+    }
 
-    font-size:25px;  
-}  
+    .stock-status{
+        font-size:9px;
+        padding:4px 7px;
+    }
 
-.product-card{  
-
-    min-height:70px;  
-
-    padding:8px;  
-
-    gap:10px;  
-}  
-
-.product-image{  
-
-    width:48px;  
-
-    height:48px;  
-
-    min-width:48px;  
-}  
-
-.product-name{  
-
-    font-size:13px;  
-}  
-
-.product-bottom{  
-
-    gap:5px;  
-}  
-
-.product-price{  
-
-    font-size:10px;  
-
-    padding:4px 7px;  
-}  
-
-.stock-status{  
-
-    font-size:9px;  
-
-    padding:4px 7px;  
-}  
-
-.buy-btn{  
-
-    padding:8px 10px;  
-
-    font-size:10px;  
-}
+    .buy-btn{
+        padding:8px 10px;
+        font-size:10px;
+    }
 
 }
-
-/* VERY SMALL PHONES */
 
 @media(max-width:380px){
 
-.product-card{  
+    .product-card{
+        gap:7px;
+    }
 
-    gap:7px;  
-}  
+    .product-image{
+        width:44px;
+        height:44px;
+        min-width:44px;
+    }
 
-.product-image{  
-
-    width:44px;  
-
-    height:44px;  
-
-    min-width:44px;  
-}  
-
-.buy-btn{  
-
-    padding:7px 8px;  
-
-    font-size:9px;  
-}
+    .buy-btn{
+        padding:7px 8px;
+        font-size:9px;
+    }
 
 }
 
-</style></head><body><header><div class="navbar"><a
-href="dashboard.html"
-class="logo"
+</style>
 
-> 
+</head>
 
-Zavora <span>Social</span>
+<body>
 
-</a>  <div class="nav-right">  <a  
-    href="dashboard.html"  
-    class="nav-btn"  
->  
-    Dashboard  
-</a>  
+<header>
 
+<div class="navbar">
 
-<a  
-    href="orders.html"  
-    class="nav-btn"  
->  
-    Orders  
+<a href="dashboard.html" class="logo">
+    Zavora <span>Social</span>
 </a>
 
-</div>  </div></header><main class="container"><div class="page-title"><h1>  
-    Products  
-</h1>  <p>  
-    Browse available products on Zavora Social.  
-</p>  </div><div  
-    class="filter-area"  
-    id="filterArea"  
-><button  
-    class="filter-btn active"  
-    data-category="all"  
->  
-    All Products  
-</button>  </div><div  
-    class="products-grid"  
-    id="productsGrid"  
-><div class="loading">  Checking your account...
+<div class="nav-right">
 
-</div>  </div></main><script type="module">  /* ==============================
-FIREBASE IMPORTS
-============================== */
+<a href="dashboard.html" class="nav-btn">
+    Dashboard
+</a>
+
+<a href="orders.html" class="nav-btn">
+    Orders
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<div class="page-title">
+
+<h1>
+    Products
+</h1>
+
+<p>
+    Browse available products on Zavora Social.
+</p>
+
+</div>
+
+<div class="filter-area" id="filterArea">
+
+<button
+    class="filter-btn active"
+    data-category="all"
+>
+    All Products
+</button>
+
+</div>
+
+<div
+    class="products-grid"
+    id="productsGrid"
+>
+
+<div class="loading">
+    Checking your account...
+</div>
+
+</div>
+
+</main>
+
+<script type="module">
 
 import {
-initializeApp
+    initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
-getAuth,
-onAuthStateChanged
+    getAuth,
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
-getDatabase,
-ref,
-onValue
+    getDatabase,
+    ref,
+    onValue
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-/* ==============================
-FIREBASE CONFIG
-============================== */
 
 const firebaseConfig = {
 
-apiKey:  
-    "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",  
+apiKey:
+    "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
-authDomain:  
-    "zavorasocial.firebaseapp.com",  
+authDomain:
+    "zavorasocial.firebaseapp.com",
 
-databaseURL:  
-    "https://zavorasocial-default-rtdb.firebaseio.com/",  
+databaseURL:
+    "https://zavorasocial-default-rtdb.firebaseio.com/",
 
-projectId:  
-    "zavorasocial",  
+projectId:
+    "zavorasocial",
 
-storageBucket:  
-    "zavorasocial.firebasestorage.app",  
+storageBucket:
+    "zavorasocial.firebasestorage.app",
 
-messagingSenderId:  
-    "447170165246",  
+messagingSenderId:
+    "447170165246",
 
-appId:  
-    "1:447170165246:web:982649e6533257ea0f28af",  
+appId:
+    "1:447170165246:web:982649e6533257ea0f28af",
 
-measurementId:  
+measurementId:
     "G-D4LNBEWH50"
 
 };
 
+
 const app =
-initializeApp(
-firebaseConfig
-);
+initializeApp(firebaseConfig);
 
 const auth =
 getAuth(app);
@@ -725,815 +580,704 @@ getAuth(app);
 const db =
 getDatabase(app);
 
+
 const productsGrid =
 document.getElementById(
-"productsGrid"
+    "productsGrid"
 );
 
 const filterArea =
 document.getElementById(
-"filterArea"
+    "filterArea"
 );
+
 
 let allProducts = [];
 
-let selectedCategory =
-"all";
+let selectedCategory = "all";
 
-let authResolved =
-false;
+let authResolved = false;
 
-/* ==============================
-URL CATEGORY
-============================== */
 
 const urlParams =
 new URLSearchParams(
-window.location.search
+    window.location.search
 );
 
+
 const requestedCategory =
-urlParams.get(
-"category"
-);
+urlParams.get("category");
+
 
 if(requestedCategory){
 
-selectedCategory =  
-    decodeURIComponent(  
-        requestedCategory  
-    );
+    selectedCategory =
+        decodeURIComponent(
+            requestedCategory
+        );
 
 }
 
-/* ==============================
-AUTH
-============================== */
 
 onAuthStateChanged(
 
-auth,  
+auth,
 
-(user) => {  
+(user) => {
 
-    authResolved =  
-        true;  
+    authResolved = true;
 
+    if(!user){
 
-    if(!user){  
+        window.location.replace(
+            "login.html"
+        );
 
-        window.location.replace(  
-            "login.html"  
-        );  
+        return;
 
-        return;  
+    }
 
-    }  
+    loadProducts();
 
-
-    loadProducts();  
-
-    loadCategories();  
+    loadCategories();
 
 }
 
 );
 
-/* ==============================
-LOAD PRODUCTS
-============================== */
 
 function loadProducts(){
 
-const productsRef =  
-    ref(  
-        db,  
-        "products"  
-    );  
+const productsRef =
+    ref(
+        db,
+        "products"
+    );
 
 
-onValue(  
+onValue(
 
-    productsRef,  
+    productsRef,
 
-    (snapshot) => {  
+    (snapshot) => {
 
-        const data =  
-            snapshot.val() || {};  
-
-
-        allProducts =  
-
-            Object.entries(  
-                data  
-            )  
-
-            .map(  
-                ([id,product]) => ({  
-
-                    id:id,  
-
-                    ...product  
-
-                })  
-            )  
-
-            .filter(  
-                product =>  
-
-                    product &&  
-
-                    product.active === true  
-
-            );  
+        const data =
+            snapshot.val() || {};
 
 
-        allProducts.sort(  
+        allProducts =
 
-            (a,b) => {  
+            Object.entries(data)
 
-                const aTime =  
-                    Number(  
-                        a.createdAt || 0  
-                    );  
+            .map(
+                ([id,product]) => ({
 
+                    id:id,
 
-                const bTime =  
-                    Number(  
-                        b.createdAt || 0  
-                    );  
+                    ...product
 
+                })
+            )
 
-                return bTime - aTime;  
-
-            }  
-
-        );  
+            .filter(
+                product =>
+                    product &&
+                    product.active === true
+            );
 
 
-        renderProducts();  
+        allProducts.sort(
 
-    },  
+            (a,b) => {
+
+                const aTime =
+                    Number(
+                        a.createdAt || 0
+                    );
+
+                const bTime =
+                    Number(
+                        b.createdAt || 0
+                    );
+
+                return bTime - aTime;
+
+            }
+
+        );
 
 
-    (error) => {  
+        renderProducts();
 
-        console.error(  
-            "Product loading error:",  
-            error  
-        );  
+    },
+
+    (error) => {
+
+        console.error(
+            "Product loading error:",
+            error
+        );
 
 
-        productsGrid.innerHTML = `  
+        productsGrid.innerHTML = `
 
-            <div class="error">  
+            <div class="error">
 
-                <h2>  
-                    Products unavailable  
-                </h2>  
+                <h2>
+                    Products unavailable
+                </h2>
 
-                <p>  
-                    We could not load the marketplace products.  
-                </p>  
+                <p>
+                    We could not load the marketplace products.
+                </p>
 
-            </div>  
+            </div>
 
-        `;  
+        `;
 
-    }  
+    }
 
 );
 
 }
 
-/* ==============================
-LOAD CATEGORIES
-============================== */
 
 function loadCategories(){
 
-const categoriesRef =  
-    ref(  
-        db,  
-        "categories"  
-    );  
+const categoriesRef =
+    ref(
+        db,
+        "categories"
+    );
 
 
-onValue(  
+onValue(
 
-    categoriesRef,  
+    categoriesRef,
 
-    (snapshot) => {  
+    (snapshot) => {
 
-        const data =  
-            snapshot.val() || {};  
-
-
-        Object.entries(  
-            data  
-        )  
-        .forEach(  
-
-            ([id,category]) => {  
-
-                if(  
-
-                    !category ||  
-
-                    category.active !== true ||  
-
-                    !category.name  
-
-                ){  
-
-                    return;  
-
-                }  
+        const data =
+            snapshot.val() || {};
 
 
-                const exists =  
+        Object.entries(data)
+        .forEach(
 
-                    [  
-                        ...filterArea.children  
-                    ]  
+            ([id,category]) => {
 
-                    .some(  
+                if(
+                    !category ||
+                    category.active !== true ||
+                    !category.name
+                ){
 
-                        button => {  
+                    return;
 
-                            return String(  
-                                button.dataset.category  
-                            )  
-                            .toLowerCase()  
-
-                            ===  
-
-                            String(  
-                                category.name  
-                            )  
-                            .toLowerCase();  
-
-                        }  
-
-                    );  
+                }
 
 
-                if(exists){  
+                const exists =
 
-                    return;  
+                    [
+                        ...filterArea.children
+                    ]
+                    .some(
 
-                }  
+                        button => {
 
+                            return String(
+                                button.dataset.category
+                            )
+                            .toLowerCase()
 
-                const button =  
-                    document.createElement(  
-                        "button"  
-                    );  
+                            ===
 
+                            String(
+                                category.name
+                            )
+                            .toLowerCase();
 
-                button.className =  
-                    "filter-btn";  
+                        }
 
-
-                button.dataset.category =  
-                    category.name;  
-
-
-                button.textContent =  
-
-                    (  
-                        category.icon ||  
-                        "📦"  
-                    )  
-
-                    + " "  
-
-                    + category.name;  
+                    );
 
 
-                button.addEventListener(  
+                if(exists){
 
-                    "click",  
+                    return;
 
-                    () => {  
-
-                        selectedCategory =  
-                            category.name;  
+                }
 
 
-                        updateButtons();  
-
-                        renderProducts();  
-
-                    }  
-
-                );  
+                const button =
+                    document.createElement(
+                        "button"
+                    );
 
 
-                filterArea.appendChild(  
-                    button  
-                );  
-
-            }  
-
-        );  
+                button.className =
+                    "filter-btn";
 
 
-        updateButtons();  
-
-        renderProducts();  
-
-    },  
+                button.dataset.category =
+                    category.name;
 
 
-    (error) => {  
+                button.textContent =
 
-        console.error(  
-            "Category loading error:",  
-            error  
-        );  
+                    (
+                        category.icon ||
+                        "📦"
+                    )
 
-    }  
+                    + " "
+
+                    + category.name;
+
+
+                button.addEventListener(
+
+                    "click",
+
+                    () => {
+
+                        selectedCategory =
+                            category.name;
+
+                        updateButtons();
+
+                        renderProducts();
+
+                    }
+
+                );
+
+
+                filterArea.appendChild(
+                    button
+                );
+
+            }
+
+        );
+
+
+        updateButtons();
+
+        renderProducts();
+
+    },
+
+    (error) => {
+
+        console.error(
+            "Category loading error:",
+            error
+        );
+
+    }
 
 );
 
 }
 
-/* ==============================
-STOCK
-============================== */
 
 function getStockInfo(product){
 
-/*  
- * No stock field = Unlimited  
- */  
+if(
+    product.stock === undefined ||
+    product.stock === null ||
+    product.stock === ""
+){
 
-if(  
+    return {
+        type:"unlimited",
+        text:"Unlimited"
+    };
 
-    product.stock === undefined ||  
-
-    product.stock === null ||  
-
-    product.stock === ""  
-
-){  
-
-    return {  
-
-        type:  
-            "unlimited",  
-
-        text:  
-            "Unlimited"  
-
-    };  
-
-}  
+}
 
 
-const stock =  
-    Number(  
-        product.stock  
-    );  
+const stock =
+    Number(product.stock);
 
 
-if(  
-    !Number.isFinite(stock)  
-){  
+if(!Number.isFinite(stock)){
 
-    return {  
+    return {
+        type:"unlimited",
+        text:"Unlimited"
+    };
 
-        type:  
-            "unlimited",  
-
-        text:  
-            "Unlimited"  
-
-    };  
-
-}  
+}
 
 
-if(stock <= 0){  
+if(stock <= 0){
 
-    return {  
+    return {
+        type:"out-stock",
+        text:"Out of Stock"
+    };
 
-        type:  
-            "out-stock",  
-
-        text:  
-            "Out of Stock"  
-
-    };  
-
-}  
+}
 
 
-return {  
+return {
 
-    type:  
-        stock <= 5  
-        ? "low-stock"  
-        : "in-stock",  
+    type:
+        stock <= 5
+        ? "low-stock"
+        : "in-stock",
 
-    text:  
-        stock + " Pcs"  
+    text:
+        stock + " Pcs"
 
 };
 
 }
 
-/* ==============================
-RENDER PRODUCTS
-============================== */
 
 function renderProducts(){
 
-if(!authResolved){  
+if(!authResolved){
 
-    return;  
-
-}  
-
-
-let products =  
-    allProducts;  
-
-
-if(  
-
-    selectedCategory &&  
-
-    selectedCategory !== "all"  
-
-){  
-
-    products =  
-
-        allProducts.filter(  
-
-            product => {  
-
-                return String(  
-                    product.category || ""  
-                )  
-                .toLowerCase()  
-
-                ===  
-
-                String(  
-                    selectedCategory  
-                )  
-                .toLowerCase();  
-
-            }  
-
-        );  
-
-}  
-
-
-
-if(products.length === 0){  
-
-    productsGrid.innerHTML = `  
-
-        <div class="empty">  
-
-            <div  
-                style="  
-                    font-size:40px;  
-                    margin-bottom:10px;  
-                "  
-            >  
-                📦  
-            </div>  
-
-
-            <h2>  
-                No products available  
-            </h2>  
-
-
-            <p>  
-
-                ${  
-                    selectedCategory === "all"  
-
-                    ? "New products will appear here."  
-
-                    : "There are no products in this category yet."  
-
-                }  
-
-            </p>  
-
-        </div>  
-
-    `;  
-
-    return;  
-
-}  
-
-
-
-productsGrid.innerHTML = "";  
-
-
-
-products.forEach(  
-
-    product => {  
-
-        const card =  
-            document.createElement(  
-                "article"  
-            );  
-
-
-        card.className =  
-            "product-card";  
-
-
-
-        const image =  
-
-            product.image ||  
-
-            "https://via.placeholder.com/100x100?text=Zavora";  
-
-
-
-        const stockInfo =  
-            getStockInfo(  
-                product  
-            );  
-
-
-        const isOutOfStock =  
-            stockInfo.type ===  
-            "out-stock";  
-
-
-
-        card.innerHTML = `  
-
-            <div class="product-image">  
-
-                <img  
-
-                    src="${escapeHtml(  
-                        image  
-                    )}"  
-
-                    alt="${escapeHtml(  
-                        product.name ||  
-                        "Product"  
-                    )}"  
-
-                >  
-
-            </div>  
-
-
-
-            <div class="product-info">  
-
-                <div class="product-name">  
-
-                    ${escapeHtml(  
-                        product.name ||  
-                        "Unnamed Product"  
-                    )}  
-
-                </div>  
-
-
-
-                <div class="product-bottom">  
-
-
-                    <div class="product-price">  
-
-                        ₦${formatNumber(  
-                            product.price || 0  
-                        )}  
-
-                    </div>  
-
-
-
-                    <div  
-                        class="  
-                            stock-status  
-                            ${stockInfo.type}  
-                        "  
-                    >  
-
-                        ${escapeHtml(  
-                            stockInfo.text  
-                        )}  
-
-                    </div>  
-
-
-                </div>  
-
-            </div>  
-
-
-
-            <button  
-
-                class="  
-                    buy-btn  
-                    ${  
-                        isOutOfStock  
-                        ? "disabled"  
-                        : ""  
-                    }  
-                "  
-
-                ${  
-                    isOutOfStock  
-                    ? "disabled"  
-                    : ""  
-                }  
-
-            >  
-
-                ${  
-                    isOutOfStock  
-                    ? "SOLD"  
-                    : "BUY"  
-                }  
-
-            </button>  
-
-        `;  
-
-
-
-        const buyButton =  
-            card.querySelector(  
-                ".buy-btn"  
-            );  
-
-
-
-        if(!isOutOfStock){  
-
-            buyButton.addEventListener(  
-
-                "click",  
-
-                () => {  
-
-                    window.location.href =  
-
-                        "product.html?id="  
-
-                        +  
-
-                        encodeURIComponent(  
-                            product.id  
-                        );  
-
-                }  
-
-            );  
-
-        }  
-
-
-
-        const imageElement =  
-            card.querySelector(  
-                "img"  
-            );  
-
-
-
-        imageElement.addEventListener(  
-
-            "error",  
-
-            () => {  
-
-                imageElement.src =  
-                    "https://via.placeholder.com/100x100?text=Zavora";  
-
-            }  
-
-        );  
-
-
-
-        productsGrid.appendChild(  
-            card  
-        );  
-
-    }  
-
-);
+    return;
 
 }
 
-/* ==============================
-FILTER BUTTONS
-============================== */
+
+let products =
+    allProducts;
+
+
+if(
+    selectedCategory &&
+    selectedCategory !== "all"
+){
+
+    products =
+        allProducts.filter(
+
+            product => {
+
+                return String(
+                    product.category || ""
+                )
+                .toLowerCase()
+
+                ===
+
+                String(
+                    selectedCategory
+                )
+                .toLowerCase();
+
+            }
+
+        );
+
+}
+
+
+if(products.length === 0){
+
+    productsGrid.innerHTML = `
+
+        <div class="empty">
+
+            <div
+                style="
+                    font-size:40px;
+                    margin-bottom:10px;
+                "
+            >
+                📦
+            </div>
+
+            <h2>
+                No products available
+            </h2>
+
+            <p>
+
+                ${
+                    selectedCategory === "all"
+
+                    ? "New products will appear here."
+
+                    : "There are no products in this category yet."
+
+                }
+
+            </p>
+
+        </div>
+
+    `;
+
+    return;
+
+}
+
+
+productsGrid.innerHTML = "";
+
+
+products.forEach(
+
+    product => {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "product-card";
+
+
+        const image =
+            product.image ||
+
+            "https://via.placeholder.com/100x100?text=Zavora";
+
+
+        const stockInfo =
+            getStockInfo(product);
+
+
+        const isOutOfStock =
+            stockInfo.type ===
+            "out-stock";
+
+
+        card.innerHTML = `
+
+            <div class="product-image">
+
+                <img
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(
+                        product.name ||
+                        "Product"
+                    )}"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+
+                    ${escapeHtml(
+                        product.name ||
+                        "Unnamed Product"
+                    )}
+
+                </div>
+
+                <div class="product-bottom">
+
+                    <div class="product-price">
+
+                        ₦${formatNumber(
+                            product.price || 0
+                        )}
+
+                    </div>
+
+                    <div
+                        class="
+                            stock-status
+                            ${stockInfo.type}
+                        "
+                    >
+
+                        ${escapeHtml(
+                            stockInfo.text
+                        )}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+
+                class="
+                    buy-btn
+                    ${
+                        isOutOfStock
+                        ? "disabled"
+                        : ""
+                    }
+                "
+
+                ${
+                    isOutOfStock
+                    ? "disabled"
+                    : ""
+                }
+
+            >
+
+                ${
+                    isOutOfStock
+                    ? "SOLD"
+                    : "BUY"
+                }
+
+            </button>
+
+        `;
+
+
+        const buyButton =
+            card.querySelector(
+                ".buy-btn"
+            );
+
+
+        if(!isOutOfStock){
+
+            buyButton.addEventListener(
+
+                "click",
+
+                () => {
+
+                    window.location.href =
+                        "product.html?id=" +
+                        encodeURIComponent(
+                            product.id
+                        );
+
+                }
+
+            );
+
+        }
+
+
+        const imageElement =
+            card.querySelector("img");
+
+
+        imageElement.addEventListener(
+
+            "error",
+
+            () => {
+
+                imageElement.src =
+                    "https://via.placeholder.com/100x100?text=Zavora";
+
+            }
+
+        );
+
+
+        productsGrid.appendChild(
+            card
+        );
+
+    }
+
+);
+
+
+}
+
 
 function updateButtons(){
 
-const buttons =  
-    filterArea.querySelectorAll(  
-        ".filter-btn"  
-    );  
+const buttons =
+    filterArea.querySelectorAll(
+        ".filter-btn"
+    );
 
 
-buttons.forEach(  
+buttons.forEach(
 
-    button => {  
+    button => {
 
-        button.classList.toggle(  
+        button.classList.toggle(
 
-            "active",  
+            "active",
 
-            String(  
-                button.dataset.category  
-            )  
-            .toLowerCase()  
+            String(
+                button.dataset.category
+            )
+            .toLowerCase()
 
-            ===  
+            ===
 
-            String(  
-                selectedCategory  
-            )  
-            .toLowerCase()  
+            String(
+                selectedCategory
+            )
+            .toLowerCase()
 
-        );  
+        );
 
-    }  
+    }
 
 );
 
 }
 
-/* ==============================
-NUMBER FORMAT
-============================== */
 
 function formatNumber(value){
 
-return Number(value)  
+return Number(value)
 
-    .toLocaleString(  
+    .toLocaleString(
 
-        "en-NG",  
+        "en-NG",
 
-        {  
-            maximumFractionDigits:2  
-        }  
+        {
+            maximumFractionDigits:2
+        }
 
     );
 
 }
 
-/* ==============================
-ESCAPE HTML
-============================== */
 
 function escapeHtml(value){
 
-return String(value)  
+return String(value)
 
-    .replaceAll(  
-        "&",  
-        "&amp;"  
-    )  
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
 
-    .replaceAll(  
-        "<",  
-        "&lt;"  
-    )  
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
 
-    .replaceAll(  
-        ">",  
-        "&gt;"  
-    )  
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
 
-    .replaceAll(  
-        '"',  
-        "&quot;"  
-    )  
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
 
-    .replaceAll(  
-        "'",  
-        "&#039;"  
+    .replaceAll(
+        "'",
+        "&#039;"
     );
 
 }
 
-</script></body></html>
+</script>
+
+</body>
+</html>
