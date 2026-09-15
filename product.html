@@ -39,53 +39,37 @@ body{
         #080b16;
 }
 
-
-/* ==========================================
-   HEADER
-========================================== */
-
 header{
     position:sticky;
     top:0;
     z-index:100;
 
     background:rgba(8,11,22,.88);
-
     backdrop-filter:blur(18px);
 
     border-bottom:
         1px solid rgba(255,255,255,.08);
 }
 
-
 .navbar{
     max-width:1100px;
     min-height:70px;
 
     margin:auto;
-
     padding:0 20px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
 }
 
-
 .logo{
     color:#fff;
-
     text-decoration:none;
-
     font-size:22px;
-
     font-weight:900;
 }
-
 
 .logo span{
     background:
@@ -96,44 +80,30 @@ header{
         );
 
     -webkit-background-clip:text;
-
     -webkit-text-fill-color:transparent;
 }
 
-
 .back-btn{
     text-decoration:none;
-
     color:#cbd5e1;
 
     padding:10px 14px;
-
     border-radius:10px;
 
-    background:
-        rgba(255,255,255,.05);
+    background:rgba(255,255,255,.05);
 
     border:
         1px solid rgba(255,255,255,.08);
 
     font-size:13px;
-
     font-weight:700;
 }
 
-
-/* ==========================================
-   MAIN
-========================================== */
-
 .container{
     max-width:1100px;
-
     margin:auto;
-
     padding:35px 20px 70px;
 }
-
 
 .product-box{
     display:grid;
@@ -158,51 +128,31 @@ header{
         0 25px 70px rgba(0,0,0,.25);
 }
 
-
-/* ==========================================
-   IMAGE
-========================================== */
-
 .product-image{
     min-height:450px;
-
     background:#111827;
-
     overflow:hidden;
 }
 
-
 .product-image img{
     width:100%;
-
     height:100%;
-
     min-height:450px;
 
     object-fit:cover;
-
     display:block;
 }
-
-
-/* ==========================================
-   DETAILS
-========================================== */
 
 .product-details{
     padding:40px 35px;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
 }
 
-
 .category{
     display:inline-block;
-
     width:max-content;
 
     color:#67e8f9;
@@ -218,49 +168,31 @@ header{
     border-radius:9px;
 
     font-size:12px;
-
     font-weight:800;
 
     margin-bottom:16px;
 }
 
-
 .product-name{
     font-size:36px;
-
     line-height:1.2;
-
     font-weight:900;
-
     margin-bottom:15px;
 }
 
-
 .price{
     color:#67e8f9;
-
     font-size:30px;
-
     font-weight:900;
-
     margin-bottom:20px;
 }
 
-
 .description{
     color:#94a3b8;
-
     line-height:1.7;
-
     font-size:15px;
-
     margin-bottom:25px;
 }
-
-
-/* ==========================================
-   WALLET
-========================================== */
 
 .wallet-box{
     padding:17px;
@@ -276,36 +208,22 @@ header{
     margin-bottom:18px;
 }
 
-
 .wallet-label{
     color:#94a3b8;
-
     font-size:12px;
-
     margin-bottom:5px;
 }
 
-
 .wallet-balance{
     font-size:22px;
-
     font-weight:900;
-
     color:#fff;
 }
 
-
-/* ==========================================
-   BUY BUTTON
-========================================== */
-
 .buy-btn{
     width:100%;
-
     border:none;
-
     cursor:pointer;
-
     color:#fff;
 
     padding:15px;
@@ -313,7 +231,6 @@ header{
     border-radius:12px;
 
     font-size:15px;
-
     font-weight:900;
 
     background:
@@ -328,68 +245,41 @@ header{
         opacity .15s ease;
 }
 
-
 .buy-btn:hover{
     transform:translateY(-1px);
 }
 
-
 .buy-btn:disabled{
     opacity:.5;
-
     cursor:not-allowed;
-
     transform:none;
 }
 
-
-/* ==========================================
-   CONTINUE
-========================================== */
-
 .continue{
     display:block;
-
     text-align:center;
-
     margin-top:15px;
 
     color:#94a3b8;
-
     text-decoration:none;
-
     font-size:13px;
 }
 
-
-/* ==========================================
-   LOADING
-========================================== */
-
 .loading{
     max-width:600px;
-
     margin:70px auto;
 
     text-align:center;
-
     padding:50px;
 
     color:#94a3b8;
 }
 
-
-/* ==========================================
-   ERROR
-========================================== */
-
 .error{
     max-width:600px;
-
     margin:70px auto;
 
     text-align:center;
-
     padding:50px;
 
     border:
@@ -403,21 +293,13 @@ header{
     color:#fca5a5;
 }
 
-
 .error h2{
     color:#fff;
-
     margin-bottom:10px;
 }
 
-
-/* ==========================================
-   MESSAGE
-========================================== */
-
 .message{
     position:fixed;
-
     inset:0;
 
     z-index:500;
@@ -425,7 +307,6 @@ header{
     display:none;
 
     align-items:center;
-
     justify-content:center;
 
     padding:20px;
@@ -436,10 +317,8 @@ header{
     backdrop-filter:blur(8px);
 }
 
-
 .message-box{
     width:100%;
-
     max-width:440px;
 
     padding:30px;
@@ -457,37 +336,29 @@ header{
         0 25px 80px rgba(0,0,0,.4);
 }
 
-
 .message-icon{
     font-size:45px;
-
     margin-bottom:12px;
 }
-
 
 .message-box h2{
     margin-bottom:10px;
 }
 
-
 .message-box p{
     color:#94a3b8;
 
     line-height:1.6;
-
     margin-bottom:20px;
 
     white-space:pre-wrap;
-
     word-break:break-word;
 }
-
 
 .message-btn{
     width:100%;
 
     border:none;
-
     color:#fff;
 
     padding:12px;
@@ -506,11 +377,6 @@ header{
         );
 }
 
-
-/* ==========================================
-   DELIVERY BOX
-========================================== */
-
 .delivery-box{
     margin-top:18px;
 
@@ -527,27 +393,22 @@ header{
     text-align:left;
 }
 
-
 .delivery-title{
     color:#67e8f9;
 
     font-size:13px;
-
     font-weight:900;
 
     margin-bottom:9px;
 }
 
-
 .delivery-content{
     color:#e2e8f0;
 
     line-height:1.7;
-
     font-size:14px;
 
     white-space:pre-wrap;
-
     word-break:break-word;
 
     background:
@@ -558,39 +419,29 @@ header{
     border-radius:10px;
 }
 
-
-/* ==========================================
-   MOBILE
-========================================== */
-
 @media(max-width:800px){
 
     .product-box{
         grid-template-columns:1fr;
     }
 
-
     .product-image{
         min-height:300px;
     }
-
 
     .product-image img{
         min-height:300px;
     }
 
-
     .product-details{
         padding:30px 22px;
     }
-
 
     .product-name{
         font-size:29px;
     }
 
 }
-
 
 @media(max-width:500px){
 
@@ -601,11 +452,9 @@ header{
             50px;
     }
 
-
     .product-image{
         min-height:260px;
     }
-
 
     .product-image img{
         min-height:260px;
@@ -619,7 +468,6 @@ header{
 
 <body>
 
-
 <header>
 
 <div class="navbar">
@@ -630,7 +478,6 @@ header{
     >
         Zavora <span>Social</span>
     </a>
-
 
     <a
         href="products.html"
@@ -658,8 +505,6 @@ header{
 </main>
 
 
-<!-- MESSAGE -->
-
 <div
     id="message"
     class="message"
@@ -674,16 +519,13 @@ header{
         ⚠️
     </div>
 
-
     <h2 id="messageTitle">
         Message
     </h2>
 
-
     <p id="messageText">
         Please wait...
     </p>
-
 
     <button
         id="messageButton"
@@ -699,23 +541,16 @@ header{
 
 <script type="module">
 
-
-/* ==========================================
-   FIREBASE
-========================================== */
-
 import {
     initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
 
 import {
     getAuth,
     onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
 
 import {
     getDatabase,
@@ -760,72 +595,40 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
-
 const auth =
     getAuth(app);
-
 
 const db =
     getDatabase(app);
 
 
-/* ==========================================
-   ELEMENTS
-========================================== */
-
 const content =
-    document.getElementById(
-        "content"
-    );
-
+    document.getElementById("content");
 
 const message =
-    document.getElementById(
-        "message"
-    );
-
+    document.getElementById("message");
 
 const messageIcon =
-    document.getElementById(
-        "messageIcon"
-    );
-
+    document.getElementById("messageIcon");
 
 const messageTitle =
-    document.getElementById(
-        "messageTitle"
-    );
-
+    document.getElementById("messageTitle");
 
 const messageText =
-    document.getElementById(
-        "messageText"
-    );
-
+    document.getElementById("messageText");
 
 const messageButton =
-    document.getElementById(
-        "messageButton"
-    );
+    document.getElementById("messageButton");
 
-
-/* ==========================================
-   PRODUCT ID
-========================================== */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
-
 const productId =
     params.get("id");
 
-
-/* ==========================================
-   CURRENT DATA
-========================================== */
 
 let currentUser = null;
 
@@ -837,12 +640,60 @@ let purchaseInProgress = false;
 
 
 /* ==========================================
-   AUTH
+   AUTH FIX
 ========================================== */
+
+let authCheckFinished = false;
+
+
+/*
+ * Give Firebase time to restore the
+ * existing browser login session.
+ *
+ * We DO NOT redirect immediately when
+ * the first auth callback is empty.
+ */
+
+const authTimeout =
+    setTimeout(() => {
+
+        if(!authCheckFinished){
+
+            authCheckFinished = true;
+
+            console.log(
+                "No Firebase login session found."
+            );
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+    }, 4000);
+
 
 onAuthStateChanged(
     auth,
     async (user) => {
+
+        /*
+         * Firebase has now finished checking
+         * the current authentication state.
+         */
+
+        if(authCheckFinished){
+
+            return;
+
+        }
+
+
+        authCheckFinished = true;
+
+        clearTimeout(authTimeout);
+
 
         console.log(
             "Zavora authentication:",
@@ -863,7 +714,12 @@ onAuthStateChanged(
         }
 
 
-        currentUser = user;
+        /*
+         * User is authenticated.
+         */
+
+        currentUser =
+            user;
 
 
         if(!productId){
@@ -1050,7 +906,6 @@ function renderProduct(
                     Your Wallet Balance
 
                 </div>
-
 
                 <div
                     id="walletBalance"
@@ -1275,11 +1130,6 @@ async function purchaseProduct(){
 
     try{
 
-        /* ======================================
-           STEP 1
-           CHECK WALLET
-        ====================================== */
-
         const walletRef =
             ref(
                 db,
@@ -1324,11 +1174,6 @@ async function purchaseProduct(){
 
         }
 
-
-        /* ======================================
-           STEP 2
-           FIND AVAILABLE INVENTORY
-        ====================================== */
 
         const inventoryRef =
             ref(
@@ -1415,11 +1260,6 @@ async function purchaseProduct(){
         }
 
 
-        /* ======================================
-           STEP 3
-           RESERVE / MARK ITEM SOLD
-        ====================================== */
-
         const itemRef =
             ref(
                 db,
@@ -1487,11 +1327,6 @@ async function purchaseProduct(){
         }
 
 
-        /* ======================================
-           STEP 4
-           DEDUCT WALLET
-        ====================================== */
-
         const walletTransaction =
             await runTransaction(
                 walletRef,
@@ -1525,11 +1360,6 @@ async function purchaseProduct(){
 
         if(!walletTransaction.committed){
 
-            /*
-             * Wallet could not be charged.
-             * Return the inventory item.
-             */
-
             await update(
                 itemRef,
                 {
@@ -1559,11 +1389,6 @@ async function purchaseProduct(){
 
         }
 
-
-        /* ======================================
-           STEP 5
-           CREATE ORDER
-        ====================================== */
 
         const orderRef =
             push(
@@ -1625,11 +1450,6 @@ async function purchaseProduct(){
         );
 
 
-        /* ======================================
-           STEP 6
-           MARK ITEM SOLD
-        ====================================== */
-
         await update(
             itemRef,
             {
@@ -1658,11 +1478,6 @@ async function purchaseProduct(){
             }
         );
 
-
-        /* ======================================
-           STEP 7
-           UPDATE DISPLAYED BALANCE
-        ====================================== */
 
         const newBalance =
             Number(
@@ -1693,10 +1508,6 @@ async function purchaseProduct(){
 
         }
 
-
-        /* ======================================
-           SUCCESS
-        ====================================== */
 
         showPurchaseSuccess(
             orderId,
@@ -1729,10 +1540,6 @@ async function purchaseProduct(){
 }
 
 
-/* ==========================================
-   PURCHASE SUCCESS
-========================================== */
-
 function showPurchaseSuccess(
     orderId,
     itemDetails,
@@ -1763,23 +1570,8 @@ function showPurchaseSuccess(
     );
 
 
-    const oldDelivery =
-        document.querySelector(
-            ".delivery-box"
-        );
-
-
-    if(oldDelivery){
-
-        oldDelivery.remove();
-
-    }
-
-
     const deliveryBox =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     deliveryBox.className =
@@ -1787,9 +1579,7 @@ function showPurchaseSuccess(
 
 
     const deliveryTitle =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     deliveryTitle.className =
@@ -1801,9 +1591,7 @@ function showPurchaseSuccess(
 
 
     const deliveryContent =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     deliveryContent.className =
@@ -1864,10 +1652,6 @@ function showPurchaseSuccess(
 }
 
 
-/* ==========================================
-   RESET BUY BUTTON
-========================================== */
-
 function resetBuyButton(){
 
     purchaseInProgress =
@@ -1903,10 +1687,6 @@ function resetBuyButton(){
 
 }
 
-
-/* ==========================================
-   ERROR
-========================================== */
 
 function showError(
     title,
@@ -1954,10 +1734,6 @@ function showError(
 }
 
 
-/* ==========================================
-   MESSAGE
-========================================== */
-
 function showMessage(
     icon,
     title,
@@ -1967,18 +1743,14 @@ function showMessage(
     messageIcon.textContent =
         icon;
 
-
     messageTitle.textContent =
         title;
-
 
     messageText.textContent =
         text;
 
-
     messageButton.textContent =
         "Continue";
-
 
     messageButton.onclick =
         () => {
@@ -1988,16 +1760,11 @@ function showMessage(
 
         };
 
-
     message.style.display =
         "flex";
 
 }
 
-
-/* ==========================================
-   FORMAT
-========================================== */
 
 function formatNumber(value){
 
@@ -2006,17 +1773,12 @@ function formatNumber(value){
             "en-NG",
             {
                 minimumFractionDigits:2,
-
                 maximumFractionDigits:2
             }
         );
 
 }
 
-
-/* ==========================================
-   ESCAPE
-========================================== */
 
 function escapeHtml(value){
 
