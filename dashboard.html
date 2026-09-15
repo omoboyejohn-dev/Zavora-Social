@@ -1,5 +1,16 @@
-<!DOCTYPE html><html lang="en">  <head><meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Dashboard</title><style>  *{
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Dashboard</title>
+
+<style>
+
+*{
 box-sizing:border-box;
 margin:0;
 padding:0;
@@ -364,281 +375,362 @@ text-align:center;
 
 @media(max-width:1000px){
 
-.stats{  
-    grid-template-columns:repeat(2,1fr);  
-}  
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
 
-.quick-actions{  
-    grid-template-columns:repeat(2,1fr);  
-}  
+.quick-actions{
+grid-template-columns:repeat(2,1fr);
+}
 
-.category-grid{  
-    grid-template-columns:repeat(3,1fr);  
+.category-grid{
+grid-template-columns:repeat(3,1fr);
 }
 
 }
 
 @media(max-width:650px){
 
-.navbar{  
-    min-height:65px;  
-}  
+.navbar{
+min-height:65px;
+}
 
-.user-name{  
-    display:none;  
-}  
+.user-name{
+display:none;
+}
 
-.container{  
-    padding:28px 15px 50px;  
-}  
+.container{
+padding:28px 15px 50px;
+}
 
-.welcome h1{  
-    font-size:27px;  
-}  
+.welcome h1{
+font-size:27px;
+}
 
-.stats{  
-    grid-template-columns:repeat(2,1fr);  
-    gap:10px;  
-}  
+.stats{
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
 
-.stat-card{  
-    padding:17px;  
-}  
+.stat-card{
+padding:17px;
+}
 
-.stat-value{  
-    font-size:21px;  
-}  
+.stat-value{
+font-size:21px;
+}
 
-.quick-actions{  
-    grid-template-columns:repeat(2,1fr);  
-    gap:10px;  
-}  
+.quick-actions{
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
 
-.quick-card{  
-    padding:16px;  
-}  
+.quick-card{
+padding:16px;
+}
 
-.category-grid{  
-    grid-template-columns:repeat(2,1fr);  
-    gap:10px;  
-}  
+.category-grid{
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
 
-.category-card{  
-    min-height:130px;  
-    padding:16px;  
+.category-card{
+min-height:130px;
+padding:16px;
 }
 
 }
 
-</style></head><body><!-- LOADING SCREEN --><div class="loading-screen" id="loadingScreen"><div class="loader-box">
+</style>
 
-<div class="loader"></div>  
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+
+<div class="loading-screen" id="loadingScreen">
+
+<div class="loader-box">
+
+<div class="loader"></div>
 
 <p>Checking your account...</p>
 
-</div>  </div><!-- HEADER --><header><div class="navbar">  <a href="dashboard.html" class="logo">  
-    Zavora <span>Social</span>  
-</a>  
-
-<div class="user-area">  
-
-    <span class="user-name" id="userName">  
-        Loading...  
-    </span>  
-
-    <button class="logout-btn" id="logoutBtn">  
-        Logout  
-    </button>  
+</div>
 
 </div>
 
-</div>  </header><!-- MAIN --><main class="container"><!-- WELCOME -->  <section class="welcome">  <h1>  
-    Welcome back,  
-    <span id="welcomeName">User</span> 👋  
-</h1>  
 
-<p>  
-    Manage your wallet, orders and marketplace purchases from one place.  
+<!-- HEADER -->
+
+<header>
+
+<div class="navbar">
+
+<a href="dashboard.html" class="logo">
+Zavora <span>Social</span>
+</a>
+
+<div class="user-area">
+
+<span class="user-name" id="userName">
+Loading...
+</span>
+
+<button class="logout-btn" id="logoutBtn">
+Logout
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+<!-- WELCOME -->
+
+<section class="welcome">
+
+<h1>
+Welcome back,
+<span id="welcomeName">User</span> 👋
+</h1>
+
+<p>
+Manage your wallet, orders and marketplace purchases from one place.
 </p>
 
-</section>  <!-- STATS -->  <section class="stats">  <div class="stat-card">  
-
-    <div class="stat-icon">  
-        💰  
-    </div>  
-
-    <div class="stat-title">  
-        Wallet Balance  
-    </div>  
-
-    <div class="stat-value" id="walletBalance">  
-        ₦0.00  
-    </div>  
-
-</div>  
+</section>
 
 
-<div class="stat-card">  
+<!-- STATS -->
 
-    <div class="stat-icon">  
-        🛍️  
-    </div>  
-
-    <div class="stat-title">  
-        Orders  
-    </div>  
-
-    <div class="stat-value">  
-        0  
-    </div>  
-
-</div>  
+<section class="stats">
 
 
-<div class="stat-card">  
+<!-- WALLET -->
 
-    <div class="stat-icon">  
-        📦  
-    </div>  
+<div class="stat-card">
 
-    <div class="stat-title">  
-        Available Products  
-    </div>  
+<div class="stat-icon">
+💰
+</div>
 
-    <div class="stat-value">  
-        0  
-    </div>  
+<div class="stat-title">
+Wallet Balance
+</div>
 
-</div>  
-
-
-<div class="stat-card">  
-
-    <div class="stat-icon">  
-        🔔  
-    </div>  
-
-    <div class="stat-title">  
-        Notifications  
-    </div>  
-
-    <div class="stat-value">  
-        0  
-    </div>  
+<div class="stat-value" id="walletBalance">
+₦0.00
+</div>
 
 </div>
 
-</section>  <!-- QUICK ACTIONS -->  <section>  <h2 class="section-title">  
-    Quick Actions  
-</h2>  
 
-<div class="quick-actions">  
+<!-- ORDERS -->
 
-    <a href="products.html" class="quick-card">  
+<div class="stat-card">
 
-        <div class="quick-icon">  
-            🛒  
-        </div>  
+<div class="stat-icon">
+🛍️
+</div>
 
-        <strong>  
-            Browse Products  
-        </strong>  
+<div class="stat-title">
+Orders
+</div>
 
-        <small>  
-            Explore the marketplace  
-        </small>  
-
-    </a>  
-
-
-    <a href="wallet.html" class="quick-card">  
-
-        <div class="quick-icon">  
-            💳  
-        </div>  
-
-        <strong>  
-            Fund Wallet  
-        </strong>  
-
-        <small>  
-            Add money to your wallet  
-        </small>  
-
-    </a>  
-
-
-    <a href="orders.html" class="quick-card">  
-
-        <div class="quick-icon">  
-            📦  
-        </div>  
-
-        <strong>  
-            My Orders  
-        </strong>  
-
-        <small>  
-            View your purchases  
-        </small>  
-
-    </a>  
-
-
-    <a href="profile.html" class="quick-card">  
-
-        <div class="quick-icon">  
-            👤  
-        </div>  
-
-        <strong>  
-            My Profile  
-        </strong>  
-
-        <small>  
-            Manage your account  
-        </small>  
-
-    </a>  
+<div class="stat-value" id="ordersCount">
+0
+</div>
 
 </div>
 
-</section>  <!-- MARKETPLACE CATEGORIES -->  <section>  <div class="marketplace-header">  
 
-    <div>  
+<!-- PRODUCTS -->
 
-        <h2 class="section-title">  
-            Marketplace Categories  
-        </h2>  
+<div class="stat-card">
 
-        <p>  
-            Choose a category to browse available products.  
-        </p>  
+<div class="stat-icon">
+📦
+</div>
 
-    </div>  
+<div class="stat-title">
+Available Products
+</div>
 
-</div>  
-
-
-<div  
-    class="category-grid"  
-    id="categoryGrid"  
->  
-
-    <div class="category-loading">  
-
-        <div class="big">  
-            🗂️  
-        </div>  
-
-        Loading categories...  
-
-    </div>  
+<div class="stat-value" id="productsCount">
+0
+</div>
 
 </div>
 
-</section>  </main><footer>© <span id="year"></span> Zavora Social.  
-All rights reserved.  </footer><script type="module">  /* ==========================================
+
+<!-- NOTIFICATIONS -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🔔
+</div>
+
+<div class="stat-title">
+Notifications
+</div>
+
+<div class="stat-value" id="notificationsCount">
+0
+</div>
+
+</div>
+
+</section>
+
+
+<!-- QUICK ACTIONS -->
+
+<section>
+
+<h2 class="section-title">
+Quick Actions
+</h2>
+
+<div class="quick-actions">
+
+
+<a href="products.html" class="quick-card">
+
+<div class="quick-icon">
+🛒
+</div>
+
+<strong>
+Browse Products
+</strong>
+
+<small>
+Explore the marketplace
+</small>
+
+</a>
+
+
+<a href="wallet.html" class="quick-card">
+
+<div class="quick-icon">
+💳
+</div>
+
+<strong>
+Fund Wallet
+</strong>
+
+<small>
+Add money to your wallet
+</small>
+
+</a>
+
+
+<a href="orders.html" class="quick-card">
+
+<div class="quick-icon">
+📦
+</div>
+
+<strong>
+My Orders
+</strong>
+
+<small>
+View your purchases
+</small>
+
+</a>
+
+
+<a href="profile.html" class="quick-card">
+
+<div class="quick-icon">
+👤
+</div>
+
+<strong>
+My Profile
+</strong>
+
+<small>
+Manage your account
+</small>
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- MARKETPLACE CATEGORIES -->
+
+<section>
+
+<div class="marketplace-header">
+
+<div>
+
+<h2 class="section-title">
+Marketplace Categories
+</h2>
+
+<p>
+Choose a category to browse available products.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="category-grid"
+id="categoryGrid"
+>
+
+<div class="category-loading">
+
+<div class="big">
+🗂️
+</div>
+
+Loading categories...
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+© <span id="year"></span> Zavora Social.
+All rights reserved.
+
+</footer>
+
+
+<script type="module">
+
+
+/* ==========================================
 FIREBASE
 ========================================== */
 
@@ -647,12 +739,14 @@ initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
+
 import {
 getAuth,
 onAuthStateChanged,
 signOut
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
 getDatabase,
@@ -661,42 +755,47 @@ onValue
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
+
 const firebaseConfig = {
 
-apiKey:  
-    "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",  
+apiKey:
+"AIzaSyBzj9_RgQPW21duk4sxyLUO3hy3-6GwGs",
 
-authDomain:  
-    "zavorasocial.firebaseapp.com",  
+authDomain:
+"zavorasocial.firebaseapp.com",
 
-databaseURL:  
-    "https://zavorasocial-default-rtdb.firebaseio.com/",  
+databaseURL:
+"https://zavorasocial-default-rtdb.firebaseio.com/",
 
-projectId:  
-    "zavorasocial",  
+projectId:
+"zavorasocial",
 
-storageBucket:  
-    "zavorasocial.firebasestorage.app",  
+storageBucket:
+"zavorasocial.firebasestorage.app",
 
-messagingSenderId:  
-    "447170165246",  
+messagingSenderId:
+"447170165246",
 
-appId:  
-    "1:447170165246:web:982649e6533257ea0f28af",  
+appId:
+"1:447170165246:web:982649e6533257ea0f28af",
 
-measurementId:  
-    "G-D4LNBEWH50"
+measurementId:
+"G-D4LNBEWH50"
 
 };
+
 
 const app =
 initializeApp(firebaseConfig);
 
+
 const auth =
 getAuth(app);
 
+
 const db =
 getDatabase(app);
+
 
 /* ==========================================
 ELEMENTS
@@ -720,6 +819,16 @@ document.getElementById("categoryGrid");
 const walletBalance =
 document.getElementById("walletBalance");
 
+const ordersCount =
+document.getElementById("ordersCount");
+
+const productsCount =
+document.getElementById("productsCount");
+
+const notificationsCount =
+document.getElementById("notificationsCount");
+
+
 /* ==========================================
 AUTHENTICATION
 ========================================== */
@@ -728,59 +837,65 @@ onAuthStateChanged(
 auth,
 (user) => {
 
-if(!user){  
+if(!user){
 
-        window.location.href =  
-            "login.html";  
+window.location.href =
+"login.html";
 
-        return;  
+return;
 
-    }  
-
-
-    let displayName =  
-        user.displayName;  
+}
 
 
-    if(!displayName){  
-
-        displayName =  
-            user.email  
-                ? user.email.split("@")[0]  
-                : "User";  
-
-    }  
+let displayName =
+user.displayName;
 
 
-    userName.textContent =  
-        displayName;  
+if(!displayName){
+
+displayName =
+user.email
+? user.email.split("@")[0]
+: "User";
+
+}
 
 
-    welcomeName.textContent =  
-        displayName;  
+userName.textContent =
+displayName;
 
 
-    loadingScreen.style.display =  
-        "none";  
+welcomeName.textContent =
+displayName;
 
 
-    /*  
-        Start listening to the  
-        customer's wallet.  
-    */  
-
-    loadWallet(user.uid);  
+loadingScreen.style.display =
+"none";
 
 
-    /*  
-        Start listening to categories.  
-    */  
+/* WALLET */
 
-    loadCategories();  
+loadWallet(user.uid);
+
+
+/* CATEGORIES */
+
+loadCategories();
+
+
+/* PRODUCTS */
+
+loadProducts();
+
+
+/* ORDERS */
+
+loadOrders(user.uid);
 
 }
 
 );
+
 
 /* ==========================================
 LOAD CUSTOMER WALLET
@@ -788,47 +903,178 @@ LOAD CUSTOMER WALLET
 
 function loadWallet(uid){
 
-const walletRef =  
-    ref(  
-        db,  
-        "users/" + uid + "/walletBalance"  
-    );  
+const walletRef =
+ref(
+db,
+"users/" + uid + "/walletBalance"
+);
 
 
-onValue(  
-    walletRef,  
-    (snapshot) => {  
+onValue(
+walletRef,
+(snapshot) => {
 
-        const balance =  
-            Number(snapshot.val()) || 0;  
-
-
-        walletBalance.textContent =  
-            "₦" +  
-            balance.toLocaleString(  
-                "en-NG",  
-                {  
-                    minimumFractionDigits:2,  
-                    maximumFractionDigits:2  
-                }  
-            );  
-
-    },  
-    (error) => {  
-
-        console.error(  
-            "Wallet loading error:",  
-            error  
-        );  
+const balance =
+Number(snapshot.val()) || 0;
 
 
-        walletBalance.textContent =  
-            "₦0.00";  
+walletBalance.textContent =
+"₦" +
+balance.toLocaleString(
+"en-NG",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
 
-    }  
+},
+(error) => {
+
+console.error(
+"Wallet loading error:",
+error
+);
+
+walletBalance.textContent =
+"₦0.00";
+
+}
+
 );
 
 }
+
+
+/* ==========================================
+LOAD AVAILABLE PRODUCTS
+========================================== */
+
+function loadProducts(){
+
+const productsRef =
+ref(db,"products");
+
+
+onValue(
+productsRef,
+(snapshot) => {
+
+const data =
+snapshot.val();
+
+
+let count = 0;
+
+
+if(data){
+
+Object.values(data).forEach(
+(product) => {
+
+if(
+product &&
+product.active === true
+){
+
+count++;
+
+}
+
+}
+);
+
+}
+
+
+productsCount.textContent =
+count;
+
+},
+(error) => {
+
+console.error(
+"Products loading error:",
+error
+);
+
+productsCount.textContent =
+"0";
+
+}
+
+);
+
+}
+
+
+/* ==========================================
+LOAD CUSTOMER ORDERS
+========================================== */
+
+function loadOrders(uid){
+
+const ordersRef =
+ref(db,"orders");
+
+
+onValue(
+ordersRef,
+(snapshot) => {
+
+const data =
+snapshot.val();
+
+
+let count = 0;
+
+
+if(data){
+
+Object.values(data).forEach(
+(order) => {
+
+if(
+order &&
+order.uid === uid
+){
+
+count++;
+
+}
+
+}
+);
+
+}
+
+
+ordersCount.textContent =
+count;
+
+},
+(error) => {
+
+console.error(
+"Orders loading error:",
+error
+);
+
+/*
+Orders will remain 0 until
+the Firebase orders path is
+available to the customer.
+*/
+
+ordersCount.textContent =
+"0";
+
+}
+
+);
+
+}
+
 
 /* ==========================================
 LOAD CATEGORIES
@@ -836,189 +1082,203 @@ LOAD CATEGORIES
 
 function loadCategories(){
 
-const categoriesRef =  
-    ref(db,"categories");  
+const categoriesRef =
+ref(db,"categories");
 
 
-onValue(  
-    categoriesRef,  
-    (snapshot) => {  
+onValue(
+categoriesRef,
+(snapshot) => {
 
-        const data =  
-            snapshot.val();  
-
-
-        const categories = [];  
+const data =
+snapshot.val();
 
 
-        if(data){  
-
-            Object.entries(data)  
-                .forEach(  
-                    ([id,category]) => {  
-
-                        if(  
-                            category &&  
-                            category.active === true  
-                        ){  
-
-                            categories.push({  
-
-                                id:id,  
-
-                                name:  
-                                    category.name ||  
-                                    "Unnamed",  
-
-                                icon:  
-                                    category.icon ||  
-                                    "📦",  
-
-                                createdAt:  
-                                    category.createdAt ||  
-                                    0  
-
-                            });  
-
-                        }  
-
-                    }  
-                );  
-
-        }  
+const categories = [];
 
 
-        categories.sort(  
-            (a,b) =>  
-                a.createdAt -  
-                b.createdAt  
-        );  
+if(data){
 
+Object.entries(data)
+.forEach(
+([id,category]) => {
 
-        renderCategories(categories);  
+if(
+category &&
+category.active === true
+){
 
-    },  
-    (error) => {  
+categories.push({
 
-        console.error(  
-            "Category loading error:",  
-            error  
-        );  
+id:id,
 
+name:
+category.name ||
+"Unnamed",
 
-        categoryGrid.innerHTML = `  
+icon:
+category.icon ||
+"📦",
 
-            <div class="empty-marketplace">  
+createdAt:
+category.createdAt ||
+0
 
-                <div class="big">  
-                    ⚠️  
-                </div>  
+});
 
-                <h3>  
-                    Categories unavailable  
-                </h3>  
+}
 
-                <p>  
-                    We could not load the marketplace categories.  
-                </p>  
-
-            </div>  
-
-        `;  
-
-    }  
+}
 );
 
 }
+
+
+categories.sort(
+(a,b) =>
+a.createdAt -
+b.createdAt
+);
+
+
+renderCategories(
+categories
+);
+
+},
+(error) => {
+
+console.error(
+"Category loading error:",
+error
+);
+
+
+categoryGrid.innerHTML = `
+
+<div class="empty-marketplace">
+
+<div class="big">
+⚠️
+</div>
+
+<h3>
+Categories unavailable
+</h3>
+
+<p>
+We could not load the marketplace categories.
+</p>
+
+</div>
+
+`;
+
+}
+
+);
+
+}
+
 
 /* ==========================================
 RENDER CATEGORIES
 ========================================== */
 
-function renderCategories(categories){
+function renderCategories(
+categories
+){
 
-if(categories.length === 0){  
+if(categories.length === 0){
 
-    categoryGrid.innerHTML = `  
+categoryGrid.innerHTML = `
 
-        <div class="empty-marketplace">  
+<div class="empty-marketplace">
 
-            <div class="big">  
-                🗂️  
-            </div>  
+<div class="big">
+🗂️
+</div>
 
-            <h3>  
-                No categories available  
-            </h3>  
+<h3>
+No categories available
+</h3>
 
-            <p>  
-                New marketplace categories will appear here.  
-            </p>  
+<p>
+New marketplace categories will appear here.
+</p>
 
-        </div>  
+</div>
 
-    `;  
+`;
 
-    return;  
+return;
 
-}  
-
-
-categoryGrid.innerHTML = "";  
-
-
-categories.forEach(  
-    (category) => {  
-
-        const card =  
-            document.createElement("div");  
+}
 
 
-        card.className =  
-            "category-card";  
+categoryGrid.innerHTML = "";
 
 
-        card.innerHTML = `  
+categories.forEach(
+(category) => {
 
-            <div class="category-icon">  
-
-                ${escapeHtml(category.icon)}  
-
-            </div>  
-
-            <div class="category-name">  
-
-                ${escapeHtml(category.name)}  
-
-            </div>  
-
-            <div class="category-count">  
-
-                Browse products →  
-
-            </div>  
-
-        `;  
+const card =
+document.createElement("div");
 
 
-        card.addEventListener(  
-            "click",  
-            () => {  
-
-                openCategory(  
-                    category.name  
-                );  
-
-            }  
-        );  
+card.className =
+"category-card";
 
 
-        categoryGrid.appendChild(card);  
+card.innerHTML = `
 
-    }  
+<div class="category-icon">
+
+${escapeHtml(
+category.icon
+)}
+
+</div>
+
+<div class="category-name">
+
+${escapeHtml(
+category.name
+)}
+
+</div>
+
+<div class="category-count">
+
+Browse products →
+
+</div>
+
+`;
+
+
+card.addEventListener(
+"click",
+() => {
+
+openCategory(
+category.name
 );
 
 }
+);
+
+
+categoryGrid.appendChild(
+card
+);
+
+}
+
+);
+
+}
+
 
 /* ==========================================
 SECURITY: ESCAPE TEXT
@@ -1026,34 +1286,35 @@ SECURITY: ESCAPE TEXT
 
 function escapeHtml(value){
 
-return String(value)  
+return String(value)
 
-    .replaceAll(  
-        "&",  
-        "&amp;"  
-    )  
+.replaceAll(
+"&",
+"&amp;"
+)
 
-    .replaceAll(  
-        "<",  
-        "&lt;"  
-    )  
+.replaceAll(
+"<",
+"&lt;"
+)
 
-    .replaceAll(  
-        ">",  
-        "&gt;"  
-    )  
+.replaceAll(
+">",
+"&gt;"
+)
 
-    .replaceAll(  
-        '"',  
-        "&quot;"  
-    )  
+.replaceAll(
+'"',
+"&quot;"
+)
 
-    .replaceAll(  
-        "'",  
-        "&#039;"  
-    );
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
+
 
 /* ==========================================
 OPEN CATEGORY
@@ -1062,11 +1323,12 @@ OPEN CATEGORY
 window.openCategory =
 function(category){
 
-window.location.href =  
-        "products.html?category=" +  
-        encodeURIComponent(category);  
+window.location.href =
+"products.html?category=" +
+encodeURIComponent(category);
 
 };
+
 
 /* ==========================================
 LOGOUT
@@ -1076,42 +1338,43 @@ logoutBtn.addEventListener(
 "click",
 async () => {
 
-logoutBtn.disabled =  
-        true;  
+logoutBtn.disabled =
+true;
 
-    logoutBtn.textContent =  
-        "Logging out...";  
-
-
-    try{  
-
-        await signOut(auth);  
+logoutBtn.textContent =
+"Logging out...";
 
 
-        window.location.href =  
-            "login.html";  
+try{
 
-    }catch(error){  
-
-        console.error(error);  
+await signOut(auth);
 
 
-        logoutBtn.disabled =  
-            false;  
+window.location.href =
+"login.html";
 
-        logoutBtn.textContent =  
-            "Logout";  
+}catch(error){
+
+console.error(error);
 
 
-        alert(  
-            "Unable to logout. Please try again."  
-        );  
+logoutBtn.disabled =
+false;
 
-    }  
+logoutBtn.textContent =
+"Logout";
+
+
+alert(
+"Unable to logout. Please try again."
+);
+
+}
 
 }
 
 );
+
 
 /* ==========================================
 YEAR
@@ -1121,6 +1384,9 @@ document.getElementById("year")
 .textContent =
 new Date().getFullYear();
 
-</script></body>
+
+</script>
+
+</body>
 
 </html>
