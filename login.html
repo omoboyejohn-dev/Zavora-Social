@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -22,10 +23,6 @@
 
 <style>
 
-/* ================================
-   RESET
-================================ */
-
 *{
     margin:0;
     padding:0;
@@ -34,9 +31,7 @@
 
 body{
     font-family:Inter,Arial,sans-serif;
-
     min-height:100vh;
-
     color:#fff;
 
     background:
@@ -52,11 +47,6 @@ body{
         ),
         #070b14;
 }
-
-
-/* ================================
-   HEADER
-================================ */
 
 .header{
     width:100%;
@@ -138,11 +128,6 @@ body{
     border-color:#8b5cf6;
 }
 
-
-/* ================================
-   PAGE
-================================ */
-
 .login-page{
     min-height:calc(100vh - 76px);
 
@@ -165,11 +150,6 @@ body{
 
     align-items:center;
 }
-
-
-/* ================================
-   LEFT SIDE
-================================ */
 
 .login-intro{
     padding:20px 0;
@@ -236,11 +216,6 @@ body{
     margin-bottom:35px;
 }
 
-
-/* ================================
-   BENEFITS
-================================ */
-
 .benefits{
     display:flex;
 
@@ -289,11 +264,6 @@ body{
     font-size:12px;
 }
 
-
-/* ================================
-   LOGIN CARD
-================================ */
-
 .login-card{
     width:100%;
 
@@ -336,11 +306,6 @@ body{
     opacity:.12;
 }
 
-
-/* ================================
-   CARD HEADER
-================================ */
-
 .card-header{
     position:relative;
 
@@ -382,11 +347,6 @@ body{
 
     font-size:13px;
 }
-
-
-/* ================================
-   FORM
-================================ */
 
 .form-group{
     margin-bottom:20px;
@@ -478,11 +438,6 @@ body{
         0 0 0 3px rgba(139,92,246,.1);
 }
 
-
-/* ================================
-   PASSWORD
-================================ */
-
 .password-toggle{
     position:absolute;
 
@@ -505,11 +460,6 @@ body{
 .password-toggle:hover{
     color:#22d3ee;
 }
-
-
-/* ================================
-   REMEMBER
-================================ */
 
 .remember-row{
     display:flex;
@@ -541,11 +491,6 @@ body{
 
     accent-color:#8b5cf6;
 }
-
-
-/* ================================
-   MESSAGE
-================================ */
 
 .message{
     display:none;
@@ -580,11 +525,6 @@ body{
 
     border:1px solid rgba(34,197,94,.2);
 }
-
-
-/* ================================
-   LOGIN BUTTON
-================================ */
 
 .login-button{
     width:100%;
@@ -637,11 +577,6 @@ body{
     transform:none;
 }
 
-
-/* ================================
-   DIVIDER
-================================ */
-
 .divider{
     display:flex;
 
@@ -666,11 +601,6 @@ body{
 
     background:#252e40;
 }
-
-
-/* ================================
-   REGISTER
-================================ */
 
 .register-text{
     text-align:center;
@@ -700,11 +630,6 @@ body{
     color:#22d3ee;
 }
 
-
-/* ================================
-   SECURITY
-================================ */
-
 .security-note{
     display:flex;
 
@@ -725,11 +650,6 @@ body{
     color:#22c55e;
 }
 
-
-/* ================================
-   FOOTER
-================================ */
-
 .footer{
     text-align:center;
 
@@ -739,11 +659,6 @@ body{
 
     font-size:11px;
 }
-
-
-/* ================================
-   MOBILE
-================================ */
 
 @media(max-width:900px){
 
@@ -775,7 +690,6 @@ body{
     }
 
 }
-
 
 @media(max-width:520px){
 
@@ -824,368 +738,333 @@ body{
 
 </head>
 
-
 <body>
-
-
-<!-- HEADER -->
 
 <header class="header">
 
-    <div class="header-container">
+<div class="header-container">
 
-        <a href="index.html" class="logo">
+<a href="index.html" class="logo">
 
-            <span class="logo-icon">
-                <i class="fa-solid fa-bolt"></i>
-            </span>
+<span class="logo-icon">
+<i class="fa-solid fa-bolt"></i>
+</span>
 
-            <span>
-                Zavora <strong>Social</strong>
-            </span>
+<span>
+Zavora <strong>Social</strong>
+</span>
 
-        </a>
+</a>
 
+<a
+href="register.html"
+class="header-register"
+>
+Create Account
+</a>
 
-        <a
-            href="register.html"
-            class="header-register"
-        >
-            Create Account
-        </a>
-
-    </div>
+</div>
 
 </header>
 
 
-
-<!-- LOGIN -->
-
 <main class="login-page">
 
-    <div class="login-container">
+<div class="login-container">
 
 
-        <!-- LEFT -->
+<section class="login-intro">
 
-        <section class="login-intro">
+<div class="intro-badge">
 
-            <div class="intro-badge">
+<i class="fa-solid fa-shield-halved"></i>
 
-                <i class="fa-solid fa-shield-halved"></i>
+Secure Account Access
 
-                Secure Account Access
+</div>
 
-            </div>
 
+<h1>
 
-            <h1>
+Welcome back to
 
-                Welcome back to
+<span>Zavora Social.</span>
 
-                <span>Zavora Social.</span>
+</h1>
 
-            </h1>
 
+<p>
 
-            <p>
+Login to your account and continue
+managing your wallet, orders and
+digital marketplace purchases.
 
-                Login to your account and continue
-                managing your wallet, orders and
-                digital marketplace purchases.
+</p>
 
-            </p>
 
+<div class="benefits">
 
-            <div class="benefits">
+<div class="benefit">
 
+<div class="benefit-icon">
+<i class="fa-solid fa-wallet"></i>
+</div>
 
-                <div class="benefit">
+<div>
 
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
+<h3>
+Manage Your Wallet
+</h3>
 
-                    <div>
+<p>
+Check your balance and transactions.
+</p>
 
-                        <h3>
-                            Manage Your Wallet
-                        </h3>
+</div>
 
-                        <p>
-                            Check your balance and transactions.
-                        </p>
+</div>
 
-                    </div>
 
-                </div>
+<div class="benefit">
 
+<div class="benefit-icon">
+<i class="fa-solid fa-box-open"></i>
+</div>
 
-                <div class="benefit">
+<div>
 
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-box-open"></i>
-                    </div>
+<h3>
+Manage Your Orders
+</h3>
 
-                    <div>
+<p>
+View your purchases and order history.
+</p>
 
-                        <h3>
-                            Manage Your Orders
-                        </h3>
+</div>
 
-                        <p>
-                            View your purchases and order history.
-                        </p>
+</div>
 
-                    </div>
 
-                </div>
+<div class="benefit">
 
+<div class="benefit-icon">
+<i class="fa-solid fa-bolt"></i>
+</div>
 
-                <div class="benefit">
+<div>
 
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
+<h3>
+Fast Marketplace Access
+</h3>
 
-                    <div>
+<p>
+Get back to your marketplace quickly.
+</p>
 
-                        <h3>
-                            Fast Marketplace Access
-                        </h3>
+</div>
 
-                        <p>
-                            Get back to your marketplace quickly.
-                        </p>
+</div>
 
-                    </div>
+</div>
 
-                </div>
+</section>
 
 
-            </div>
+<section class="login-card">
 
-        </section>
+<div class="card-header">
 
+<div class="card-logo">
+<i class="fa-solid fa-bolt"></i>
+</div>
 
+<h2>
+Login to your account
+</h2>
 
-        <!-- LOGIN CARD -->
+<p>
+Enter your details to continue.
+</p>
 
-        <section class="login-card">
+</div>
 
 
-            <div class="card-header">
+<form id="loginForm">
 
-                <div class="card-logo">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
 
-                <h2>
-                    Login to your account
-                </h2>
+<div class="form-group">
 
-                <p>
-                    Enter your details to continue.
-                </p>
+<label for="email">
+Email Address
+</label>
 
-            </div>
+<div class="input-box">
 
+<i class="fa-regular fa-envelope"></i>
 
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+autocomplete="email"
+required
+>
 
-            <form id="loginForm">
+</div>
 
+</div>
 
-                <!-- EMAIL -->
 
-                <div class="form-group">
+<div class="form-group">
 
-                    <label for="email">
-                        Email Address
-                    </label>
+<div class="password-heading">
 
-                    <div class="input-box">
+<label for="password">
+Password
+</label>
 
-                        <i class="fa-regular fa-envelope"></i>
+<a
+href="#"
+class="forgot-password"
+id="forgotPassword"
+>
+Forgot password?
+</a>
 
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                            autocomplete="email"
-                            required
-                        >
+</div>
 
-                    </div>
 
-                </div>
+<div class="input-box">
 
+<i class="fa-solid fa-lock"></i>
 
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+autocomplete="current-password"
+required
+>
 
-                <!-- PASSWORD -->
+<button
+type="button"
+class="password-toggle"
+id="togglePassword"
+>
 
-                <div class="form-group">
+<i class="fa-regular fa-eye"></i>
 
-                    <div class="password-heading">
+</button>
 
-                        <label for="password">
-                            Password
-                        </label>
+</div>
 
-                        <a
-                            href="#"
-                            class="forgot-password"
-                            id="forgotPassword"
-                        >
-                            Forgot password?
-                        </a>
+</div>
 
-                    </div>
 
+<div class="remember-row">
 
-                    <div class="input-box">
+<label class="remember">
 
-                        <i class="fa-solid fa-lock"></i>
+<input
+type="checkbox"
+id="remember"
+checked
+>
 
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required
-                        >
+<span>
+Remember me
+</span>
 
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            id="togglePassword"
-                        >
+</label>
 
-                            <i class="fa-regular fa-eye"></i>
+</div>
 
-                        </button>
 
-                    </div>
+<div
+id="message"
+class="message"
+></div>
 
-                </div>
 
+<button
+type="submit"
+class="login-button"
+id="loginButton"
+>
 
+<span id="buttonText">
+Login
+</span>
 
-                <!-- REMEMBER -->
+<i
+id="buttonIcon"
+class="fa-solid fa-arrow-right"
+></i>
 
-                <div class="remember-row">
+</button>
 
-                    <label class="remember">
+</form>
 
-                        <input
-                            type="checkbox"
-                            id="remember"
-                        >
 
-                        <span>
-                            Remember me
-                        </span>
+<div class="divider">
+<span>OR</span>
+</div>
 
-                    </label>
 
-                </div>
+<p class="register-text">
+Don't have an account?
+</p>
 
 
+<a
+href="register.html"
+class="register-link"
+>
+Create an account
+<i class="fa-solid fa-arrow-right"></i>
+</a>
 
-                <!-- ERROR / SUCCESS -->
 
-                <div
-                    id="message"
-                    class="message"
-                ></div>
+<div class="security-note">
 
+<i class="fa-solid fa-shield-halved"></i>
 
+<span>
+Your account information is protected.
+</span>
 
-                <!-- BUTTON -->
+</div>
 
-                <button
-                    type="submit"
-                    class="login-button"
-                    id="loginButton"
-                >
+</section>
 
-                    <span id="buttonText">
-                        Login
-                    </span>
-
-                    <i
-                        id="buttonIcon"
-                        class="fa-solid fa-arrow-right"
-                    ></i>
-
-                </button>
-
-
-            </form>
-
-
-
-            <div class="divider">
-                <span>OR</span>
-            </div>
-
-
-            <p class="register-text">
-                Don't have an account?
-            </p>
-
-
-            <a
-                href="register.html"
-                class="register-link"
-            >
-                Create an account
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-
-            <div class="security-note">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-                <span>
-                    Your account information is protected.
-                </span>
-
-            </div>
-
-
-        </section>
-
-
-    </div>
+</div>
 
 </main>
 
 
-
 <footer class="footer">
 
-    © <span id="year"></span> Zavora Social.
-    All rights reserved.
+© <span id="year"></span> Zavora Social.
+All rights reserved.
 
 </footer>
 
 
-
-<!-- FIREBASE LOGIN -->
-
 <script type="module">
 
-import { initializeApp } from
+import {
+    initializeApp
+}
+from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     signInWithEmailAndPassword,
     setPersistence,
     browserLocalPersistence,
-    browserSessionPersistence,
     sendPasswordResetEmail
 }
 from
@@ -1199,7 +1078,7 @@ from
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_RgqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -1222,21 +1101,13 @@ const firebaseConfig = {
 };
 
 
-/* =========================================
-   INITIALIZE FIREBASE
-========================================= */
-
 const app =
     initializeApp(firebaseConfig);
+
 
 const auth =
     getAuth(app);
 
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
 
 const loginForm =
     document.getElementById("loginForm");
@@ -1254,14 +1125,10 @@ const message =
     document.getElementById("message");
 
 
-
-/* =========================================
-   MESSAGE
-========================================= */
-
 function showMessage(text,type){
 
-    message.textContent = text;
+    message.textContent =
+        text;
 
     message.className =
         "message " + type;
@@ -1269,16 +1136,15 @@ function showMessage(text,type){
 }
 
 
-
 function clearMessage(){
 
-    message.textContent = "";
+    message.textContent =
+        "";
 
     message.className =
         "message";
 
 }
-
 
 
 /* =========================================
@@ -1296,22 +1162,16 @@ loginForm.addEventListener(
 
         const email =
             document
-                .getElementById("email")
-                .value
-                .trim()
-                .toLowerCase();
+            .getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
 
 
         const password =
             document
-                .getElementById("password")
-                .value;
-
-
-        const remember =
-            document
-                .getElementById("remember")
-                .checked;
+            .getElementById("password")
+            .value;
 
 
         if(!email){
@@ -1340,19 +1200,8 @@ loginForm.addEventListener(
 
         try{
 
-            /* Choose login persistence */
-
-            await setPersistence(
-                auth,
-                remember
-                    ? browserLocalPersistence
-                    : browserSessionPersistence
-            );
-
-
-            /* Loading state */
-
-            loginButton.disabled = true;
+            loginButton.disabled =
+                true;
 
             buttonText.textContent =
                 "Signing in...";
@@ -1361,7 +1210,27 @@ loginForm.addEventListener(
                 "fa-solid fa-spinner fa-spin";
 
 
-            /* Firebase login */
+            /*
+             * IMPORTANT:
+             *
+             * Always keep the Firebase login
+             * in browser local persistence.
+             *
+             * This keeps the user logged in
+             * while moving between:
+             *
+             * Dashboard
+             * Products
+             * Product
+             * Wallet
+             * Orders
+             */
+
+            await setPersistence(
+                auth,
+                browserLocalPersistence
+            );
+
 
             await signInWithEmailAndPassword(
                 auth,
@@ -1370,23 +1239,26 @@ loginForm.addEventListener(
             );
 
 
-            /* Success */
-
             showMessage(
                 "Login successful. Redirecting...",
                 "success"
             );
 
 
-            setTimeout(function(){
+            setTimeout(
+                function(){
 
-                window.location.href =
-                    "dashboard.html";
+                    window.location.replace(
+                        "dashboard.html"
+                    );
 
-            },700);
+                },
+                700
+            );
 
 
-        }catch(error){
+        }
+        catch(error){
 
             console.error(
                 "Login error:",
@@ -1394,7 +1266,8 @@ loginForm.addEventListener(
             );
 
 
-            loginButton.disabled = false;
+            loginButton.disabled =
+                false;
 
             buttonText.textContent =
                 "Login";
@@ -1417,7 +1290,6 @@ loginForm.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/invalid-email"
@@ -1427,7 +1299,6 @@ loginForm.addEventListener(
                     "Please enter a valid email address.";
 
             }
-
 
             else if(
                 error.code ===
@@ -1439,7 +1310,6 @@ loginForm.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/too-many-requests"
@@ -1449,7 +1319,6 @@ loginForm.addEventListener(
                     "Too many login attempts. Please try again later.";
 
             }
-
 
             else if(
                 error.code ===
@@ -1473,111 +1342,143 @@ loginForm.addEventListener(
 );
 
 
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
+
+document
+.getElementById("togglePassword")
+.addEventListener(
+    "click",
+    function(){
+
+        const password =
+            document.getElementById(
+                "password"
+            );
+
+        const icon =
+            this.querySelector("i");
+
+
+        if(password.type === "password"){
+
+            password.type =
+                "text";
+
+            icon.className =
+                "fa-regular fa-eye-slash";
+
+        }
+        else{
+
+            password.type =
+                "password";
+
+            icon.className =
+                "fa-regular fa-eye";
+
+        }
+
+    }
+);
+
 
 /* =========================================
    FORGOT PASSWORD
 ========================================= */
 
 document
-    .getElementById("forgotPassword")
-    .addEventListener(
-        "click",
-        async function(event){
+.getElementById("forgotPassword")
+.addEventListener(
+    "click",
+    async function(event){
 
-            event.preventDefault();
+        event.preventDefault();
 
-            clearMessage();
-
-
-            const email =
-                document
-                    .getElementById("email")
-                    .value
-                    .trim()
-                    .toLowerCase();
+        clearMessage();
 
 
-            if(!email){
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        if(!email){
+
+            showMessage(
+                "Enter your email address first.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        try{
+
+            await sendPasswordResetEmail(
+                auth,
+                email
+            );
+
+
+            showMessage(
+                "Password reset email sent. Check your inbox.",
+                "success"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Password reset error:",
+                error
+            );
+
+
+            if(
+                error.code ===
+                "auth/user-not-found"
+            ){
 
                 showMessage(
-                    "Enter your email address first.",
+                    "No account was found with this email address.",
                     "error"
                 );
 
-                document
-                    .getElementById("email")
-                    .focus();
+            }
 
-                return;
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                showMessage(
+                    "Please enter a valid email address.",
+                    "error"
+                );
 
             }
 
-
-            try{
-
-                await sendPasswordResetEmail(
-                    auth,
-                    email
-                );
-
+            else{
 
                 showMessage(
-                    "Password reset email sent. Check your inbox.",
-                    "success"
+                    "Unable to send password reset email. Please try again.",
+                    "error"
                 );
-
-
-            }catch(error){
-
-                console.error(
-                    "Password reset error:",
-                    error
-                );
-
-
-                if(
-                    error.code ===
-                    "auth/user-not-found"
-                ){
-
-                    showMessage(
-                        "No account was found with this email address.",
-                        "error"
-                    );
-
-                }
-
-                else if(
-                    error.code ===
-                    "auth/invalid-email"
-                ){
-
-                    showMessage(
-                        "Please enter a valid email address.",
-                        "error"
-                    );
-
-                }
-
-                else{
-
-                    showMessage(
-                        "Unable to send password reset email. Please try again.",
-                        "error"
-                    );
-
-                }
 
             }
 
         }
-    );
 
+    }
+);
 
-
-/* =========================================
-   YEAR
-========================================= */
 
 document.getElementById("year").textContent =
     new Date().getFullYear();
