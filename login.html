@@ -496,6 +496,8 @@ font-size:12px;
 line-height:1.5;
 
 margin-bottom:15px;
+
+word-break:break-word;
 }
 
 .message.error{
@@ -1356,6 +1358,10 @@ buttonIcon.className =
 "fa-solid fa-arrow-right";
 
 
+/* =========================================
+DETAILED FIREBASE ERROR
+========================================= */
+
 let errorMessage =
 "Unable to login. Please try again.";
 
@@ -1410,6 +1416,50 @@ errorMessage =
 
 }
 
+else if(
+error.code ===
+"auth/operation-not-allowed"
+){
+
+errorMessage =
+"Email/Password login is disabled in Firebase Authentication.";
+
+}
+
+else if(
+error.code ===
+"auth/api-key-not-valid"
+){
+
+errorMessage =
+"Firebase API key is not valid.";
+
+}
+
+else if(
+error.code ===
+"auth/configuration-not-found"
+){
+
+errorMessage =
+"Firebase Authentication is not configured for this project.";
+
+}
+
+else if(
+error.code
+){
+
+errorMessage =
+"Firebase error: " +
+error.code +
+" — " +
+(error.message || "Unknown Firebase error.");
+
+}
+
+
+/* Show exact error */
 
 showMessage(
 errorMessage,
@@ -1502,6 +1552,20 @@ error.code ===
 
 showMessage(
 "Please enter a valid email address.",
+"error"
+);
+
+}
+
+else if(
+error.code
+){
+
+showMessage(
+"Firebase error: " +
+error.code +
+" — " +
+(error.message || "Unknown Firebase error."),
 "error"
 );
 
