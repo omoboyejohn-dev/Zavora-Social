@@ -1,4 +1,14 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Products</title><style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Products</title>
+
+<style>
 
 *{
     box-sizing:border-box;
@@ -8,6 +18,7 @@
 
 body{
     font-family:Inter,Arial,sans-serif;
+
     background:
         radial-gradient(
             circle at top left,
@@ -20,6 +31,7 @@ body{
             transparent 30%
         ),
         #080b16;
+
     color:#fff;
     min-height:100vh;
 }
@@ -33,14 +45,18 @@ header{
     position:sticky;
     top:0;
     z-index:100;
+
     border-bottom:1px solid rgba(255,255,255,.08);
+
     background:rgba(8,11,22,.88);
+
     backdrop-filter:blur(18px);
 }
 
 .navbar{
     max-width:1250px;
     min-height:70px;
+
     margin:auto;
     padding:0 20px;
 
@@ -603,7 +619,18 @@ header{
 
 }
 
-</style></head><body><header><div class="navbar"><a
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<div class="navbar">
+
+<a
     href="dashboard.html"
     class="logo"
 >
@@ -613,24 +640,34 @@ header{
 
 <div class="nav-right">
 
-    <a
-        href="dashboard.html"
-        class="nav-btn"
-    >
-        Dashboard
-    </a>
+<a
+    href="dashboard.html"
+    class="nav-btn"
+>
+    Dashboard
+</a>
 
 
-    <a
-        href="orders.html"
-        class="nav-btn"
-    >
-        Orders
-    </a>
+<a
+    href="orders.html"
+    class="nav-btn"
+>
+    Orders
+</a>
 
 </div>
 
-</div></header><main class="container"><div class="page-title"><h1>
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="page-title">
+
+<h1>
     Products
 </h1>
 
@@ -639,26 +676,42 @@ header{
     Browse available products on Zavora Social.
 </p>
 
-</div><div
+</div>
+
+
+<div
     class="filter-area"
     id="filterArea"
-><button
+>
+
+<button
     class="filter-btn active"
     data-category="all"
 >
     All Products
 </button>
 
-</div><div
+</div>
+
+
+<div
     class="products-grid"
     id="productsGrid"
-><div class="loading">
+>
+
+<div class="loading">
 
     Checking your account...
 
 </div>
 
-</div></main><script type="module">
+</div>
+
+
+</main>
+
+
+<script type="module">
 
 
 /* ==============================
@@ -697,7 +750,7 @@ from
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_RgqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -724,6 +777,10 @@ const firebaseConfig = {
 
 
 
+/* ==============================
+   FIREBASE INITIALIZATION
+============================== */
+
 const app =
     initializeApp(
         firebaseConfig
@@ -739,6 +796,10 @@ const db =
 
 
 
+/* ==============================
+   ELEMENTS
+============================== */
+
 const productsGrid =
     document.getElementById(
         "productsGrid"
@@ -751,6 +812,10 @@ const filterArea =
     );
 
 
+
+/* ==============================
+   VARIABLES
+============================== */
 
 let allProducts = [];
 
@@ -790,7 +855,7 @@ if(requestedCategory){
 
 
 /* ==============================
-   AUTH
+   AUTHENTICATION
 ============================== */
 
 onAuthStateChanged(
@@ -799,11 +864,15 @@ onAuthStateChanged(
 
     (user) => {
 
-        authResolved =
-            true;
+        authResolved = true;
 
 
         if(!user){
+
+            /*
+             * User is not logged in.
+             * Send them to login.
+             */
 
             window.location.replace(
                 "login.html"
@@ -813,6 +882,11 @@ onAuthStateChanged(
 
         }
 
+
+        /*
+         * User is authenticated.
+         * Load marketplace.
+         */
 
         loadProducts();
 
@@ -854,6 +928,7 @@ function loadProducts(){
                 )
 
                 .map(
+
                     ([id,product]) => ({
 
                         id:id,
@@ -861,9 +936,11 @@ function loadProducts(){
                         ...product
 
                     })
+
                 )
 
                 .filter(
+
                     product =>
 
                         product &&
@@ -959,6 +1036,7 @@ function loadCategories(){
             Object.entries(
                 data
             )
+
             .forEach(
 
                 ([id,category]) => {
@@ -1095,7 +1173,8 @@ function loadCategories(){
 function getStockInfo(product){
 
     /*
-     * No stock field = Unlimited
+     * No stock field means
+     * unlimited stock.
      */
 
     if(
@@ -1288,13 +1367,11 @@ function renderProducts(){
                 "product-card";
 
 
-
             const image =
 
                 product.image ||
 
                 "https://via.placeholder.com/100x100?text=Zavora";
-
 
 
             const stockInfo =
@@ -1414,6 +1491,14 @@ function renderProducts(){
 
 
 
+            /*
+             * IMPORTANT:
+             *
+             * BUY opens product.html
+             * and passes the Firebase
+             * product ID.
+             */
+
             if(!isOutOfStock){
 
                 buyButton.addEventListener(
@@ -1423,11 +1508,7 @@ function renderProducts(){
                     () => {
 
                         window.location.href =
-
-                            "product.html?id="
-
-                            +
-
+                            "product.html?id=" +
                             encodeURIComponent(
                                 product.id
                             );
@@ -1446,7 +1527,6 @@ function renderProducts(){
                 );
 
 
-
             imageElement.addEventListener(
 
                 "error",
@@ -1459,7 +1539,6 @@ function renderProducts(){
                 }
 
             );
-
 
 
             productsGrid.appendChild(
@@ -1573,4 +1652,7 @@ function escapeHtml(value){
 
 }
 
-</script></body></html>
+</script>
+
+</body>
+</html>
