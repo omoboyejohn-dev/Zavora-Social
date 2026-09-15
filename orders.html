@@ -1,212 +1,638 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Zavora Social | My Orders</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 body{
     font-family:Inter,Arial,sans-serif;
     color:#fff;
     min-height:100vh;
+
     background:
-    radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
-    radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
+    radial-gradient(
+        circle at top left,
+        rgba(124,58,237,.18),
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at top right,
+        rgba(6,182,212,.12),
+        transparent 30%
+    ),
     #080b16;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 header{
     position:sticky;
     top:0;
     z-index:100;
+
     background:rgba(8,11,22,.88);
+
     backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.08);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 }
+
 
 .navbar{
     max-width:1100px;
     min-height:72px;
+
     margin:auto;
+
     padding:0 20px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
+
 .logo{
     color:#fff;
+
     text-decoration:none;
+
     font-size:22px;
+
     font-weight:900;
 }
 
+
 .logo span{
-    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+
+    background:
+        linear-gradient(
+            90deg,
+            #a78bfa,
+            #22d3ee
+        );
+
     -webkit-background-clip:text;
+
     -webkit-text-fill-color:transparent;
+
 }
+
 
 .back{
     color:#cbd5e1;
+
     text-decoration:none;
+
     font-size:14px;
+
     font-weight:700;
 }
 
+
+/* =========================
+   MAIN
+========================= */
+
 .container{
     max-width:1000px;
+
     margin:auto;
+
     padding:35px 20px 60px;
 }
+
 
 .heading{
     margin-bottom:25px;
 }
 
+
 .heading h1{
     font-size:32px;
+
     margin-bottom:7px;
 }
 
+
 .heading p{
     color:#94a3b8;
-}
 
-.order-card{
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:13px;
-}
-
-.order-top{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:15px;
-}
-
-.order-name{
-    font-weight:800;
-    font-size:16px;
-}
-
-.order-id{
-    color:#64748b;
-    font-size:12px;
-    margin-top:5px;
-}
-
-.status{
-    height:max-content;
-    padding:7px 11px;
-    border-radius:9px;
-    font-size:11px;
-    font-weight:800;
-    background:rgba(34,211,238,.1);
-    color:#67e8f9;
-}
-
-.order-info{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-.info{
-    padding:13px;
-    border-radius:11px;
-    background:rgba(255,255,255,.035);
-}
-
-.info small{
-    display:block;
-    color:#64748b;
-    margin-bottom:5px;
-}
-
-.info strong{
     font-size:14px;
 }
 
-.empty{
-    padding:65px 20px;
-    text-align:center;
-    border:1px dashed rgba(255,255,255,.13);
-    border-radius:20px;
-    background:rgba(255,255,255,.025);
+
+/* =========================
+   ORDERS
+========================= */
+
+.order-card{
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:14px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.12);
 }
 
-.empty-icon{
-    font-size:48px;
+
+.order-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+
+.order-name{
+
+    font-weight:800;
+
+    font-size:17px;
+}
+
+
+.order-id{
+
+    color:#64748b;
+
+    font-size:11px;
+
+    margin-top:5px;
+
+    word-break:break-all;
+}
+
+
+.status{
+
+    height:max-content;
+
+    padding:7px 11px;
+
+    border-radius:9px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+    text-transform:uppercase;
+}
+
+
+.status.delivered,
+.status.completed{
+
+    background:
+        rgba(34,197,94,.10);
+
+    border:
+        1px solid rgba(34,197,94,.18);
+
+    color:#86efac;
+}
+
+
+.status.pending,
+.status.processing{
+
+    background:
+        rgba(234,179,8,.10);
+
+    border:
+        1px solid rgba(234,179,8,.18);
+
+    color:#fde68a;
+}
+
+
+.status.cancelled,
+.status.rejected,
+.status.failed{
+
+    background:
+        rgba(239,68,68,.10);
+
+    border:
+        1px solid rgba(239,68,68,.18);
+
+    color:#fca5a5;
+}
+
+
+.status.default{
+
+    background:
+        rgba(34,211,238,.10);
+
+    border:
+        1px solid rgba(34,211,238,.15);
+
+    color:#67e8f9;
+}
+
+
+/* =========================
+   ORDER INFO
+========================= */
+
+.order-info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin-bottom:14px;
+}
+
+
+.info{
+
+    padding:13px;
+
+    border-radius:11px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.04);
+}
+
+
+.info small{
+
+    display:block;
+
+    color:#64748b;
+
+    margin-bottom:6px;
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4px;
+}
+
+
+.info strong{
+
+    font-size:14px;
+
+    word-break:break-word;
+}
+
+
+/* =========================
+   DELIVERY
+========================= */
+
+.delivery-box{
+
+    margin-top:15px;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.08),
+            rgba(6,182,212,.06)
+        );
+
+    border:
+        1px solid rgba(124,58,237,.16);
+}
+
+
+.delivery-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:12px;
+
+    font-size:14px;
+
+    font-weight:900;
+}
+
+
+.delivery-subtitle{
+
+    color:#64748b;
+
+    font-size:11px;
+
     margin-bottom:12px;
 }
 
-.empty h2{
-    margin-bottom:8px;
+
+.delivery-details{
+
+    color:#dbe4f0;
+
+    background:#080b16;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    border-radius:11px;
+
+    padding:14px;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
 }
+
+
+/* =========================
+   DATE
+========================= */
+
+.order-date{
+
+    color:#64748b;
+
+    font-size:11px;
+
+    margin-top:14px;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+
+    padding:65px 20px;
+
+    text-align:center;
+
+    border:
+        1px dashed rgba(255,255,255,.13);
+
+    border-radius:20px;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+
+.empty-icon{
+
+    font-size:48px;
+
+    margin-bottom:12px;
+}
+
+
+.empty h2{
+
+    margin-bottom:8px;
+
+    font-size:20px;
+}
+
 
 .empty p{
+
     color:#94a3b8;
+
     line-height:1.6;
+
+    font-size:14px;
 }
+
 
 .shop-btn{
+
     display:inline-block;
+
     margin-top:20px;
+
     text-decoration:none;
+
     color:#fff;
+
     padding:12px 18px;
+
     border-radius:11px;
+
     font-weight:800;
-    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #06b6d4
+        );
 }
 
-footer{
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    padding:55px 20px;
+
     text-align:center;
-    color:#64748b;
-    font-size:13px;
-    padding:0 20px 30px;
+
+    color:#94a3b8;
 }
+
+
+.loading-icon{
+
+    font-size:35px;
+
+    margin-bottom:12px;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error{
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    border:
+        1px solid rgba(239,68,68,.18);
+
+    border-radius:18px;
+
+    background:
+        rgba(239,68,68,.05);
+
+    color:#fca5a5;
+}
+
+
+.error-icon{
+
+    font-size:38px;
+
+    margin-bottom:10px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    padding:
+        0
+        20px
+        30px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:650px){
 
     .container{
-        padding:28px 15px 50px;
+
+        padding:
+            28px
+            15px
+            50px;
     }
 
+
     .heading h1{
+
         font-size:27px;
     }
 
+
+    .order-card{
+
+        padding:16px;
+    }
+
+
     .order-top{
+
         flex-direction:column;
     }
 
+
     .order-info{
+
         grid-template-columns:1fr;
     }
+
+
+    .status{
+
+        width:max-content;
+    }
+
+
+    .logo{
+
+        font-size:20px;
+    }
+
+
+    .back{
+
+        font-size:12px;
+    }
+
 }
+
 </style>
+
 </head>
 
 <body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
     <div class="navbar">
 
-        <a href="dashboard.html" class="logo">
+        <a
+            href="dashboard.html"
+            class="logo"
+        >
             Zavora <span>Social</span>
         </a>
 
-        <a href="dashboard.html" class="back">
+
+        <a
+            href="dashboard.html"
+            class="back"
+        >
             ← Dashboard
         </a>
 
@@ -215,14 +641,21 @@ footer{
 </header>
 
 
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="container">
+
 
     <div class="heading">
 
-        <h1>My Orders</h1>
+        <h1>
+            My Orders
+        </h1>
 
         <p>
-            View your purchases and order status.
+            View your purchases and delivered items.
         </p>
 
     </div>
@@ -230,40 +663,42 @@ footer{
 
     <div id="ordersArea">
 
-        <div class="empty">
+        <div class="loading">
 
-            <div class="empty-icon">
-                📦
+            <div class="loading-icon">
+                ⏳
             </div>
 
-            <h2>No orders yet</h2>
-
-            <p>
-                Your purchases will appear here after
-                you place an order.
-            </p>
-
-            <a href="products.html" class="shop-btn">
-                Browse Products
-            </a>
+            Loading your orders...
 
         </div>
 
     </div>
 
+
 </main>
 
 
 <footer>
-    © <span id="year"></span> Zavora Social. All rights reserved.
+
+    ©
+    <span id="year"></span>
+    Zavora Social. All rights reserved.
+
 </footer>
 
 
 <script type="module">
 
+
+/* =========================================
+   FIREBASE
+========================================= */
+
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
@@ -271,34 +706,854 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
+
 const firebaseConfig = {
-    apiKey:"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
-    authDomain:"zavorasocial.firebaseapp.com",
-    projectId:"zavorasocial",
-    storageBucket:"zavorasocial.firebasestorage.app",
-    messagingSenderId:"447170165246",
-    appId:"1:447170165246:web:982649e6533257ea0f28af",
-    measurementId:"G-D4LNBEWH50"
+
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:
+        "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com",
+
+    projectId:
+        "zavorasocial",
+
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
+
+    messagingSenderId:
+        "447170165246",
+
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:
+        "G-D4LNBEWH50"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+const app =
+    initializeApp(firebaseConfig);
 
 
-onAuthStateChanged(auth,(user)=>{
+const auth =
+    getAuth(app);
 
-    if(!user){
 
-        window.location.href="login.html";
+const db =
+    getDatabase(app);
 
-        return;
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const ordersArea =
+    document.getElementById(
+        "ordersArea"
+    );
+
+
+const year =
+    document.getElementById(
+        "year"
+    );
+
+
+year.textContent =
+    new Date().getFullYear();
+
+
+/* =========================================
+   AUTH
+========================================= */
+
+let unsubscribeOrders = null;
+
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if(!user){
+
+            if(unsubscribeOrders){
+
+                unsubscribeOrders();
+
+                unsubscribeOrders = null;
+
+            }
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+
+        }
+
+
+        loadOrders(
+            user.uid
+        );
+
+    }
+);
+
+
+/* =========================================
+   LOAD CUSTOMER ORDERS
+========================================= */
+
+function loadOrders(uid){
+
+    if(unsubscribeOrders){
+
+        unsubscribeOrders();
+
     }
 
-});
+
+    const ordersRef =
+        ref(
+            db,
+            "orders"
+        );
 
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+    unsubscribeOrders =
+        onValue(
+            ordersRef,
+            (snapshot) => {
+
+                const data =
+                    snapshot.val();
+
+
+                const orders = [];
+
+
+                if(data){
+
+                    Object.entries(data)
+                        .forEach(
+                            ([id,order]) => {
+
+                                /*
+                                 * IMPORTANT:
+                                 *
+                                 * Only orders belonging
+                                 * to this logged-in user
+                                 * are displayed.
+                                 */
+
+                                if(
+                                    order &&
+                                    order.uid === uid
+                                ){
+
+                                    orders.push({
+
+                                        id:id,
+
+                                        ...order
+
+                                    });
+
+                                }
+
+                            }
+                        );
+
+                }
+
+
+                orders.sort(
+                    (a,b) => {
+
+                        const dateA =
+                            Number(
+                                a.createdAt || 0
+                            );
+
+
+                        const dateB =
+                            Number(
+                                b.createdAt || 0
+                            );
+
+
+                        return dateB - dateA;
+
+                    }
+                );
+
+
+                renderOrders(
+                    orders
+                );
+
+            },
+            (error) => {
+
+                console.error(
+                    "Orders load error:",
+                    error
+                );
+
+
+                showError(
+                    error.message ||
+                    "Unable to load your orders."
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================
+   RENDER ORDERS
+========================================= */
+
+function renderOrders(orders){
+
+    if(orders.length === 0){
+
+        ordersArea.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No orders yet
+                </h2>
+
+                <p>
+                    Your purchases will appear here
+                    after you place an order.
+                </p>
+
+                <a
+                    href="products.html"
+                    class="shop-btn"
+                >
+                    Browse Products
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    ordersArea.innerHTML =
+        orders
+            .map(
+                order =>
+                    createOrderCard(order)
+            )
+            .join("");
+
+}
+
+
+/* =========================================
+   CREATE ORDER CARD
+========================================= */
+
+function createOrderCard(order){
+
+    const productName =
+        order.productName ||
+        order.name ||
+        "Product";
+
+
+    const price =
+        Number(
+            order.price ||
+            order.amount ||
+            0
+        );
+
+
+    const status =
+        normalizeStatus(
+            order.status
+        );
+
+
+    const statusClass =
+        getStatusClass(
+            status
+        );
+
+
+    const createdAt =
+        formatDate(
+            order.createdAt
+        );
+
+
+    const orderId =
+        escapeHTML(
+            order.id
+        );
+
+
+    /*
+     * Delivery details can be stored
+     * under different field names.
+     *
+     * We support the main structure
+     * our purchase system will use.
+     */
+
+    const itemDetails =
+        order.itemDetails ||
+        order.deliveryDetails ||
+        order.details ||
+        "";
+
+
+    const hasDelivery =
+        Boolean(
+            itemDetails
+        );
+
+
+    return `
+
+        <article class="order-card">
+
+
+            <div class="order-top">
+
+                <div>
+
+                    <div class="order-name">
+
+                        ${escapeHTML(
+                            productName
+                        )}
+
+                    </div>
+
+
+                    <div class="order-id">
+
+                        Order ID:
+                        ${orderId}
+
+                    </div>
+
+                </div>
+
+
+                <span
+                    class="status ${statusClass}"
+                >
+
+                    ${escapeHTML(
+                        status
+                    )}
+
+                </span>
+
+            </div>
+
+
+            <div class="order-info">
+
+
+                <div class="info">
+
+                    <small>
+                        Amount
+                    </small>
+
+                    <strong>
+                        ₦${formatNumber(price)}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>
+                        Category
+                    </small>
+
+                    <strong>
+                        ${escapeHTML(
+                            order.category ||
+                            "Product"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>
+                        Payment
+                    </small>
+
+                    <strong>
+                        Wallet
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            ${
+                hasDelivery
+                ?
+                `
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-title">
+
+                            🎁
+                            Your Delivered Item
+
+                        </div>
+
+
+                        <div class="delivery-subtitle">
+
+                            Your purchased item is available below.
+
+                        </div>
+
+
+                        <div class="delivery-details">
+
+                            ${escapeHTML(
+                                itemDetails
+                            )}
+
+                        </div>
+
+                    </div>
+
+                `
+                :
+                getDeliveryMessage(status)
+
+            }
+
+
+            <div class="order-date">
+
+                Purchased:
+                ${escapeHTML(
+                    createdAt
+                )}
+
+            </div>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================
+   DELIVERY MESSAGE
+========================================= */
+
+function getDeliveryMessage(status){
+
+    if(
+        status === "pending" ||
+        status === "processing"
+    ){
+
+        return `
+
+            <div class="delivery-box">
+
+                <div class="delivery-title">
+
+                    ⏳ Order Processing
+
+                </div>
+
+                <div class="delivery-subtitle">
+
+                    Your order is being processed.
+                    Your purchased item will appear
+                    here when it is delivered.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if(
+        status === "cancelled" ||
+        status === "rejected" ||
+        status === "failed"
+    ){
+
+        return `
+
+            <div class="delivery-box">
+
+                <div class="delivery-title">
+
+                    ⚠️ Order Not Delivered
+
+                </div>
+
+                <div class="delivery-subtitle">
+
+                    This order was not completed.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div class="delivery-box">
+
+            <div class="delivery-title">
+
+                📦 Delivery Pending
+
+            </div>
+
+            <div class="delivery-subtitle">
+
+                Your order has been received.
+                Delivery details will appear here.
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function normalizeStatus(status){
+
+    return String(
+        status ||
+        "processing"
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+function getStatusClass(status){
+
+    if(
+        status === "delivered"
+    ){
+
+        return "delivered";
+
+    }
+
+
+    if(
+        status === "completed"
+    ){
+
+        return "completed";
+
+    }
+
+
+    if(
+        status === "pending"
+    ){
+
+        return "pending";
+
+    }
+
+
+    if(
+        status === "processing"
+    ){
+
+        return "processing";
+
+    }
+
+
+    if(
+        status === "cancelled"
+    ){
+
+        return "cancelled";
+
+    }
+
+
+    if(
+        status === "rejected"
+    ){
+
+        return "rejected";
+
+    }
+
+
+    if(
+        status === "failed"
+    ){
+
+        return "failed";
+
+    }
+
+
+    return "default";
+
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "Date unavailable";
+
+    }
+
+
+    let timestamp =
+        Number(value);
+
+
+    /*
+     * Firebase Timestamp-like objects
+     */
+
+    if(
+        typeof value === "object" &&
+        value !== null
+    ){
+
+        if(
+            typeof value.toMillis === "function"
+        ){
+
+            timestamp =
+                value.toMillis();
+
+        }
+
+        else if(
+            value.seconds
+        ){
+
+            timestamp =
+                Number(
+                    value.seconds
+                ) * 1000;
+
+        }
+
+    }
+
+
+    /*
+     * Handle seconds instead
+     * of milliseconds.
+     */
+
+    if(
+        timestamp > 0 &&
+        timestamp < 100000000000
+    ){
+
+        timestamp *= 1000;
+
+    }
+
+
+    const date =
+        new Date(timestamp);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date unavailable";
+
+    }
+
+
+    return date.toLocaleString(
+        "en-NG",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================
+   NUMBER
+========================================= */
+
+function formatNumber(value){
+
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "en-NG",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+function showError(text){
+
+    ordersArea.innerHTML = `
+
+        <div class="error">
+
+            <div class="error-icon">
+                ⚠️
+            </div>
+
+            <div>
+                Unable to load your orders.
+            </div>
+
+            <div style="
+                margin-top:8px;
+                color:#64748b;
+                font-size:11px;
+                line-height:1.5;
+            ">
+
+                ${escapeHTML(text)}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
 
 </script>
 
