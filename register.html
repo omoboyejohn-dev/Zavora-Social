@@ -1054,15 +1054,20 @@ from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
-/* FIREBASE */
+/* =========================================
+FIREBASE CONFIG
+========================================= */
 
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+    "AIzaSyBzj9_RgQPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
     "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+    "https://zavorasocial-default-rtdb.firebaseio.com/",
 
     projectId:
     "zavorasocial",
@@ -1082,6 +1087,10 @@ const firebaseConfig = {
 };
 
 
+/* =========================================
+INITIALIZE FIREBASE
+========================================= */
+
 const app =
     initializeApp(firebaseConfig);
 
@@ -1089,7 +1098,9 @@ const auth =
     getAuth(app);
 
 
-/* ELEMENTS */
+/* =========================================
+ELEMENTS
+========================================= */
 
 const form =
     document.getElementById("registerForm");
@@ -1107,11 +1118,14 @@ const message =
     document.getElementById("message");
 
 
-/* MESSAGE */
+/* =========================================
+MESSAGE
+========================================= */
 
 function showMessage(text,type){
 
-    message.textContent = text;
+    message.textContent =
+        text;
 
     message.className =
         "message " + type;
@@ -1119,7 +1133,9 @@ function showMessage(text,type){
 }
 
 
-/* PASSWORD TOGGLE */
+/* =========================================
+PASSWORD TOGGLE
+========================================= */
 
 function setupPasswordToggle(
     inputId,
@@ -1141,7 +1157,8 @@ function setupPasswordToggle(
 
             if(input.type === "password"){
 
-                input.type = "text";
+                input.type =
+                    "text";
 
                 icon.classList.remove(
                     "fa-eye"
@@ -1153,7 +1170,8 @@ function setupPasswordToggle(
 
             }else{
 
-                input.type = "password";
+                input.type =
+                    "password";
 
                 icon.classList.remove(
                     "fa-eye-slash"
@@ -1182,7 +1200,9 @@ setupPasswordToggle(
 );
 
 
-/* REGISTER */
+/* =========================================
+REGISTER
+========================================= */
 
 form.addEventListener(
     "submit",
@@ -1197,11 +1217,13 @@ form.addEventListener(
             .value
             .trim();
 
+
         const username =
             document
             .getElementById("username")
             .value
             .trim();
+
 
         const email =
             document
@@ -1210,26 +1232,32 @@ form.addEventListener(
             .trim()
             .toLowerCase();
 
+
         const country =
             document
             .getElementById("country")
             .value;
+
 
         const password =
             document
             .getElementById("password")
             .value;
 
+
         const confirmPassword =
             document
             .getElementById("confirmPassword")
             .value;
+
 
         const terms =
             document
             .getElementById("terms")
             .checked;
 
+
+        /* VALIDATION */
 
         if(fullName.length < 2){
 
@@ -1299,7 +1327,8 @@ form.addEventListener(
 
         try{
 
-            button.disabled = true;
+            button.disabled =
+                true;
 
             buttonText.textContent =
                 "Creating Account...";
@@ -1307,6 +1336,8 @@ form.addEventListener(
             buttonIcon.className =
                 "fa-solid fa-spinner fa-spin";
 
+
+            /* CREATE FIREBASE USER */
 
             const userCredential =
                 await createUserWithEmailAndPassword(
@@ -1316,13 +1347,18 @@ form.addEventListener(
                 );
 
 
+            /* SAVE DISPLAY NAME */
+
             await updateProfile(
                 userCredential.user,
                 {
-                    displayName:fullName
+                    displayName:
+                        fullName
                 }
             );
 
+
+            /* SUCCESS */
 
             showMessage(
                 "Account created successfully. Redirecting...",
@@ -1349,7 +1385,8 @@ form.addEventListener(
             );
 
 
-            button.disabled = false;
+            button.disabled =
+                false;
 
             buttonText.textContent =
                 "Create Account";
@@ -1388,7 +1425,7 @@ form.addEventListener(
             ){
 
                 errorMessage =
-                    "Your password is too weak.";
+                    "Your password is too weak. Use at least 6 characters.";
 
             }
 
@@ -1399,6 +1436,16 @@ form.addEventListener(
 
                 errorMessage =
                     "Network error. Check your internet connection.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/operation-not-allowed"
+            ){
+
+                errorMessage =
+                    "Email/password registration is not enabled in Firebase.";
 
             }
 
@@ -1414,10 +1461,14 @@ form.addEventListener(
 );
 
 
-/* YEAR */
+/* =========================================
+YEAR
+========================================= */
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+document
+.getElementById("year")
+.textContent =
+new Date().getFullYear();
 
 </script>
 
