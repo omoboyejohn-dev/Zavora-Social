@@ -1,5 +1,18 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Product</title><style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Zavora Social | Product</title>
+
+<style>
 
 *{
     box-sizing:border-box;
@@ -18,18 +31,18 @@ body{
             rgba(124,58,237,.18),
             transparent 35%
         ),
-
         radial-gradient(
             circle at top right,
             rgba(6,182,212,.12),
             transparent 30%
         ),
-
         #080b16;
 }
 
 
-/* HEADER */
+/* ==========================================
+   HEADER
+========================================== */
 
 header{
     position:sticky;
@@ -75,7 +88,6 @@ header{
 
 
 .logo span{
-
     background:
         linear-gradient(
             90deg,
@@ -86,12 +98,10 @@ header{
     -webkit-background-clip:text;
 
     -webkit-text-fill-color:transparent;
-
 }
 
 
 .back-btn{
-
     text-decoration:none;
 
     color:#cbd5e1;
@@ -112,10 +122,11 @@ header{
 }
 
 
-/* MAIN */
+/* ==========================================
+   MAIN
+========================================== */
 
 .container{
-
     max-width:1100px;
 
     margin:auto;
@@ -125,7 +136,6 @@ header{
 
 
 .product-box{
-
     display:grid;
 
     grid-template-columns:
@@ -149,10 +159,11 @@ header{
 }
 
 
-/* IMAGE */
+/* ==========================================
+   IMAGE
+========================================== */
 
 .product-image{
-
     min-height:450px;
 
     background:#111827;
@@ -162,7 +173,6 @@ header{
 
 
 .product-image img{
-
     width:100%;
 
     height:100%;
@@ -175,10 +185,11 @@ header{
 }
 
 
-/* DETAILS */
+/* ==========================================
+   DETAILS
+========================================== */
 
 .product-details{
-
     padding:40px 35px;
 
     display:flex;
@@ -190,7 +201,6 @@ header{
 
 
 .category{
-
     display:inline-block;
 
     width:max-content;
@@ -216,7 +226,6 @@ header{
 
 
 .product-name{
-
     font-size:36px;
 
     line-height:1.2;
@@ -228,7 +237,6 @@ header{
 
 
 .price{
-
     color:#67e8f9;
 
     font-size:30px;
@@ -240,7 +248,6 @@ header{
 
 
 .description{
-
     color:#94a3b8;
 
     line-height:1.7;
@@ -251,10 +258,11 @@ header{
 }
 
 
-/* WALLET */
+/* ==========================================
+   WALLET
+========================================== */
 
 .wallet-box{
-
     padding:17px;
 
     border-radius:14px;
@@ -270,7 +278,6 @@ header{
 
 
 .wallet-label{
-
     color:#94a3b8;
 
     font-size:12px;
@@ -280,7 +287,6 @@ header{
 
 
 .wallet-balance{
-
     font-size:22px;
 
     font-weight:900;
@@ -289,10 +295,11 @@ header{
 }
 
 
-/* BUY */
+/* ==========================================
+   BUY BUTTON
+========================================== */
 
 .buy-btn{
-
     width:100%;
 
     border:none;
@@ -315,21 +322,32 @@ header{
             #7c3aed,
             #06b6d4
         );
+
+    transition:
+        transform .15s ease,
+        opacity .15s ease;
+}
+
+
+.buy-btn:hover{
+    transform:translateY(-1px);
 }
 
 
 .buy-btn:disabled{
-
     opacity:.5;
 
     cursor:not-allowed;
+
+    transform:none;
 }
 
 
-/* BACK */
+/* ==========================================
+   CONTINUE
+========================================== */
 
 .continue{
-
     display:block;
 
     text-align:center;
@@ -344,10 +362,11 @@ header{
 }
 
 
-/* LOADING */
+/* ==========================================
+   LOADING
+========================================== */
 
 .loading{
-
     max-width:600px;
 
     margin:70px auto;
@@ -360,10 +379,11 @@ header{
 }
 
 
-/* ERROR */
+/* ==========================================
+   ERROR
+========================================== */
 
 .error{
-
     max-width:600px;
 
     margin:70px auto;
@@ -385,17 +405,17 @@ header{
 
 
 .error h2{
-
     color:#fff;
 
     margin-bottom:10px;
 }
 
 
-/* MESSAGE */
+/* ==========================================
+   MESSAGE
+========================================== */
 
 .message{
-
     position:fixed;
 
     inset:0;
@@ -411,17 +431,16 @@ header{
     padding:20px;
 
     background:
-        rgba(0,0,0,.7);
+        rgba(0,0,0,.72);
 
     backdrop-filter:blur(8px);
 }
 
 
 .message-box{
-
     width:100%;
 
-    max-width:420px;
+    max-width:440px;
 
     padding:30px;
 
@@ -433,11 +452,13 @@ header{
 
     border:
         1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.4);
 }
 
 
 .message-icon{
-
     font-size:45px;
 
     margin-bottom:12px;
@@ -445,23 +466,24 @@ header{
 
 
 .message-box h2{
-
     margin-bottom:10px;
 }
 
 
 .message-box p{
-
     color:#94a3b8;
 
     line-height:1.6;
 
     margin-bottom:20px;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
 }
 
 
 .message-btn{
-
     width:100%;
 
     border:none;
@@ -485,74 +507,122 @@ header{
 }
 
 
-/* MOBILE */
+/* ==========================================
+   DELIVERY BOX
+========================================== */
+
+.delivery-box{
+    margin-top:18px;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    background:
+        rgba(34,211,238,.06);
+
+    border:
+        1px solid rgba(34,211,238,.18);
+
+    text-align:left;
+}
+
+
+.delivery-title{
+    color:#67e8f9;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    margin-bottom:9px;
+}
+
+
+.delivery-content{
+    color:#e2e8f0;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+    background:
+        rgba(0,0,0,.2);
+
+    padding:12px;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:800px){
 
     .product-box{
-
         grid-template-columns:1fr;
-
     }
 
 
     .product-image{
-
         min-height:300px;
-
     }
 
 
     .product-image img{
-
         min-height:300px;
-
     }
 
 
     .product-details{
-
         padding:30px 22px;
-
     }
 
 
     .product-name{
-
         font-size:29px;
-
     }
 
 }
+
 
 @media(max-width:500px){
 
     .container{
-
         padding:
             20px
             14px
             50px;
-
     }
 
 
     .product-image{
-
         min-height:260px;
-
     }
 
 
     .product-image img{
-
         min-height:260px;
-
     }
 
 }
 
-</style></head><body><header><div class="navbar">
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<div class="navbar">
 
     <a
         href="dashboard.html"
@@ -571,7 +641,12 @@ header{
 
 </div>
 
-</header><main class="container"><div
+</header>
+
+
+<main class="container">
+
+<div
     id="content"
     class="loading"
 >
@@ -580,10 +655,17 @@ header{
 
 </div>
 
-</main><div
+</main>
+
+
+<!-- MESSAGE -->
+
+<div
     id="message"
     class="message"
-><div class="message-box">
+>
+
+<div class="message-box">
 
     <div
         id="messageIcon"
@@ -612,7 +694,10 @@ header{
 
 </div>
 
-</div><script type="module">
+</div>
+
+
+<script type="module">
 
 
 /* ==========================================
@@ -635,7 +720,10 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
     getDatabase,
     ref,
-    get
+    get,
+    push,
+    update,
+    runTransaction
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
@@ -643,7 +731,7 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -736,21 +824,21 @@ const productId =
 
 
 /* ==========================================
-   AUTHENTICATION
+   CURRENT DATA
 ========================================== */
 
-/*
- * IMPORTANT:
- *
- * We do not redirect immediately.
- *
- * Firebase needs a moment to restore the
- * existing login session when moving from
- * products.html to product.html.
- *
- * onAuthStateChanged fires after Firebase
- * has completed that check.
- */
+let currentUser = null;
+
+let currentProduct = null;
+
+let currentWalletBalance = 0;
+
+let purchaseInProgress = false;
+
+
+/* ==========================================
+   AUTH
+========================================== */
 
 onAuthStateChanged(
     auth,
@@ -766,11 +854,6 @@ onAuthStateChanged(
 
         if(!user){
 
-            /*
-             * Firebase has finished checking.
-             * The customer is genuinely logged out.
-             */
-
             window.location.replace(
                 "login.html"
             );
@@ -780,9 +863,8 @@ onAuthStateChanged(
         }
 
 
-        /*
-         * Customer is authenticated.
-         */
+        currentUser = user;
+
 
         if(!productId){
 
@@ -850,6 +932,10 @@ async function loadProduct(user){
         }
 
 
+        currentProduct =
+            product;
+
+
         renderProduct(
             product,
             user
@@ -875,7 +961,7 @@ async function loadProduct(user){
 
 
 /* ==========================================
-   RENDER
+   RENDER PRODUCT
 ========================================== */
 
 function renderProduct(
@@ -1003,11 +1089,15 @@ function renderProduct(
     `;
 
 
-    document
-        .getElementById(
+    const productImage =
+        document.getElementById(
             "productImage"
-        )
-        .addEventListener(
+        );
+
+
+    if(productImage){
+
+        productImage.addEventListener(
             "error",
             function(){
 
@@ -1017,23 +1107,32 @@ function renderProduct(
             }
         );
 
+    }
+
+
+    const buyButton =
+        document.getElementById(
+            "buyButton"
+        );
+
+
+    if(buyButton){
+
+        buyButton.addEventListener(
+            "click",
+            purchaseProduct
+        );
+
+    }
+
 
     loadWallet(user);
-
-
-    /*
-     * Purchase logic is intentionally not
-     * added here yet.
-     *
-     * First we make sure authentication and
-     * product navigation work correctly.
-     */
 
 }
 
 
 /* ==========================================
-   WALLET
+   LOAD WALLET
 ========================================== */
 
 async function loadWallet(user){
@@ -1066,7 +1165,7 @@ async function loadWallet(user){
             await get(walletRef);
 
 
-        const balance =
+        currentWalletBalance =
             snapshot.exists()
             ? Number(
                 snapshot.val() || 0
@@ -1077,7 +1176,7 @@ async function loadWallet(user){
         walletBalance.textContent =
             "₦" +
             formatNumber(
-                balance
+                currentWalletBalance
             );
 
     }
@@ -1098,6 +1197,714 @@ async function loadWallet(user){
 
 
 /* ==========================================
+   PURCHASE
+========================================== */
+
+async function purchaseProduct(){
+
+    if(purchaseInProgress){
+
+        return;
+
+    }
+
+
+    if(!currentUser){
+
+        showMessage(
+            "🔐",
+            "Login Required",
+            "Please login before purchasing."
+        );
+
+        return;
+
+    }
+
+
+    if(!currentProduct){
+
+        showMessage(
+            "⚠️",
+            "Product Error",
+            "The product could not be loaded."
+        );
+
+        return;
+
+    }
+
+
+    const price =
+        Number(
+            currentProduct.price || 0
+        );
+
+
+    if(!Number.isFinite(price) || price <= 0){
+
+        showMessage(
+            "⚠️",
+            "Invalid Price",
+            "This product has an invalid price."
+        );
+
+        return;
+
+    }
+
+
+    purchaseInProgress = true;
+
+
+    const buyButton =
+        document.getElementById(
+            "buyButton"
+        );
+
+
+    if(buyButton){
+
+        buyButton.disabled = true;
+
+        buyButton.textContent =
+            "Processing Purchase...";
+
+    }
+
+
+    try{
+
+        /* ======================================
+           STEP 1
+           CHECK WALLET
+        ====================================== */
+
+        const walletRef =
+            ref(
+                db,
+                "users/" +
+                currentUser.uid +
+                "/walletBalance"
+            );
+
+
+        const walletSnapshot =
+            await get(walletRef);
+
+
+        const walletBalance =
+            walletSnapshot.exists()
+            ? Number(
+                walletSnapshot.val() || 0
+            )
+            : 0;
+
+
+        currentWalletBalance =
+            walletBalance;
+
+
+        if(walletBalance < price){
+
+            showMessage(
+                "💳",
+                "Insufficient Balance",
+                "Your wallet balance is ₦" +
+                formatNumber(walletBalance) +
+                ".\n\nYou need ₦" +
+                formatNumber(price) +
+                " to purchase this product."
+            );
+
+
+            resetBuyButton();
+
+            return;
+
+        }
+
+
+        /* ======================================
+           STEP 2
+           FIND AVAILABLE INVENTORY
+        ====================================== */
+
+        const inventoryRef =
+            ref(
+                db,
+                "inventory/" +
+                productId
+            );
+
+
+        const inventorySnapshot =
+            await get(inventoryRef);
+
+
+        if(!inventorySnapshot.exists()){
+
+            showMessage(
+                "📦",
+                "Out of Stock",
+                "This product currently has no available item."
+            );
+
+
+            resetBuyButton();
+
+            return;
+
+        }
+
+
+        let selectedItemId = null;
+
+        let selectedItem = null;
+
+
+        inventorySnapshot.forEach(
+            (child) => {
+
+                if(selectedItemId){
+
+                    return;
+
+                }
+
+
+                const item =
+                    child.val();
+
+
+                if(
+                    item &&
+                    item.status === "available" &&
+                    typeof item.details === "string" &&
+                    item.details.trim() !== ""
+                ){
+
+                    selectedItemId =
+                        child.key;
+
+                    selectedItem =
+                        item;
+
+                }
+
+            }
+        );
+
+
+        if(
+            !selectedItemId ||
+            !selectedItem
+        ){
+
+            showMessage(
+                "📦",
+                "Out of Stock",
+                "This product is currently out of stock."
+            );
+
+
+            resetBuyButton();
+
+            return;
+
+        }
+
+
+        /* ======================================
+           STEP 3
+           RESERVE / MARK ITEM SOLD
+        ====================================== */
+
+        const itemRef =
+            ref(
+                db,
+                "inventory/" +
+                productId +
+                "/" +
+                selectedItemId
+            );
+
+
+        const reservation =
+            await runTransaction(
+                itemRef,
+                (item) => {
+
+                    if(!item){
+
+                        return;
+
+                    }
+
+
+                    if(
+                        item.status !==
+                        "available"
+                    ){
+
+                        return;
+
+                    }
+
+
+                    return {
+
+                        ...item,
+
+                        status:
+                            "processing",
+
+                        processingBy:
+                            currentUser.uid,
+
+                        processingAt:
+                            Date.now()
+
+                    };
+
+                }
+            );
+
+
+        if(!reservation.committed){
+
+            showMessage(
+                "📦",
+                "Item Just Sold",
+                "Someone else purchased the last available item. Please try again."
+            );
+
+
+            resetBuyButton();
+
+            return;
+
+        }
+
+
+        /* ======================================
+           STEP 4
+           DEDUCT WALLET
+        ====================================== */
+
+        const walletTransaction =
+            await runTransaction(
+                walletRef,
+                (balance) => {
+
+                    const currentBalance =
+                        Number(
+                            balance || 0
+                        );
+
+
+                    if(
+                        currentBalance < price
+                    ){
+
+                        return;
+
+                    }
+
+
+                    return Number(
+                        (
+                            currentBalance -
+                            price
+                        ).toFixed(2)
+                    );
+
+                }
+            );
+
+
+        if(!walletTransaction.committed){
+
+            /*
+             * Wallet could not be charged.
+             * Return the inventory item.
+             */
+
+            await update(
+                itemRef,
+                {
+                    status:
+                        "available",
+
+                    processingBy:
+                        null,
+
+                    processingAt:
+                        null
+
+                }
+            );
+
+
+            showMessage(
+                "💳",
+                "Insufficient Balance",
+                "Your wallet balance is not enough to complete this purchase."
+            );
+
+
+            resetBuyButton();
+
+            return;
+
+        }
+
+
+        /* ======================================
+           STEP 5
+           CREATE ORDER
+        ====================================== */
+
+        const orderRef =
+            push(
+                ref(db, "orders")
+            );
+
+
+        const orderId =
+            orderRef.key;
+
+
+        const now =
+            Date.now();
+
+
+        const orderData = {
+
+            uid:
+                currentUser.uid,
+
+            email:
+                currentUser.email || "",
+
+            productId:
+                productId,
+
+            productName:
+                currentProduct.name ||
+                "Product",
+
+            category:
+                currentProduct.category ||
+                "Product",
+
+            amount:
+                price,
+
+            paymentMethod:
+                "Wallet",
+
+            inventoryItemId:
+                selectedItemId,
+
+            itemDetails:
+                selectedItem.details,
+
+            status:
+                "completed",
+
+            createdAt:
+                now
+
+        };
+
+
+        await update(
+            orderRef,
+            orderData
+        );
+
+
+        /* ======================================
+           STEP 6
+           MARK ITEM SOLD
+        ====================================== */
+
+        await update(
+            itemRef,
+            {
+
+                status:
+                    "sold",
+
+                soldTo:
+                    currentUser.uid,
+
+                soldToEmail:
+                    currentUser.email || "",
+
+                soldAt:
+                    now,
+
+                orderId:
+                    orderId,
+
+                processingBy:
+                    null,
+
+                processingAt:
+                    null
+
+            }
+        );
+
+
+        /* ======================================
+           STEP 7
+           UPDATE DISPLAYED BALANCE
+        ====================================== */
+
+        const newBalance =
+            Number(
+                (
+                    walletBalance -
+                    price
+                ).toFixed(2)
+            );
+
+
+        currentWalletBalance =
+            newBalance;
+
+
+        const walletDisplay =
+            document.getElementById(
+                "walletBalance"
+            );
+
+
+        if(walletDisplay){
+
+            walletDisplay.textContent =
+                "₦" +
+                formatNumber(
+                    newBalance
+                );
+
+        }
+
+
+        /* ======================================
+           SUCCESS
+        ====================================== */
+
+        showPurchaseSuccess(
+            orderId,
+            selectedItem.details,
+            newBalance
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Purchase error:",
+            error
+        );
+
+
+        showMessage(
+            "⚠️",
+            "Purchase Failed",
+            error?.message ||
+            "Something went wrong while processing your purchase."
+        );
+
+
+        resetBuyButton();
+
+    }
+
+}
+
+
+/* ==========================================
+   PURCHASE SUCCESS
+========================================== */
+
+function showPurchaseSuccess(
+    orderId,
+    itemDetails,
+    newBalance
+){
+
+    messageIcon.textContent =
+        "🎉";
+
+
+    messageTitle.textContent =
+        "Purchase Successful!";
+
+
+    messageText.innerHTML =
+        "";
+
+
+    messageText.appendChild(
+        document.createTextNode(
+            "Your order has been completed.\n\n" +
+            "Order ID: " +
+            orderId +
+            "\n\n" +
+            "Remaining Wallet Balance: ₦" +
+            formatNumber(newBalance)
+        )
+    );
+
+
+    const oldDelivery =
+        document.querySelector(
+            ".delivery-box"
+        );
+
+
+    if(oldDelivery){
+
+        oldDelivery.remove();
+
+    }
+
+
+    const deliveryBox =
+        document.createElement(
+            "div"
+        );
+
+
+    deliveryBox.className =
+        "delivery-box";
+
+
+    const deliveryTitle =
+        document.createElement(
+            "div"
+        );
+
+
+    deliveryTitle.className =
+        "delivery-title";
+
+
+    deliveryTitle.textContent =
+        "📦 Your Delivered Item";
+
+
+    const deliveryContent =
+        document.createElement(
+            "div"
+        );
+
+
+    deliveryContent.className =
+        "delivery-content";
+
+
+    deliveryContent.textContent =
+        itemDetails;
+
+
+    deliveryBox.appendChild(
+        deliveryTitle
+    );
+
+
+    deliveryBox.appendChild(
+        deliveryContent
+    );
+
+
+    messageText.appendChild(
+        deliveryBox
+    );
+
+
+    messageButton.textContent =
+        "View My Orders";
+
+
+    messageButton.onclick =
+        () => {
+
+            window.location.href =
+                "orders.html";
+
+        };
+
+
+    message.style.display =
+        "flex";
+
+
+    const buyButton =
+        document.getElementById(
+            "buyButton"
+        );
+
+
+    if(buyButton){
+
+        buyButton.disabled = true;
+
+        buyButton.textContent =
+            "Purchased ✓";
+
+    }
+
+}
+
+
+/* ==========================================
+   RESET BUY BUTTON
+========================================== */
+
+function resetBuyButton(){
+
+    purchaseInProgress =
+        false;
+
+
+    const buyButton =
+        document.getElementById(
+            "buyButton"
+        );
+
+
+    if(!buyButton){
+
+        return;
+
+    }
+
+
+    buyButton.disabled =
+        false;
+
+
+    const price =
+        Number(
+            currentProduct?.price || 0
+        );
+
+
+    buyButton.textContent =
+        "Buy Now — ₦" +
+        formatNumber(price);
+
+}
+
+
+/* ==========================================
    ERROR
 ========================================== */
 
@@ -1112,7 +1919,12 @@ function showError(
 
     content.innerHTML = `
 
-        <div style="font-size:45px;margin-bottom:10px">
+        <div
+            style="
+                font-size:45px;
+                margin-bottom:10px
+            "
+        >
             ⚠️
         </div>
 
@@ -1155,27 +1967,32 @@ function showMessage(
     messageIcon.textContent =
         icon;
 
+
     messageTitle.textContent =
         title;
 
+
     messageText.textContent =
         text;
+
+
+    messageButton.textContent =
+        "Continue";
+
+
+    messageButton.onclick =
+        () => {
+
+            message.style.display =
+                "none";
+
+        };
+
 
     message.style.display =
         "flex";
 
 }
-
-
-messageButton.addEventListener(
-    "click",
-    () => {
-
-        message.style.display =
-            "none";
-
-    }
-);
 
 
 /* ==========================================
@@ -1188,6 +2005,8 @@ function formatNumber(value){
         .toLocaleString(
             "en-NG",
             {
+                minimumFractionDigits:2,
+
                 maximumFractionDigits:2
             }
         );
@@ -1230,4 +2049,7 @@ function escapeHtml(value){
 
 }
 
-</script></body></html>
+</script>
+
+</body>
+</html>
