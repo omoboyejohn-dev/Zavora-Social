@@ -69,11 +69,8 @@ gap:15px;
 
 .logo{
 color:#fff;
-
 text-decoration:none;
-
 font-size:22px;
-
 font-weight:900;
 }
 
@@ -87,14 +84,12 @@ linear-gradient(
 );
 
 -webkit-background-clip:text;
-
 -webkit-text-fill-color:transparent;
 }
 
 .back-btn{
 
 text-decoration:none;
-
 color:#cbd5e1;
 
 padding:10px 14px;
@@ -108,7 +103,6 @@ border:
 1px solid rgba(255,255,255,.08);
 
 font-size:13px;
-
 font-weight:700;
 }
 
@@ -157,7 +151,6 @@ overflow:hidden;
 .product-image img{
 
 width:100%;
-
 height:100%;
 
 min-height:450px;
@@ -206,9 +199,7 @@ margin-bottom:16px;
 .product-name{
 
 font-size:36px;
-
 line-height:1.2;
-
 font-weight:900;
 
 margin-bottom:15px;
@@ -219,7 +210,6 @@ margin-bottom:15px;
 color:#67e8f9;
 
 font-size:30px;
-
 font-weight:900;
 
 margin-bottom:20px;
@@ -446,28 +436,22 @@ linear-gradient(
 @media(max-width:800px){
 
 .product-box{
-
 grid-template-columns:1fr;
-
 }
 
 .product-image{
-
 min-height:300px;
 }
 
 .product-image img{
-
 min-height:300px;
 }
 
 .product-details{
-
 padding:30px 22px;
 }
 
 .product-name{
-
 font-size:29px;
 }
 
@@ -476,20 +460,14 @@ font-size:29px;
 @media(max-width:500px){
 
 .container{
-
-padding:
-20px
-14px
-50px;
+padding:20px 14px 50px;
 }
 
 .product-image{
-
 min-height:260px;
 }
 
 .product-image img{
-
 min-height:260px;
 }
 
@@ -505,17 +483,11 @@ min-height:260px;
 
 <div class="navbar">
 
-<a
-href="dashboard.html"
-class="logo"
->
+<a href="dashboard.html" class="logo">
 Zavora <span>Social</span>
 </a>
 
-<a
-href="products.html"
-class="back-btn"
->
+<a href="products.html" class="back-btn">
 ← Products
 </a>
 
@@ -523,13 +495,9 @@ class="back-btn"
 
 </header>
 
-
 <main class="container">
 
-<div
-id="content"
-class="loading"
->
+<div id="content" class="loading">
 
 Checking your account...
 
@@ -537,18 +505,11 @@ Checking your account...
 
 </main>
 
-
-<div
-id="message"
-class="message"
->
+<div id="message" class="message">
 
 <div class="message-box">
 
-<div
-id="messageIcon"
-class="message-icon"
->
+<div id="messageIcon" class="message-icon">
 ⚠️
 </div>
 
@@ -560,17 +521,13 @@ Message
 Please wait...
 </p>
 
-<button
-id="messageButton"
-class="message-btn"
->
+<button id="messageButton" class="message-btn">
 Continue
 </button>
 
 </div>
 
 </div>
-
 
 <script type="module">
 
@@ -580,14 +537,12 @@ initializeApp
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-
 import {
 getAuth,
 onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
 
 import {
 getDatabase,
@@ -602,7 +557,7 @@ from
 
 
 /* ==========================================
-FIREBASE CONFIG
+FIREBASE
 ========================================== */
 
 const firebaseConfig = {
@@ -681,14 +636,12 @@ params.get("id");
 
 
 let currentProduct = null;
-
 let currentUser = null;
-
 let purchaseInProgress = false;
 
 
 /* ==========================================
-AUTHENTICATION
+AUTH
 ========================================== */
 
 onAuthStateChanged(
@@ -702,7 +655,6 @@ user
 : "No authenticated user"
 );
 
-
 if(!user){
 
 window.location.replace(
@@ -713,9 +665,7 @@ return;
 
 }
 
-
 currentUser = user;
-
 
 if(!productId){
 
@@ -727,7 +677,6 @@ showError(
 return;
 
 }
-
 
 await loadProduct(user);
 
@@ -750,10 +699,8 @@ db,
 productId
 );
 
-
 const snapshot =
 await get(productRef);
-
 
 if(!snapshot.exists()){
 
@@ -766,10 +713,8 @@ return;
 
 }
 
-
 const product =
 snapshot.val();
-
 
 if(product.active !== true){
 
@@ -782,10 +727,8 @@ return;
 
 }
 
-
 currentProduct =
 product;
-
 
 renderProduct(
 product,
@@ -800,7 +743,6 @@ console.error(
 "Product loading error:",
 error
 );
-
 
 showError(
 "Unable to load product",
@@ -825,22 +767,16 @@ const image =
 product.image ||
 "https://via.placeholder.com/700x600?text=Zavora";
 
-
 const name =
 product.name ||
 "Unnamed Product";
 
-
 const price =
-Number(
-product.price || 0
-);
-
+Number(product.price || 0);
 
 const category =
 product.category ||
 "Product";
-
 
 const description =
 product.description ||
@@ -863,16 +799,13 @@ alt="${escapeHtml(name)}"
 
 </div>
 
-
 <div class="product-details">
 
 <div class="category">
 
-📦
-${escapeHtml(category)}
+📦 ${escapeHtml(category)}
 
 </div>
-
 
 <h1 class="product-name">
 
@@ -880,20 +813,17 @@ ${escapeHtml(name)}
 
 </h1>
 
-
 <div class="price">
 
 ₦${formatNumber(price)}
 
 </div>
 
-
 <div class="description">
 
 ${escapeHtml(description)}
 
 </div>
-
 
 <div class="wallet-box">
 
@@ -902,7 +832,6 @@ ${escapeHtml(description)}
 Your Wallet Balance
 
 </div>
-
 
 <div
 id="walletBalance"
@@ -915,7 +844,6 @@ Checking...
 
 </div>
 
-
 <button
 id="buyButton"
 class="buy-btn"
@@ -925,7 +853,6 @@ type="button"
 Buy Now — ₦${formatNumber(price)}
 
 </button>
-
 
 <a
 href="products.html"
@@ -980,18 +907,16 @@ LOAD WALLET
 
 async function loadWallet(user){
 
-const walletBalance =
+const walletElement =
 document.getElementById(
 "walletBalance"
 );
 
-
-if(!walletBalance){
+if(!walletElement){
 
 return;
 
 }
-
 
 try{
 
@@ -1003,20 +928,15 @@ user.uid +
 "/walletBalance"
 );
 
-
 const snapshot =
 await get(walletRef);
 
-
 const balance =
-snapshot.exists()
-? Number(
+Number(
 snapshot.val() || 0
-)
-: 0;
+);
 
-
-walletBalance.textContent =
+walletElement.textContent =
 "₦" +
 formatNumber(balance);
 
@@ -1029,8 +949,7 @@ console.error(
 error
 );
 
-
-walletBalance.textContent =
+walletElement.textContent =
 "Unavailable";
 
 }
@@ -1059,12 +978,10 @@ document.getElementById(
 "buyButton"
 );
 
-
-const walletBalanceElement =
+const walletElement =
 document.getElementById(
 "walletBalance"
 );
-
 
 const price =
 Number(
@@ -1078,19 +995,6 @@ showMessage(
 "⚠️",
 "Purchase unavailable",
 "This product has an invalid price."
-);
-
-return;
-
-}
-
-
-if(!user){
-
-showMessage(
-"🔐",
-"Login required",
-"Please login before purchasing."
 );
 
 return;
@@ -1122,8 +1026,19 @@ user.uid +
 );
 
 
-let newBalance = 0;
+/*
+==========================================
+DEDUCT WALLET
+==========================================
 
+Important:
+When balance is insufficient, we return
+the EXISTING balance instead of undefined.
+
+That allows Firebase to complete the
+transaction normally and lets us check
+the actual final balance ourselves.
+*/
 
 const transactionResult =
 await runTransaction(
@@ -1135,83 +1050,111 @@ Number(
 currentBalance || 0
 );
 
+if(
+balance < price
+){
 
-if(balance < price){
-
-return;
+return balance;
 
 }
 
-
-newBalance =
-balance - price;
-
-return newBalance;
+return balance - price;
 
 }
 );
 
 
-if(!transactionResult.committed){
+const finalBalance =
+Number(
+transactionResult.snapshot.val() || 0
+);
 
-if(buyButton){
 
-buyButton.disabled = false;
+/*
+==========================================
+CHECK BALANCE
+==========================================
+*/
 
-buyButton.textContent =
-"Buy Now — ₦" +
-formatNumber(price);
+if(
+finalBalance >=
+price
+){
+
+/*
+This means the transaction did not
+deduct the money as expected.
+*/
+
+throw new Error(
+"Wallet transaction did not deduct the expected amount."
+);
 
 }
 
-purchaseInProgress = false;
+
+/*
+==========================================
+INSUFFICIENT BALANCE
+==========================================
+
+If the balance stayed the same because
+there wasn't enough money, show this.
+*/
+
+const balanceWasEnough =
+transactionResult.committed &&
+finalBalance <
+price &&
+finalBalance !==
+Number(
+transactionResult.snapshot.val() || 0
+);
 
 
-const currentSnapshot =
+/*
+Get the current wallet value directly.
+*/
+
+const verifySnapshot =
 await get(walletRef);
 
-
 const currentBalance =
-currentSnapshot.exists()
-? Number(
-currentSnapshot.val() || 0
-)
-: 0;
+Number(
+verifySnapshot.val() || 0
+);
 
 
-if(walletBalanceElement){
+/*
+If current balance is still enough,
+something went wrong with deduction.
+*/
 
-walletBalanceElement.textContent =
-"₦" +
-formatNumber(
-currentBalance
+if(
+currentBalance >=
+price
+){
+
+throw new Error(
+"Wallet balance could not be deducted."
 );
 
 }
 
 
-showMessage(
-"💳",
-"Insufficient Balance",
-"Your wallet balance is ₦" +
-formatNumber(currentBalance) +
-". You need ₦" +
-formatNumber(price) +
-" to purchase this product."
-);
-
-return;
-
-}
-
-
-/* CREATE ORDER */
+/*
+==========================================
+CREATE ORDER ONLY AFTER DEDUCTION
+==========================================
+*/
 
 const orderRef =
 push(
-ref(db, "orders")
+ref(
+db,
+"orders"
+)
 );
-
 
 const orderData = {
 
@@ -1268,7 +1211,9 @@ orderError
 );
 
 
-/* REFUND IF ORDER FAILED */
+/*
+REFUND
+*/
 
 await runTransaction(
 walletRef,
@@ -1284,26 +1229,33 @@ return balance + price;
 }
 );
 
-
 throw orderError;
 
 }
 
 
-/* UPDATE WALLET */
+/*
+==========================================
+UPDATE WALLET DISPLAY
+==========================================
+*/
 
-if(walletBalanceElement){
+if(walletElement){
 
-walletBalanceElement.textContent =
+walletElement.textContent =
 "₦" +
 formatNumber(
-newBalance
+currentBalance
 );
 
 }
 
 
-/* SUCCESS */
+/*
+==========================================
+SUCCESS
+==========================================
+*/
 
 if(buyButton){
 
@@ -1323,7 +1275,9 @@ showMessage(
 "this product") +
 " for ₦" +
 formatNumber(price) +
-". Your order has been added to My Orders."
+". Your new wallet balance is ₦" +
+formatNumber(currentBalance) +
+". The order has been added to My Orders."
 );
 
 }
@@ -1336,6 +1290,37 @@ error
 );
 
 
+/*
+If an unexpected error happened after
+money was deducted, don't silently continue.
+*/
+
+if(
+error &&
+error.message &&
+error.message.includes(
+"Wallet balance could not be deducted"
+)
+){
+
+showMessage(
+"❌",
+"Purchase Failed",
+"Your wallet balance could not be updated. Your money was not used for an order."
+);
+
+}
+else{
+
+showMessage(
+"❌",
+"Purchase Failed",
+"Unable to complete your purchase. Please try again."
+);
+
+}
+
+
 if(buyButton){
 
 buyButton.disabled = false;
@@ -1346,33 +1331,10 @@ formatNumber(price);
 
 }
 
-
-let errorText =
-"Unable to complete your purchase. Please try again.";
-
-
-if(
-error &&
-error.code ===
-"PERMISSION_DENIED"
-){
-
-errorText =
-"Your account does not have permission to complete this purchase.";
-
 }
 
-
-showMessage(
-"❌",
-"Purchase Failed",
-errorText
-);
-
-}
-
-
-purchaseInProgress = false;
+purchaseInProgress =
+false;
 
 }
 
@@ -1389,7 +1351,6 @@ text
 content.className =
 "error";
 
-
 content.innerHTML = `
 
 <div
@@ -1401,23 +1362,15 @@ margin-bottom:10px
 ⚠️
 </div>
 
-
 <h2>
-
 ${escapeHtml(title)}
-
 </h2>
 
-
 <p>
-
 ${escapeHtml(text)}
-
 </p>
 
-
 <br>
-
 
 <a
 href="products.html"
@@ -1483,6 +1436,7 @@ return Number(value)
 .toLocaleString(
 "en-NG",
 {
+minimumFractionDigits:2,
 maximumFractionDigits:2
 }
 );
