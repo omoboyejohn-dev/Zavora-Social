@@ -1101,6 +1101,7 @@ from
 
 /* =========================================
 FIREBASE CONFIG
+EXACT CONFIG FROM FIREBASE CONSOLE
 ========================================= */
 
 const firebaseConfig = {
@@ -1112,7 +1113,7 @@ authDomain:
 "zavorasocial.firebaseapp.com",
 
 databaseURL:
-"https://zavorasocial-default-rtdb.firebaseio.com/",
+"https://zavorasocial-default-rtdb.firebaseio.com",
 
 projectId:
 "zavorasocial",
@@ -1359,7 +1360,7 @@ buttonIcon.className =
 
 
 /* =========================================
-DETAILED FIREBASE ERROR
+FIREBASE ERROR
 ========================================= */
 
 let errorMessage =
@@ -1432,7 +1433,7 @@ error.code ===
 ){
 
 errorMessage =
-"Firebase API key is not valid.";
+"Firebase API key is not valid. Check Firebase Console.";
 
 }
 
@@ -1459,7 +1460,7 @@ error.code +
 }
 
 
-/* Show exact error */
+/* Show error */
 
 showMessage(
 errorMessage,
