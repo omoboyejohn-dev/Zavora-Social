@@ -1,1658 +1,1539 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zavora Social | Products</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Products</title><style>  *{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Inter,Arial,sans-serif;
-
-    background:
-        radial-gradient(
-            circle at top left,
-            rgba(124,58,237,.16),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at top right,
-            rgba(6,182,212,.10),
-            transparent 30%
-        ),
-        #080b16;
-
-    color:#fff;
-    min-height:100vh;
+font-family:Inter,Arial,sans-serif;
+background:
+radial-gradient(
+circle at top left,
+rgba(124,58,237,.16),
+transparent 35%
+),
+radial-gradient(
+circle at top right,
+rgba(6,182,212,.10),
+transparent 30%
+),
+#080b16;
+color:#fff;
+min-height:100vh;
 }
 
-
 /* ==============================
-   HEADER
+HEADER
 ============================== */
 
 header{
-    position:sticky;
-    top:0;
-    z-index:100;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-
-    background:rgba(8,11,22,.88);
-
-    backdrop-filter:blur(18px);
+position:sticky;
+top:0;
+z-index:100;
+border-bottom:1px solid rgba(255,255,255,.08);
+background:rgba(8,11,22,.88);
+backdrop-filter:blur(18px);
 }
 
 .navbar{
-    max-width:1250px;
-    min-height:70px;
+max-width:1250px;
+min-height:70px;
+margin:auto;
+padding:0 20px;
 
-    margin:auto;
-    padding:0 20px;
+display:flex;  
+align-items:center;  
+justify-content:space-between;  
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+gap:20px;
 
-    gap:20px;
 }
 
 .logo{
-    color:#fff;
-    text-decoration:none;
+color:#fff;
+text-decoration:none;
 
-    font-size:22px;
-    font-weight:900;
+font-size:22px;  
+font-weight:900;
+
 }
 
 .logo span{
-    background:
-        linear-gradient(
-            90deg,
-            #a78bfa,
-            #22d3ee
-        );
+background:
+linear-gradient(
+90deg,
+#a78bfa,
+#22d3ee
+);
 
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+-webkit-background-clip:text;  
+-webkit-text-fill-color:transparent;
+
 }
 
 .nav-right{
-    display:flex;
-    gap:10px;
+display:flex;
+gap:10px;
 }
 
 .nav-btn{
-    text-decoration:none;
+text-decoration:none;
 
-    color:#cbd5e1;
+color:#cbd5e1;  
 
-    background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.05);  
 
-    border:1px solid rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.08);  
 
-    padding:10px 14px;
+padding:10px 14px;  
 
-    border-radius:10px;
+border-radius:10px;  
 
-    font-size:13px;
+font-size:13px;  
 
-    font-weight:700;
+font-weight:700;
+
 }
 
-
 /* ==============================
-   CONTAINER
+CONTAINER
 ============================== */
 
 .container{
-    max-width:900px;
+max-width:900px;
 
-    margin:auto;
+margin:auto;  
 
-    padding:28px 15px 60px;
+padding:28px 15px 60px;
+
 }
 
-
 /* ==============================
-   TITLE
+TITLE
 ============================== */
 
 .page-title{
-    margin-bottom:22px;
+margin-bottom:22px;
 }
 
 .page-title h1{
-    font-size:30px;
+font-size:30px;
 
-    margin-bottom:6px;
+margin-bottom:6px;
+
 }
 
 .page-title p{
-    color:#94a3b8;
+color:#94a3b8;
 
-    font-size:13px;
+font-size:13px;
+
 }
 
-
 /* ==============================
-   FILTERS
+FILTERS
 ============================== */
 
 .filter-area{
-    display:flex;
+display:flex;
 
-    gap:8px;
+gap:8px;  
 
-    flex-wrap:wrap;
+flex-wrap:wrap;  
 
-    margin-bottom:20px;
+margin-bottom:20px;
+
 }
 
 .filter-btn{
-    border:1px solid rgba(255,255,255,.10);
+border:1px solid rgba(255,255,255,.10);
 
-    background:rgba(255,255,255,.045);
+background:rgba(255,255,255,.045);  
 
-    color:#cbd5e1;
+color:#cbd5e1;  
 
-    padding:9px 12px;
+padding:9px 12px;  
 
-    border-radius:9px;
+border-radius:9px;  
 
-    cursor:pointer;
+cursor:pointer;  
 
-    font-size:12px;
+font-size:12px;  
 
-    font-weight:700;
+font-weight:700;
+
 }
 
 .filter-btn.active{
-    color:#fff;
+color:#fff;
 
-    border-color:#8b5cf6;
+border-color:#8b5cf6;  
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124,58,237,.35),
-            rgba(6,182,212,.18)
-        );
+background:  
+    linear-gradient(  
+        135deg,  
+        rgba(124,58,237,.35),  
+        rgba(6,182,212,.18)  
+    );
+
 }
 
-
 /* ==============================
-   PRODUCTS LIST
+PRODUCTS LIST
 ============================== */
 
 .products-grid{
-    display:flex;
+display:flex;
 
-    flex-direction:column;
+flex-direction:column;  
 
-    gap:9px;
+gap:9px;
+
 }
 
-
 /* ==============================
-   PRODUCT ROW
+PRODUCT ROW
 ============================== */
 
 .product-card{
 
-    width:100%;
+width:100%;  
 
-    min-height:76px;
+min-height:76px;  
 
-    display:flex;
+display:flex;  
 
-    align-items:center;
+align-items:center;  
 
-    gap:12px;
+gap:12px;  
 
-    padding:9px 10px;
+padding:9px 10px;  
 
-    background:#111522;
+background:#111522;  
 
-    border:1px solid rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.08);  
 
-    border-radius:13px;
+border-radius:13px;  
 
-    transition:.2s;
+transition:.2s;  
 
-    box-shadow:
-        0 4px 15px rgba(0,0,0,.16);
+box-shadow:  
+    0 4px 15px rgba(0,0,0,.16);
+
 }
 
 .product-card:hover{
 
-    border-color:
-        rgba(139,92,246,.45);
+border-color:  
+    rgba(139,92,246,.45);  
 
-    transform:translateY(-1px);
+transform:translateY(-1px);
+
 }
 
-
 /* ==============================
-   SMALL PRODUCT IMAGE
+SMALL PRODUCT IMAGE
 ============================== */
 
 .product-image{
 
-    width:52px;
+width:52px;  
 
-    height:52px;
+height:52px;  
 
-    min-width:52px;
+min-width:52px;  
 
-    border-radius:10px;
+border-radius:10px;  
 
-    overflow:hidden;
+overflow:hidden;  
 
-    background:#1a2030;
+background:#1a2030;  
 
-    border:1px solid rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.08);
+
 }
 
 .product-image img{
 
-    width:100%;
+width:100%;  
 
-    height:100%;
+height:100%;  
 
-    object-fit:cover;
+object-fit:cover;  
 
-    display:block;
+display:block;
+
 }
 
-
 /* ==============================
-   PRODUCT INFORMATION
+PRODUCT INFORMATION
 ============================== */
 
 .product-info{
 
-    min-width:0;
+min-width:0;  
 
-    flex:1;
+flex:1;  
 
-    display:flex;
+display:flex;  
 
-    flex-direction:column;
+flex-direction:column;  
 
-    gap:7px;
+gap:7px;
+
 }
-
 
 /* PRODUCT NAME */
 
 .product-name{
 
-    color:#fff;
+color:#fff;  
 
-    font-size:14px;
+font-size:14px;  
 
-    line-height:1.2;
+line-height:1.2;  
 
-    font-weight:800;
+font-weight:800;  
 
-    white-space:nowrap;
+white-space:nowrap;  
 
-    overflow:hidden;
+overflow:hidden;  
 
-    text-overflow:ellipsis;
+text-overflow:ellipsis;
+
 }
 
-
 /* ==============================
-   BOTTOM INFORMATION
+BOTTOM INFORMATION
 ============================== */
 
 .product-bottom{
 
-    display:flex;
+display:flex;  
 
-    align-items:center;
+align-items:center;  
 
-    gap:7px;
+gap:7px;  
 
-    flex-wrap:wrap;
+flex-wrap:wrap;
+
 }
-
 
 /* PRICE */
 
 .product-price{
 
-    color:#67e8f9;
+color:#67e8f9;  
 
-    background:rgba(6,182,212,.10);
+background:rgba(6,182,212,.10);  
 
-    border:1px solid rgba(6,182,212,.18);
+border:1px solid rgba(6,182,212,.18);  
 
-    padding:4px 8px;
+padding:4px 8px;  
 
-    border-radius:6px;
+border-radius:6px;  
 
-    font-size:11px;
+font-size:11px;  
 
-    font-weight:900;
+font-weight:900;  
 
-    white-space:nowrap;
+white-space:nowrap;
+
 }
-
 
 /* STOCK */
 
 .stock-status{
 
-    padding:4px 8px;
+padding:4px 8px;  
 
-    border-radius:6px;
+border-radius:6px;  
 
-    font-size:10px;
+font-size:10px;  
 
-    font-weight:800;
+font-weight:800;  
 
-    white-space:nowrap;
+white-space:nowrap;
+
 }
 
 .stock-status.in-stock{
 
-    color:#86efac;
+color:#86efac;  
 
-    background:rgba(34,197,94,.10);
+background:rgba(34,197,94,.10);  
 
-    border:1px solid rgba(34,197,94,.18);
+border:1px solid rgba(34,197,94,.18);
+
 }
 
 .stock-status.low-stock{
 
-    color:#fde68a;
+color:#fde68a;  
 
-    background:rgba(234,179,8,.10);
+background:rgba(234,179,8,.10);  
 
-    border:1px solid rgba(234,179,8,.18);
+border:1px solid rgba(234,179,8,.18);
+
 }
 
 .stock-status.out-stock{
 
-    color:#fca5a5;
+color:#fca5a5;  
 
-    background:rgba(239,68,68,.10);
+background:rgba(239,68,68,.10);  
 
-    border:1px solid rgba(239,68,68,.18);
+border:1px solid rgba(239,68,68,.18);
+
 }
 
 .stock-status.unlimited{
 
-    color:#67e8f9;
+color:#67e8f9;  
 
-    background:rgba(6,182,212,.10);
+background:rgba(6,182,212,.10);  
 
-    border:1px solid rgba(6,182,212,.18);
+border:1px solid rgba(6,182,212,.18);
+
 }
 
-
 /* ==============================
-   BUY BUTTON
+BUY BUTTON
 ============================== */
 
 .buy-btn{
 
-    border:none;
+border:none;  
 
-    color:#fff;
+color:#fff;  
 
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #06b6d4
-        );
+background:  
+    linear-gradient(  
+        135deg,  
+        #7c3aed,  
+        #06b6d4  
+    );  
 
-    padding:9px 13px;
+padding:9px 13px;  
 
-    border-radius:8px;
+border-radius:8px;  
 
-    cursor:pointer;
+cursor:pointer;  
 
-    font-size:11px;
+font-size:11px;  
 
-    font-weight:900;
+font-weight:900;  
 
-    white-space:nowrap;
+white-space:nowrap;  
 
-    transition:.2s;
+transition:.2s;
+
 }
 
 .buy-btn:hover{
 
-    transform:scale(1.03);
+transform:scale(1.03);  
 
-    box-shadow:
-        0 5px 15px
-        rgba(124,58,237,.25);
+box-shadow:  
+    0 5px 15px  
+    rgba(124,58,237,.25);
+
 }
 
 .buy-btn.disabled{
 
-    background:#303747;
+background:#303747;  
 
-    color:#8b95a7;
+color:#8b95a7;  
 
-    cursor:not-allowed;
+cursor:not-allowed;  
 
-    opacity:.75;
+opacity:.75;
+
 }
 
-
 /* ==============================
-   LOADING / EMPTY / ERROR
+LOADING / EMPTY / ERROR
 ============================== */
 
 .loading,
 .empty,
 .error{
 
-    width:100%;
+width:100%;  
 
-    text-align:center;
+text-align:center;  
 
-    padding:50px 20px;
+padding:50px 20px;  
 
-    border-radius:15px;
+border-radius:15px;
+
 }
 
 .loading{
 
-    color:#94a3b8;
+color:#94a3b8;
+
 }
 
 .empty{
 
-    border:1px dashed rgba(255,255,255,.12);
+border:1px dashed rgba(255,255,255,.12);  
 
-    color:#94a3b8;
+color:#94a3b8;
+
 }
 
 .empty h2,
 .error h2{
 
-    color:#fff;
+color:#fff;  
 
-    margin-bottom:8px;
+margin-bottom:8px;
+
 }
 
 .error{
 
-    background:rgba(239,68,68,.06);
+background:rgba(239,68,68,.06);  
 
-    border:
-        1px solid
-        rgba(239,68,68,.20);
+border:  
+    1px solid  
+    rgba(239,68,68,.20);  
 
-    color:#fca5a5;
+color:#fca5a5;
+
 }
 
-
 /* ==============================
-   MOBILE
+MOBILE
 ============================== */
 
 @media(max-width:600px){
 
-    .navbar{
+.navbar{  
 
-        padding:0 12px;
-    }
+    padding:0 12px;  
+}  
 
-    .logo{
+.logo{  
 
-        font-size:19px;
-    }
+    font-size:19px;  
+}  
 
-    .nav-btn{
+.nav-btn{  
 
-        padding:8px 10px;
+    padding:8px 10px;  
 
-        font-size:11px;
-    }
+    font-size:11px;  
+}  
 
-    .container{
+.container{  
 
-        padding:
-            22px 10px 50px;
-    }
+    padding:  
+        22px 10px 50px;  
+}  
 
-    .page-title h1{
+.page-title h1{  
 
-        font-size:25px;
-    }
+    font-size:25px;  
+}  
 
-    .product-card{
+.product-card{  
 
-        min-height:70px;
+    min-height:70px;  
 
-        padding:8px;
+    padding:8px;  
 
-        gap:10px;
-    }
+    gap:10px;  
+}  
 
-    .product-image{
+.product-image{  
 
-        width:48px;
+    width:48px;  
 
-        height:48px;
+    height:48px;  
 
-        min-width:48px;
-    }
+    min-width:48px;  
+}  
 
-    .product-name{
+.product-name{  
 
-        font-size:13px;
-    }
+    font-size:13px;  
+}  
 
-    .product-bottom{
+.product-bottom{  
 
-        gap:5px;
-    }
+    gap:5px;  
+}  
 
-    .product-price{
+.product-price{  
 
-        font-size:10px;
+    font-size:10px;  
 
-        padding:4px 7px;
-    }
+    padding:4px 7px;  
+}  
 
-    .stock-status{
+.stock-status{  
 
-        font-size:9px;
+    font-size:9px;  
 
-        padding:4px 7px;
-    }
+    padding:4px 7px;  
+}  
 
-    .buy-btn{
+.buy-btn{  
 
-        padding:8px 10px;
+    padding:8px 10px;  
 
-        font-size:10px;
-    }
-
+    font-size:10px;  
 }
 
+}
 
 /* VERY SMALL PHONES */
 
 @media(max-width:380px){
 
-    .product-card{
+.product-card{  
 
-        gap:7px;
-    }
+    gap:7px;  
+}  
 
-    .product-image{
+.product-image{  
 
-        width:44px;
+    width:44px;  
 
-        height:44px;
+    height:44px;  
 
-        min-width:44px;
-    }
+    min-width:44px;  
+}  
 
-    .buy-btn{
+.buy-btn{  
 
-        padding:7px 8px;
+    padding:7px 8px;  
 
-        font-size:9px;
-    }
+    font-size:9px;  
+}
 
 }
 
-</style>
+</style></head><body><header><div class="navbar"><a
+href="dashboard.html"
+class="logo"
 
-</head>
+> 
 
-<body>
+Zavora <span>Social</span>
+
+</a>  <div class="nav-right">  <a  
+    href="dashboard.html"  
+    class="nav-btn"  
+>  
+    Dashboard  
+</a>  
 
 
-<header>
-
-<div class="navbar">
-
-<a
-    href="dashboard.html"
-    class="logo"
->
-    Zavora <span>Social</span>
+<a  
+    href="orders.html"  
+    class="nav-btn"  
+>  
+    Orders  
 </a>
 
+</div>  </div></header><main class="container"><div class="page-title"><h1>  
+    Products  
+</h1>  <p>  
+    Browse available products on Zavora Social.  
+</p>  </div><div  
+    class="filter-area"  
+    id="filterArea"  
+><button  
+    class="filter-btn active"  
+    data-category="all"  
+>  
+    All Products  
+</button>  </div><div  
+    class="products-grid"  
+    id="productsGrid"  
+><div class="loading">  Checking your account...
 
-<div class="nav-right">
-
-<a
-    href="dashboard.html"
-    class="nav-btn"
->
-    Dashboard
-</a>
-
-
-<a
-    href="orders.html"
-    class="nav-btn"
->
-    Orders
-</a>
-
-</div>
-
-</div>
-
-</header>
-
-
-<main class="container">
-
-
-<div class="page-title">
-
-<h1>
-    Products
-</h1>
-
-
-<p>
-    Browse available products on Zavora Social.
-</p>
-
-</div>
-
-
-<div
-    class="filter-area"
-    id="filterArea"
->
-
-<button
-    class="filter-btn active"
-    data-category="all"
->
-    All Products
-</button>
-
-</div>
-
-
-<div
-    class="products-grid"
-    id="productsGrid"
->
-
-<div class="loading">
-
-    Checking your account...
-
-</div>
-
-</div>
-
-
-</main>
-
-
-<script type="module">
-
-
-/* ==============================
-   FIREBASE IMPORTS
+</div>  </div></main><script type="module">  /* ==============================
+FIREBASE IMPORTS
 ============================== */
 
 import {
-    initializeApp
+initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-
 import {
-    getAuth,
-    onAuthStateChanged
+getAuth,
+onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-
 import {
-    getDatabase,
-    ref,
-    onValue
+getDatabase,
+ref,
+onValue
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-
-
 /* ==============================
-   FIREBASE CONFIG
+FIREBASE CONFIG
 ============================== */
 
 const firebaseConfig = {
 
-    apiKey:
-        "AIzaSyBzj9_RgqPW21duk4sxyLUO3hy3-6GwGs",
+apiKey:  
+    "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",  
 
-    authDomain:
-        "zavorasocial.firebaseapp.com",
+authDomain:  
+    "zavorasocial.firebaseapp.com",  
 
-    databaseURL:
-        "https://zavorasocial-default-rtdb.firebaseio.com/",
+databaseURL:  
+    "https://zavorasocial-default-rtdb.firebaseio.com/",  
 
-    projectId:
-        "zavorasocial",
+projectId:  
+    "zavorasocial",  
 
-    storageBucket:
-        "zavorasocial.firebasestorage.app",
+storageBucket:  
+    "zavorasocial.firebasestorage.app",  
 
-    messagingSenderId:
-        "447170165246",
+messagingSenderId:  
+    "447170165246",  
 
-    appId:
-        "1:447170165246:web:982649e6533257ea0f28af",
+appId:  
+    "1:447170165246:web:982649e6533257ea0f28af",  
 
-    measurementId:
-        "G-D4LNBEWH50"
+measurementId:  
+    "G-D4LNBEWH50"
 
 };
 
-
-
-/* ==============================
-   FIREBASE INITIALIZATION
-============================== */
-
 const app =
-    initializeApp(
-        firebaseConfig
-    );
-
+initializeApp(
+firebaseConfig
+);
 
 const auth =
-    getAuth(app);
-
+getAuth(app);
 
 const db =
-    getDatabase(app);
-
-
-
-/* ==============================
-   ELEMENTS
-============================== */
+getDatabase(app);
 
 const productsGrid =
-    document.getElementById(
-        "productsGrid"
-    );
-
+document.getElementById(
+"productsGrid"
+);
 
 const filterArea =
-    document.getElementById(
-        "filterArea"
-    );
-
-
-
-/* ==============================
-   VARIABLES
-============================== */
+document.getElementById(
+"filterArea"
+);
 
 let allProducts = [];
 
 let selectedCategory =
-    "all";
+"all";
 
 let authResolved =
-    false;
-
-
+false;
 
 /* ==============================
-   URL CATEGORY
+URL CATEGORY
 ============================== */
 
 const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
-
+new URLSearchParams(
+window.location.search
+);
 
 const requestedCategory =
-    urlParams.get(
-        "category"
-    );
-
+urlParams.get(
+"category"
+);
 
 if(requestedCategory){
 
-    selectedCategory =
-        decodeURIComponent(
-            requestedCategory
-        );
+selectedCategory =  
+    decodeURIComponent(  
+        requestedCategory  
+    );
 
 }
 
-
-
 /* ==============================
-   AUTHENTICATION
+AUTH
 ============================== */
 
 onAuthStateChanged(
 
-    auth,
+auth,  
 
-    (user) => {
+(user) => {  
 
-        authResolved = true;
-
-
-        if(!user){
-
-            /*
-             * User is not logged in.
-             * Send them to login.
-             */
-
-            window.location.replace(
-                "login.html"
-            );
-
-            return;
-
-        }
+    authResolved =  
+        true;  
 
 
-        /*
-         * User is authenticated.
-         * Load marketplace.
-         */
+    if(!user){  
 
-        loadProducts();
+        window.location.replace(  
+            "login.html"  
+        );  
 
-        loadCategories();
+        return;  
 
-    }
+    }  
+
+
+    loadProducts();  
+
+    loadCategories();  
+
+}
 
 );
 
-
-
 /* ==============================
-   LOAD PRODUCTS
+LOAD PRODUCTS
 ============================== */
 
 function loadProducts(){
 
-    const productsRef =
-        ref(
-            db,
-            "products"
-        );
+const productsRef =  
+    ref(  
+        db,  
+        "products"  
+    );  
 
 
-    onValue(
+onValue(  
 
-        productsRef,
+    productsRef,  
 
-        (snapshot) => {
+    (snapshot) => {  
 
-            const data =
-                snapshot.val() || {};
-
-
-            allProducts =
-
-                Object.entries(
-                    data
-                )
-
-                .map(
-
-                    ([id,product]) => ({
-
-                        id:id,
-
-                        ...product
-
-                    })
-
-                )
-
-                .filter(
-
-                    product =>
-
-                        product &&
-
-                        product.active === true
-
-                );
+        const data =  
+            snapshot.val() || {};  
 
 
-            allProducts.sort(
+        allProducts =  
 
-                (a,b) => {
+            Object.entries(  
+                data  
+            )  
 
-                    const aTime =
-                        Number(
-                            a.createdAt || 0
-                        );
+            .map(  
+                ([id,product]) => ({  
 
+                    id:id,  
 
-                    const bTime =
-                        Number(
-                            b.createdAt || 0
-                        );
+                    ...product  
 
+                })  
+            )  
 
-                    return bTime - aTime;
+            .filter(  
+                product =>  
 
-                }
+                    product &&  
 
-            );
+                    product.active === true  
 
-
-            renderProducts();
-
-        },
+            );  
 
 
-        (error) => {
+        allProducts.sort(  
 
-            console.error(
-                "Product loading error:",
-                error
-            );
+            (a,b) => {  
+
+                const aTime =  
+                    Number(  
+                        a.createdAt || 0  
+                    );  
 
 
-            productsGrid.innerHTML = `
+                const bTime =  
+                    Number(  
+                        b.createdAt || 0  
+                    );  
 
-                <div class="error">
 
-                    <h2>
-                        Products unavailable
-                    </h2>
+                return bTime - aTime;  
 
-                    <p>
-                        We could not load the marketplace products.
-                    </p>
+            }  
 
-                </div>
+        );  
 
-            `;
 
-        }
+        renderProducts();  
 
-    );
+    },  
+
+
+    (error) => {  
+
+        console.error(  
+            "Product loading error:",  
+            error  
+        );  
+
+
+        productsGrid.innerHTML = `  
+
+            <div class="error">  
+
+                <h2>  
+                    Products unavailable  
+                </h2>  
+
+                <p>  
+                    We could not load the marketplace products.  
+                </p>  
+
+            </div>  
+
+        `;  
+
+    }  
+
+);
 
 }
 
-
-
 /* ==============================
-   LOAD CATEGORIES
+LOAD CATEGORIES
 ============================== */
 
 function loadCategories(){
 
-    const categoriesRef =
-        ref(
-            db,
-            "categories"
-        );
+const categoriesRef =  
+    ref(  
+        db,  
+        "categories"  
+    );  
 
 
-    onValue(
+onValue(  
 
-        categoriesRef,
+    categoriesRef,  
 
-        (snapshot) => {
+    (snapshot) => {  
 
-            const data =
-                snapshot.val() || {};
+        const data =  
+            snapshot.val() || {};  
 
 
-            Object.entries(
-                data
-            )
+        Object.entries(  
+            data  
+        )  
+        .forEach(  
 
-            .forEach(
+            ([id,category]) => {  
 
-                ([id,category]) => {
+                if(  
 
-                    if(
+                    !category ||  
 
-                        !category ||
+                    category.active !== true ||  
 
-                        category.active !== true ||
+                    !category.name  
 
-                        !category.name
+                ){  
 
-                    ){
+                    return;  
 
-                        return;
+                }  
 
-                    }
 
+                const exists =  
 
-                    const exists =
+                    [  
+                        ...filterArea.children  
+                    ]  
 
-                        [
-                            ...filterArea.children
-                        ]
+                    .some(  
 
-                        .some(
+                        button => {  
 
-                            button => {
+                            return String(  
+                                button.dataset.category  
+                            )  
+                            .toLowerCase()  
 
-                                return String(
-                                    button.dataset.category
-                                )
-                                .toLowerCase()
+                            ===  
 
-                                ===
+                            String(  
+                                category.name  
+                            )  
+                            .toLowerCase();  
 
-                                String(
-                                    category.name
-                                )
-                                .toLowerCase();
+                        }  
 
-                            }
+                    );  
 
-                        );
 
+                if(exists){  
 
-                    if(exists){
+                    return;  
 
-                        return;
+                }  
 
-                    }
 
+                const button =  
+                    document.createElement(  
+                        "button"  
+                    );  
 
-                    const button =
-                        document.createElement(
-                            "button"
-                        );
 
+                button.className =  
+                    "filter-btn";  
 
-                    button.className =
-                        "filter-btn";
 
+                button.dataset.category =  
+                    category.name;  
 
-                    button.dataset.category =
-                        category.name;
 
+                button.textContent =  
 
-                    button.textContent =
+                    (  
+                        category.icon ||  
+                        "📦"  
+                    )  
 
-                        (
-                            category.icon ||
-                            "📦"
-                        )
+                    + " "  
 
-                        + " "
+                    + category.name;  
 
-                        + category.name;
 
+                button.addEventListener(  
 
-                    button.addEventListener(
+                    "click",  
 
-                        "click",
+                    () => {  
 
-                        () => {
+                        selectedCategory =  
+                            category.name;  
 
-                            selectedCategory =
-                                category.name;
 
+                        updateButtons();  
 
-                            updateButtons();
+                        renderProducts();  
 
-                            renderProducts();
+                    }  
 
-                        }
+                );  
 
-                    );
 
+                filterArea.appendChild(  
+                    button  
+                );  
 
-                    filterArea.appendChild(
-                        button
-                    );
+            }  
 
-                }
+        );  
 
-            );
 
+        updateButtons();  
 
-            updateButtons();
+        renderProducts();  
 
-            renderProducts();
+    },  
 
-        },
 
+    (error) => {  
 
-        (error) => {
+        console.error(  
+            "Category loading error:",  
+            error  
+        );  
 
-            console.error(
-                "Category loading error:",
-                error
-            );
+    }  
 
-        }
-
-    );
+);
 
 }
 
-
-
 /* ==============================
-   STOCK
+STOCK
 ============================== */
 
 function getStockInfo(product){
 
-    /*
-     * No stock field means
-     * unlimited stock.
-     */
+/*  
+ * No stock field = Unlimited  
+ */  
 
-    if(
+if(  
 
-        product.stock === undefined ||
+    product.stock === undefined ||  
 
-        product.stock === null ||
+    product.stock === null ||  
 
-        product.stock === ""
+    product.stock === ""  
 
-    ){
+){  
 
-        return {
+    return {  
 
-            type:
-                "unlimited",
+        type:  
+            "unlimited",  
 
-            text:
-                "Unlimited"
+        text:  
+            "Unlimited"  
 
-        };
+    };  
 
-    }
-
-
-    const stock =
-        Number(
-            product.stock
-        );
+}  
 
 
-    if(
-        !Number.isFinite(stock)
-    ){
-
-        return {
-
-            type:
-                "unlimited",
-
-            text:
-                "Unlimited"
-
-        };
-
-    }
+const stock =  
+    Number(  
+        product.stock  
+    );  
 
 
-    if(stock <= 0){
+if(  
+    !Number.isFinite(stock)  
+){  
 
-        return {
+    return {  
 
-            type:
-                "out-stock",
+        type:  
+            "unlimited",  
 
-            text:
-                "Out of Stock"
+        text:  
+            "Unlimited"  
 
-        };
+    };  
 
-    }
+}  
 
 
-    return {
+if(stock <= 0){  
 
-        type:
-            stock <= 5
-            ? "low-stock"
-            : "in-stock",
+    return {  
 
-        text:
-            stock + " Pcs"
+        type:  
+            "out-stock",  
 
-    };
+        text:  
+            "Out of Stock"  
+
+    };  
+
+}  
+
+
+return {  
+
+    type:  
+        stock <= 5  
+        ? "low-stock"  
+        : "in-stock",  
+
+    text:  
+        stock + " Pcs"  
+
+};
 
 }
 
-
-
 /* ==============================
-   RENDER PRODUCTS
+RENDER PRODUCTS
 ============================== */
 
 function renderProducts(){
 
-    if(!authResolved){
+if(!authResolved){  
 
-        return;
+    return;  
 
-    }
+}  
 
 
-    let products =
-        allProducts;
+let products =  
+    allProducts;  
 
 
-    if(
+if(  
 
-        selectedCategory &&
+    selectedCategory &&  
 
-        selectedCategory !== "all"
+    selectedCategory !== "all"  
 
-    ){
+){  
 
-        products =
+    products =  
 
-            allProducts.filter(
+        allProducts.filter(  
 
-                product => {
+            product => {  
 
-                    return String(
-                        product.category || ""
-                    )
-                    .toLowerCase()
+                return String(  
+                    product.category || ""  
+                )  
+                .toLowerCase()  
 
-                    ===
+                ===  
 
-                    String(
-                        selectedCategory
-                    )
-                    .toLowerCase();
+                String(  
+                    selectedCategory  
+                )  
+                .toLowerCase();  
 
-                }
+            }  
 
-            );
+        );  
 
-    }
+}  
 
 
 
-    if(products.length === 0){
+if(products.length === 0){  
 
-        productsGrid.innerHTML = `
+    productsGrid.innerHTML = `  
 
-            <div class="empty">
+        <div class="empty">  
 
-                <div
-                    style="
-                        font-size:40px;
-                        margin-bottom:10px;
-                    "
-                >
-                    📦
-                </div>
+            <div  
+                style="  
+                    font-size:40px;  
+                    margin-bottom:10px;  
+                "  
+            >  
+                📦  
+            </div>  
 
 
-                <h2>
-                    No products available
-                </h2>
+            <h2>  
+                No products available  
+            </h2>  
 
 
-                <p>
+            <p>  
 
-                    ${
-                        selectedCategory === "all"
+                ${  
+                    selectedCategory === "all"  
 
-                        ? "New products will appear here."
+                    ? "New products will appear here."  
 
-                        : "There are no products in this category yet."
+                    : "There are no products in this category yet."  
 
-                    }
+                }  
 
-                </p>
+            </p>  
 
-            </div>
+        </div>  
 
-        `;
+    `;  
 
-        return;
+    return;  
 
-    }
+}  
 
 
 
-    productsGrid.innerHTML = "";
+productsGrid.innerHTML = "";  
 
 
 
-    products.forEach(
+products.forEach(  
 
-        product => {
+    product => {  
 
-            const card =
-                document.createElement(
-                    "article"
-                );
+        const card =  
+            document.createElement(  
+                "article"  
+            );  
 
 
-            card.className =
-                "product-card";
+        card.className =  
+            "product-card";  
 
 
-            const image =
 
-                product.image ||
+        const image =  
 
-                "https://via.placeholder.com/100x100?text=Zavora";
+            product.image ||  
 
+            "https://via.placeholder.com/100x100?text=Zavora";  
 
-            const stockInfo =
-                getStockInfo(
-                    product
-                );
 
 
-            const isOutOfStock =
-                stockInfo.type ===
-                "out-stock";
+        const stockInfo =  
+            getStockInfo(  
+                product  
+            );  
 
 
+        const isOutOfStock =  
+            stockInfo.type ===  
+            "out-stock";  
 
-            card.innerHTML = `
 
-                <div class="product-image">
 
-                    <img
+        card.innerHTML = `  
 
-                        src="${escapeHtml(
-                            image
-                        )}"
+            <div class="product-image">  
 
-                        alt="${escapeHtml(
-                            product.name ||
-                            "Product"
-                        )}"
+                <img  
 
-                    >
+                    src="${escapeHtml(  
+                        image  
+                    )}"  
 
-                </div>
+                    alt="${escapeHtml(  
+                        product.name ||  
+                        "Product"  
+                    )}"  
 
+                >  
 
+            </div>  
 
-                <div class="product-info">
 
-                    <div class="product-name">
 
-                        ${escapeHtml(
-                            product.name ||
-                            "Unnamed Product"
-                        )}
+            <div class="product-info">  
 
-                    </div>
+                <div class="product-name">  
 
+                    ${escapeHtml(  
+                        product.name ||  
+                        "Unnamed Product"  
+                    )}  
 
+                </div>  
 
-                    <div class="product-bottom">
 
 
-                        <div class="product-price">
+                <div class="product-bottom">  
 
-                            ₦${formatNumber(
-                                product.price || 0
-                            )}
 
-                        </div>
+                    <div class="product-price">  
 
+                        ₦${formatNumber(  
+                            product.price || 0  
+                        )}  
 
+                    </div>  
 
-                        <div
-                            class="
-                                stock-status
-                                ${stockInfo.type}
-                            "
-                        >
 
-                            ${escapeHtml(
-                                stockInfo.text
-                            )}
 
-                        </div>
+                    <div  
+                        class="  
+                            stock-status  
+                            ${stockInfo.type}  
+                        "  
+                    >  
 
+                        ${escapeHtml(  
+                            stockInfo.text  
+                        )}  
 
-                    </div>
+                    </div>  
 
-                </div>
 
+                </div>  
 
+            </div>  
 
-                <button
 
-                    class="
-                        buy-btn
-                        ${
-                            isOutOfStock
-                            ? "disabled"
-                            : ""
-                        }
-                    "
 
-                    ${
-                        isOutOfStock
-                        ? "disabled"
-                        : ""
-                    }
+            <button  
 
-                >
+                class="  
+                    buy-btn  
+                    ${  
+                        isOutOfStock  
+                        ? "disabled"  
+                        : ""  
+                    }  
+                "  
 
-                    ${
-                        isOutOfStock
-                        ? "SOLD"
-                        : "BUY"
-                    }
+                ${  
+                    isOutOfStock  
+                    ? "disabled"  
+                    : ""  
+                }  
 
-                </button>
+            >  
 
-            `;
+                ${  
+                    isOutOfStock  
+                    ? "SOLD"  
+                    : "BUY"  
+                }  
 
+            </button>  
 
+        `;  
 
-            const buyButton =
-                card.querySelector(
-                    ".buy-btn"
-                );
 
 
+        const buyButton =  
+            card.querySelector(  
+                ".buy-btn"  
+            );  
 
-            /*
-             * IMPORTANT:
-             *
-             * BUY opens product.html
-             * and passes the Firebase
-             * product ID.
-             */
 
-            if(!isOutOfStock){
 
-                buyButton.addEventListener(
+        if(!isOutOfStock){  
 
-                    "click",
+            buyButton.addEventListener(  
 
-                    () => {
+                "click",  
 
-                        window.location.href =
-                            "product.html?id=" +
-                            encodeURIComponent(
-                                product.id
-                            );
+                () => {  
 
-                    }
+                    window.location.href =  
 
-                );
+                        "product.html?id="  
 
-            }
+                        +  
 
+                        encodeURIComponent(  
+                            product.id  
+                        );  
 
+                }  
 
-            const imageElement =
-                card.querySelector(
-                    "img"
-                );
+            );  
 
+        }  
 
-            imageElement.addEventListener(
 
-                "error",
 
-                () => {
+        const imageElement =  
+            card.querySelector(  
+                "img"  
+            );  
 
-                    imageElement.src =
-                        "https://via.placeholder.com/100x100?text=Zavora";
 
-                }
 
-            );
+        imageElement.addEventListener(  
 
+            "error",  
 
-            productsGrid.appendChild(
-                card
-            );
+            () => {  
 
-        }
+                imageElement.src =  
+                    "https://via.placeholder.com/100x100?text=Zavora";  
 
-    );
+            }  
+
+        );  
+
+
+
+        productsGrid.appendChild(  
+            card  
+        );  
+
+    }  
+
+);
 
 }
 
-
-
 /* ==============================
-   FILTER BUTTONS
+FILTER BUTTONS
 ============================== */
 
 function updateButtons(){
 
-    const buttons =
-        filterArea.querySelectorAll(
-            ".filter-btn"
-        );
+const buttons =  
+    filterArea.querySelectorAll(  
+        ".filter-btn"  
+    );  
 
 
-    buttons.forEach(
+buttons.forEach(  
 
-        button => {
+    button => {  
 
-            button.classList.toggle(
+        button.classList.toggle(  
 
-                "active",
+            "active",  
 
-                String(
-                    button.dataset.category
-                )
-                .toLowerCase()
+            String(  
+                button.dataset.category  
+            )  
+            .toLowerCase()  
 
-                ===
+            ===  
 
-                String(
-                    selectedCategory
-                )
-                .toLowerCase()
+            String(  
+                selectedCategory  
+            )  
+            .toLowerCase()  
 
-            );
+        );  
 
-        }
+    }  
+
+);
+
+}
+
+/* ==============================
+NUMBER FORMAT
+============================== */
+
+function formatNumber(value){
+
+return Number(value)  
+
+    .toLocaleString(  
+
+        "en-NG",  
+
+        {  
+            maximumFractionDigits:2  
+        }  
 
     );
 
 }
 
-
-
 /* ==============================
-   NUMBER FORMAT
-============================== */
-
-function formatNumber(value){
-
-    return Number(value)
-
-        .toLocaleString(
-
-            "en-NG",
-
-            {
-                maximumFractionDigits:2
-            }
-
-        );
-
-}
-
-
-
-/* ==============================
-   ESCAPE HTML
+ESCAPE HTML
 ============================== */
 
 function escapeHtml(value){
 
-    return String(value)
+return String(value)  
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+    .replaceAll(  
+        "&",  
+        "&amp;"  
+    )  
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+    .replaceAll(  
+        "<",  
+        "&lt;"  
+    )  
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+    .replaceAll(  
+        ">",  
+        "&gt;"  
+    )  
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+    .replaceAll(  
+        '"',  
+        "&quot;"  
+    )  
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    .replaceAll(  
+        "'",  
+        "&#039;"  
+    );
 
 }
 
-</script>
-
-</body>
-</html>
+</script></body></html>
