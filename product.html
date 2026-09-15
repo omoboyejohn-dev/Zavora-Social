@@ -458,6 +458,7 @@ header{
 
 </div>
 
+
 <script type="module">
 
 import {
@@ -465,11 +466,13 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
+
 import {
     getAuth,
     onAuthStateChanged
 } from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -477,6 +480,13 @@ import {
     get
 } from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+import {
+    getFunctions,
+    httpsCallable
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js";
 
 
 const firebaseConfig = {
@@ -511,15 +521,45 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
+
 const auth =
     getAuth(app);
+
 
 const db =
     getDatabase(app);
 
 
-const PURCHASE_WORKER_URL =
-    "https://zavora-purchase.omoboyejohn.workers.dev";
+/*
+============================================
+FIREBASE CLOUD FUNCTIONS
+============================================
+
+Your function is:
+
+purchaseProduct
+
+and your backend uses:
+
+region: "us-central1"
+
+So we explicitly connect to
+us-central1 here.
+============================================
+*/
+
+const functions =
+    getFunctions(
+        app,
+        "us-central1"
+    );
+
+
+const purchaseProduct =
+    httpsCallable(
+        functions,
+        "purchaseProduct"
+    );
 
 
 const loading =
@@ -573,11 +613,13 @@ const urlParams =
         window.location.search
     );
 
+
 const productId =
     urlParams.get("id");
 
 
 let currentUser = null;
+
 let currentProduct = null;
 
 
@@ -601,9 +643,11 @@ function showMessage(
     success=false
 ){
 
-    modalTitle.textContent = title;
+    modalTitle.textContent =
+        title;
 
-    modalMessage.textContent = message;
+    modalMessage.textContent =
+        message;
 
     modalTitle.className =
         "modal-title " +
@@ -613,7 +657,21 @@ function showMessage(
             : "failure"
         );
 
-    messageModal.classList.add("show");
+    modalButton.textContent =
+        "Continue";
+
+    modalButton.onclick =
+        () => {
+
+            messageModal.classList.remove(
+                "show"
+            );
+
+        };
+
+    messageModal.classList.add(
+        "show"
+    );
 
 }
 
@@ -622,9 +680,11 @@ async function loadProduct(){
 
     if(!productId){
 
-        loading.style.display = "none";
+        loading.style.display =
+            "none";
 
-        errorArea.style.display = "block";
+        errorArea.style.display =
+            "block";
 
         errorText.textContent =
             "No product was selected.";
@@ -650,9 +710,11 @@ async function loadProduct(){
 
         if(!snapshot.exists()){
 
-            loading.style.display = "none";
+            loading.style.display =
+                "none";
 
-            errorArea.style.display = "block";
+            errorArea.style.display =
+                "block";
 
             errorText.textContent =
                 "This product does not exist.";
@@ -668,9 +730,11 @@ async function loadProduct(){
 
         if(product.active === false){
 
-            loading.style.display = "none";
+            loading.style.display =
+                "none";
 
-            errorArea.style.display = "block";
+            errorArea.style.display =
+                "block";
 
             errorText.textContent =
                 "This product is currently unavailable.";
@@ -681,8 +745,12 @@ async function loadProduct(){
 
 
         currentProduct = {
-            id:productId,
+
+            id:
+                productId,
+
             ...product
+
         };
 
 
@@ -719,9 +787,12 @@ async function loadProduct(){
         }
 
 
-        loading.style.display = "none";
+        loading.style.display =
+            "none";
 
-        productArea.style.display = "block";
+        productArea.style.display =
+            "block";
+
 
         await loadWallet();
 
@@ -733,9 +804,12 @@ async function loadProduct(){
             error
         );
 
-        loading.style.display = "none";
 
-        errorArea.style.display = "block";
+        loading.style.display =
+            "none";
+
+        errorArea.style.display =
+            "block";
 
         errorText.textContent =
             "Unable to load this product.";
@@ -747,25 +821,42 @@ async function loadProduct(){
 
 async function loadWallet(){
 
-    const walletRef =
-        ref(
-            db,
-            "users/" +
-            currentUser.uid +
-            "/walletBalance"
+    try{
+
+        const walletRef =
+            ref(
+                db,
+                "users/" +
+                currentUser.uid +
+                "/walletBalance"
+            );
+
+
+        const snapshot =
+            await get(walletRef);
+
+
+        const balance =
+            Number(
+                snapshot.val()
+            ) || 0;
+
+
+        walletBalance.textContent =
+            money(balance);
+
+    }
+    catch(error){
+
+        console.error(
+            "Wallet error:",
+            error
         );
 
+        walletBalance.textContent =
+            "₦0.00";
 
-    const snapshot =
-        await get(walletRef);
-
-
-    const balance =
-        Number(snapshot.val()) || 0;
-
-
-    walletBalance.textContent =
-        money(balance);
+    }
 
 }
 
@@ -796,7 +887,26 @@ buyButton.addEventListener(
         }
 
 
-        buyButton.disabled = true;
+        const price =
+            Number(
+                currentProduct.price
+            ) || 0;
+
+
+        if(price <= 0){
+
+            showMessage(
+                "Purchase Failed",
+                "This product has an invalid price."
+            );
+
+            return;
+
+        }
+
+
+        buyButton.disabled =
+            true;
 
         buyButton.textContent =
             "Processing...";
@@ -804,114 +914,70 @@ buyButton.addEventListener(
 
         try{
 
-            const idToken =
-                await currentUser.getIdToken(true);
+            /*
+            ====================================
+            CALL FIREBASE CLOUD FUNCTION
+            ====================================
+
+            The backend function is:
+
+            purchaseProduct
+
+            We only send productId.
+
+            Firebase automatically sends
+            the logged-in customer's auth.
+            ====================================
+            */
+
+            const result =
+                await purchaseProduct({
+
+                    productId:
+                        currentProduct.id
+
+                });
 
 
-            const response =
-                await fetch(
-                    PURCHASE_WORKER_URL,
-                    {
-                        method:"POST",
-
-                        headers:{
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify({
-
-                                productId:
-                                    currentProduct.id,
-
-                                idToken:
-                                    idToken
-
-                            })
-
-                    }
-                );
+            const data =
+                result.data || {};
 
 
-            let result = null;
+            if(data.success !== true){
 
-
-            try{
-
-                result =
-                    await response.json();
-
-            }
-            catch(parseError){
-
-                console.error(
-                    "Worker response error:",
-                    parseError
+                throw new Error(
+                    data.message ||
+                    "Purchase could not be completed."
                 );
 
             }
 
 
-            if(
-                !response.ok ||
-                !result ||
-                result.success !== true
-            ){
+            /*
+            ====================================
+            REFRESH WALLET
+            ====================================
+            */
 
-                buyButton.disabled = false;
-
-                buyButton.textContent =
-                    "Buy Now";
+            await loadWallet();
 
 
-                showMessage(
-                    "Purchase Failed",
-                    result &&
-                    result.message
-                    ? result.message
-                    : "Unable to complete your purchase. Please try again."
-                );
-
-
-                return;
-
-            }
-
-
-            const updatedWalletSnapshot =
-                await get(
-                    ref(
-                        db,
-                        "users/" +
-                        currentUser.uid +
-                        "/walletBalance"
-                    )
-                );
-
-
-            const newBalance =
-                Number(
-                    updatedWalletSnapshot.val()
-                ) || 0;
-
-
-            walletBalance.textContent =
-                money(newBalance);
-
-
-            buyButton.disabled = false;
+            buyButton.disabled =
+                false;
 
             buyButton.textContent =
                 "Buy Now";
 
 
+            /*
+            ====================================
+            SUCCESS
+            ====================================
+            */
+
             showMessage(
-                "Order Completed",
-                "Your purchase was successful. " +
-                money(result.price) +
-                " has been deducted from your wallet. " +
-                "Your item has been delivered to your Orders page.",
+                "Purchase Successful",
+                "Your purchase was completed successfully. Your item has been delivered to your Orders page.",
                 true
             );
 
@@ -928,6 +994,7 @@ buyButton.addEventListener(
 
                 };
 
+
         }
         catch(error){
 
@@ -937,15 +1004,49 @@ buyButton.addEventListener(
             );
 
 
-            buyButton.disabled = false;
+            buyButton.disabled =
+                false;
 
             buyButton.textContent =
                 "Buy Now";
 
 
+            let message =
+                "Unable to complete your purchase. Please try again.";
+
+
+            /*
+            ====================================
+            FIREBASE ERROR MESSAGES
+            ====================================
+            */
+
+            if(
+                error &&
+                error.message
+            ){
+
+                message =
+                    error.message;
+
+            }
+
+
+            /*
+            Remove ugly Firebase
+            technical prefixes where possible.
+            */
+
+            message =
+                message.replace(
+                    /^FirebaseError:\s*/i,
+                    ""
+                );
+
+
             showMessage(
                 "Purchase Failed",
-                "Unable to connect to the purchase service. Please try again."
+                message
             );
 
         }
@@ -958,7 +1059,9 @@ modalButton.addEventListener(
     "click",
     () => {
 
-        messageModal.classList.remove("show");
+        messageModal.classList.remove(
+            "show"
+        );
 
     }
 );
@@ -978,7 +1081,9 @@ onAuthStateChanged(
         }
 
 
-        currentUser = user;
+        currentUser =
+            user;
+
 
         await loadProduct();
 
