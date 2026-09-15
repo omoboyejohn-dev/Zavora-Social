@@ -472,19 +472,19 @@ header{
 
 <div class="navbar">
 
-    <a
-        href="dashboard.html"
-        class="logo"
-    >
-        Zavora <span>Social</span>
-    </a>
+<a
+    href="dashboard.html"
+    class="logo"
+>
+    Zavora <span>Social</span>
+</a>
 
-    <a
-        href="products.html"
-        class="back-btn"
-    >
-        ← Products
-    </a>
+<a
+    href="products.html"
+    class="back-btn"
+>
+    ← Products
+</a>
 
 </div>
 
@@ -512,27 +512,27 @@ header{
 
 <div class="message-box">
 
-    <div
-        id="messageIcon"
-        class="message-icon"
-    >
-        ⚠️
-    </div>
+<div
+    id="messageIcon"
+    class="message-icon"
+>
+    ⚠️
+</div>
 
-    <h2 id="messageTitle">
-        Message
-    </h2>
+<h2 id="messageTitle">
+    Message
+</h2>
 
-    <p id="messageText">
-        Please wait...
-    </p>
+<p id="messageText">
+    Please wait...
+</p>
 
-    <button
-        id="messageButton"
-        class="message-btn"
-    >
-        Continue
-    </button>
+<button
+    id="messageButton"
+    class="message-btn"
+>
+    Continue
+</button>
 
 </div>
 
@@ -544,13 +544,17 @@ header{
 import {
     initializeApp
 }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged
 }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -560,13 +564,18 @@ import {
     update,
     runTransaction
 }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
+
+/* ==========================================
+   CORRECT FIREBASE CONFIG
+========================================== */
 
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzj9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_RgqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -595,8 +604,10 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
+
 const auth =
     getAuth(app);
+
 
 const db =
     getDatabase(app);
@@ -626,62 +637,60 @@ const params =
         window.location.search
     );
 
+
 const productId =
     params.get("id");
 
 
-let currentUser = null;
+let currentUser =
+    null;
 
-let currentProduct = null;
+let currentProduct =
+    null;
 
-let currentWalletBalance = 0;
+let currentWalletBalance =
+    0;
 
-let purchaseInProgress = false;
+let purchaseInProgress =
+    false;
 
 
 /* ==========================================
-   AUTH FIX
+   AUTH CHECK
 ========================================== */
 
-let authCheckFinished = false;
+let authCheckFinished =
+    false;
 
 
 /*
- * Give Firebase time to restore the
- * existing browser login session.
- *
- * We DO NOT redirect immediately when
- * the first auth callback is empty.
+ * Wait for Firebase to restore the
+ * existing login session.
  */
 
 const authTimeout =
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        if(!authCheckFinished){
+            if(!authCheckFinished){
 
-            authCheckFinished = true;
+                authCheckFinished =
+                    true;
 
-            console.log(
-                "No Firebase login session found."
-            );
+                window.location.replace(
+                    "login.html"
+                );
 
-            window.location.replace(
-                "login.html"
-            );
+            }
 
-        }
-
-    }, 4000);
+        },
+        7000
+    );
 
 
 onAuthStateChanged(
     auth,
     async (user) => {
-
-        /*
-         * Firebase has now finished checking
-         * the current authentication state.
-         */
 
         if(authCheckFinished){
 
@@ -690,16 +699,20 @@ onAuthStateChanged(
         }
 
 
-        authCheckFinished = true;
+        authCheckFinished =
+            true;
 
-        clearTimeout(authTimeout);
+
+        clearTimeout(
+            authTimeout
+        );
 
 
         console.log(
-            "Zavora authentication:",
+            "Current Firebase user:",
             user
                 ? user.email
-                : "No authenticated user"
+                : "No user"
         );
 
 
@@ -713,10 +726,6 @@ onAuthStateChanged(
 
         }
 
-
-        /*
-         * User is authenticated.
-         */
 
         currentUser =
             user;
@@ -734,7 +743,7 @@ onAuthStateChanged(
         }
 
 
-        await loadProduct(user);
+        await loadProduct();
 
     }
 );
@@ -744,7 +753,7 @@ onAuthStateChanged(
    LOAD PRODUCT
 ========================================== */
 
-async function loadProduct(user){
+async function loadProduct(){
 
     try{
 
@@ -757,7 +766,9 @@ async function loadProduct(user){
 
 
         const snapshot =
-            await get(productRef);
+            await get(
+                productRef
+            );
 
 
         if(!snapshot.exists()){
@@ -793,8 +804,7 @@ async function loadProduct(user){
 
 
         renderProduct(
-            product,
-            user
+            product
         );
 
     }
@@ -821,8 +831,7 @@ async function loadProduct(user){
 ========================================== */
 
 function renderProduct(
-    product,
-    user
+    product
 ){
 
     const image =
@@ -981,7 +990,7 @@ function renderProduct(
     }
 
 
-    loadWallet(user);
+    loadWallet();
 
 }
 
@@ -990,7 +999,14 @@ function renderProduct(
    LOAD WALLET
 ========================================== */
 
-async function loadWallet(user){
+async function loadWallet(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
 
     const walletBalance =
         document.getElementById(
@@ -1011,13 +1027,15 @@ async function loadWallet(user){
             ref(
                 db,
                 "users/" +
-                user.uid +
+                currentUser.uid +
                 "/walletBalance"
             );
 
 
         const snapshot =
-            await get(walletRef);
+            await get(
+                walletRef
+            );
 
 
         currentWalletBalance =
@@ -1096,7 +1114,10 @@ async function purchaseProduct(){
         );
 
 
-    if(!Number.isFinite(price) || price <= 0){
+    if(
+        !Number.isFinite(price) ||
+        price <= 0
+    ){
 
         showMessage(
             "⚠️",
@@ -1109,7 +1130,8 @@ async function purchaseProduct(){
     }
 
 
-    purchaseInProgress = true;
+    purchaseInProgress =
+        true;
 
 
     const buyButton =
@@ -1120,7 +1142,8 @@ async function purchaseProduct(){
 
     if(buyButton){
 
-        buyButton.disabled = true;
+        buyButton.disabled =
+            true;
 
         buyButton.textContent =
             "Processing Purchase...";
@@ -1140,7 +1163,9 @@ async function purchaseProduct(){
 
 
         const walletSnapshot =
-            await get(walletRef);
+            await get(
+                walletRef
+            );
 
 
         const walletBalance =
@@ -1184,7 +1209,9 @@ async function purchaseProduct(){
 
 
         const inventorySnapshot =
-            await get(inventoryRef);
+            await get(
+                inventoryRef
+            );
 
 
         if(!inventorySnapshot.exists()){
@@ -1203,9 +1230,11 @@ async function purchaseProduct(){
         }
 
 
-        let selectedItemId = null;
+        let selectedItemId =
+            null;
 
-        let selectedItem = null;
+        let selectedItem =
+            null;
 
 
         inventorySnapshot.forEach(
@@ -1371,7 +1400,6 @@ async function purchaseProduct(){
 
                     processingAt:
                         null
-
                 }
             );
 
@@ -1392,7 +1420,10 @@ async function purchaseProduct(){
 
         const orderRef =
             push(
-                ref(db, "orders")
+                ref(
+                    db,
+                    "orders"
+                )
             );
 
 
@@ -1515,7 +1546,6 @@ async function purchaseProduct(){
             newBalance
         );
 
-
     }
     catch(error){
 
@@ -1539,6 +1569,10 @@ async function purchaseProduct(){
 
 }
 
+
+/* ==========================================
+   SUCCESS
+========================================== */
 
 function showPurchaseSuccess(
     orderId,
@@ -1565,13 +1599,17 @@ function showPurchaseSuccess(
             orderId +
             "\n\n" +
             "Remaining Wallet Balance: ₦" +
-            formatNumber(newBalance)
+            formatNumber(
+                newBalance
+            )
         )
     );
 
 
     const deliveryBox =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     deliveryBox.className =
@@ -1579,7 +1617,9 @@ function showPurchaseSuccess(
 
 
     const deliveryTitle =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     deliveryTitle.className =
@@ -1591,7 +1631,9 @@ function showPurchaseSuccess(
 
 
     const deliveryContent =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     deliveryContent.className =
@@ -1642,7 +1684,8 @@ function showPurchaseSuccess(
 
     if(buyButton){
 
-        buyButton.disabled = true;
+        buyButton.disabled =
+            true;
 
         buyButton.textContent =
             "Purchased ✓";
@@ -1651,6 +1694,10 @@ function showPurchaseSuccess(
 
 }
 
+
+/* ==========================================
+   RESET BUY
+========================================== */
 
 function resetBuyButton(){
 
@@ -1683,10 +1730,16 @@ function resetBuyButton(){
 
     buyButton.textContent =
         "Buy Now — ₦" +
-        formatNumber(price);
+        formatNumber(
+            price
+        );
 
 }
 
+
+/* ==========================================
+   ERROR
+========================================== */
 
 function showError(
     title,
@@ -1734,6 +1787,10 @@ function showError(
 }
 
 
+/* ==========================================
+   MESSAGE
+========================================== */
+
 function showMessage(
     icon,
     title,
@@ -1752,6 +1809,7 @@ function showMessage(
     messageButton.textContent =
         "Continue";
 
+
     messageButton.onclick =
         () => {
 
@@ -1760,11 +1818,16 @@ function showMessage(
 
         };
 
+
     message.style.display =
         "flex";
 
 }
 
+
+/* ==========================================
+   FORMAT
+========================================== */
 
 function formatNumber(value){
 
@@ -1779,6 +1842,10 @@ function formatNumber(value){
 
 }
 
+
+/* ==========================================
+   ESCAPE
+========================================== */
 
 function escapeHtml(value){
 
