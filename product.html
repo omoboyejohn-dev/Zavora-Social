@@ -37,11 +37,8 @@ header{
     position:sticky;
     top:0;
     z-index:100;
-
     border-bottom:1px solid rgba(255,255,255,.08);
-
     background:rgba(8,11,22,.88);
-
     backdrop-filter:blur(18px);
 }
 
@@ -59,7 +56,6 @@ header{
 .logo{
     color:#fff;
     text-decoration:none;
-
     font-size:21px;
     font-weight:900;
 }
@@ -106,7 +102,6 @@ header{
 .product-box{
     display:grid;
     grid-template-columns:1fr 1fr;
-
     gap:25px;
 
     background:#111522;
@@ -151,7 +146,6 @@ header{
 .product-info{
     display:flex;
     flex-direction:column;
-
     justify-content:center;
 }
 
@@ -427,7 +421,6 @@ header{
 
 <body>
 
-
 <header>
 
     <div class="navbar">
@@ -438,7 +431,6 @@ header{
         >
             Zavora <span>Social</span>
         </a>
-
 
         <a
             href="products.html"
@@ -453,7 +445,6 @@ header{
 
 
 <main class="container">
-
 
     <div
         id="loading"
@@ -470,7 +461,6 @@ header{
 
         <div class="product-box">
 
-
             <div class="product-image-box">
 
                 <img
@@ -484,7 +474,6 @@ header{
 
 
             <div class="product-info">
-
 
                 <div
                     id="productCategory"
@@ -644,9 +633,7 @@ from
 import {
     getDatabase,
     ref,
-    get,
-    set,
-    push
+    get
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
@@ -655,7 +642,7 @@ from
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_RgQPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
@@ -691,6 +678,14 @@ const auth =
 
 const db =
     getDatabase(app);
+
+
+/* =================================
+   CLOUDFLARE PURCHASE WORKER
+================================= */
+
+const PURCHASE_WORKER_URL =
+    "https://zavora-purchase.omoboyejohn-dev.workers.dev";
 
 
 /* =================================
@@ -774,8 +769,7 @@ const modalButton =
 
 
 /* =================================
-   IMPORTANT:
-   PRODUCTS.HTML SENDS ?id=
+   PRODUCT ID
 ================================= */
 
 const urlParams =
@@ -783,10 +777,8 @@ const urlParams =
         window.location.search
     );
 
-
 const productId =
     urlParams.get("id");
-
 
 console.log(
     "Selected product ID:",
@@ -1037,6 +1029,7 @@ async function loadWallet(){
 
 /* =================================
    BUY PRODUCT
+   NOW USES CLOUDFLARE WORKER
 ================================= */
 
 buyButton.addEventListener(
@@ -1065,27 +1058,6 @@ buyButton.addEventListener(
         }
 
 
-        const price =
-            Number(
-                currentProduct.price
-            );
-
-
-        if(
-            !Number.isFinite(price) ||
-            price <= 0
-        ){
-
-            showMessage(
-                "Purchase Failed",
-                "This product has an invalid price."
-            );
-
-            return;
-
-        }
-
-
         buyButton.disabled =
             true;
 
@@ -1095,44 +1067,82 @@ buyButton.addEventListener(
 
         try{
 
-            /* =========================
-               GET CURRENT WALLET
-            ========================= */
+            /*
+             * GET FRESH FIREBASE LOGIN TOKEN
+             */
 
-            const walletRef =
-                ref(
-                    db,
-                    "users/" +
-                    currentUser.uid +
-                    "/walletBalance"
+            const idToken =
+                await currentUser.getIdToken(
+                    true
                 );
 
 
-            const walletSnapshot =
-                await get(
-                    walletRef
+            /*
+             * SEND PURCHASE REQUEST
+             * TO CLOUDFLARE WORKER
+             */
+
+            const response =
+                await fetch(
+                    PURCHASE_WORKER_URL,
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                productId:
+                                    currentProduct.id,
+
+                                idToken:
+                                    idToken
+
+                            })
+
+                    }
                 );
 
 
-            const balance =
-                Number(
-                    walletSnapshot.val()
-                ) || 0;
+            let result = null;
+
+
+            try{
+
+                result =
+                    await response.json();
+
+            }
+            catch(parseError){
+
+                console.error(
+                    "Worker response error:",
+                    parseError
+                );
+
+            }
 
 
             console.log(
-                "Wallet:",
-                balance,
-                "Price:",
-                price
+                "Purchase response:",
+                response.status,
+                result
             );
 
 
-            /* =========================
-               CHECK BALANCE
-            ========================= */
+            /*
+             * WORKER ERROR
+             */
 
-            if(balance < price){
+            if(
+                !response.ok ||
+                !result ||
+                result.success !== true
+            ){
 
                 buyButton.disabled =
                     false;
@@ -1141,17 +1151,12 @@ buyButton.addEventListener(
                     "Buy Now";
 
 
-                walletBalance.textContent =
-                    money(balance);
-
-
                 showMessage(
-                    "Insufficient Balance",
-                    "Your wallet balance is " +
-                    money(balance) +
-                    ". You need " +
-                    money(price) +
-                    " to purchase this product."
+                    "Purchase Failed",
+                    result &&
+                    result.message
+                    ? result.message
+                    : "Unable to complete your purchase. Please try again."
                 );
 
 
@@ -1160,119 +1165,24 @@ buyButton.addEventListener(
             }
 
 
-            /* =========================
-               NEW BALANCE
-            ========================= */
+            /*
+             * SUCCESS
+             */
 
             const newBalance =
-                balance - price;
+                Number(
+                    (
+                        await get(
+                            ref(
+                                db,
+                                "users/" +
+                                currentUser.uid +
+                                "/walletBalance"
+                            )
+                        )
+                    ).val()
+                ) || 0;
 
-
-            /* =========================
-               DEDUCT MONEY
-            ========================= */
-
-            await set(
-                walletRef,
-                newBalance
-            );
-
-
-            /* =========================
-               CREATE ORDER
-            ========================= */
-
-            const ordersRef =
-                ref(
-                    db,
-                    "orders"
-                );
-
-
-            const newOrderRef =
-                push(
-                    ordersRef
-                );
-
-
-            const order = {
-
-                uid:
-                    currentUser.uid,
-
-                email:
-                    currentUser.email ||
-                    "",
-
-                productId:
-                    currentProduct.id,
-
-                productName:
-                    currentProduct.name ||
-                    "Unnamed Product",
-
-                price:
-                    price,
-
-                category:
-                    currentProduct.category ||
-                    "Product",
-
-                image:
-                    currentProduct.image ||
-                    "",
-
-                description:
-                    currentProduct.description ||
-                    "",
-
-                status:
-                    "completed",
-
-                deliveryStatus:
-                    "pending",
-
-                createdAt:
-                    Date.now()
-
-            };
-
-
-            try{
-
-                await set(
-                    newOrderRef,
-                    order
-                );
-
-            }
-            catch(orderError){
-
-                console.error(
-                    "Order error:",
-                    orderError
-                );
-
-
-                /*
-                 * REFUND CUSTOMER
-                 * IF ORDER CREATION FAILS
-                 */
-
-                await set(
-                    walletRef,
-                    balance
-                );
-
-
-                throw orderError;
-
-            }
-
-
-            /* =========================
-               SUCCESS
-            ========================= */
 
             walletBalance.textContent =
                 money(
@@ -1290,11 +1200,11 @@ buyButton.addEventListener(
             showMessage(
                 "Order Completed",
                 "Your purchase was successful. " +
-                money(price) +
+                money(
+                    result.price
+                ) +
                 " has been deducted from your wallet. " +
-                "Your new balance is " +
-                money(newBalance) +
-                ".",
+                "Your item has been delivered to your Orders page.",
                 true
             );
 
@@ -1330,7 +1240,7 @@ buyButton.addEventListener(
 
             showMessage(
                 "Purchase Failed",
-                "Unable to complete your purchase. Please try again."
+                "Unable to connect to the purchase service. Please try again."
             );
 
         }
