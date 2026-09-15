@@ -1,735 +1,852 @@
-<!DOCTYPE html><html lang="en">  <head><meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Zavora Social | Dashboard</title><style>  *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zavora Social | Dashboard</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-font-family:Inter,Arial,sans-serif;
-background:
-radial-gradient(circle at top left,rgba(124,58,237,.16),transparent 35%),
-radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
-#080b16;
-color:#fff;
-min-height:100vh;
+    font-family:Inter,Arial,sans-serif;
+    background:#ffffff;
+    color:#111111;
+    min-height:100vh;
 }
 
 /* LOADING */
 
 .loading-screen{
-position:fixed;
-inset:0;
-background:#080b16;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
+    position:fixed;
+    inset:0;
+    background:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
 }
 
 .loader-box{
-text-align:center;
+    text-align:center;
+    color:#111111;
 }
 
 .loader{
-width:45px;
-height:45px;
-border:4px solid rgba(255,255,255,.12);
-border-top-color:#8b5cf6;
-border-right-color:#06b6d4;
-border-radius:50%;
-animation:spin .8s linear infinite;
-margin:auto auto 15px;
+    width:45px;
+    height:45px;
+    border:4px solid #e5e5e5;
+    border-top-color:#111111;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+    margin:auto auto 15px;
 }
 
 @keyframes spin{
-to{
-transform:rotate(360deg);
-}
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 /* HEADER */
 
 header{
-width:100%;
-border-bottom:1px solid rgba(255,255,255,.08);
-background:rgba(8,11,22,.82);
-backdrop-filter:blur(18px);
-position:sticky;
-top:0;
-z-index:100;
+    width:100%;
+    border-bottom:1px solid #e8e8e8;
+    background:#ffffff;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 .navbar{
-max-width:1250px;
-margin:auto;
-min-height:72px;
-padding:0 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
+    max-width:1250px;
+    margin:auto;
+    min-height:72px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
 .logo{
-text-decoration:none;
-color:#fff;
-font-size:22px;
-font-weight:900;
-letter-spacing:-.5px;
+    text-decoration:none;
+    color:#111111;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-.5px;
 }
 
 .logo span{
-background:linear-gradient(90deg,#a78bfa,#22d3ee);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+    color:#666666;
 }
 
 .user-area{
-display:flex;
-align-items:center;
-gap:14px;
+    display:flex;
+    align-items:center;
+    gap:14px;
 }
 
 .user-name{
-color:#cbd5e1;
-font-size:14px;
-font-weight:600;
+    color:#555555;
+    font-size:14px;
+    font-weight:600;
 }
 
 .logout-btn{
-border:1px solid rgba(255,255,255,.1);
-background:rgba(255,255,255,.05);
-color:#fff;
-padding:10px 15px;
-border-radius:10px;
-cursor:pointer;
-font-weight:700;
+    border:1px solid #111111;
+    background:#111111;
+    color:#ffffff;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
 }
 
 .logout-btn:hover{
-background:rgba(239,68,68,.15);
-border-color:rgba(239,68,68,.3);
+    background:#333333;
 }
 
 /* MAIN */
 
 .container{
-max-width:1250px;
-margin:auto;
-padding:35px 20px 60px;
+    max-width:1250px;
+    margin:auto;
+    padding:35px 20px 60px;
 }
 
 .welcome{
-margin-bottom:30px;
+    margin-bottom:30px;
 }
 
 .welcome h1{
-font-size:34px;
-line-height:1.2;
-margin-bottom:8px;
+    font-size:34px;
+    line-height:1.2;
+    margin-bottom:8px;
+    color:#111111;
 }
 
 .welcome h1 span{
-background:linear-gradient(90deg,#a78bfa,#22d3ee);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+    color:#000000;
 }
 
 .welcome p{
-color:#94a3b8;
-font-size:15px;
+    color:#666666;
+    font-size:15px;
 }
 
 /* STATS */
 
 .stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
-margin-bottom:30px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:30px;
 }
 
 .stat-card{
-background:linear-gradient(
-145deg,
-rgba(255,255,255,.07),
-rgba(255,255,255,.025)
-);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-padding:22px;
-box-shadow:0 15px 40px rgba(0,0,0,.15);
+    background:#ffffff;
+    border:1px solid #e5e5e5;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
 }
 
 .stat-icon{
-width:42px;
-height:42px;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#7c3aed,#06b6d4);
-font-size:20px;
-margin-bottom:15px;
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#111111;
+    font-size:20px;
+    margin-bottom:15px;
 }
 
 .stat-title{
-color:#94a3b8;
-font-size:13px;
-margin-bottom:7px;
+    color:#777777;
+    font-size:13px;
+    margin-bottom:7px;
 }
 
 .stat-value{
-font-size:25px;
-font-weight:900;
+    color:#111111;
+    font-size:25px;
+    font-weight:900;
 }
 
 /* QUICK ACTIONS */
 
 .section-title{
-font-size:21px;
-margin-bottom:16px;
+    font-size:21px;
+    margin-bottom:16px;
+    color:#111111;
 }
 
 .quick-actions{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-bottom:40px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:40px;
 }
 
 .quick-card{
-text-decoration:none;
-color:#fff;
-background:rgba(255,255,255,.045);
-border:1px solid rgba(255,255,255,.08);
-border-radius:16px;
-padding:20px;
-transition:.2s ease;
+    text-decoration:none;
+    color:#111111;
+    background:#ffffff;
+    border:1px solid #e5e5e5;
+    border-radius:16px;
+    padding:20px;
+    transition:.2s ease;
+    box-shadow:0 6px 20px rgba(0,0,0,.04);
 }
 
 .quick-card:hover{
-transform:translateY(-3px);
-border-color:rgba(139,92,246,.45);
-background:rgba(139,92,246,.09);
+    transform:translateY(-3px);
+    border-color:#111111;
+    box-shadow:0 12px 30px rgba(0,0,0,.09);
 }
 
 .quick-icon{
-font-size:25px;
-margin-bottom:12px;
+    font-size:25px;
+    margin-bottom:12px;
 }
 
 .quick-card strong{
-display:block;
-margin-bottom:5px;
+    display:block;
+    margin-bottom:5px;
+    color:#111111;
 }
 
 .quick-card small{
-color:#94a3b8;
+    color:#777777;
 }
 
 /* MARKETPLACE */
 
 .marketplace-header{
-display:flex;
-align-items:end;
-justify-content:space-between;
-gap:20px;
-margin-bottom:18px;
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:18px;
 }
 
 .marketplace-header p{
-color:#94a3b8;
-font-size:14px;
-margin-top:5px;
+    color:#777777;
+    font-size:14px;
+    margin-top:5px;
 }
 
 /* CATEGORY GRID */
 
 .category-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:15px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
 }
 
 .category-card{
-position:relative;
-min-height:145px;
-padding:20px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.08);
-background:
-linear-gradient(
-145deg,
-rgba(124,58,237,.12),
-rgba(6,182,212,.05)
-);
-cursor:pointer;
-transition:.2s ease;
-overflow:hidden;
+    position:relative;
+    min-height:145px;
+    padding:20px;
+    border-radius:18px;
+    border:1px solid #e5e5e5;
+    background:#ffffff;
+    cursor:pointer;
+    transition:.2s ease;
+    overflow:hidden;
+    box-shadow:0 7px 22px rgba(0,0,0,.04);
 }
 
 .category-card::after{
-content:"";
-position:absolute;
-width:100px;
-height:100px;
-right:-45px;
-bottom:-45px;
-background:rgba(139,92,246,.12);
-border-radius:50%;
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:-45px;
+    bottom:-45px;
+    background:#f2f2f2;
+    border-radius:50%;
 }
 
 .category-card:hover{
-transform:translateY(-4px);
-border-color:rgba(139,92,246,.5);
-box-shadow:0 15px 35px rgba(0,0,0,.2);
+    transform:translateY(-4px);
+    border-color:#111111;
+    box-shadow:0 15px 35px rgba(0,0,0,.10);
 }
 
 .category-icon{
-width:48px;
-height:48px;
-border-radius:14px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,255,255,.08);
-font-size:23px;
-margin-bottom:15px;
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#111111;
+    color:#ffffff;
+    font-size:23px;
+    margin-bottom:15px;
 }
 
 .category-name{
-font-size:16px;
-font-weight:800;
-margin-bottom:5px;
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:5px;
+    color:#111111;
 }
 
 .category-count{
-color:#94a3b8;
-font-size:12px;
+    color:#777777;
+    font-size:12px;
 }
 
 /* CATEGORY LOADING */
 
 .category-loading{
-grid-column:1/-1;
-padding:45px 20px;
-border:1px dashed rgba(255,255,255,.13);
-border-radius:18px;
-text-align:center;
-color:#94a3b8;
-background:rgba(255,255,255,.025);
+    grid-column:1/-1;
+    padding:45px 20px;
+    border:1px dashed #cccccc;
+    border-radius:18px;
+    text-align:center;
+    color:#777777;
+    background:#fafafa;
 }
 
 .category-loading .big{
-font-size:38px;
-margin-bottom:10px;
+    font-size:38px;
+    margin-bottom:10px;
 }
 
 /* EMPTY */
 
 .empty-marketplace{
-grid-column:1/-1;
-padding:45px 20px;
-border:1px dashed rgba(255,255,255,.13);
-border-radius:18px;
-text-align:center;
-color:#94a3b8;
-background:rgba(255,255,255,.025);
+    grid-column:1/-1;
+    padding:45px 20px;
+    border:1px dashed #cccccc;
+    border-radius:18px;
+    text-align:center;
+    color:#777777;
+    background:#fafafa;
 }
 
 .empty-marketplace .big{
-font-size:38px;
-margin-bottom:10px;
+    font-size:38px;
+    margin-bottom:10px;
 }
 
 .empty-marketplace h3{
-color:#fff;
-margin-bottom:7px;
+    color:#111111;
+    margin-bottom:7px;
 }
 
 /* FOOTER */
 
 footer{
-max-width:1250px;
-margin:auto;
-padding:0 20px 30px;
-color:#64748b;
-font-size:13px;
-text-align:center;
+    max-width:1250px;
+    margin:auto;
+    padding:0 20px 30px;
+    color:#888888;
+    font-size:13px;
+    text-align:center;
 }
 
 /* MOBILE */
 
 @media(max-width:1000px){
 
-.stats{
-grid-template-columns:repeat(2,1fr);
-}
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-.quick-actions{
-grid-template-columns:repeat(2,1fr);
-}
+    .quick-actions{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-.category-grid{
-grid-template-columns:repeat(3,1fr);
-}
+    .category-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 
 }
 
 @media(max-width:650px){
 
-.navbar{
-min-height:65px;
+    .navbar{
+        min-height:65px;
+    }
+
+    .user-name{
+        display:none;
+    }
+
+    .container{
+        padding:28px 15px 50px;
+    }
+
+    .welcome h1{
+        font-size:27px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:17px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .quick-actions{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .quick-card{
+        padding:16px;
+    }
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .category-card{
+        min-height:130px;
+        padding:16px;
+    }
+
 }
 
-.user-name{
-display:none;
-}
+</style>
+</head>
 
-.container{
-padding:28px 15px 50px;
-}
+<body>
 
-.welcome h1{
-font-size:27px;
-}
+<!-- LOADING SCREEN -->
 
-.stats{
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
+<div class="loading-screen" id="loadingScreen">
 
-.stat-card{
-padding:17px;
-}
+    <div class="loader-box">
 
-.stat-value{
-font-size:21px;
-}
+        <div class="loader"></div>
 
-.quick-actions{
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
+        <p>Checking your account...</p>
 
-.quick-card{
-padding:16px;
-}
-
-.category-grid{
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.category-card{
-min-height:130px;
-padding:16px;
-}
-
-}
-
-</style></head><body><!-- LOADING SCREEN --><div class="loading-screen" id="loadingScreen"><div class="loader-box">
-
-<div class="loader"></div>    <p>Checking your account...</p>  </div>  </div><!-- HEADER --><header><div class="navbar">  <a href="dashboard.html" class="logo">    
-    Zavora <span>Social</span>    
-</a>    <div class="user-area">    <span class="user-name" id="userName">    
-    Loading...    
-</span>    
-
-<button class="logout-btn" id="logoutBtn">    
-    Logout    
-</button>
-
-</div>  </div>  </header><!-- MAIN --><main class="container"><!-- WELCOME -->  <section class="welcome">  <h1>    
-    Welcome back,    
-    <span id="welcomeName">User</span> 👋    
-</h1>    <p>    
-    Manage your wallet, orders and marketplace purchases from one place.    
-</p>  </section>  <!-- STATS -->  <section class="stats">  <div class="stat-card">    <div class="stat-icon">    
-    💰    
-</div>    
-
-<div class="stat-title">    
-    Wallet Balance    
-</div>    
-
-<div class="stat-value" id="walletBalance">    
-    ₦0.00    
-</div>
-
-</div>    <div class="stat-card">    <div class="stat-icon">    
-    🛍️    
-</div>    
-
-<div class="stat-title">    
-    Orders    
-</div>    
-
-<div class="stat-value">    
-    0    
-</div>
-
-</div>    <div class="stat-card">    <div class="stat-icon">    
-    📦    
-</div>    
-
-<div class="stat-title">    
-    Available Products    
-</div>    
-
-<div class="stat-value">    
-    0    
-</div>
-
-</div>    <div class="stat-card">    <div class="stat-icon">    
-    🔔    
-</div>    
-
-<div class="stat-title">    
-    Notifications    
-</div>    
-
-<div class="stat-value">    
-    0    
-</div>
-
-</div>  </section>  <!-- QUICK ACTIONS -->  <section>  <h2 class="section-title">    
-    Quick Actions    
-</h2>    <div class="quick-actions">    <a href="products.html" class="quick-card">    
-
-    <div class="quick-icon">    
-        🛒    
-    </div>    
-
-    <strong>    
-        Browse Products    
-    </strong>    
-
-    <small>    
-        Explore the marketplace    
-    </small>    
-
-</a>    
-
-
-<a href="wallet.html" class="quick-card">    
-
-    <div class="quick-icon">    
-        💳    
-    </div>    
-
-    <strong>    
-        Fund Wallet    
-    </strong>    
-
-    <small>    
-        Add money to your wallet    
-    </small>    
-
-</a>    
-
-
-<a href="orders.html" class="quick-card">    
-
-    <div class="quick-icon">    
-        📦    
-    </div>    
-
-    <strong>    
-        My Orders    
-    </strong>    
-
-    <small>    
-        View your purchases    
-    </small>    
-
-</a>    
-
-
-<a href="profile.html" class="quick-card">    
-
-    <div class="quick-icon">    
-        👤    
-    </div>    
-
-    <strong>    
-        My Profile    
-    </strong>    
-
-    <small>    
-        Manage your account    
-    </small>    
-
-</a>
-
-</div>  </section>  <!-- MARKETPLACE CATEGORIES -->  <section>  <div class="marketplace-header">    <div>    
-
-    <h2 class="section-title">    
-        Marketplace Categories    
-    </h2>    
-
-    <p>    
-        Choose a category to browse available products.    
-    </p>    
+    </div>
 
 </div>
 
-</div>    <div    
-    class="category-grid"    
-    id="categoryGrid"    
->    <div class="category-loading">    
 
-    <div class="big">    
-        🗂️    
-    </div>    
+<!-- HEADER -->
 
-    Loading categories...    
+<header>
 
-</div>
+    <div class="navbar">
 
-</div>  </section>  </main><footer>© <span id="year"></span> Zavora Social.    
-All rights reserved.  </footer><script type="module">  /* ==========================================  
-FIREBASE  
-========================================== */  import {
-initializeApp
+        <a href="dashboard.html" class="logo">
+            Zavora <span>Social</span>
+        </a>
+
+        <div class="user-area">
+
+            <span class="user-name" id="userName">
+                Loading...
+            </span>
+
+            <button class="logout-btn" id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <h1>
+            Welcome back,
+            <span id="welcomeName">User</span> 👋
+        </h1>
+
+        <p>
+            Manage your wallet, orders and marketplace purchases from one place.
+        </p>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <div class="stat-title">
+                Wallet Balance
+            </div>
+
+            <div class="stat-value" id="walletBalance">
+                ₦0.00
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🛍️
+            </div>
+
+            <div class="stat-title">
+                Orders
+            </div>
+
+            <div class="stat-value">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📦
+            </div>
+
+            <div class="stat-title">
+                Available Products
+            </div>
+
+            <div class="stat-value">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🔔
+            </div>
+
+            <div class="stat-title">
+                Notifications
+            </div>
+
+            <div class="stat-value">
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section>
+
+        <h2 class="section-title">
+            Quick Actions
+        </h2>
+
+        <div class="quick-actions">
+
+            <a href="products.html" class="quick-card">
+
+                <div class="quick-icon">
+                    🛒
+                </div>
+
+                <strong>
+                    Browse Products
+                </strong>
+
+                <small>
+                    Explore the marketplace
+                </small>
+
+            </a>
+
+
+            <a href="wallet.html" class="quick-card">
+
+                <div class="quick-icon">
+                    💳
+                </div>
+
+                <strong>
+                    Fund Wallet
+                </strong>
+
+                <small>
+                    Add money to your wallet
+                </small>
+
+            </a>
+
+
+            <a href="orders.html" class="quick-card">
+
+                <div class="quick-icon">
+                    📦
+                </div>
+
+                <strong>
+                    My Orders
+                </strong>
+
+                <small>
+                    View your purchases
+                </small>
+
+            </a>
+
+
+            <a href="profile.html" class="quick-card">
+
+                <div class="quick-icon">
+                    👤
+                </div>
+
+                <strong>
+                    My Profile
+                </strong>
+
+                <small>
+                    Manage your account
+                </small>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- MARKETPLACE CATEGORIES -->
+
+    <section>
+
+        <div class="marketplace-header">
+
+            <div>
+
+                <h2 class="section-title">
+                    Marketplace Categories
+                </h2>
+
+                <p>
+                    Choose a category to browse available products.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="category-grid"
+            id="categoryGrid"
+        >
+
+            <div class="category-loading">
+
+                <div class="big">
+                    🗂️
+                </div>
+
+                Loading categories...
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    © <span id="year"></span> Zavora Social.
+    All rights reserved.
+
+</footer>
+
+
+<script type="module">
+
+/* ==========================================
+FIREBASE
+========================================== */
+
+import {
+    initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
+
 import {
-getAuth,
-onAuthStateChanged,
-signOut
+    getAuth,
+    onAuthStateChanged,
+    signOut
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
+
 import {
-getDatabase,
-ref,
-onValue
+    getDatabase,
+    ref,
+    onValue
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
+
 const firebaseConfig = {
 
-apiKey:
-"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
-authDomain:
-"zavorasocial.firebaseapp.com",
+    authDomain:
+        "zavorasocial.firebaseapp.com",
 
-databaseURL:
-"https://zavorasocial-default-rtdb.firebaseio.com/",
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
 
-projectId:
-"zavorasocial",
+    projectId:
+        "zavorasocial",
 
-storageBucket:
-"zavorasocial.firebasestorage.app",
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
 
-messagingSenderId:
-"447170165246",
+    messagingSenderId:
+        "447170165246",
 
-appId:
-"1:447170165246:web:982649e6533257ea0f28af",
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
 
-measurementId:
-"G-D4LNBEWH50"
+    measurementId:
+        "G-D4LNBEWH50"
 
 };
 
+
 const app =
-initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
+
 
 const auth =
-getAuth(app);
+    getAuth(app);
+
 
 const db =
-getDatabase(app);
+    getDatabase(app);
+
 
 /* ==========================================
 ELEMENTS
 ========================================== */
 
 const loadingScreen =
-document.getElementById("loadingScreen");
+    document.getElementById("loadingScreen");
 
 const userName =
-document.getElementById("userName");
+    document.getElementById("userName");
 
 const welcomeName =
-document.getElementById("welcomeName");
+    document.getElementById("welcomeName");
 
 const logoutBtn =
-document.getElementById("logoutBtn");
+    document.getElementById("logoutBtn");
 
 const categoryGrid =
-document.getElementById("categoryGrid");
+    document.getElementById("categoryGrid");
 
 const walletBalance =
-document.getElementById("walletBalance");
+    document.getElementById("walletBalance");
+
 
 /* ==========================================
 AUTHENTICATION
 ========================================== */
 
 onAuthStateChanged(
-auth,
-(user) => {
+    auth,
+    (user) => {
 
-if(!user){
+        if(!user){
 
-window.location.href =    
-        "login.html";    
+            window.location.href =
+                "login.html";
 
-    return;    
+            return;
 
-}    
-
-
-let displayName =    
-    user.displayName;    
+        }
 
 
-if(!displayName){    
-
-    displayName =    
-        user.email    
-            ? user.email.split("@")[0]    
-            : "User";    
-
-}    
+        let displayName =
+            user.displayName;
 
 
-userName.textContent =    
-    displayName;    
+        if(!displayName){
+
+            displayName =
+                user.email
+                    ? user.email.split("@")[0]
+                    : "User";
+
+        }
 
 
-welcomeName.textContent =    
-    displayName;    
+        userName.textContent =
+            displayName;
 
 
-loadingScreen.style.display =    
-    "none";    
+        welcomeName.textContent =
+            displayName;
 
 
-/*    
-    Start listening to the    
-    customer's wallet.    
-*/    
-
-loadWallet(user.uid);    
+        loadingScreen.style.display =
+            "none";
 
 
-/*    
-    Start listening to categories.    
-*/    
+        loadWallet(user.uid);
 
-loadCategories();
+        loadCategories();
 
-}
-
+    }
 );
+
 
 /* ==========================================
 LOAD CUSTOMER WALLET
@@ -737,47 +854,48 @@ LOAD CUSTOMER WALLET
 
 function loadWallet(uid){
 
-const walletRef =
-ref(
-db,
-"users/" + uid + "/walletBalance"
-);
-
-onValue(
-walletRef,
-(snapshot) => {
-
-const balance =    
-        Number(snapshot.val()) || 0;    
+    const walletRef =
+        ref(
+            db,
+            "users/" + uid + "/walletBalance"
+        );
 
 
-    walletBalance.textContent =    
-        "₦" +    
-        balance.toLocaleString(    
-            "en-NG",    
-            {    
-                minimumFractionDigits:2,    
-                maximumFractionDigits:2    
-            }    
-        );    
+    onValue(
+        walletRef,
+        (snapshot) => {
 
-},    
-(error) => {    
-
-    console.error(    
-        "Wallet loading error:",    
-        error    
-    );    
+            const balance =
+                Number(snapshot.val()) || 0;
 
 
-    walletBalance.textContent =    
-        "₦0.00";    
+            walletBalance.textContent =
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                );
+
+        },
+        (error) => {
+
+            console.error(
+                "Wallet loading error:",
+                error
+            );
+
+
+            walletBalance.textContent =
+                "₦0.00";
+
+        }
+    );
 
 }
 
-);
-
-}
 
 /* ==========================================
 LOAD CATEGORIES
@@ -785,100 +903,101 @@ LOAD CATEGORIES
 
 function loadCategories(){
 
-const categoriesRef =
-ref(db,"categories");
-
-onValue(
-categoriesRef,
-(snapshot) => {
-
-const data =    
-        snapshot.val();    
+    const categoriesRef =
+        ref(db,"categories");
 
 
-    const categories = [];    
+    onValue(
+        categoriesRef,
+        (snapshot) => {
+
+            const data =
+                snapshot.val();
 
 
-    if(data){    
-
-        Object.entries(data)    
-            .forEach(    
-                ([id,category]) => {    
-
-                    if(    
-                        category &&    
-                        category.active === true    
-                    ){    
-
-                        categories.push({    
-
-                            id:id,    
-
-                            name:    
-                                category.name ||    
-                                "Unnamed",    
-
-                            icon:    
-                                category.icon ||    
-                                "📦",    
-
-                            createdAt:    
-                                category.createdAt ||    
-                                0    
-
-                        });    
-
-                    }    
-
-                }    
-            );    
-
-    }    
+            const categories = [];
 
 
-    categories.sort(    
-        (a,b) =>    
-            a.createdAt -    
-            b.createdAt    
-    );    
+            if(data){
+
+                Object.entries(data)
+                    .forEach(
+                        ([id,category]) => {
+
+                            if(
+                                category &&
+                                category.active === true
+                            ){
+
+                                categories.push({
+
+                                    id:id,
+
+                                    name:
+                                        category.name ||
+                                        "Unnamed",
+
+                                    icon:
+                                        category.icon ||
+                                        "📦",
+
+                                    createdAt:
+                                        category.createdAt ||
+                                        0
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+            }
 
 
-    renderCategories(categories);    
-
-},    
-(error) => {    
-
-    console.error(    
-        "Category loading error:",    
-        error    
-    );    
+            categories.sort(
+                (a,b) =>
+                    a.createdAt -
+                    b.createdAt
+            );
 
 
-    categoryGrid.innerHTML = `    
+            renderCategories(categories);
 
-        <div class="empty-marketplace">    
+        },
+        (error) => {
 
-            <div class="big">    
-                ⚠️    
-            </div>    
+            console.error(
+                "Category loading error:",
+                error
+            );
 
-            <h3>    
-                Categories unavailable    
-            </h3>    
 
-            <p>    
-                We could not load the marketplace categories.    
-            </p>    
+            categoryGrid.innerHTML = `
 
-        </div>    
+                <div class="empty-marketplace">
 
-    `;    
+                    <div class="big">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Categories unavailable
+                    </h3>
+
+                    <p>
+                        We could not load the marketplace categories.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
 
 }
 
-);
-
-}
 
 /* ==========================================
 RENDER CATEGORIES
@@ -886,87 +1005,89 @@ RENDER CATEGORIES
 
 function renderCategories(categories){
 
-if(categories.length === 0){
+    if(categories.length === 0){
 
-categoryGrid.innerHTML = `    
+        categoryGrid.innerHTML = `
 
-    <div class="empty-marketplace">    
+            <div class="empty-marketplace">
 
-        <div class="big">    
-            🗂️    
-        </div>    
+                <div class="big">
+                    🗂️
+                </div>
 
-        <h3>    
-            No categories available    
-        </h3>    
+                <h3>
+                    No categories available
+                </h3>
 
-        <p>    
-            New marketplace categories will appear here.    
-        </p>    
+                <p>
+                    New marketplace categories will appear here.
+                </p>
 
-    </div>    
+            </div>
 
-`;    
+        `;
 
-return;
+        return;
+
+    }
+
+
+    categoryGrid.innerHTML = "";
+
+
+    categories.forEach(
+        (category) => {
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "category-card";
+
+
+            card.innerHTML = `
+
+                <div class="category-icon">
+
+                    ${escapeHtml(category.icon)}
+
+                </div>
+
+                <div class="category-name">
+
+                    ${escapeHtml(category.name)}
+
+                </div>
+
+                <div class="category-count">
+
+                    Browse products →
+
+                </div>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    openCategory(
+                        category.name
+                    );
+
+                }
+            );
+
+
+            categoryGrid.appendChild(card);
+
+        }
+    );
 
 }
 
-categoryGrid.innerHTML = "";
-
-categories.forEach(
-(category) => {
-
-const card =    
-        document.createElement("div");    
-
-
-    card.className =    
-        "category-card";    
-
-
-    card.innerHTML = `    
-
-        <div class="category-icon">    
-
-            ${escapeHtml(category.icon)}    
-
-        </div>    
-
-        <div class="category-name">    
-
-            ${escapeHtml(category.name)}    
-
-        </div>    
-
-        <div class="category-count">    
-
-            Browse products →    
-
-        </div>    
-
-    `;    
-
-
-    card.addEventListener(    
-        "click",    
-        () => {    
-
-            openCategory(    
-                category.name    
-            );    
-
-        }    
-    );    
-
-
-    categoryGrid.appendChild(card);    
-
-}
-
-);
-
-}
 
 /* ==========================================
 SECURITY: ESCAPE TEXT
@@ -974,34 +1095,35 @@ SECURITY: ESCAPE TEXT
 
 function escapeHtml(value){
 
-return String(value)
+    return String(value)
 
-.replaceAll(    
-    "&",    
-    "&amp;"    
-)    
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-.replaceAll(    
-    "<",    
-    "&lt;"    
-)    
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-.replaceAll(    
-    ">",    
-    "&gt;"    
-)    
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-.replaceAll(    
-    '"',    
-    "&quot;"    
-)    
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-.replaceAll(    
-    "'",    
-    "&#039;"    
-);
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
+
 
 /* ==========================================
 OPEN CATEGORY
@@ -1010,65 +1132,67 @@ OPEN CATEGORY
 window.openCategory =
 function(category){
 
-window.location.href =
-"products.html?category=" +
-encodeURIComponent(category);
+    window.location.href =
+        "products.html?category=" +
+        encodeURIComponent(category);
 
 };
+
 
 /* ==========================================
 LOGOUT
 ========================================== */
 
 logoutBtn.addEventListener(
-"click",
-async () => {
+    "click",
+    async () => {
 
-logoutBtn.disabled =
-true;
+        logoutBtn.disabled =
+            true;
 
-logoutBtn.textContent =    
-    "Logging out...";    
-
-
-try{    
-
-    await signOut(auth);    
+        logoutBtn.textContent =
+            "Logging out...";
 
 
-    window.location.href =    
-        "login.html";    
+        try{
 
-}catch(error){    
-
-    console.error(error);    
+            await signOut(auth);
 
 
-    logoutBtn.disabled =    
-        false;    
+            window.location.href =
+                "login.html";
 
-    logoutBtn.textContent =    
-        "Logout";    
+        }catch(error){
+
+            console.error(error);
 
 
-    alert(    
-        "Unable to logout. Please try again."    
-    );    
+            logoutBtn.disabled =
+                false;
 
-}
+            logoutBtn.textContent =
+                "Logout";
 
-}
 
+            alert(
+                "Unable to logout. Please try again."
+            );
+
+        }
+
+    }
 );
+
 
 /* ==========================================
 YEAR
 ========================================== */
 
 document.getElementById("year")
-.textContent =
-new Date().getFullYear();
+    .textContent =
+    new Date().getFullYear();
 
-</script></body>
+</script>
 
+</body>
 </html>
