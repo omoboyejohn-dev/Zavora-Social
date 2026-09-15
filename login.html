@@ -135,6 +135,22 @@ button:disabled{
     display:none;
     text-align:center;
     font-size:14px;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+.message.error{
+    display:block;
+    background:rgba(239,68,68,.12);
+    border:1px solid rgba(239,68,68,.3);
+    color:#fca5a5;
+}
+
+.message.success{
+    display:block;
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.3);
+    color:#86efac;
 }
 
 </style>
@@ -200,7 +216,6 @@ button:disabled{
 
     </form>
 
-
     <div class="forgot">
 
         <a href="#" id="forgotPassword">
@@ -209,12 +224,10 @@ button:disabled{
 
     </div>
 
-
     <div
         id="message"
         class="message"
     ></div>
-
 
     <div class="register">
 
@@ -246,7 +259,7 @@ import {
 
 
 /* =========================
-   FIREBASE
+   FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
@@ -277,6 +290,10 @@ const firebaseConfig = {
 };
 
 
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
+
 const app =
     initializeApp(firebaseConfig);
 
@@ -303,22 +320,40 @@ const forgotPassword =
 const remember =
     document.getElementById("remember");
 
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
 
 /* =========================
    MESSAGE
 ========================= */
 
-function showMessage(text){
+function showError(text){
 
-    message.textContent = text;
+    message.className =
+        "message error";
 
-    message.style.display = "block";
+    message.textContent =
+        text;
+
+}
+
+function showSuccess(text){
+
+    message.className =
+        "message success";
+
+    message.textContent =
+        text;
 
 }
 
 
 /* =========================
-   GET REDIRECT
+   REDIRECT
 ========================= */
 
 const params =
@@ -330,17 +365,12 @@ const redirect =
     params.get("redirect");
 
 
-/*
-   Only allow pages inside Zavora Social.
-
-   This prevents an external website from
-   being used as a redirect.
-*/
-
 function getSafeRedirect(){
 
     if(!redirect){
+
         return "dashboard.html";
+
     }
 
 
@@ -351,7 +381,8 @@ function getSafeRedirect(){
 
 
         if(
-            /^(dashboard|products|product|wallet|orders|transactions|profile|notifications|support)\.html(?:\?.*)?$/.test(decoded)
+            /^(dashboard|products|product|wallet|orders|transactions|profile|notifications|support)\.html(?:\?.*)?$/
+            .test(decoded)
         ){
 
             return decoded;
@@ -360,7 +391,10 @@ function getSafeRedirect(){
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "Redirect error:",
+            error
+        );
 
     }
 
@@ -382,30 +416,51 @@ loginForm.addEventListener(
 
 
         const email =
-            document
-            .getElementById("email")
-            .value
-            .trim();
+            emailInput.value.trim();
 
 
         const password =
-            document
-            .getElementById("password")
-            .value;
+            passwordInput.value;
 
 
-        loginBtn.disabled = true;
+        if(!email){
+
+            showError(
+                "Please enter your email address."
+            );
+
+            return;
+
+        }
+
+
+        if(!password){
+
+            showError(
+                "Please enter your password."
+            );
+
+            return;
+
+        }
+
+
+        loginBtn.disabled =
+            true;
 
         loginBtn.textContent =
             "Logging in...";
 
 
+        message.style.display =
+            "none";
+
+
         try{
 
-            /*
-               Keep the Firebase login session
-               on this browser.
-            */
+            /* =========================
+               SET LOGIN PERSISTENCE
+            ========================= */
 
             await setPersistence(
                 auth,
@@ -415,82 +470,138 @@ loginForm.addEventListener(
             );
 
 
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
+            /* =========================
+               FIREBASE LOGIN
+            ========================= */
+
+            const credential =
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            console.log(
+                "LOGIN SUCCESS:",
+                credential.user.uid
             );
 
 
-            /*
-               IMPORTANT:
-               Return to the page the customer
-               originally wanted.
-            */
+            showSuccess(
+                "Login successful. Opening your dashboard..."
+            );
+
+
+            /* =========================
+               REDIRECT
+            ========================= */
 
             const destination =
                 getSafeRedirect();
 
 
-            window.location.replace(
-                destination
-            );
+            setTimeout(() => {
+
+                window.location.replace(
+                    destination
+                );
+
+            }, 500);
 
 
         }catch(error){
 
             console.error(
-                "Login error:",
+                "FIREBASE LOGIN ERROR:",
                 error
             );
 
 
             let text =
-                "Login failed. Please check your email and password.";
+                "Login failed.";
 
 
-            if(
-                error.code ===
-                "auth/invalid-credential"
-            ){
+            switch(error.code){
 
-                text =
-                    "Incorrect email or password.";
+                case "auth/invalid-credential":
+
+                    text =
+                        "Incorrect email or password.";
+
+                    break;
+
+
+                case "auth/user-not-found":
+
+                    text =
+                        "No account exists with this email.";
+
+                    break;
+
+
+                case "auth/wrong-password":
+
+                    text =
+                        "The password is incorrect.";
+
+                    break;
+
+
+                case "auth/invalid-email":
+
+                    text =
+                        "The email address is not valid.";
+
+                    break;
+
+
+                case "auth/user-disabled":
+
+                    text =
+                        "This account has been disabled.";
+
+                    break;
+
+
+                case "auth/too-many-requests":
+
+                    text =
+                        "Too many login attempts. Please wait and try again.";
+
+                    break;
+
+
+                case "auth/network-request-failed":
+
+                    text =
+                        "Network error. Check your internet connection.";
+
+                    break;
+
+
+                case "auth/operation-not-allowed":
+
+                    text =
+                        "Email/password login is not enabled in Firebase Authentication.";
+
+                    break;
+
+
+                default:
+
+                    text =
+                        "Firebase error: " +
+                        (error.code || "unknown-error") +
+                        " — " +
+                        (error.message || "Unknown error.");
+
+                    break;
 
             }
 
-            else if(
-                error.code ===
-                "auth/user-not-found"
-            ){
 
-                text =
-                    "No account was found with this email.";
-
-            }
-
-            else if(
-                error.code ===
-                "auth/wrong-password"
-            ){
-
-                text =
-                    "Incorrect password.";
-
-            }
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                text =
-                    "Please enter a valid email address.";
-
-            }
-
-
-            showMessage(text);
+            showError(text);
 
 
             loginBtn.disabled =
@@ -517,19 +628,19 @@ forgotPassword.addEventListener(
 
 
         const email =
-            document
-            .getElementById("email")
-            .value
-            .trim();
+            emailInput.value.trim();
 
 
         if(!email){
 
-            showMessage(
+            showError(
                 "Enter your email address first."
             );
 
+            emailInput.focus();
+
             return;
+
         }
 
 
@@ -541,18 +652,53 @@ forgotPassword.addEventListener(
             );
 
 
-            showMessage(
+            showSuccess(
                 "Password reset email sent. Check your inbox."
             );
 
 
         }catch(error){
 
-            console.error(error);
-
-            showMessage(
-                "Unable to send password reset email."
+            console.error(
+                "PASSWORD RESET ERROR:",
+                error
             );
+
+
+            let text =
+                "Unable to send password reset email.";
+
+
+            if(
+                error.code ===
+                "auth/user-not-found"
+            ){
+
+                text =
+                    "No account exists with this email.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                text =
+                    "Please enter a valid email address.";
+
+            }
+
+            else{
+
+                text =
+                    "Firebase error: " +
+                    (error.code || "unknown-error");
+
+            }
+
+
+            showError(text);
 
         }
 
