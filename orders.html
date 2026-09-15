@@ -18,13 +18,12 @@
 
 body{
     font-family:Inter,Arial,sans-serif;
-    color:#fff;
-    min-height:100vh;
 
-    background:
-    radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
-    radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
-    #080b16;
+    background:#ffffff;
+
+    color:#111827;
+
+    min-height:100vh;
 }
 
 header{
@@ -32,46 +31,71 @@ header{
     top:0;
     z-index:100;
 
-    background:rgba(8,11,22,.88);
-    backdrop-filter:blur(18px);
+    background:#ffffff;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid #e5e7eb;
 }
 
 .navbar{
     max-width:1100px;
     min-height:72px;
+
     margin:auto;
+
     padding:0 20px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
 .logo{
-    color:#fff;
+    color:#111827;
+
     text-decoration:none;
+
     font-size:22px;
+
     font-weight:900;
 }
 
 .logo span{
-    background:linear-gradient(90deg,#a78bfa,#22d3ee);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:#16a34a;
 }
 
 .back{
-    color:#cbd5e1;
+    color:#ffffff;
+
+    background:#16a34a;
+
+    border:1px solid #15803d;
+
+    padding:9px 13px;
+
+    border-radius:9px;
+
     text-decoration:none;
-    font-size:14px;
+
+    font-size:13px;
+
     font-weight:700;
+
+    transition:.2s;
+}
+
+.back:hover{
+    background:#15803d;
+
+    transform:translateY(-1px);
 }
 
 .container{
     max-width:1000px;
+
     margin:auto;
+
     padding:35px 20px 60px;
 }
 
@@ -80,40 +104,64 @@ header{
 }
 
 .heading h1{
+    color:#111827;
+
     font-size:32px;
+
     margin-bottom:7px;
 }
 
 .heading p{
-    color:#94a3b8;
+    color:#64748b;
 }
 
 .order-card{
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
     border-radius:18px;
 
     padding:20px;
+
     margin-bottom:15px;
+
+    box-shadow:0 7px 22px rgba(0,0,0,.05);
+
+    transition:.2s;
+}
+
+.order-card:hover{
+    border-color:#86efac;
+
+    box-shadow:0 10px 28px rgba(22,163,74,.08);
 }
 
 .order-top{
     display:flex;
+
     justify-content:space-between;
+
     gap:15px;
 
     margin-bottom:18px;
 }
 
 .order-name{
+    color:#111827;
+
     font-weight:800;
+
     font-size:17px;
 }
 
 .order-id{
-    color:#64748b;
+    color:#94a3b8;
+
     font-size:12px;
+
     margin-top:5px;
+
     word-break:break-all;
 }
 
@@ -125,15 +173,19 @@ header{
     border-radius:9px;
 
     font-size:11px;
+
     font-weight:800;
 
-    background:rgba(34,211,238,.1);
-    color:#67e8f9;
+    background:#16a34a;
+
+    color:#ffffff;
 }
 
 .order-info{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     gap:12px;
 }
 
@@ -142,7 +194,9 @@ header{
 
     border-radius:11px;
 
-    background:rgba(255,255,255,.035);
+    background:#f0fdf4;
+
+    border:1px solid #dcfce7;
 }
 
 .info small{
@@ -154,6 +208,8 @@ header{
 }
 
 .info strong{
+    color:#111827;
+
     font-size:14px;
 }
 
@@ -164,13 +220,16 @@ header{
 
     border-radius:14px;
 
-    background:rgba(124,58,237,.08);
+    background:#f0fdf4;
 
-    border:1px solid rgba(167,139,250,.18);
+    border:1px solid #bbf7d0;
 }
 
 .delivery-title{
+    color:#15803d;
+
     font-size:14px;
+
     font-weight:900;
 
     margin-bottom:10px;
@@ -184,16 +243,18 @@ header{
     border-radius:8px;
 
     font-size:11px;
+
     font-weight:800;
 
-    background:rgba(245,158,11,.1);
-    color:#fbbf24;
+    background:#16a34a;
+
+    color:#ffffff;
 
     margin-bottom:10px;
 }
 
 .delivery-details{
-    color:#e2e8f0;
+    color:#334155;
 
     font-size:14px;
 
@@ -205,7 +266,7 @@ header{
 }
 
 .delivery-pending{
-    color:#94a3b8;
+    color:#64748b;
 
     font-size:13px;
 
@@ -217,24 +278,28 @@ header{
 
     text-align:center;
 
-    border:1px dashed rgba(255,255,255,.13);
+    border:1px dashed #d1d5db;
 
     border-radius:20px;
 
-    background:rgba(255,255,255,.025);
+    background:#fafafa;
 }
 
 .empty-icon{
     font-size:48px;
+
     margin-bottom:12px;
 }
 
 .empty h2{
+    color:#111827;
+
     margin-bottom:8px;
 }
 
 .empty p{
-    color:#94a3b8;
+    color:#64748b;
+
     line-height:1.6;
 }
 
@@ -245,7 +310,7 @@ header{
 
     text-decoration:none;
 
-    color:#fff;
+    color:#ffffff;
 
     padding:12px 18px;
 
@@ -253,7 +318,19 @@ header{
 
     font-weight:800;
 
-    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    background:#16a34a;
+
+    border:1px solid #15803d;
+
+    transition:.2s;
+}
+
+.shop-btn:hover{
+    background:#15803d;
+
+    transform:translateY(-1px);
+
+    box-shadow:0 7px 18px rgba(22,163,74,.20);
 }
 
 .loading{
@@ -261,7 +338,7 @@ header{
 
     padding:50px 20px;
 
-    color:#94a3b8;
+    color:#64748b;
 }
 
 .error{
@@ -271,17 +348,17 @@ header{
 
     border-radius:18px;
 
-    background:rgba(239,68,68,.08);
+    background:#fef2f2;
 
-    border:1px solid rgba(239,68,68,.18);
+    border:1px solid #fecaca;
 
-    color:#fca5a5;
+    color:#dc2626;
 }
 
 footer{
     text-align:center;
 
-    color:#64748b;
+    color:#94a3b8;
 
     font-size:13px;
 
@@ -312,9 +389,7 @@ footer{
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -332,9 +407,7 @@ footer{
 
 </header>
 
-
 <main class="container">
-
 
 <div class="heading">
 
@@ -346,7 +419,6 @@ footer{
 
 </div>
 
-
 <div id="ordersArea">
 
     <div class="loading">
@@ -355,9 +427,7 @@ footer{
 
 </div>
 
-
 </main>
-
 
 <footer>
 
@@ -365,20 +435,16 @@ footer{
 
 </footer>
 
-
 <script type="module">
-
 
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
 
 import {
     getDatabase,
@@ -389,33 +455,48 @@ import {
 
 const firebaseConfig = {
 
-    apiKey:"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+    apiKey:
+        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
-    authDomain:"zavorasocial.firebaseapp.com",
+    authDomain:
+        "zavorasocial.firebaseapp.com",
 
-    databaseURL:"https://zavorasocial-default-rtdb.firebaseio.com",
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com",
 
-    projectId:"zavorasocial",
+    projectId:
+        "zavorasocial",
 
-    storageBucket:"zavorasocial.firebasestorage.app",
+    storageBucket:
+        "zavorasocial.firebasestorage.app",
 
-    messagingSenderId:"447170165246",
+    messagingSenderId:
+        "447170165246",
 
-    appId:"1:447170165246:web:982649e6533257ea0f28af",
+    appId:
+        "1:447170165246:web:982649e6533257ea0f28af",
 
-    measurementId:"G-D4LNBEWH50"
+    measurementId:
+        "G-D4LNBEWH50"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+const auth =
+    getAuth(app);
 
-const db = getDatabase(app);
+const db =
+    getDatabase(app);
 
 
-const ordersArea = document.getElementById("ordersArea");
+const ordersArea =
+    document.getElementById(
+        "ordersArea"
+    );
+
 
 document.getElementById("year").textContent =
     new Date().getFullYear();
@@ -423,13 +504,14 @@ document.getElementById("year").textContent =
 
 function formatPrice(amount){
 
-    return "₦" + Number(amount || 0).toLocaleString(
-        "en-NG",
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }
-    );
+    return "₦" +
+        Number(amount || 0).toLocaleString(
+            "en-NG",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
 
 }
 
@@ -455,17 +537,25 @@ function formatDate(timestamp){
 
 function escapeHTML(value){
 
-    if(value === null || value === undefined){
+    if(
+        value === null ||
+        value === undefined
+    ){
 
         return "";
 
     }
 
     return String(value)
+
         .replace(/&/g,"&amp;")
+
         .replace(/</g,"&lt;")
+
         .replace(/>/g,"&gt;")
+
         .replace(/"/g,"&quot;")
+
         .replace(/'/g,"&#039;");
 
 }
@@ -498,7 +588,9 @@ function renderOrders(orders){
                     📦
                 </div>
 
-                <h2>No orders yet</h2>
+                <h2>
+                    No orders yet
+                </h2>
 
                 <p>
                     Your purchases will appear here after
@@ -535,7 +627,9 @@ function renderOrders(orders){
         const card =
             document.createElement("div");
 
-        card.className = "order-card";
+
+        card.className =
+            "order-card";
 
 
         let deliveryHTML = "";
@@ -553,19 +647,24 @@ function renderOrders(orders){
 
                     <div class="delivery-status">
                         ${escapeHTML(
-                            String(deliveryStatus).toUpperCase()
+                            String(
+                                deliveryStatus
+                            ).toUpperCase()
                         )}
                     </div>
 
                     <div class="delivery-details">
-                        ${escapeHTML(deliveryDetails)}
+                        ${escapeHTML(
+                            deliveryDetails
+                        )}
                     </div>
 
                 </div>
 
             `;
 
-        }else{
+        }
+        else{
 
             deliveryHTML = `
 
@@ -577,7 +676,9 @@ function renderOrders(orders){
 
                     <div class="delivery-status">
                         ${escapeHTML(
-                            String(deliveryStatus).toUpperCase()
+                            String(
+                                deliveryStatus
+                            ).toUpperCase()
                         )}
                     </div>
 
@@ -614,7 +715,6 @@ function renderOrders(orders){
 
                 </div>
 
-
                 <div class="status">
 
                     ${escapeHTML(
@@ -631,10 +731,11 @@ function renderOrders(orders){
 
             <div class="order-info">
 
-
                 <div class="info">
 
-                    <small>Product</small>
+                    <small>
+                        Product
+                    </small>
 
                     <strong>
                         ${escapeHTML(
@@ -648,10 +749,14 @@ function renderOrders(orders){
 
                 <div class="info">
 
-                    <small>Amount Paid</small>
+                    <small>
+                        Amount Paid
+                    </small>
 
                     <strong>
-                        ${formatPrice(order.price)}
+                        ${formatPrice(
+                            order.price
+                        )}
                     </strong>
 
                 </div>
@@ -659,7 +764,9 @@ function renderOrders(orders){
 
                 <div class="info">
 
-                    <small>Category</small>
+                    <small>
+                        Category
+                    </small>
 
                     <strong>
                         ${escapeHTML(
@@ -673,7 +780,9 @@ function renderOrders(orders){
 
                 <div class="info">
 
-                    <small>Order Date</small>
+                    <small>
+                        Order Date
+                    </small>
 
                     <strong>
                         ${formatDate(
@@ -686,7 +795,9 @@ function renderOrders(orders){
 
                 <div class="info">
 
-                    <small>Order Status</small>
+                    <small>
+                        Order Status
+                    </small>
 
                     <strong>
                         ${escapeHTML(
@@ -700,7 +811,9 @@ function renderOrders(orders){
 
                 <div class="info">
 
-                    <small>Delivery</small>
+                    <small>
+                        Delivery
+                    </small>
 
                     <strong>
                         ${escapeHTML(
@@ -709,7 +822,6 @@ function renderOrders(orders){
                     </strong>
 
                 </div>
-
 
             </div>
 
@@ -726,103 +838,115 @@ function renderOrders(orders){
 }
 
 
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(
+    auth,
+    (user) => {
 
-    if(!user){
+        if(!user){
 
-        window.location.href="login.html";
+            window.location.href =
+                "login.html";
 
-        return;
-
-    }
-
-
-    const ordersRef =
-        ref(db,"orders");
-
-
-    onValue(
-
-        ordersRef,
-
-        (snapshot)=>{
-
-            const data =
-                snapshot.val();
-
-
-            const orders = [];
-
-
-            if(data){
-
-                Object.entries(data).forEach(
-                    ([id,order])=>{
-
-                        if(
-                            order &&
-                            order.uid === user.uid
-                        ){
-
-                            orders.push({
-
-                                id,
-
-                                ...order
-
-                            });
-
-                        }
-
-                    }
-                );
-
-            }
-
-
-            orders.sort(
-                (a,b)=>
-                    Number(b.createdAt || 0) -
-                    Number(a.createdAt || 0)
-            );
-
-
-            renderOrders(orders);
-
-        },
-
-        (error)=>{
-
-            console.error(
-                "Orders error:",
-                error
-            );
-
-
-            ordersArea.innerHTML = `
-
-                <div class="error">
-
-                    Unable to load your orders.
-
-                    <br><br>
-
-                    Please refresh the page
-                    and try again.
-
-                </div>
-
-            `;
+            return;
 
         }
 
-    );
 
-});
+        const ordersRef =
+            ref(
+                db,
+                "orders"
+            );
 
+
+        onValue(
+
+            ordersRef,
+
+            (snapshot) => {
+
+                const data =
+                    snapshot.val();
+
+
+                const orders = [];
+
+
+                if(data){
+
+                    Object.entries(data).forEach(
+                        ([id,order]) => {
+
+                            if(
+                                order &&
+                                order.uid === user.uid
+                            ){
+
+                                orders.push({
+
+                                    id,
+
+                                    ...order
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                orders.sort(
+
+                    (a,b) =>
+                        Number(
+                            b.createdAt || 0
+                        ) -
+
+                        Number(
+                            a.createdAt || 0
+                        )
+
+                );
+
+
+                renderOrders(orders);
+
+            },
+
+            (error) => {
+
+                console.error(
+                    "Orders error:",
+                    error
+                );
+
+
+                ordersArea.innerHTML = `
+
+                    <div class="error">
+
+                        Unable to load your orders.
+
+                        <br><br>
+
+                        Please refresh the page
+                        and try again.
+
+                    </div>
+
+                `;
+
+            }
+
+        );
+
+    }
+);
 
 </script>
-
 
 </body>
 
