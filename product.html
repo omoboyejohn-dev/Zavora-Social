@@ -685,7 +685,7 @@ const db =
 ================================= */
 
 const PURCHASE_WORKER_URL =
-    "https://zavora-purchase.omoboyejohn-dev.workers.dev";
+    "https://zavora-purchase.omoboyejohn.workers.dev";
 
 
 /* =================================
@@ -1029,7 +1029,7 @@ async function loadWallet(){
 
 /* =================================
    BUY PRODUCT
-   NOW USES CLOUDFLARE WORKER
+   CLOUDFLARE WORKER
 ================================= */
 
 buyButton.addEventListener(
@@ -1079,7 +1079,6 @@ buyButton.addEventListener(
 
             /*
              * SEND PURCHASE REQUEST
-             * TO CLOUDFLARE WORKER
              */
 
             const response =
@@ -1166,21 +1165,23 @@ buyButton.addEventListener(
 
 
             /*
-             * SUCCESS
+             * GET UPDATED WALLET
              */
+
+            const updatedWalletSnapshot =
+                await get(
+                    ref(
+                        db,
+                        "users/" +
+                        currentUser.uid +
+                        "/walletBalance"
+                    )
+                );
+
 
             const newBalance =
                 Number(
-                    (
-                        await get(
-                            ref(
-                                db,
-                                "users/" +
-                                currentUser.uid +
-                                "/walletBalance"
-                            )
-                        )
-                    ).val()
+                    updatedWalletSnapshot.val()
                 ) || 0;
 
 
@@ -1196,6 +1197,10 @@ buyButton.addEventListener(
             buyButton.textContent =
                 "Buy Now";
 
+
+            /*
+             * PURCHASE SUCCESS
+             */
 
             showMessage(
                 "Order Completed",
