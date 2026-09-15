@@ -204,6 +204,7 @@ header{
 }
 
 .quick-card{
+    min-width:0;
     text-decoration:none;
     color:#ffffff;
     background:#16a34a;
@@ -245,7 +246,9 @@ header{
     opacity:.85;
 }
 
-/* MARKETPLACE */
+/* ==========================================
+MARKETPLACE
+========================================== */
 
 .marketplace{
     margin-top:10px;
@@ -444,7 +447,9 @@ footer{
     text-align:center;
 }
 
-/* MOBILE */
+/* TABLET
+   QUICK ACTIONS STAY 4 ACROSS
+*/
 
 @media(max-width:1000px){
 
@@ -457,6 +462,10 @@ footer{
     }
 
 }
+
+/* MOBILE
+   QUICK ACTIONS STAY 4 ACROSS
+*/
 
 @media(max-width:650px){
 
@@ -489,13 +498,40 @@ footer{
         font-size:21px;
     }
 
+    /*
+       4 CARDS ACROSS
+       2 ROWS
+    */
+
     .quick-actions{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:7px;
     }
 
     .quick-card{
-        padding:16px;
+        padding:12px 6px;
+        border-radius:12px;
+        text-align:center;
+    }
+
+    .quick-icon{
+        width:36px;
+        height:36px;
+        border-radius:10px;
+        font-size:18px;
+        margin:0 auto 8px;
+    }
+
+    .quick-card strong{
+        font-size:10px;
+        line-height:1.2;
+        margin-bottom:4px;
+    }
+
+    .quick-card small{
+        display:block;
+        font-size:8px;
+        line-height:1.2;
     }
 
     .marketplace-header h2{
@@ -665,7 +701,7 @@ footer{
 
         <div class="quick-actions">
 
-            <!-- 1. BROWSE PRODUCTS -->
+            <!-- 1 -->
 
             <a href="products.html" class="quick-card">
 
@@ -678,13 +714,13 @@ footer{
                 </strong>
 
                 <small>
-                    Explore the marketplace
+                    Explore marketplace
                 </small>
 
             </a>
 
 
-            <!-- 2. FUND WALLET -->
+            <!-- 2 -->
 
             <a href="wallet.html" class="quick-card">
 
@@ -697,13 +733,13 @@ footer{
                 </strong>
 
                 <small>
-                    Add money to your wallet
+                    Add money
                 </small>
 
             </a>
 
 
-            <!-- 3. MY PROFILE -->
+            <!-- 3 -->
 
             <a href="profile.html" class="quick-card">
 
@@ -716,13 +752,13 @@ footer{
                 </strong>
 
                 <small>
-                    Manage your account
+                    Manage account
                 </small>
 
             </a>
 
 
-            <!-- 4. MY ORDERS -->
+            <!-- 4 -->
 
             <a href="orders.html" class="quick-card">
 
@@ -735,13 +771,13 @@ footer{
                 </strong>
 
                 <small>
-                    View your purchases
+                    View purchases
                 </small>
 
             </a>
 
 
-            <!-- 5. BUY NUMBER -->
+            <!-- 5 -->
 
             <a href="numbers.html" class="quick-card">
 
@@ -754,13 +790,13 @@ footer{
                 </strong>
 
                 <small>
-                    Get a virtual number
+                    Get a number
                 </small>
 
             </a>
 
 
-            <!-- 6. SEND GIFTS -->
+            <!-- 6 -->
 
             <a href="gifts.html" class="quick-card">
 
@@ -773,13 +809,13 @@ footer{
                 </strong>
 
                 <small>
-                    Send gifts to loved ones
+                    Send gifts
                 </small>
 
             </a>
 
 
-            <!-- 7. BOOST SOCIAL MEDIA -->
+            <!-- 7 -->
 
             <a href="boost.html" class="quick-card">
 
@@ -788,17 +824,17 @@ footer{
                 </div>
 
                 <strong>
-                    Boost S/M
+                    Boost Social Media 
                 </strong>
 
                 <small>
-                    Boost your social media
+                    Boost like, views & others 
                 </small>
 
             </a>
 
 
-            <!-- 8. API -->
+            <!-- 8 -->
 
             <a href="api.html" class="quick-card">
 
@@ -811,7 +847,7 @@ footer{
                 </strong>
 
                 <small>
-                    Developer API services
+                    Developer API
                 </small>
 
             </a>
