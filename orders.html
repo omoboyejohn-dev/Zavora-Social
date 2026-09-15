@@ -1,283 +1,829 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width,initial-scale=1.0">  <title>Zavora Social | My Orders</title>  <style>  
-*{box-sizing:border-box;margin:0;padding:0}  
-  
-body{  
-    font-family:Inter,Arial,sans-serif;  
-    color:#fff;  
-    min-height:100vh;  
-    background:  
-    radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),  
-    radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),  
-    #080b16;  
-}  
-  
-header{  
-    position:sticky;  
-    top:0;  
-    z-index:100;  
-    background:rgba(8,11,22,.88);  
-    backdrop-filter:blur(18px);  
-    border-bottom:1px solid rgba(255,255,255,.08);  
-}  
-  
-.navbar{  
-    max-width:1100px;  
-    min-height:72px;  
-    margin:auto;  
-    padding:0 20px;  
-    display:flex;  
-    align-items:center;  
-    justify-content:space-between;  
-}  
-  
-.logo{  
-    color:#fff;  
-    text-decoration:none;  
-    font-size:22px;  
-    font-weight:900;  
-}  
-  
-.logo span{  
-    background:linear-gradient(90deg,#a78bfa,#22d3ee);  
-    -webkit-background-clip:text;  
-    -webkit-text-fill-color:transparent;  
-}  
-  
-.back{  
-    color:#cbd5e1;  
-    text-decoration:none;  
-    font-size:14px;  
-    font-weight:700;  
-}  
-  
-.container{  
-    max-width:1000px;  
-    margin:auto;  
-    padding:35px 20px 60px;  
-}  
-  
-.heading{  
-    margin-bottom:25px;  
-}  
-  
-.heading h1{  
-    font-size:32px;  
-    margin-bottom:7px;  
-}  
-  
-.heading p{  
-    color:#94a3b8;  
-}  
-  
-.order-card{  
-    background:rgba(255,255,255,.045);  
-    border:1px solid rgba(255,255,255,.08);  
-    border-radius:18px;  
-    padding:20px;  
-    margin-bottom:13px;  
-}  
-  
-.order-top{  
-    display:flex;  
-    justify-content:space-between;  
-    gap:15px;  
-    margin-bottom:15px;  
-}  
-  
-.order-name{  
-    font-weight:800;  
-    font-size:16px;  
-}  
-  
-.order-id{  
-    color:#64748b;  
-    font-size:12px;  
-    margin-top:5px;  
-}  
-  
-.status{  
-    height:max-content;  
-    padding:7px 11px;  
-    border-radius:9px;  
-    font-size:11px;  
-    font-weight:800;  
-    background:rgba(34,211,238,.1);  
-    color:#67e8f9;  
-}  
-  
-.order-info{  
-    display:grid;  
-    grid-template-columns:repeat(3,1fr);  
-    gap:12px;  
-}  
-  
-.info{  
-    padding:13px;  
-    border-radius:11px;  
-    background:rgba(255,255,255,.035);  
-}  
-  
-.info small{  
-    display:block;  
-    color:#64748b;  
-    margin-bottom:5px;  
-}  
-  
-.info strong{  
-    font-size:14px;  
-}  
-  
-.empty{  
-    padding:65px 20px;  
-    text-align:center;  
-    border:1px dashed rgba(255,255,255,.13);  
-    border-radius:20px;  
-    background:rgba(255,255,255,.025);  
-}  
-  
-.empty-icon{  
-    font-size:48px;  
-    margin-bottom:12px;  
-}  
-  
-.empty h2{  
-    margin-bottom:8px;  
-}  
-  
-.empty p{  
-    color:#94a3b8;  
-    line-height:1.6;  
-}  
-  
-.shop-btn{  
-    display:inline-block;  
-    margin-top:20px;  
-    text-decoration:none;  
-    color:#fff;  
-    padding:12px 18px;  
-    border-radius:11px;  
-    font-weight:800;  
-    background:linear-gradient(135deg,#7c3aed,#06b6d4);  
-}  
-  
-footer{  
-    text-align:center;  
-    color:#64748b;  
-    font-size:13px;  
-    padding:0 20px 30px;  
-}  
-  
-@media(max-width:650px){  
-  
-    .container{  
-        padding:28px 15px 50px;  
-    }  
-  
-    .heading h1{  
-        font-size:27px;  
-    }  
-  
-    .order-top{  
-        flex-direction:column;  
-    }  
-  
-    .order-info{  
-        grid-template-columns:1fr;  
-    }  
-}  
-</style>  </head>  <body>  <header>  <div class="navbar">  
+<head>
 
-    <a href="dashboard.html" class="logo">  
-        Zavora <span>Social</span>  
-    </a>  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <a href="dashboard.html" class="back">  
-        ← Dashboard  
-    </a>  
+<title>Zavora Social | My Orders</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    color:#fff;
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
+    radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
+    #080b16;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    background:rgba(8,11,22,.88);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+    max-width:1100px;
+    min-height:72px;
+    margin:auto;
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:900;
+}
+
+.logo span{
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.back{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:32px;
+    margin-bottom:7px;
+}
+
+.heading p{
+    color:#94a3b8;
+}
+
+.order-card{
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+.order-name{
+    font-weight:800;
+    font-size:17px;
+}
+
+.order-id{
+    color:#64748b;
+    font-size:12px;
+    margin-top:5px;
+    word-break:break-all;
+}
+
+.status{
+    height:max-content;
+
+    padding:7px 11px;
+
+    border-radius:9px;
+
+    font-size:11px;
+    font-weight:800;
+
+    background:rgba(34,211,238,.1);
+    color:#67e8f9;
+}
+
+.order-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.info{
+    padding:13px;
+
+    border-radius:11px;
+
+    background:rgba(255,255,255,.035);
+}
+
+.info small{
+    display:block;
+
+    color:#64748b;
+
+    margin-bottom:5px;
+}
+
+.info strong{
+    font-size:14px;
+}
+
+.delivery-box{
+    margin-top:16px;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    background:rgba(124,58,237,.08);
+
+    border:1px solid rgba(167,139,250,.18);
+}
+
+.delivery-title{
+    font-size:14px;
+    font-weight:900;
+
+    margin-bottom:10px;
+}
+
+.delivery-status{
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:8px;
+
+    font-size:11px;
+    font-weight:800;
+
+    background:rgba(245,158,11,.1);
+    color:#fbbf24;
+
+    margin-bottom:10px;
+}
+
+.delivery-details{
+    color:#e2e8f0;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+}
+
+.delivery-pending{
+    color:#94a3b8;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+.empty{
+    padding:65px 20px;
+
+    text-align:center;
+
+    border:1px dashed rgba(255,255,255,.13);
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.025);
+}
+
+.empty-icon{
+    font-size:48px;
+    margin-bottom:12px;
+}
+
+.empty h2{
+    margin-bottom:8px;
+}
+
+.empty p{
+    color:#94a3b8;
+    line-height:1.6;
+}
+
+.shop-btn{
+    display:inline-block;
+
+    margin-top:20px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    padding:12px 18px;
+
+    border-radius:11px;
+
+    font-weight:800;
+
+    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+}
+
+.loading{
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:#94a3b8;
+}
+
+.error{
+    text-align:center;
+
+    padding:35px 20px;
+
+    border-radius:18px;
+
+    background:rgba(239,68,68,.08);
+
+    border:1px solid rgba(239,68,68,.18);
+
+    color:#fca5a5;
+}
+
+footer{
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    padding:0 20px 30px;
+}
+
+@media(max-width:650px){
+
+    .container{
+        padding:28px 15px 50px;
+    }
+
+    .heading h1{
+        font-size:27px;
+    }
+
+    .order-top{
+        flex-direction:column;
+    }
+
+    .order-info{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="navbar">
+
+    <a href="dashboard.html" class="logo">
+        Zavora <span>Social</span>
+    </a>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
 
 </div>
 
-</header>  <main class="container">  <div class="heading">  
-
-    <h1>My Orders</h1>  
-
-    <p>  
-        View your purchases and order status.  
-    </p>  
-
-</div>  
+</header>
 
 
-<div id="ordersArea">  
+<main class="container">
 
-    <div class="empty">  
 
-        <div class="empty-icon">  
-            📦  
-        </div>  
+<div class="heading">
 
-        <h2>No orders yet</h2>  
+    <h1>My Orders</h1>
 
-        <p>  
-            Your purchases will appear here after  
-            you place an order.  
-        </p>  
-
-        <a href="products.html" class="shop-btn">  
-            Browse Products  
-        </a>  
-
-    </div>  
+    <p>
+        View your purchases and order status.
+    </p>
 
 </div>
 
-</main>  <footer>  
-    © <span id="year"></span> Zavora Social. All rights reserved.  
-</footer>  <script type="module">  
-  
-import {  
-    initializeApp  
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";  
-  
-import {  
-    getAuth,  
-    onAuthStateChanged  
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";  
-  
-  
-const firebaseConfig = {  
-    apiKey:"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",  
-    authDomain:"zavorasocial.firebaseapp.com",  
-    projectId:"zavorasocial",  
-    storageBucket:"zavorasocial.firebasestorage.app",  
-    messagingSenderId:"447170165246",  
-    appId:"1:447170165246:web:982649e6533257ea0f28af",  
-    measurementId:"G-D4LNBEWH50"  
-};  
-  
-const app = initializeApp(firebaseConfig);  
-const auth = getAuth(app);  
-  
-  
-onAuthStateChanged(auth,(user)=>{  
-  
-    if(!user){  
-  
-        window.location.href="login.html";  
-  
-        return;  
-    }  
-  
-});  
-  
-  
-document.getElementById("year").textContent =  
-    new Date().getFullYear();  
-  
-</script>  </body>  
+
+<div id="ordersArea">
+
+    <div class="loading">
+        Loading your orders...
+    </div>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+© <span id="year"></span> Zavora Social. All rights reserved.
+
+</footer>
+
+
+<script type="module">
+
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+
+    authDomain:"zavorasocial.firebaseapp.com",
+
+    databaseURL:"https://zavorasocial-default-rtdb.firebaseio.com",
+
+    projectId:"zavorasocial",
+
+    storageBucket:"zavorasocial.firebasestorage.app",
+
+    messagingSenderId:"447170165246",
+
+    appId:"1:447170165246:web:982649e6533257ea0f28af",
+
+    measurementId:"G-D4LNBEWH50"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+
+const ordersArea = document.getElementById("ordersArea");
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+function formatPrice(amount){
+
+    return "₦" + Number(amount || 0).toLocaleString(
+        "en-NG",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+function formatDate(timestamp){
+
+    if(!timestamp){
+
+        return "Date unavailable";
+
+    }
+
+    return new Date(timestamp).toLocaleString(
+        "en-NG",
+        {
+            dateStyle:"medium",
+            timeStyle:"short"
+        }
+    );
+
+}
+
+
+function escapeHTML(value){
+
+    if(value === null || value === undefined){
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function getDeliveryDetails(order){
+
+    return (
+        order.deliveryDetails ||
+        order.delivery ||
+        order.details ||
+        order.itemDetails ||
+        order.accountDetails ||
+        order.item ||
+        ""
+    );
+
+}
+
+
+function renderOrders(orders){
+
+    if(orders.length === 0){
+
+        ordersArea.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>No orders yet</h2>
+
+                <p>
+                    Your purchases will appear here after
+                    you place an order.
+                </p>
+
+                <a href="products.html" class="shop-btn">
+                    Browse Products
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    ordersArea.innerHTML = "";
+
+
+    orders.forEach(order => {
+
+        const deliveryDetails =
+            getDeliveryDetails(order);
+
+
+        const deliveryStatus =
+            order.deliveryStatus ||
+            "pending";
+
+
+        const card =
+            document.createElement("div");
+
+        card.className = "order-card";
+
+
+        let deliveryHTML = "";
+
+
+        if(deliveryDetails){
+
+            deliveryHTML = `
+
+                <div class="delivery-box">
+
+                    <div class="delivery-title">
+                        📦 Delivered Item
+                    </div>
+
+                    <div class="delivery-status">
+                        ${escapeHTML(
+                            String(deliveryStatus).toUpperCase()
+                        )}
+                    </div>
+
+                    <div class="delivery-details">
+                        ${escapeHTML(deliveryDetails)}
+                    </div>
+
+                </div>
+
+            `;
+
+        }else{
+
+            deliveryHTML = `
+
+                <div class="delivery-box">
+
+                    <div class="delivery-title">
+                        📦 Delivery
+                    </div>
+
+                    <div class="delivery-status">
+                        ${escapeHTML(
+                            String(deliveryStatus).toUpperCase()
+                        )}
+                    </div>
+
+                    <div class="delivery-pending">
+                        Your order has been completed successfully.
+                        The item details will appear here when
+                        delivery has been assigned.
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        card.innerHTML = `
+
+            <div class="order-top">
+
+                <div>
+
+                    <div class="order-name">
+                        ${escapeHTML(
+                            order.productName ||
+                            "Product"
+                        )}
+                    </div>
+
+                    <div class="order-id">
+                        Order ID:
+                        ${escapeHTML(order.id)}
+                    </div>
+
+                </div>
+
+
+                <div class="status">
+
+                    ${escapeHTML(
+                        String(
+                            order.status ||
+                            "completed"
+                        ).toUpperCase()
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <div class="order-info">
+
+
+                <div class="info">
+
+                    <small>Product</small>
+
+                    <strong>
+                        ${escapeHTML(
+                            order.productName ||
+                            "Product"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>Amount Paid</small>
+
+                    <strong>
+                        ${formatPrice(order.price)}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>Category</small>
+
+                    <strong>
+                        ${escapeHTML(
+                            order.category ||
+                            "—"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>Order Date</small>
+
+                    <strong>
+                        ${formatDate(
+                            order.createdAt
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>Order Status</small>
+
+                    <strong>
+                        ${escapeHTML(
+                            order.status ||
+                            "Completed"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="info">
+
+                    <small>Delivery</small>
+
+                    <strong>
+                        ${escapeHTML(
+                            deliveryStatus
+                        )}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            ${deliveryHTML}
+
+        `;
+
+
+        ordersArea.appendChild(card);
+
+    });
+
+}
+
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(!user){
+
+        window.location.href="login.html";
+
+        return;
+
+    }
+
+
+    const ordersRef =
+        ref(db,"orders");
+
+
+    onValue(
+
+        ordersRef,
+
+        (snapshot)=>{
+
+            const data =
+                snapshot.val();
+
+
+            const orders = [];
+
+
+            if(data){
+
+                Object.entries(data).forEach(
+                    ([id,order])=>{
+
+                        if(
+                            order &&
+                            order.uid === user.uid
+                        ){
+
+                            orders.push({
+
+                                id,
+
+                                ...order
+
+                            });
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            orders.sort(
+                (a,b)=>
+                    Number(b.createdAt || 0) -
+                    Number(a.createdAt || 0)
+            );
+
+
+            renderOrders(orders);
+
+        },
+
+        (error)=>{
+
+            console.error(
+                "Orders error:",
+                error
+            );
+
+
+            ordersArea.innerHTML = `
+
+                <div class="error">
+
+                    Unable to load your orders.
+
+                    <br><br>
+
+                    Please refresh the page
+                    and try again.
+
+                </div>
+
+            `;
+
+        }
+
+    );
+
+});
+
+
+</script>
+
+
+</body>
+
 </html>
