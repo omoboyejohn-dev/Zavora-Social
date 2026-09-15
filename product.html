@@ -37,8 +37,6 @@ transparent 30%
 #080b16;
 }
 
-/* HEADER */
-
 header{
 position:sticky;
 top:0;
@@ -114,8 +112,6 @@ font-size:13px;
 font-weight:700;
 }
 
-/* MAIN */
-
 .container{
 
 max-width:1100px;
@@ -149,8 +145,6 @@ box-shadow:
 0 25px 70px rgba(0,0,0,.25);
 }
 
-/* IMAGE */
-
 .product-image{
 
 min-height:450px;
@@ -172,8 +166,6 @@ object-fit:cover;
 
 display:block;
 }
-
-/* DETAILS */
 
 .product-details{
 
@@ -244,8 +236,6 @@ font-size:15px;
 margin-bottom:25px;
 }
 
-/* WALLET */
-
 .wallet-box{
 
 padding:17px;
@@ -278,8 +268,6 @@ font-weight:900;
 
 color:#fff;
 }
-
-/* BUY */
 
 .buy-btn{
 
@@ -314,8 +302,6 @@ opacity:.5;
 cursor:not-allowed;
 }
 
-/* BACK */
-
 .continue{
 
 display:block;
@@ -331,8 +317,6 @@ text-decoration:none;
 font-size:13px;
 }
 
-/* LOADING */
-
 .loading{
 
 max-width:600px;
@@ -345,8 +329,6 @@ padding:50px;
 
 color:#94a3b8;
 }
-
-/* ERROR */
 
 .error{
 
@@ -375,8 +357,6 @@ color:#fff;
 
 margin-bottom:10px;
 }
-
-/* MESSAGE */
 
 .message{
 
@@ -462,8 +442,6 @@ linear-gradient(
 #06b6d4
 );
 }
-
-/* MOBILE */
 
 @media(max-width:800px){
 
@@ -596,10 +574,6 @@ Continue
 
 <script type="module">
 
-/* ==========================================
-FIREBASE
-========================================== */
-
 import {
 initializeApp
 }
@@ -627,10 +601,14 @@ from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
+/* ==========================================
+FIREBASE CONFIG
+========================================== */
+
 const firebaseConfig = {
 
 apiKey:
-"AIzaSyBzj9_RgQPW21duk4sxyLUO3hy3-6GwGs",
+"AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
 
 authDomain:
 "zavorasocial.firebaseapp.com",
@@ -701,10 +679,6 @@ window.location.search
 const productId =
 params.get("id");
 
-
-/* ==========================================
-CURRENT PRODUCT
-========================================== */
 
 let currentProduct = null;
 
@@ -809,7 +783,8 @@ return;
 }
 
 
-currentProduct = product;
+currentProduct =
+product;
 
 
 renderProduct(
@@ -979,12 +954,8 @@ this.src =
 );
 
 
-/* Load wallet */
-
 loadWallet(user);
 
-
-/* BUY BUTTON */
 
 document
 .getElementById("buyButton")
@@ -1142,13 +1113,6 @@ buyButton.textContent =
 
 try{
 
-/*
-==========================================
-STEP 1
-GET WALLET
-==========================================
-*/
-
 const walletRef =
 ref(
 db,
@@ -1160,16 +1124,6 @@ user.uid +
 
 let newBalance = 0;
 
-
-/*
-==========================================
-STEP 2
-DEDUCT WALLET SAFELY
-==========================================
-
-The transaction makes sure the wallet
-balance is checked before the deduction.
-*/
 
 const transactionResult =
 await runTransaction(
@@ -1251,12 +1205,7 @@ return;
 }
 
 
-/*
-==========================================
-STEP 3
-CREATE ORDER
-==========================================
-*/
+/* CREATE ORDER */
 
 const orderRef =
 push(
@@ -1276,16 +1225,19 @@ productId:
 productId,
 
 productName:
-product.name || "Unnamed Product",
+product.name ||
+"Unnamed Product",
 
 price:
 price,
 
 category:
-product.category || "Product",
+product.category ||
+"Product",
 
 image:
-product.image || "",
+product.image ||
+"",
 
 status:
 "completed",
@@ -1310,16 +1262,13 @@ orderData
 
 catch(orderError){
 
-/*
-If the order could not be created,
-return the deducted money to the wallet.
-*/
-
 console.error(
 "Order creation error:",
 orderError
 );
 
+
+/* REFUND IF ORDER FAILED */
 
 await runTransaction(
 walletRef,
@@ -1341,12 +1290,7 @@ throw orderError;
 }
 
 
-/*
-==========================================
-STEP 4
-UPDATE WALLET DISPLAY
-==========================================
-*/
+/* UPDATE WALLET */
 
 if(walletBalanceElement){
 
@@ -1359,12 +1303,7 @@ newBalance
 }
 
 
-/*
-==========================================
-STEP 5
-SUCCESS
-==========================================
-*/
+/* SUCCESS */
 
 if(buyButton){
 
@@ -1380,7 +1319,8 @@ showMessage(
 "🎉",
 "Order Completed",
 "You successfully purchased " +
-(product.name || "this product") +
+(product.name ||
+"this product") +
 " for ₦" +
 formatNumber(price) +
 ". Your order has been added to My Orders."
