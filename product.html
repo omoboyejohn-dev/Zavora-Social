@@ -477,9 +477,7 @@ import {
 import {
     getDatabase,
     ref,
-    get,
-    push,
-    set
+    get
 } from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
@@ -826,16 +824,20 @@ async function loadWallet(){
 
 /*
 ============================================
-CREATE PURCHASE REQUEST
+DIRECT PURCHASE
 ============================================
 
-The customer does NOT directly deduct
-money from the wallet.
+The customer sends the Firebase ID token
+to the Vercel API.
 
-Instead, a purchase request is created.
+The server securely handles:
 
-The admin will review the request and
-complete the purchase.
+1. Authentication
+2. Product price
+3. Wallet deduction
+4. Inventory assignment
+5. Inventory sale
+6. Order creation
 ============================================
 */
 
@@ -885,75 +887,6 @@ buyButton.addEventListener(
 
         /*
         ====================================
-        CHECK CUSTOMER WALLET
-        ====================================
-        */
-
-        let balance = 0;
-
-
-        try{
-
-            const walletRef =
-                ref(
-                    db,
-                    "users/" +
-                    currentUser.uid +
-                    "/walletBalance"
-                );
-
-
-            const walletSnapshot =
-                await get(walletRef);
-
-
-            balance =
-                Number(
-                    walletSnapshot.val()
-                ) || 0;
-
-        }
-        catch(error){
-
-            console.error(
-                "Wallet check error:",
-                error
-            );
-
-            showMessage(
-                "Purchase Failed",
-                "Unable to check your wallet balance. Please try again."
-            );
-
-            return;
-
-        }
-
-
-        /*
-        ====================================
-        CHECK BALANCE
-        ====================================
-        */
-
-        if(balance < price){
-
-            showMessage(
-                "Insufficient Balance",
-                "Your wallet balance is " +
-                money(balance) +
-                ". You need " +
-                money(price) +
-                " to purchase this product."
-            );
-
-            return;
-
-        }
-
-
-        /*
-        ====================================
         DISABLE BUTTON
         ====================================
         */
@@ -962,97 +895,151 @@ buyButton.addEventListener(
             true;
 
         buyButton.textContent =
-            "Sending Request...";
+            "Processing Purchase...";
 
 
         try{
 
             /*
             ====================================
-            PURCHASE REQUEST DATA
+            GET FRESH FIREBASE ID TOKEN
             ====================================
             */
 
-            const requestRef =
-                push(
-                    ref(
-                        db,
-                        "purchaseRequests"
-                    )
+            const idToken =
+                await currentUser.getIdToken(
+                    true
                 );
 
 
-            const purchaseRequest = {
+            /*
+            ====================================
+            CALL VERCEL PURCHASE API
+            ====================================
+            */
 
-                uid:
-                    currentUser.uid,
+            const response =
+                await fetch(
+                    "/api/purchase",
+                    {
+                        method:"POST",
 
-                email:
-                    currentUser.email ||
-                    "",
+                        headers:{
+                            "Content-Type":
+                                "application/json",
 
-                productId:
-                    currentProduct.id,
+                            "Authorization":
+                                "Bearer " +
+                                idToken
+                        },
 
-                productName:
-                    currentProduct.name ||
-                    "Unnamed Product",
+                        body:JSON.stringify({
+                            productId:
+                                currentProduct.id
+                        })
+                    }
+                );
 
-                price:
-                    price,
 
-                category:
-                    currentProduct.category ||
-                    "Product",
+            let result = null;
 
-                image:
-                    currentProduct.image ||
-                    "",
 
-                description:
-                    currentProduct.description ||
-                    "",
+            try{
 
-                status:
-                    "pending",
+                result =
+                    await response.json();
 
-                createdAt:
-                    Date.now()
+            }
+            catch(jsonError){
 
-            };
+                result = null;
+
+            }
 
 
             /*
             ====================================
-            SAVE REQUEST
+            HANDLE API ERROR
             ====================================
             */
 
-            await set(
-                requestRef,
-                purchaseRequest
-            );
+            if(
+                !response.ok ||
+                !result ||
+                !result.success
+            ){
+
+                const message =
+                    result &&
+                    result.message
+                    ? result.message
+                    : "Unable to complete your purchase. Please try again.";
+
+
+                showMessage(
+                    "Purchase Failed",
+                    message
+                );
+
+
+                buyButton.disabled =
+                    false;
+
+                buyButton.textContent =
+                    "Buy Now";
+
+                return;
+
+            }
 
 
             /*
             ====================================
-            SUCCESS
+            PURCHASE SUCCESS
             ====================================
             */
 
-            buyButton.disabled =
-                false;
+            walletBalance.textContent =
+                money(result.balance);
+
 
             buyButton.textContent =
-                "Buy Now";
+                "Purchase Complete";
+
+
+            /*
+            ====================================
+            SHOW DELIVERY
+            ====================================
+            */
+
+            let deliveryMessage =
+                "Your purchase was completed successfully.";
+
+
+            if(
+                result.deliveryDetails
+            ){
+
+                deliveryMessage +=
+                    "\n\nDelivery:\n" +
+                    result.deliveryDetails;
+
+            }
 
 
             showMessage(
-                "Purchase Request Sent",
-                "Your purchase request has been sent successfully. Please wait while your order is processed.",
+                "Purchase Successful",
+                deliveryMessage,
                 true
             );
 
+
+            /*
+            ====================================
+            CHANGE MODAL BUTTON
+            ====================================
+            */
 
             modalButton.textContent =
                 "View My Orders";
@@ -1071,8 +1058,14 @@ buyButton.addEventListener(
         catch(error){
 
             console.error(
-                "Purchase request error:",
+                "Purchase error:",
                 error
+            );
+
+
+            showMessage(
+                "Purchase Failed",
+                "Unable to connect to the purchase server. Please try again."
             );
 
 
@@ -1081,27 +1074,6 @@ buyButton.addEventListener(
 
             buyButton.textContent =
                 "Buy Now";
-
-
-            let message =
-                "Unable to send your purchase request. Please try again.";
-
-
-            if(
-                error &&
-                error.message
-            ){
-
-                message =
-                    error.message;
-
-            }
-
-
-            showMessage(
-                "Purchase Failed",
-                message
-            );
 
         }
 
