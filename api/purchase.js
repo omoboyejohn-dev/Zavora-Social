@@ -82,7 +82,7 @@ function formatMoney(amount) {
 ========================================================= */
 
 /*
-   Your admin inventory page creates:
+   Admin inventory normally creates:
 
    status: "available"
 
@@ -93,7 +93,7 @@ function formatMoney(amount) {
    Available
    empty/legacy status
 
-   It rejects only:
+   It rejects:
 
    sold
    processing
@@ -120,7 +120,7 @@ function isPurchasable(item) {
 
 
     /*
-       Never sell an item already sold.
+       Already sold.
     */
 
     if (
@@ -133,8 +133,7 @@ function isPurchasable(item) {
 
 
     /*
-       Never sell an item currently being
-       processed by another purchase.
+       Currently being purchased.
     */
 
     if (
@@ -147,12 +146,7 @@ function isPurchasable(item) {
 
 
     /*
-       Any other status is considered
-       purchasable.
-
-       This allows older inventory records
-       that may have an empty or unexpected
-       status.
+       Everything else can be purchased.
     */
 
     return true;
@@ -168,7 +162,7 @@ module.exports = async function handler(req, res) {
 
 
     /* =====================================================
-       METHOD CHECK
+       METHOD
     ===================================================== */
 
     if (
@@ -190,7 +184,7 @@ module.exports = async function handler(req, res) {
 
 
     /* =====================================================
-       ENVIRONMENT CHECK
+       FIREBASE ENVIRONMENT VARIABLES
     ===================================================== */
 
     if (
@@ -387,7 +381,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           PRODUCT ACTIVE CHECK
+           PRODUCT ACTIVE
         ================================================= */
 
         if (
@@ -465,7 +459,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           INVENTORY EXISTENCE
+           NO INVENTORY NODE
         ================================================= */
 
         if (
@@ -516,7 +510,9 @@ module.exports = async function handler(req, res) {
 
 
         const inventoryEntries =
-            Object.entries(inventory);
+            Object.entries(
+                inventory
+            );
 
 
         console.log(
@@ -526,7 +522,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           INVENTORY DIAGNOSTIC COUNT
+           DIAGNOSTIC COUNTS
         ================================================= */
 
         let availableCount = 0;
@@ -692,8 +688,7 @@ module.exports = async function handler(req, res) {
 
 
                         /*
-                           If item disappeared,
-                           cancel transaction.
+                           Item no longer exists.
                         */
 
                         if (
@@ -707,10 +702,9 @@ module.exports = async function handler(req, res) {
 
 
                         /*
-                           Check again inside the
-                           transaction to prevent
-                           two customers from getting
-                           the same item.
+                           Check again inside the transaction.
+                           This prevents two customers from
+                           receiving the same item.
                         */
 
                         if (
@@ -777,7 +771,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           NO INVENTORY AVAILABLE
+           NO PURCHASABLE INVENTORY
         ================================================= */
 
         if (
@@ -797,7 +791,7 @@ module.exports = async function handler(req, res) {
                     success: false,
 
                     message:
-                        "This product currently has no purchasable inventory items.",
+                        `No purchasable inventory. Total: ${inventoryEntries.length}, Available: ${availableCount}, Sold: ${soldCount}, Processing: ${processingCount}, Other: ${otherCount}.`,
 
                     debug: {
 
@@ -868,12 +862,6 @@ module.exports = async function handler(req, res) {
                     );
 
 
-                    /*
-                       Not enough money.
-                       Returning undefined aborts
-                       the transaction.
-                    */
-
                     if (
                         balance < price
                     ) {
@@ -905,9 +893,9 @@ module.exports = async function handler(req, res) {
             );
 
 
-            /*
-               Restore reserved inventory.
-            */
+            /* ---------------------------------------------
+               RESTORE INVENTORY
+            --------------------------------------------- */
 
             await reservedItemRef.transaction(
                 (currentItem) => {
@@ -1101,9 +1089,9 @@ module.exports = async function handler(req, res) {
             );
 
 
-            /*
-               Refund wallet.
-            */
+            /* ---------------------------------------------
+               REFUND WALLET
+            --------------------------------------------- */
 
             await walletRef.transaction(
                 (currentBalance) => {
@@ -1122,9 +1110,9 @@ module.exports = async function handler(req, res) {
             );
 
 
-            /*
-               Restore inventory.
-            */
+            /* ---------------------------------------------
+               RESTORE INVENTORY
+            --------------------------------------------- */
 
             await reservedItemRef.transaction(
                 (currentItem) => {
@@ -1289,10 +1277,8 @@ module.exports = async function handler(req, res) {
 
 
             /*
-               The customer has already been charged
-               and the order exists.
-
-               Do not charge again.
+               Order and wallet charge already exist.
+               Do not charge the customer again.
             */
 
             return sendJson(
