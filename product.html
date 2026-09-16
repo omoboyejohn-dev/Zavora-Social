@@ -283,6 +283,7 @@ header{
     line-height:1.6;
     font-size:14px;
     margin-bottom:20px;
+    white-space:pre-line;
 }
 
 .modal-btn{
@@ -353,11 +354,13 @@ header{
 
 </header>
 
+
 <main class="container">
 
     <div id="loading" class="loading">
         Loading product...
     </div>
+
 
     <div id="productArea" style="display:none;">
 
@@ -374,23 +377,28 @@ header{
 
             </div>
 
+
             <div class="product-info">
 
                 <div id="productCategory" class="category">
                     Product
                 </div>
 
+
                 <h1 id="productName" class="product-name">
                     Product
                 </h1>
+
 
                 <div id="productDescription" class="description">
                     Loading description...
                 </div>
 
+
                 <div id="productPrice" class="price">
                     ₦0.00
                 </div>
+
 
                 <div class="wallet">
 
@@ -404,11 +412,19 @@ header{
 
                 </div>
 
-                <button id="buyButton" class="buy-btn">
+
+                <button
+                    id="buyButton"
+                    class="buy-btn"
+                >
                     Buy Now
                 </button>
 
-                <a href="products.html" class="continue">
+
+                <a
+                    href="products.html"
+                    class="continue"
+                >
                     ← Continue Shopping
                 </a>
 
@@ -418,7 +434,12 @@ header{
 
     </div>
 
-    <div id="errorArea" class="error" style="display:none;">
+
+    <div
+        id="errorArea"
+        class="error"
+        style="display:none;"
+    >
 
         <h2>
             Product Not Found
@@ -430,7 +451,10 @@ header{
 
         <br>
 
-        <a href="products.html" class="back-btn">
+        <a
+            href="products.html"
+            class="back-btn"
+        >
             Back to Products
         </a>
 
@@ -438,19 +462,38 @@ header{
 
 </main>
 
-<div id="messageModal" class="modal">
+
+<!-- =========================================
+     PURCHASE MESSAGE MODAL
+========================================= -->
+
+<div
+    id="messageModal"
+    class="modal"
+>
 
     <div class="modal-box">
 
-        <h2 id="modalTitle" class="modal-title">
+        <h2
+            id="modalTitle"
+            class="modal-title"
+        >
             Purchase
         </h2>
 
-        <p id="modalMessage" class="modal-message">
+
+        <p
+            id="modalMessage"
+            class="modal-message"
+        >
             ...
         </p>
 
-        <button id="modalButton" class="modal-btn">
+
+        <button
+            id="modalButton"
+            class="modal-btn"
+        >
             Continue
         </button>
 
@@ -461,16 +504,24 @@ header{
 
 <script type="module">
 
+/*
+==================================================
+FIREBASE
+==================================================
+*/
+
 import {
     initializeApp
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
     getAuth,
     onAuthStateChanged
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
@@ -478,9 +529,16 @@ import {
     getDatabase,
     ref,
     get
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
+
+/*
+==================================================
+FIREBASE CONFIG
+==================================================
+*/
 
 const firebaseConfig = {
 
@@ -511,8 +569,16 @@ const firebaseConfig = {
 };
 
 
+/*
+==================================================
+INITIALIZE FIREBASE
+==================================================
+*/
+
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
 
 
 const auth =
@@ -523,51 +589,112 @@ const db =
     getDatabase(app);
 
 
+/*
+==================================================
+ELEMENTS
+==================================================
+*/
+
 const loading =
-    document.getElementById("loading");
+    document.getElementById(
+        "loading"
+    );
+
 
 const productArea =
-    document.getElementById("productArea");
+    document.getElementById(
+        "productArea"
+    );
+
 
 const errorArea =
-    document.getElementById("errorArea");
+    document.getElementById(
+        "errorArea"
+    );
+
 
 const errorText =
-    document.getElementById("errorText");
+    document.getElementById(
+        "errorText"
+    );
+
 
 const productImage =
-    document.getElementById("productImage");
+    document.getElementById(
+        "productImage"
+    );
+
 
 const productName =
-    document.getElementById("productName");
+    document.getElementById(
+        "productName"
+    );
+
 
 const productCategory =
-    document.getElementById("productCategory");
+    document.getElementById(
+        "productCategory"
+    );
+
 
 const productDescription =
-    document.getElementById("productDescription");
+    document.getElementById(
+        "productDescription"
+    );
+
 
 const productPrice =
-    document.getElementById("productPrice");
+    document.getElementById(
+        "productPrice"
+    );
+
 
 const walletBalance =
-    document.getElementById("walletBalance");
+    document.getElementById(
+        "walletBalance"
+    );
+
 
 const buyButton =
-    document.getElementById("buyButton");
+    document.getElementById(
+        "buyButton"
+    );
+
 
 const messageModal =
-    document.getElementById("messageModal");
+    document.getElementById(
+        "messageModal"
+    );
+
 
 const modalTitle =
-    document.getElementById("modalTitle");
+    document.getElementById(
+        "modalTitle"
+    );
+
 
 const modalMessage =
-    document.getElementById("modalMessage");
+    document.getElementById(
+        "modalMessage"
+    );
+
 
 const modalButton =
-    document.getElementById("modalButton");
+    document.getElementById(
+        "modalButton"
+    );
 
+
+/*
+==================================================
+GET PRODUCT ID FROM URL
+==================================================
+
+Example:
+
+product.html?id=PRODUCT_ID
+==================================================
+*/
 
 const urlParams =
     new URLSearchParams(
@@ -579,56 +706,101 @@ const productId =
     urlParams.get("id");
 
 
-let currentUser = null;
+/*
+==================================================
+CURRENT USER / PRODUCT
+==================================================
+*/
 
-let currentProduct = null;
+let currentUser =
+    null;
 
+
+let currentProduct =
+    null;
+
+
+/*
+==================================================
+MONEY FORMAT
+==================================================
+*/
 
 function money(amount){
 
     return "₦" +
-        Number(amount || 0).toLocaleString(
+        Number(
+            amount || 0
+        ).toLocaleString(
             "en-NG",
             {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
+                minimumFractionDigits:
+                    2,
+
+                maximumFractionDigits:
+                    2
             }
         );
 
 }
 
 
+/*
+==================================================
+SHOW MODAL
+==================================================
+*/
+
 function showMessage(
     title,
     message,
-    success=false
+    success = false,
+    buttonText = "Continue",
+    buttonAction = null
 ){
 
     modalTitle.textContent =
         title;
 
+
     modalMessage.textContent =
         message;
+
 
     modalTitle.className =
         "modal-title " +
         (
             success
-            ? "success"
-            : "failure"
+                ? "success"
+                : "failure"
         );
 
+
     modalButton.textContent =
-        "Continue";
+        buttonText;
+
 
     modalButton.onclick =
         () => {
+
+            if(
+                typeof buttonAction ===
+                "function"
+            ){
+
+                buttonAction();
+
+                return;
+
+            }
+
 
             messageModal.classList.remove(
                 "show"
             );
 
         };
+
 
     messageModal.classList.add(
         "show"
@@ -637,6 +809,12 @@ function showMessage(
 }
 
 
+/*
+==================================================
+LOAD PRODUCT
+==================================================
+*/
+
 async function loadProduct(){
 
     if(!productId){
@@ -644,11 +822,14 @@ async function loadProduct(){
         loading.style.display =
             "none";
 
+
         errorArea.style.display =
             "block";
 
+
         errorText.textContent =
             "No product was selected.";
+
 
         return;
 
@@ -666,19 +847,26 @@ async function loadProduct(){
 
 
         const snapshot =
-            await get(productRef);
+            await get(
+                productRef
+            );
 
 
-        if(!snapshot.exists()){
+        if(
+            !snapshot.exists()
+        ){
 
             loading.style.display =
                 "none";
 
+
             errorArea.style.display =
                 "block";
 
+
             errorText.textContent =
                 "This product does not exist.";
+
 
             return;
 
@@ -689,21 +877,38 @@ async function loadProduct(){
             snapshot.val();
 
 
-        if(product.active === false){
+        /*
+        ========================================
+        CHECK PRODUCT ACTIVE
+        ========================================
+        */
+
+        if(
+            product.active === false
+        ){
 
             loading.style.display =
                 "none";
 
+
             errorArea.style.display =
                 "block";
 
+
             errorText.textContent =
                 "This product is currently unavailable.";
+
 
             return;
 
         }
 
+
+        /*
+        ========================================
+        STORE PRODUCT
+        ========================================
+        */
 
         currentProduct = {
 
@@ -714,6 +919,12 @@ async function loadProduct(){
 
         };
 
+
+        /*
+        ========================================
+        DISPLAY PRODUCT
+        ========================================
+        */
 
         productName.textContent =
             product.name ||
@@ -731,13 +942,26 @@ async function loadProduct(){
 
 
         productPrice.textContent =
-            money(product.price);
+            money(
+                product.price
+            );
 
 
-        if(product.image){
+        /*
+        ========================================
+        PRODUCT IMAGE
+        ========================================
+        */
+
+        if(
+            product.image
+        ){
 
             productImage.src =
                 product.image;
+
+            productImage.style.display =
+                "block";
 
         }
         else{
@@ -748,12 +972,25 @@ async function loadProduct(){
         }
 
 
+        /*
+        ========================================
+        SHOW PRODUCT
+        ========================================
+        */
+
         loading.style.display =
             "none";
+
 
         productArea.style.display =
             "block";
 
+
+        /*
+        ========================================
+        LOAD WALLET
+        ========================================
+        */
 
         await loadWallet();
 
@@ -761,7 +998,7 @@ async function loadProduct(){
     catch(error){
 
         console.error(
-            "Product error:",
+            "Product loading error:",
             error
         );
 
@@ -769,18 +1006,35 @@ async function loadProduct(){
         loading.style.display =
             "none";
 
+
         errorArea.style.display =
             "block";
 
+
         errorText.textContent =
-            "Unable to load this product.";
+            "Unable to load this product. Please try again.";
 
     }
 
 }
 
 
+/*
+==================================================
+LOAD WALLET
+==================================================
+*/
+
 async function loadWallet(){
+
+    if(
+        !currentUser
+    ){
+
+        return;
+
+    }
+
 
     try{
 
@@ -794,7 +1048,9 @@ async function loadWallet(){
 
 
         const snapshot =
-            await get(walletRef);
+            await get(
+                walletRef
+            );
 
 
         const balance =
@@ -804,15 +1060,18 @@ async function loadWallet(){
 
 
         walletBalance.textContent =
-            money(balance);
+            money(
+                balance
+            );
 
     }
     catch(error){
 
         console.error(
-            "Wallet error:",
+            "Wallet loading error:",
             error
         );
+
 
         walletBalance.textContent =
             "₦0.00";
@@ -823,29 +1082,37 @@ async function loadWallet(){
 
 
 /*
-============================================
-DIRECT PURCHASE
-============================================
+==================================================
+BUY PRODUCT
+==================================================
 
-The customer sends the Firebase ID token
-to the Vercel API.
+The browser DOES NOT deduct money.
 
-The server securely handles:
+The browser DOES NOT select inventory.
 
-1. Authentication
-2. Product price
-3. Wallet deduction
-4. Inventory assignment
-5. Inventory sale
-6. Order creation
-============================================
+The browser DOES NOT create the order.
+
+Everything important is handled by:
+
+/api/purchase
+
+on Vercel.
+==================================================
 */
 
 buyButton.addEventListener(
     "click",
     async () => {
 
-        if(!currentUser){
+        /*
+        ========================================
+        CHECK LOGIN
+        ========================================
+        */
+
+        if(
+            !currentUser
+        ){
 
             window.location.href =
                 "login.html";
@@ -855,7 +1122,15 @@ buyButton.addEventListener(
         }
 
 
-        if(!currentProduct){
+        /*
+        ========================================
+        CHECK PRODUCT
+        ========================================
+        */
+
+        if(
+            !currentProduct
+        ){
 
             showMessage(
                 "Purchase Failed",
@@ -867,13 +1142,21 @@ buyButton.addEventListener(
         }
 
 
+        /*
+        ========================================
+        PRICE CHECK
+        ========================================
+        */
+
         const price =
             Number(
                 currentProduct.price
             ) || 0;
 
 
-        if(price <= 0){
+        if(
+            price <= 0
+        ){
 
             showMessage(
                 "Purchase Failed",
@@ -886,13 +1169,14 @@ buyButton.addEventListener(
 
 
         /*
-        ====================================
+        ========================================
         DISABLE BUTTON
-        ====================================
+        ========================================
         */
 
         buyButton.disabled =
             true;
+
 
         buyButton.textContent =
             "Processing Purchase...";
@@ -914,7 +1198,7 @@ buyButton.addEventListener(
 
             /*
             ====================================
-            CALL VERCEL PURCHASE API
+            SEND PURCHASE TO VERCEL
             ====================================
             */
 
@@ -922,7 +1206,8 @@ buyButton.addEventListener(
                 await fetch(
                     "/api/purchase",
                     {
-                        method:"POST",
+                        method:
+                            "POST",
 
                         headers:{
                             "Content-Type":
@@ -933,15 +1218,23 @@ buyButton.addEventListener(
                                 idToken
                         },
 
-                        body:JSON.stringify({
-                            productId:
-                                currentProduct.id
-                        })
+                        body:
+                            JSON.stringify({
+                                productId:
+                                    currentProduct.id
+                            })
                     }
                 );
 
 
-            let result = null;
+            /*
+            ====================================
+            READ API RESPONSE
+            ====================================
+            */
+
+            let result =
+                null;
 
 
             try{
@@ -950,16 +1243,21 @@ buyButton.addEventListener(
                     await response.json();
 
             }
-            catch(jsonError){
+            catch(
+                jsonError
+            ){
 
-                result = null;
+                console.error(
+                    "Invalid API response:",
+                    jsonError
+                );
 
             }
 
 
             /*
             ====================================
-            HANDLE API ERROR
+            API FAILED
             ====================================
             */
 
@@ -972,21 +1270,25 @@ buyButton.addEventListener(
                 const message =
                     result &&
                     result.message
-                    ? result.message
-                    : "Unable to complete your purchase. Please try again.";
+                        ? result.message
+                        : "Unable to complete your purchase. Please try again.";
 
 
                 showMessage(
                     "Purchase Failed",
-                    message
+                    message,
+                    false,
+                    "Continue"
                 );
 
 
                 buyButton.disabled =
                     false;
 
+
                 buyButton.textContent =
                     "Buy Now";
+
 
                 return;
 
@@ -1000,7 +1302,13 @@ buyButton.addEventListener(
             */
 
             walletBalance.textContent =
-                money(result.balance);
+                money(
+                    result.balance
+                );
+
+
+            buyButton.disabled =
+                true;
 
 
             buyButton.textContent =
@@ -1009,7 +1317,7 @@ buyButton.addEventListener(
 
             /*
             ====================================
-            SHOW DELIVERY
+            DELIVERY MESSAGE
             ====================================
             */
 
@@ -1028,31 +1336,24 @@ buyButton.addEventListener(
             }
 
 
-            showMessage(
-                "Purchase Successful",
-                deliveryMessage,
-                true
-            );
-
-
             /*
             ====================================
-            CHANGE MODAL BUTTON
+            SHOW SUCCESS
             ====================================
             */
 
-            modalButton.textContent =
-                "View My Orders";
-
-
-            modalButton.onclick =
+            showMessage(
+                "Purchase Successful",
+                deliveryMessage,
+                true,
+                "View My Orders",
                 () => {
 
                     window.location.href =
                         "orders.html";
 
-                };
-
+                }
+            );
 
         }
         catch(error){
@@ -1065,12 +1366,15 @@ buyButton.addEventListener(
 
             showMessage(
                 "Purchase Failed",
-                "Unable to connect to the purchase server. Please try again."
+                "Unable to connect to the purchase server. Please try again.",
+                false,
+                "Continue"
             );
 
 
             buyButton.disabled =
                 false;
+
 
             buyButton.textContent =
                 "Buy Now";
@@ -1081,11 +1385,25 @@ buyButton.addEventListener(
 );
 
 
+/*
+==================================================
+FIREBASE AUTH STATE
+==================================================
+*/
+
 onAuthStateChanged(
     auth,
     async (user) => {
 
-        if(!user){
+        /*
+        ========================================
+        USER NOT LOGGED IN
+        ========================================
+        */
+
+        if(
+            !user
+        ){
 
             window.location.href =
                 "login.html";
@@ -1095,9 +1413,21 @@ onAuthStateChanged(
         }
 
 
+        /*
+        ========================================
+        STORE CURRENT USER
+        ========================================
+        */
+
         currentUser =
             user;
 
+
+        /*
+        ========================================
+        LOAD PRODUCT
+        ========================================
+        */
 
         await loadProduct();
 
@@ -1105,13 +1435,26 @@ onAuthStateChanged(
 );
 
 
-modalButton.addEventListener(
-    "click",
-    () => {
+/*
+==================================================
+CLOSE MODAL WHEN CLICKING OUTSIDE
+==================================================
+*/
 
-        messageModal.classList.remove(
-            "show"
-        );
+messageModal.addEventListener(
+    "click",
+    (event) => {
+
+        if(
+            event.target ===
+            messageModal
+        ){
+
+            messageModal.classList.remove(
+                "show"
+            );
+
+        }
 
     }
 );
