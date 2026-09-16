@@ -1,332 +1,694 @@
-const { initializeApp, cert, getApps } = require("firebase-admin/app");
-const { getAuth } = require("firebase-admin/auth");
-const { getDatabase } = require("firebase-admin/database");
-// ----------------------------------------------------
-// Firebase Admin setup
-// ----------------------------------------------------
+const {
+    initializeApp,
+    cert,
+    getApps
+} = require("firebase-admin/app");
+const {
+    getAuth
+} = require("firebase-admin/auth");
+const {
+    getDatabase
+} = require("firebase-admin/database");
+/*
+==================================================
+FIREBASE ADMIN INITIALIZATION
+==================================================
+*/
 if (!getApps().length) {
-  let privateKey = process.env.FIREBASE_PRIVATE_KEY || "";
-  // Vercel may store the \n characters literally.
-  privateKey = privateKey.replace(/\\n/g, "\n");
-  // Remove accidental surrounding quotes if they were pasted.
-  if (
-    privateKey.startsWith('"') &&
-    privateKey.endsWith('"')
-  ) {
-    privateKey = privateKey.slice(1, -1);
-  }
-  initializeApp({
-    credential: cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey,
-    }),
-    databaseURL:
-      "https://zavorasocial-default-rtdb.firebaseio.com/",
-  });
+    const privateKey =
+        process.env.FIREBASE_PRIVATE_KEY
+            ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
+            : "";
+    initializeApp({
+        credential: cert({
+            projectId:
+                process.env.FIREBASE_PROJECT_ID,
+            clientEmail:
+                process.env.FIREBASE_CLIENT_EMAIL,
+            privateKey:
+                privateKey
+        }),
+        databaseURL:
+            "https://zavorasocial-default-rtdb.firebaseio.com/"
+    });
 }
-const db = getDatabase();
-const adminAuth = getAuth();
-// ----------------------------------------------------
-// API
-// ----------------------------------------------------
-module.exports = async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      success: false,
-      message: "Method not allowed.",
-    });
-  }
-  let reservedInventoryRef = null;
-  let walletRef = null;
-  let chargedAmount = 0;
-  let orderRef = null;
-  try {
-    // ------------------------------------------------
-    // 1. Verify Firebase login
-    // ------------------------------------------------
-    const authHeader = req.headers.authorization || "";
-    if (!authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({
-        success: false,
-        message: "You must be logged in.",
-      });
+const adminAuth =
+    getAuth();
+const db =
+    getDatabase();
+/*
+==================================================
+HELPER
+==================================================
+*/
+function sendJson(
+    res,
+    status,
+    data
+) {
+    return res
+        .status(status)
+        .json(data);
+}
+/*
+==================================================
+PURCHASE API
+==================================================
+*/
+module.exports = async function handler(
+    req,
+    res
+) {
+    /*
+    ==============================================
+    ONLY POST IS ALLOWED
+    ==============================================
+    */
+    if (req.method !== "POST") {
+        return sendJson(
+            res,
+            405,
+            {
+                success: false,
+                message: "Method not allowed."
+            }
+        );
     }
-    const idToken = authHeader.substring(7).trim();
-    if (!idToken) {
-      return res.status(401).json({
-        success: false,
-        message: "Missing authentication token.",
-      });
+    /*
+    ==============================================
+    CHECK ENVIRONMENT VARIABLES
+    ==============================================
+    */
+    if (
+        !process.env.FIREBASE_PROJECT_ID ||
+        !process.env.FIREBASE_CLIENT_EMAIL ||
+        !process.env.FIREBASE_PRIVATE_KEY
+    ) {
+        console.error(
+            "Missing Firebase environment variables."
+        );
+        return sendJson(
+            res,
+            500,
+            {
+                success: false,
+                message:
+                    "Purchase server is not configured correctly."
+            }
+        );
     }
-    const decodedToken = await adminAuth.verifyIdToken(idToken);
-    const uid = decodedToken.uid;
-    const email = decodedToken.email || "";
-    // ------------------------------------------------
-    // 2. Read product ID
-    // ------------------------------------------------
-    const productId = String(
-      req.body && req.body.productId
-        ? req.body.productId
-        : ""
-    ).trim();
-    if (!productId) {
-      return res.status(400).json({
-        success: false,
-        message: "Product ID is required.",
-      });
-    }
-    // ------------------------------------------------
-    // 3. Get product from Firebase
-    // ------------------------------------------------
-    const productRef = db.ref(`products/${productId}`);
-    const productSnapshot = await productRef.once("value");
-    if (!productSnapshot.exists()) {
-      return res.status(404).json({
-        success: false,
-        message: "Product not found.",
-      });
-    }
-    const product = productSnapshot.val();
-    if (product.active === false) {
-      return res.status(400).json({
-        success: false,
-        message: "This product is currently unavailable.",
-      });
-    }
-    const price = Number(product.price);
-    if (!Number.isFinite(price) || price <= 0) {
-      console.error("Invalid product price:", product.price);
-      return res.status(500).json({
-        success: false,
-        message: "This product has an invalid price.",
-      });
-    }
-    chargedAmount = price;
-    // ------------------------------------------------
-    // 4. Find available inventory
-    // ------------------------------------------------
-    const inventoryRef = db.ref(`inventory/${productId}`);
-    const inventorySnapshot = await inventoryRef
-      .orderByChild("status")
-      .equalTo("available")
-      .limitToFirst(10)
-      .once("value");
-    const inventory = inventorySnapshot.val();
-    if (!inventory) {
-      return res.status(409).json({
-        success: false,
-        message: "This product is out of stock.",
-      });
-    }
-    // ------------------------------------------------
-    // 5. Reserve ONE inventory item
-    // ------------------------------------------------
-    let reservedInventory = null;
-    for (const [inventoryId, item] of Object.entries(inventory)) {
-      const itemRef = inventoryRef.child(inventoryId);
-      const reservation = await itemRef.transaction((current) => {
-        if (!current) {
-          return;
+    try {
+        /*
+        ==========================================
+        1. GET FIREBASE ID TOKEN
+        ==========================================
+        */
+        const authorization =
+            req.headers.authorization || "";
+        if (
+            !authorization.startsWith(
+                "Bearer "
+            )
+        ) {
+            return sendJson(
+                res,
+                401,
+                {
+                    success: false,
+                    message:
+                        "You must be logged in to make a purchase."
+                }
+            );
         }
-        if (current.status !== "available") {
-          return;
+        const idToken =
+            authorization.substring(
+                7
+            ).trim();
+        if (!idToken) {
+            return sendJson(
+                res,
+                401,
+                {
+                    success: false,
+                    message:
+                        "Authentication token is missing."
+                }
+            );
         }
-        return {
-          ...current,
-          status: "processing",
-          processingBy: uid,
-          processingAt: Date.now(),
+        /*
+        ==========================================
+        2. VERIFY USER
+        ==========================================
+        */
+        const decodedToken =
+            await adminAuth.verifyIdToken(
+                idToken
+            );
+        const uid =
+            decodedToken.uid;
+        const email =
+            decodedToken.email || "";
+        /*
+        ==========================================
+        3. GET PRODUCT ID
+        ==========================================
+        */
+        const productId =
+            req.body &&
+            req.body.productId
+                ? String(
+                    req.body.productId
+                ).trim()
+                : "";
+        if (!productId) {
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+                    message:
+                        "Product ID is required."
+                }
+            );
+        }
+        /*
+        ==========================================
+        4. LOAD PRODUCT FROM DATABASE
+        ==========================================
+        */
+        const productRef =
+            db.ref(
+                "products/" +
+                productId
+            );
+        const productSnapshot =
+            await productRef.once(
+                "value"
+            );
+        if (!productSnapshot.exists()) {
+            return sendJson(
+                res,
+                404,
+                {
+                    success: false,
+                    message:
+                        "Product not found."
+                }
+            );
+        }
+        const product =
+            productSnapshot.val();
+        /*
+        ==========================================
+        5. CHECK PRODUCT STATUS
+        ==========================================
+        */
+        if (
+            product.active === false
+        ) {
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+                    message:
+                        "This product is currently unavailable."
+                }
+            );
+        }
+        /*
+        ==========================================
+        6. GET PRICE FROM DATABASE
+        ==========================================
+        */
+        const price =
+            Number(
+                product.price
+            );
+        if (
+            !Number.isFinite(price) ||
+            price <= 0
+        ) {
+            console.error(
+                "Invalid product price:",
+                productId,
+                product.price
+            );
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+                    message:
+                        "This product has an invalid price."
+                }
+            );
+        }
+        /*
+        ==========================================
+        7. FIND AVAILABLE INVENTORY
+        ==========================================
+        */
+        const inventoryRef =
+            db.ref(
+                "inventory/" +
+                productId
+            );
+        const inventorySnapshot =
+            await inventoryRef
+                .orderByChild("status")
+                .equalTo("available")
+                .limitToFirst(10)
+                .once("value");
+        const inventory =
+            inventorySnapshot.val();
+        if (
+            !inventory ||
+            typeof inventory !== "object"
+        ) {
+            return sendJson(
+                res,
+                409,
+                {
+                    success: false,
+                    message:
+                        "This product is currently out of stock."
+                }
+            );
+        }
+        /*
+        ==========================================
+        8. RESERVE ONE INVENTORY ITEM
+        ==========================================
+        */
+        let reservedInventoryId =
+            null;
+        let reservedInventory =
+            null;
+        for (
+            const [
+                inventoryId,
+                inventoryItem
+            ]
+            of Object.entries(
+                inventory
+            )
+        ) {
+            const itemRef =
+                inventoryRef.child(
+                    inventoryId
+                );
+            const reservation =
+                await itemRef.transaction(
+                    (currentItem) => {
+                        if (
+                            !currentItem ||
+                            currentItem.status !==
+                                "available"
+                        ) {
+                            return;
+                        }
+                        return {
+                            ...currentItem,
+                            status:
+                                "processing",
+                            processingBy:
+                                uid,
+                            processingAt:
+                                Date.now()
+                        };
+                    }
+                );
+            if (
+                reservation.committed
+            ) {
+                reservedInventoryId =
+                    inventoryId;
+                reservedInventory =
+                    reservation.snapshot.val();
+                break;
+            }
+        }
+        /*
+        ==========================================
+        9. MAKE SURE INVENTORY WAS RESERVED
+        ==========================================
+        */
+        if (
+            !reservedInventoryId ||
+            !reservedInventory
+        ) {
+            return sendJson(
+                res,
+                409,
+                {
+                    success: false,
+                    message:
+                        "This item was just purchased by another customer. Please try again."
+                }
+            );
+        }
+        const reservedItemRef =
+            inventoryRef.child(
+                reservedInventoryId
+            );
+        /*
+        ==========================================
+        10. DEDUCT WALLET SAFELY
+        ==========================================
+        */
+        const walletRef =
+            db.ref(
+                "users/" +
+                uid +
+                "/walletBalance"
+            );
+        const walletTransaction =
+            await walletRef.transaction(
+                (currentBalance) => {
+                    const balance =
+                        Number(
+                            currentBalance
+                        ) || 0;
+                    if (
+                        balance < price
+                    ) {
+                        return;
+                    }
+                    return (
+                        balance - price
+                    );
+                }
+            );
+        /*
+        ==========================================
+        11. CHECK WALLET RESULT
+        ==========================================
+        */
+        if (
+            !walletTransaction.committed
+        ) {
+            /*
+            Release the reserved item.
+            */
+            await reservedItemRef.transaction(
+                (currentItem) => {
+                    if (
+                        !currentItem
+                    ) {
+                        return;
+                    }
+                    if (
+                        currentItem.status ===
+                            "processing" &&
+                        currentItem.processingBy ===
+                            uid
+                    ) {
+                        const restored = {
+                            ...currentItem
+                        };
+                        restored.status =
+                            "available";
+                        delete restored.processingBy;
+                        delete restored.processingAt;
+                        return restored;
+                    }
+                    return;
+                }
+            );
+            const latestWallet =
+                await walletRef.once(
+                    "value"
+                );
+            const latestBalance =
+                Number(
+                    latestWallet.val()
+                ) || 0;
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+                    message:
+                        `Insufficient wallet balance. Your balance is ₦${latestBalance.toLocaleString("en-NG", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })}, but this product costs ₦${price.toLocaleString("en-NG", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })}.`
+                }
+            );
+        }
+        /*
+        ==========================================
+        12. GET NEW WALLET BALANCE
+        ==========================================
+        */
+        const newBalance =
+            Number(
+                walletTransaction
+                    .snapshot
+                    .val()
+            ) || 0;
+        /*
+        ==========================================
+        13. CREATE ORDER
+        ==========================================
+        */
+        const orderRef =
+            db.ref(
+                "orders"
+            ).push();
+        const orderId =
+            orderRef.key;
+        const deliveryDetails =
+            reservedInventory.details !==
+                undefined
+                ? reservedInventory.details
+                : "";
+        const order = {
+            uid:
+                uid,
+            email:
+                email,
+            productId:
+                productId,
+            productName:
+                product.name ||
+                "Unnamed Product",
+            price:
+                price,
+            category:
+                product.category ||
+                "Product",
+            image:
+                product.image ||
+                "",
+            description:
+                product.description ||
+                "",
+            status:
+                "completed",
+            deliveryStatus:
+                "delivered",
+            deliveryDetails:
+                deliveryDetails,
+            inventoryId:
+                reservedInventoryId,
+            createdAt:
+                Date.now()
         };
-      });
-      if (reservation.committed) {
-        reservedInventoryRef = itemRef;
-        reservedInventory = reservation.snapshot.val();
-        break;
-      }
-    }
-    if (!reservedInventoryRef || !reservedInventory) {
-      return res.status(409).json({
-        success: false,
-        message:
-          "That inventory item was just purchased by another customer. Please try again.",
-      });
-    }
-    // ------------------------------------------------
-    // 6. Deduct wallet balance safely
-    // ------------------------------------------------
-    walletRef = db.ref(`users/${uid}/walletBalance`);
-    const walletTransaction = await walletRef.transaction(
-      (currentBalance) => {
-        const balance = Number(currentBalance) || 0;
-        if (balance < price) {
-          return;
+        try {
+            await orderRef.set(
+                order
+            );
         }
-        return balance - price;
-      }
-    );
-    if (!walletTransaction.committed) {
-      // Release inventory because customer could not pay.
-      await reservedInventoryRef.transaction((current) => {
+        catch (orderError) {
+            console.error(
+                "Order creation failed:",
+                orderError
+            );
+            /*
+            ======================================
+            REFUND WALLET
+            ======================================
+            */
+            await walletRef.transaction(
+                (currentBalance) => {
+                    const balance =
+                        Number(
+                            currentBalance
+                        ) || 0;
+                    return (
+                        balance + price
+                    );
+                }
+            );
+            /*
+            ======================================
+            RELEASE INVENTORY
+            ======================================
+            */
+            await reservedItemRef.transaction(
+                (currentItem) => {
+                    if (
+                        !currentItem
+                    ) {
+                        return;
+                    }
+                    if (
+                        currentItem.status ===
+                            "processing" &&
+                        currentItem.processingBy ===
+                            uid
+                    ) {
+                        const restored = {
+                            ...currentItem
+                        };
+                        restored.status =
+                            "available";
+                        delete restored.processingBy;
+                        delete restored.processingAt;
+                        return restored;
+                    }
+                    return;
+                }
+            );
+            return sendJson(
+                res,
+                500,
+                {
+                    success: false,
+                    message:
+                        "Your purchase could not be completed. Your wallet has not been charged."
+                }
+            );
+        }
+        /*
+        ==========================================
+        14. MARK INVENTORY AS SOLD
+        ==========================================
+        */
+        const soldTransaction =
+            await reservedItemRef.transaction(
+                (currentItem) => {
+                    if (
+                        !currentItem
+                    ) {
+                        return;
+                    }
+                    if (
+                        currentItem.status !==
+                            "processing" ||
+                        currentItem.processingBy !==
+                            uid
+                    ) {
+                        return;
+                    }
+                    const soldItem = {
+                        ...currentItem
+                    };
+                    soldItem.status =
+                        "sold";
+                    soldItem.soldTo =
+                        uid;
+                    soldItem.soldOrderId =
+                        orderId;
+                    soldItem.soldAt =
+                        Date.now();
+                    delete soldItem.processingBy;
+                    delete soldItem.processingAt;
+                    return soldItem;
+                }
+            );
+        /*
+        ==========================================
+        15. SAFETY CHECK
+        ==========================================
+        */
         if (
-          current &&
-          current.status === "processing" &&
-          current.processingBy === uid
+            !soldTransaction.committed
         ) {
-          const released = { ...current };
-          released.status = "available";
-          delete released.processingBy;
-          delete released.processingAt;
-          return released;
+            console.error(
+                "Inventory could not be marked sold:",
+                {
+                    productId,
+                    inventoryId:
+                        reservedInventoryId,
+                    orderId,
+                    uid
+                }
+            );
+            /*
+            We do not charge the customer again.
+            The order has already been created.
+            The inventory item remains reserved
+            instead of becoming available to another
+            customer.
+            */
+            return sendJson(
+                res,
+                200,
+                {
+                    success: true,
+                    message:
+                        "Purchase completed successfully.",
+                    orderId:
+                        orderId,
+                    balance:
+                        newBalance,
+                    deliveryDetails:
+                        deliveryDetails
+                }
+            );
         }
-        return current;
-      });
-      const currentWalletSnapshot = await walletRef.once("value");
-      const currentBalance =
-        Number(currentWalletSnapshot.val()) || 0;
-      return res.status(400).json({
-        success: false,
-        message: `Insufficient wallet balance. Your balance is ${currentBalance}. Product price is ${price}.`,
-        balance: currentBalance,
-        price,
-      });
+        /*
+        ==========================================
+        16. SUCCESS
+        ==========================================
+        */
+        console.log(
+            "Purchase completed:",
+            {
+                uid,
+                email,
+                productId,
+                inventoryId:
+                    reservedInventoryId,
+                orderId,
+                price
+            }
+        );
+        return sendJson(
+            res,
+            200,
+            {
+                success: true,
+                message:
+                    "Purchase completed successfully.",
+                orderId:
+                    orderId,
+                balance:
+                    newBalance,
+                deliveryDetails:
+                    deliveryDetails
+            }
+        );
     }
-    // ------------------------------------------------
-    // 7. Create order as processing
-    // ------------------------------------------------
-    orderRef = db.ref("orders").push();
-    const orderId = orderRef.key;
-    const order = {
-      uid,
-      email,
-      productId,
-      productName: product.name || "",
-      price,
-      category: product.category || "",
-      image: product.image || "",
-      description: product.description || "",
-      status: "processing",
-      deliveryStatus: "processing",
-      deliveryDetails:
-        reservedInventory.details ||
-        reservedInventory.deliveryDetails ||
-        "",
-      inventoryId: reservedInventoryRef.key,
-      createdAt: Date.now(),
-    };
-    await orderRef.set(order);
-    // ------------------------------------------------
-    // 8. Mark inventory as sold
-    // ------------------------------------------------
-    const soldTransaction = await reservedInventoryRef.transaction(
-      (current) => {
-        if (!current) {
-          return;
-        }
-        if (
-          current.status !== "processing" ||
-          current.processingBy !== uid
-        ) {
-          return;
-        }
-        const sold = { ...current };
-        sold.status = "sold";
-        sold.soldTo = uid;
-        sold.soldOrderId = orderId;
-        sold.soldAt = Date.now();
-        delete sold.processingBy;
-        delete sold.processingAt;
-        return sold;
-      }
-    );
-    if (!soldTransaction.committed) {
-      throw new Error("Could not finalize inventory item.");
+    catch (error) {
+        console.error(
+            "Purchase API error:",
+            error
+        );
+        return sendJson(
+            res,
+            500,
+            {
+                success: false,
+                message:
+                    "Unable to complete your purchase right now. Please try again."
+            }
+        );
     }
-    // ------------------------------------------------
-    // 9. Complete the order
-    // ------------------------------------------------
-    await orderRef.update({
-      status: "completed",
-      deliveryStatus: "delivered",
-      completedAt: Date.now(),
-    });
-    // ------------------------------------------------
-    // 10. Return purchase result
-    // ------------------------------------------------
-    const finalWalletSnapshot = await walletRef.once("value");
-    const finalBalance =
-      Number(finalWalletSnapshot.val()) || 0;
-    return res.status(200).json({
-      success: true,
-      message: "Purchase successful!",
-      orderId,
-      productId,
-      productName: product.name || "",
-      price,
-      deliveryDetails:
-        reservedInventory.details ||
-        reservedInventory.deliveryDetails ||
-        "",
-      balance: finalBalance,
-    });
-  } catch (error) {
-    console.error("PURCHASE ERROR:", error);
-    // ------------------------------------------------
-    // Roll back if something failed after reservation
-    // ------------------------------------------------
-    try {
-      if (reservedInventoryRef) {
-        await reservedInventoryRef.transaction((current) => {
-          if (
-            current &&
-            current.status === "processing" &&
-            current.processingBy
-          ) {
-            const released = { ...current };
-            released.status = "available";
-            delete released.processingBy;
-            delete released.processingAt;
-            return released;
-          }
-          return current;
-        });
-      }
-    } catch (rollbackError) {
-      console.error(
-        "INVENTORY ROLLBACK ERROR:",
-        rollbackError
-      );
-    }
-    // ------------------------------------------------
-    // Refund wallet if it was charged
-    // ------------------------------------------------
-    try {
-      if (walletRef && chargedAmount > 0) {
-        await walletRef.transaction((currentBalance) => {
-          const balance = Number(currentBalance) || 0;
-          return balance + chargedAmount;
-        });
-      }
-    } catch (refundError) {
-      console.error("WALLET REFUND ERROR:", refundError);
-    }
-    // ------------------------------------------------
-    // Remove incomplete order
-    // ------------------------------------------------
-    try {
-      if (orderRef) {
-        await orderRef.remove();
-      }
-    } catch (orderCleanupError) {
-      console.error(
-        "ORDER CLEANUP ERROR:",
-        orderCleanupError
-      );
-    }
-    return res.status(500).json({
-      success: false,
-      message:
-        "Purchase could not be completed. Your wallet and inventory were protected.",
-    });
-  }
 };
