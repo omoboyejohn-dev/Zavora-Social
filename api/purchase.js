@@ -1,135 +1,137 @@
-const {
-  initializeApp,
-  cert,
-  getApps,
-} = require("firebase-admin/app");
-
+const { initializeApp, cert, getApps } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 const { getDatabase } = require("firebase-admin/database");
-
-// Initialize Firebase Admin only once
+// ----------------------------------------------------
+// Firebase Admin setup
+// ----------------------------------------------------
 if (!getApps().length) {
+  let privateKey = process.env.FIREBASE_PRIVATE_KEY || "";
+  // Vercel may store the \n characters literally.
+  privateKey = privateKey.replace(/\\n/g, "\n");
+  // Remove accidental surrounding quotes if they were pasted.
+  if (
+    privateKey.startsWith('"') &&
+    privateKey.endsWith('"')
+  ) {
+    privateKey = privateKey.slice(1, -1);
+  }
   initializeApp({
     credential: cert({
       projectId: process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      privateKey,
     }),
     databaseURL:
       "https://zavorasocial-default-rtdb.firebaseio.com/",
   });
 }
-
 const db = getDatabase();
-const auth = getAuth();
-
+const adminAuth = getAuth();
+// ----------------------------------------------------
+// API
+// ----------------------------------------------------
 module.exports = async function handler(req, res) {
-  // Only POST is allowed
   if (req.method !== "POST") {
     return res.status(405).json({
       success: false,
       message: "Method not allowed.",
     });
   }
-
   let reservedInventoryRef = null;
   let walletRef = null;
-  let price = 0;
-  let walletDeducted = false;
-
+  let chargedAmount = 0;
+  let orderRef = null;
   try {
-    // --------------------------------------------------
+    // ------------------------------------------------
     // 1. Verify Firebase login
-    // --------------------------------------------------
-
-    const authorization = req.headers.authorization || "";
-
-    if (!authorization.startsWith("Bearer ")) {
+    // ------------------------------------------------
+    const authHeader = req.headers.authorization || "";
+    if (!authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
         message: "You must be logged in.",
       });
     }
-
-    const idToken = authorization.substring(7);
-
-    const decodedToken = await auth.verifyIdToken(idToken);
-
+    const idToken = authHeader.substring(7).trim();
+    if (!idToken) {
+      return res.status(401).json({
+        success: false,
+        message: "Missing authentication token.",
+      });
+    }
+    const decodedToken = await adminAuth.verifyIdToken(idToken);
     const uid = decodedToken.uid;
     const email = decodedToken.email || "";
-
-    // --------------------------------------------------
-    // 2. Get product ID
-    // --------------------------------------------------
-
-    const productId = String(req.body?.productId || "").trim();
-
+    // ------------------------------------------------
+    // 2. Read product ID
+    // ------------------------------------------------
+    const productId = String(
+      req.body && req.body.productId
+        ? req.body.productId
+        : ""
+    ).trim();
     if (!productId) {
       return res.status(400).json({
         success: false,
         message: "Product ID is required.",
       });
     }
-
-    // --------------------------------------------------
-    // 3. Read product from Firebase
-    // --------------------------------------------------
-
+    // ------------------------------------------------
+    // 3. Get product from Firebase
+    // ------------------------------------------------
     const productRef = db.ref(`products/${productId}`);
     const productSnapshot = await productRef.once("value");
-
     if (!productSnapshot.exists()) {
       return res.status(404).json({
         success: false,
         message: "Product not found.",
       });
     }
-
     const product = productSnapshot.val();
-
     if (product.active === false) {
       return res.status(400).json({
         success: false,
         message: "This product is currently unavailable.",
       });
     }
-
-    price = Number(product.price);
-
+    const price = Number(product.price);
     if (!Number.isFinite(price) || price <= 0) {
+      console.error("Invalid product price:", product.price);
       return res.status(500).json({
         success: false,
         message: "This product has an invalid price.",
       });
     }
-
-    // --------------------------------------------------
-    // 4. Find an available inventory item
-    // --------------------------------------------------
-
+    chargedAmount = price;
+    // ------------------------------------------------
+    // 4. Find available inventory
+    // ------------------------------------------------
     const inventoryRef = db.ref(`inventory/${productId}`);
-
     const inventorySnapshot = await inventoryRef
       .orderByChild("status")
       .equalTo("available")
       .limitToFirst(10)
       .once("value");
-
-    const inventoryItems = inventorySnapshot.val() || {};
-
-    let inventoryId = null;
-    let inventoryItem = null;
-
-    // Try several available items in case another
-    // customer purchases one at the same time.
-    for (const [id, item] of Object.entries(inventoryItems)) {
-      const itemRef = inventoryRef.child(id);
-
-      const transaction = await itemRef.transaction((current) => {
-        if (!current || current.status !== "available") {
+    const inventory = inventorySnapshot.val();
+    if (!inventory) {
+      return res.status(409).json({
+        success: false,
+        message: "This product is out of stock.",
+      });
+    }
+    // ------------------------------------------------
+    // 5. Reserve ONE inventory item
+    // ------------------------------------------------
+    let reservedInventory = null;
+    for (const [inventoryId, item] of Object.entries(inventory)) {
+      const itemRef = inventoryRef.child(inventoryId);
+      const reservation = await itemRef.transaction((current) => {
+        if (!current) {
           return;
         }
-
+        if (current.status !== "available") {
+          return;
+        }
         return {
           ...current,
           status: "processing",
@@ -137,213 +139,194 @@ module.exports = async function handler(req, res) {
           processingAt: Date.now(),
         };
       });
-
-      if (transaction.committed) {
-        inventoryId = id;
-        inventoryItem = transaction.snapshot.val();
+      if (reservation.committed) {
         reservedInventoryRef = itemRef;
+        reservedInventory = reservation.snapshot.val();
         break;
       }
     }
-
-    if (!inventoryId || !inventoryItem) {
+    if (!reservedInventoryRef || !reservedInventory) {
       return res.status(409).json({
         success: false,
-        message: "This product is currently out of stock.",
+        message:
+          "That inventory item was just purchased by another customer. Please try again.",
       });
     }
-
-    // --------------------------------------------------
-    // 5. Deduct money from customer's wallet
-    // --------------------------------------------------
-
+    // ------------------------------------------------
+    // 6. Deduct wallet balance safely
+    // ------------------------------------------------
     walletRef = db.ref(`users/${uid}/walletBalance`);
-
-    const walletTransaction = await walletRef.transaction((current) => {
-      const balance = Number(current) || 0;
-
-      if (balance < price) {
-        return;
+    const walletTransaction = await walletRef.transaction(
+      (currentBalance) => {
+        const balance = Number(currentBalance) || 0;
+        if (balance < price) {
+          return;
+        }
+        return balance - price;
       }
-
-      return balance - price;
-    });
-
+    );
     if (!walletTransaction.committed) {
-      // Release the inventory item because payment failed.
+      // Release inventory because customer could not pay.
       await reservedInventoryRef.transaction((current) => {
         if (
           current &&
           current.status === "processing" &&
           current.processingBy === uid
         ) {
-          return {
-            ...current,
-            status: "available",
-            processingBy: null,
-            processingAt: null,
-          };
+          const released = { ...current };
+          released.status = "available";
+          delete released.processingBy;
+          delete released.processingAt;
+          return released;
         }
-
         return current;
       });
-
       const currentWalletSnapshot = await walletRef.once("value");
       const currentBalance =
         Number(currentWalletSnapshot.val()) || 0;
-
       return res.status(400).json({
         success: false,
-        message: `Insufficient wallet balance. Your balance is ₦${currentBalance.toLocaleString()}.`,
+        message: `Insufficient wallet balance. Your balance is ${currentBalance}. Product price is ${price}.`,
         balance: currentBalance,
         price,
       });
     }
-
-    walletDeducted = true;
-
-    // --------------------------------------------------
-    // 6. Create the order
-    // --------------------------------------------------
-
-    const orderRef = db.ref("orders").push();
-
+    // ------------------------------------------------
+    // 7. Create order as processing
+    // ------------------------------------------------
+    orderRef = db.ref("orders").push();
+    const orderId = orderRef.key;
     const order = {
       uid,
       email,
-
       productId,
       productName: product.name || "",
       price,
-
       category: product.category || "",
       image: product.image || "",
       description: product.description || "",
-
-      status: "completed",
-      deliveryStatus: "delivered",
-
-      deliveryDetails: inventoryItem.details || "",
-
-      inventoryId,
-
+      status: "processing",
+      deliveryStatus: "processing",
+      deliveryDetails:
+        reservedInventory.details ||
+        reservedInventory.deliveryDetails ||
+        "",
+      inventoryId: reservedInventoryRef.key,
       createdAt: Date.now(),
     };
-
     await orderRef.set(order);
-
-    // --------------------------------------------------
-    // 7. Mark inventory item as sold
-    // --------------------------------------------------
-
+    // ------------------------------------------------
+    // 8. Mark inventory as sold
+    // ------------------------------------------------
     const soldTransaction = await reservedInventoryRef.transaction(
       (current) => {
+        if (!current) {
+          return;
+        }
         if (
-          !current ||
           current.status !== "processing" ||
           current.processingBy !== uid
         ) {
           return;
         }
-
-        return {
-          ...current,
-
-          status: "sold",
-
-          soldTo: uid,
-          soldEmail: email,
-          soldOrderId: orderRef.key,
-          soldAt: Date.now(),
-
-          processingBy: null,
-          processingAt: null,
-        };
+        const sold = { ...current };
+        sold.status = "sold";
+        sold.soldTo = uid;
+        sold.soldOrderId = orderId;
+        sold.soldAt = Date.now();
+        delete sold.processingBy;
+        delete sold.processingAt;
+        return sold;
       }
     );
-
     if (!soldTransaction.committed) {
-      console.error(
-        "Order created but inventory could not be marked sold:",
-        inventoryId
-      );
+      throw new Error("Could not finalize inventory item.");
     }
-
-    // --------------------------------------------------
-    // 8. Return successful purchase
-    // --------------------------------------------------
-
-    const newBalance =
-      Number(walletTransaction.snapshot.val()) || 0;
-
+    // ------------------------------------------------
+    // 9. Complete the order
+    // ------------------------------------------------
+    await orderRef.update({
+      status: "completed",
+      deliveryStatus: "delivered",
+      completedAt: Date.now(),
+    });
+    // ------------------------------------------------
+    // 10. Return purchase result
+    // ------------------------------------------------
+    const finalWalletSnapshot = await walletRef.once("value");
+    const finalBalance =
+      Number(finalWalletSnapshot.val()) || 0;
     return res.status(200).json({
       success: true,
-
       message: "Purchase successful!",
-
-      orderId: orderRef.key,
-
+      orderId,
       productId,
       productName: product.name || "",
-
       price,
-
-      balance: newBalance,
-
-      inventoryId,
-
-      deliveryDetails: inventoryItem.details || "",
-
-      order: {
-        ...order,
-        orderId: orderRef.key,
-      },
+      deliveryDetails:
+        reservedInventory.details ||
+        reservedInventory.deliveryDetails ||
+        "",
+      balance: finalBalance,
     });
   } catch (error) {
-    console.error("Purchase API error:", error);
-
-    // --------------------------------------------------
-    // Emergency rollback
-    // --------------------------------------------------
-
+    console.error("PURCHASE ERROR:", error);
+    // ------------------------------------------------
+    // Roll back if something failed after reservation
+    // ------------------------------------------------
     try {
-      // Return inventory to available if it was reserved.
       if (reservedInventoryRef) {
         await reservedInventoryRef.transaction((current) => {
           if (
             current &&
-            current.status === "processing"
+            current.status === "processing" &&
+            current.processingBy
           ) {
-            return {
-              ...current,
-              status: "available",
-              processingBy: null,
-              processingAt: null,
-            };
+            const released = { ...current };
+            released.status = "available";
+            delete released.processingBy;
+            delete released.processingAt;
+            return released;
           }
-
           return current;
-        });
-      }
-
-      // Refund wallet if money was already deducted.
-      if (walletDeducted && walletRef && price > 0) {
-        await walletRef.transaction((current) => {
-          const balance = Number(current) || 0;
-          return balance + price;
         });
       }
     } catch (rollbackError) {
       console.error(
-        "Rollback error:",
+        "INVENTORY ROLLBACK ERROR:",
         rollbackError
       );
     }
-
+    // ------------------------------------------------
+    // Refund wallet if it was charged
+    // ------------------------------------------------
+    try {
+      if (walletRef && chargedAmount > 0) {
+        await walletRef.transaction((currentBalance) => {
+          const balance = Number(currentBalance) || 0;
+          return balance + chargedAmount;
+        });
+      }
+    } catch (refundError) {
+      console.error("WALLET REFUND ERROR:", refundError);
+    }
+    // ------------------------------------------------
+    // Remove incomplete order
+    // ------------------------------------------------
+    try {
+      if (orderRef) {
+        await orderRef.remove();
+      }
+    } catch (orderCleanupError) {
+      console.error(
+        "ORDER CLEANUP ERROR:",
+        orderCleanupError
+      );
+    }
     return res.status(500).json({
       success: false,
       message:
-        "Something went wrong while processing your purchase. Please try again.",
+        "Purchase could not be completed. Your wallet and inventory were protected.",
     });
   }
 };
