@@ -47,16 +47,22 @@ if (!getApps().length) {
 }
 
 
-const adminAuth = getAuth();
+const adminAuth =
+    getAuth();
 
-const db = getDatabase();
+const db =
+    getDatabase();
 
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function sendJson(res, status, data) {
+function sendJson(
+    res,
+    status,
+    data
+) {
 
     return res
         .status(status)
@@ -65,9 +71,13 @@ function sendJson(res, status, data) {
 }
 
 
-function formatMoney(amount) {
+function formatMoney(
+    amount
+) {
 
-    return Number(amount || 0).toLocaleString(
+    return Number(
+        amount
+    ).toLocaleString(
         "en-NG",
         {
             minimumFractionDigits: 2,
@@ -79,25 +89,12 @@ function formatMoney(amount) {
 
 
 /* =========================================================
-   INVENTORY CHECK
+   INVENTORY STATUS
 ========================================================= */
 
-/*
-   Purchasable inventory:
-
-   available
-   AVAILABLE
-   Available
-   empty/legacy status
-   any other status
-
-   NOT purchasable:
-
-   sold
-   processing
-*/
-
-function isPurchasable(item) {
+function isPurchasable(
+    item
+) {
 
     if (
         !item ||
@@ -117,6 +114,10 @@ function isPurchasable(item) {
             : "";
 
 
+    /*
+       Never sell an item that is already sold.
+    */
+
     if (
         status === "sold"
     ) {
@@ -125,6 +126,10 @@ function isPurchasable(item) {
 
     }
 
+
+    /*
+       Never sell an item currently being processed.
+    */
 
     if (
         status === "processing"
@@ -135,6 +140,15 @@ function isPurchasable(item) {
     }
 
 
+    /*
+       available
+       AVAILABLE
+       Available
+       empty/legacy status
+
+       are all accepted.
+    */
+
     return true;
 
 }
@@ -144,11 +158,14 @@ function isPurchasable(item) {
    PURCHASE HANDLER
 ========================================================= */
 
-module.exports = async function handler(req, res) {
+module.exports = async function handler(
+    req,
+    res
+) {
 
 
     /* =====================================================
-       METHOD
+       METHOD CHECK
     ===================================================== */
 
     if (
@@ -170,7 +187,7 @@ module.exports = async function handler(req, res) {
 
 
     /* =====================================================
-       ENVIRONMENT
+       ENVIRONMENT CHECK
     ===================================================== */
 
     if (
@@ -180,7 +197,7 @@ module.exports = async function handler(req, res) {
     ) {
 
         console.error(
-            "Firebase environment variables are missing."
+            "Missing Firebase environment variables."
         );
 
         return sendJson(
@@ -209,7 +226,9 @@ module.exports = async function handler(req, res) {
 
 
         if (
-            !authorization.startsWith("Bearer ")
+            !authorization.startsWith(
+                "Bearer "
+            )
         ) {
 
             return sendJson(
@@ -232,7 +251,9 @@ module.exports = async function handler(req, res) {
                 .trim();
 
 
-        if (!idToken) {
+        if (
+            !idToken
+        ) {
 
             return sendJson(
                 res,
@@ -275,7 +296,9 @@ module.exports = async function handler(req, res) {
                 : "";
 
 
-        if (!productId) {
+        if (
+            !productId
+        ) {
 
             return sendJson(
                 res,
@@ -296,7 +319,7 @@ module.exports = async function handler(req, res) {
         );
 
         console.log(
-            "PURCHASE START"
+            "PURCHASE STARTED"
         );
 
         console.log(
@@ -320,7 +343,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           PRODUCT
+           PRODUCT LOOKUP
         ================================================= */
 
         const productRef =
@@ -370,7 +393,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           ACTIVE CHECK
+           PRODUCT ACTIVE
         ================================================= */
 
         if (
@@ -432,7 +455,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           INVENTORY REFERENCE
+           INVENTORY LOOKUP
         ================================================= */
 
         const inventoryRef =
@@ -441,10 +464,6 @@ module.exports = async function handler(req, res) {
                 productId
             );
 
-
-        /* =================================================
-           INVENTORY SNAPSHOT
-        ================================================= */
 
         const inventorySnapshot =
             await inventoryRef.once(
@@ -457,7 +476,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           NO INVENTORY NODE
+           NO INVENTORY AT ALL
         ================================================= */
 
         if (
@@ -466,7 +485,7 @@ module.exports = async function handler(req, res) {
         ) {
 
             console.error(
-                "NO INVENTORY NODE:",
+                "NO INVENTORY FOUND:",
                 productId
             );
 
@@ -513,17 +532,27 @@ module.exports = async function handler(req, res) {
             );
 
 
+        console.log(
+            "TOTAL INVENTORY ITEMS:",
+            inventoryEntries.length
+        );
+
+
         /* =================================================
-           DIAGNOSTIC COUNTS
+           INVENTORY DIAGNOSTICS
         ================================================= */
 
-        let availableCount = 0;
+        let availableCount =
+            0;
 
-        let soldCount = 0;
+        let soldCount =
+            0;
 
-        let processingCount = 0;
+        let processingCount =
+            0;
 
-        let otherCount = 0;
+        let otherCount =
+            0;
 
 
         for (
@@ -553,10 +582,14 @@ module.exports = async function handler(req, res) {
 
 
             console.log(
-                "INVENTORY:",
-                inventoryId,
-                "STATUS:",
-                status || "(empty)"
+                "INVENTORY ITEM:",
+                {
+                    inventoryId:
+                        inventoryId,
+
+                    status:
+                        status || "(empty)"
+                }
             );
 
 
@@ -599,13 +632,10 @@ module.exports = async function handler(req, res) {
         );
 
         console.log(
-            "INVENTORY DIAGNOSTIC"
+            "INVENTORY STATUS SUMMARY"
         );
 
         console.log({
-
-            productId:
-                productId,
 
             total:
                 inventoryEntries.length,
@@ -630,87 +660,150 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           RESERVATION TOKEN
+           RESERVE INVENTORY
         ================================================= */
 
-        const reservationToken =
-            uid +
-            "_" +
-            Date.now() +
-            "_" +
-            Math.random()
-                .toString(36)
-                .substring(2);
+        let reservedInventoryId =
+            null;
+
+        let reservedInventory =
+            null;
 
 
-        /* =================================================
-           ATOMIC INVENTORY RESERVATION
-           
-           IMPORTANT:
-           We now transact on the ENTIRE inventory node.
-
-           This avoids the previous situation where an
-           individual inventory transaction could return
-           committed:false even though the item was
-           available.
-        ================================================= */
-
-        const reservationTransaction =
-            await inventoryRef.transaction(
-                (currentInventory) => {
-
-                    if (
-                        !currentInventory ||
-                        typeof currentInventory !== "object"
-                    ) {
-
-                        return currentInventory;
-
-                    }
+        for (
+            const [
+                inventoryId
+            ]
+            of inventoryEntries
+        ) {
 
 
-                    const updatedInventory =
-                        {
-                            ...currentInventory
-                        };
+            const itemRef =
+                inventoryRef.child(
+                    inventoryId
+                );
 
 
-                    let foundItem = false;
+            /*
+               IMPORTANT:
+
+               Read the exact child first.
+
+               This prevents the transaction from
+               incorrectly receiving null because the
+               child was not locally cached.
+            */
+
+            const itemSnapshot =
+                await itemRef.once(
+                    "value"
+                );
 
 
-                    for (
-                        const [
-                            inventoryId,
-                            inventoryItem
-                        ]
-                        of Object.entries(
-                            currentInventory
-                        )
-                    ) {
+            if (
+                !itemSnapshot.exists()
+            ) {
+
+                continue;
+
+            }
+
+
+            const currentItem =
+                itemSnapshot.val();
+
+
+            console.log(
+                "CHECKING INVENTORY:",
+                {
+                    inventoryId:
+                        inventoryId,
+
+                    status:
+                        currentItem &&
+                        currentItem.status
+                            ? currentItem.status
+                            : "(empty)"
+                }
+            );
+
+
+            if (
+                !isPurchasable(
+                    currentItem
+                )
+            ) {
+
+                continue;
+
+            }
+
+
+            console.log(
+                "TRYING TO RESERVE:",
+                inventoryId
+            );
+
+
+            /*
+               Transaction is now performed against
+               an exact item that we just read.
+            */
+
+            const transactionResult =
+                await itemRef.transaction(
+                    (
+                        currentValue
+                    ) => {
+
+
+                        /*
+                           If another process removed
+                           the item, abort.
+                        */
 
                         if (
-                            foundItem
+                            currentValue === null ||
+                            currentValue === undefined
                         ) {
 
-                            break;
+                            return;
 
                         }
 
+
+                        if (
+                            typeof currentValue !==
+                            "object"
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Check status again inside
+                           the transaction.
+
+                           This protects against two
+                           customers buying the same item.
+                        */
 
                         if (
                             !isPurchasable(
-                                inventoryItem
+                                currentValue
                             )
                         ) {
 
-                            continue;
+                            return;
 
                         }
 
 
-                        updatedInventory[inventoryId] = {
+                        return {
 
-                            ...inventoryItem,
+                            ...currentValue,
 
                             status:
                                 "processing",
@@ -718,101 +811,42 @@ module.exports = async function handler(req, res) {
                             processingBy:
                                 uid,
 
-                            processingToken:
-                                reservationToken,
-
                             processingAt:
                                 Date.now()
 
                         };
 
-
-                        foundItem = true;
-
                     }
+                );
 
 
-                    /*
-                       IMPORTANT:
-                       We always return an object.
+            console.log(
+                "RESERVATION RESULT:",
+                {
+                    inventoryId:
+                        inventoryId,
 
-                       We do NOT return undefined when no item
-                       is found.
-
-                       This makes the transaction complete
-                       normally and lets us inspect the final
-                       snapshot afterwards.
-                    */
-
-                    return updatedInventory;
-
+                    committed:
+                        transactionResult.committed
                 }
             );
 
 
-        console.log(
-            "INVENTORY TRANSACTION:",
-            {
-                committed:
-                    reservationTransaction.committed
-            }
-        );
-
-
-        /* =================================================
-           FIND OUR RESERVED ITEM
-        ================================================= */
-
-        let reservedInventoryId =
-            null;
-
-
-        let reservedInventory =
-            null;
-
-
-        if (
-            reservationTransaction.committed
-        ) {
-
-            const reservedInventorySnapshot =
-                reservationTransaction
-                    .snapshot
-                    .val();
-
-
             if (
-                reservedInventorySnapshot &&
-                typeof reservedInventorySnapshot === "object"
+                transactionResult.committed
             ) {
 
-                for (
-                    const [
-                        inventoryId,
-                        inventoryItem
-                    ]
-                    of Object.entries(
-                        reservedInventorySnapshot
-                    )
-                ) {
+                reservedInventoryId =
+                    inventoryId;
 
-                    if (
-                        inventoryItem &&
-                        inventoryItem.processingToken ===
-                            reservationToken
-                    ) {
 
-                        reservedInventoryId =
-                            inventoryId;
+                reservedInventory =
+                    transactionResult
+                        .snapshot
+                        .val();
 
-                        reservedInventory =
-                            inventoryItem;
 
-                        break;
-
-                    }
-
-                }
+                break;
 
             }
 
@@ -820,7 +854,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           NO INVENTORY
+           RESERVATION FAILED
         ================================================= */
 
         if (
@@ -829,7 +863,27 @@ module.exports = async function handler(req, res) {
         ) {
 
             console.error(
-                "RESERVATION FAILED."
+                "NO PURCHASABLE INVENTORY.",
+                {
+                    productId:
+                        productId,
+
+                    total:
+                        inventoryEntries.length,
+
+                    available:
+                        availableCount,
+
+                    sold:
+                        soldCount,
+
+                    processing:
+                        processingCount,
+
+                    other:
+                        otherCount
+
+                }
             );
 
 
@@ -879,7 +933,7 @@ module.exports = async function handler(req, res) {
         );
 
         console.log(
-            "INVENTORY ID:",
+            "Inventory ID:",
             reservedInventoryId
         );
 
@@ -906,20 +960,330 @@ module.exports = async function handler(req, res) {
             );
 
 
+        /*
+           IMPORTANT:
+
+           Read the exact wallet location first.
+
+           This prevents the transaction from treating
+           an uncached existing wallet as null/₦0.
+        */
+
+        const walletSnapshot =
+            await walletRef.once(
+                "value"
+            );
+
+
+        if (
+            !walletSnapshot.exists()
+        ) {
+
+            console.error(
+                "WALLET BALANCE DOES NOT EXIST:",
+                uid
+            );
+
+
+            /*
+               Restore inventory because purchase
+               cannot continue.
+            */
+
+            await reservedItemRef.transaction(
+                (
+                    currentItem
+                ) => {
+
+                    if (
+                        !currentItem ||
+                        typeof currentItem !== "object"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        currentItem.status ===
+                            "processing" &&
+
+                        currentItem.processingBy ===
+                            uid
+                    ) {
+
+                        const restored = {
+                            ...currentItem
+                        };
+
+
+                        restored.status =
+                            "available";
+
+
+                        delete restored.processingBy;
+
+                        delete restored.processingAt;
+
+
+                        return restored;
+
+                    }
+
+
+                    return;
+
+                }
+            );
+
+
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+
+                    message:
+                        "Your wallet balance could not be found."
+                }
+            );
+
+        }
+
+
+        const initialWalletBalance =
+            Number(
+                walletSnapshot.val()
+            );
+
+
+        console.log(
+            "WALLET READ BEFORE TRANSACTION:",
+            initialWalletBalance
+        );
+
+
+        if (
+            !Number.isFinite(
+                initialWalletBalance
+            )
+        ) {
+
+            console.error(
+                "INVALID WALLET BALANCE:",
+                walletSnapshot.val()
+            );
+
+
+            await reservedItemRef.transaction(
+                (
+                    currentItem
+                ) => {
+
+                    if (
+                        !currentItem ||
+                        typeof currentItem !== "object"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        currentItem.status ===
+                            "processing" &&
+
+                        currentItem.processingBy ===
+                            uid
+                    ) {
+
+                        const restored = {
+                            ...currentItem
+                        };
+
+
+                        restored.status =
+                            "available";
+
+
+                        delete restored.processingBy;
+
+                        delete restored.processingAt;
+
+
+                        return restored;
+
+                    }
+
+
+                    return;
+
+                }
+            );
+
+
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+
+                    message:
+                        "Your wallet balance is invalid."
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           CHECK BALANCE BEFORE TRANSACTION
+        ================================================= */
+
+        if (
+            initialWalletBalance < price
+        ) {
+
+            console.log(
+                "INSUFFICIENT WALLET BALANCE:",
+                {
+                    balance:
+                        initialWalletBalance,
+
+                    price:
+                        price
+                }
+            );
+
+
+            /*
+               Restore inventory.
+            */
+
+            await reservedItemRef.transaction(
+                (
+                    currentItem
+                ) => {
+
+                    if (
+                        !currentItem ||
+                        typeof currentItem !== "object"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        currentItem.status ===
+                            "processing" &&
+
+                        currentItem.processingBy ===
+                            uid
+                    ) {
+
+                        const restored = {
+                            ...currentItem
+                        };
+
+
+                        restored.status =
+                            "available";
+
+
+                        delete restored.processingBy;
+
+                        delete restored.processingAt;
+
+
+                        return restored;
+
+                    }
+
+
+                    return;
+
+                }
+            );
+
+
+            return sendJson(
+                res,
+                400,
+                {
+                    success: false,
+
+                    message:
+                        `Insufficient wallet balance. Your balance is ₦${formatMoney(initialWalletBalance)}, but this product costs ₦${formatMoney(price)}.`
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           DEDUCT WALLET
+        ================================================= */
+
+        console.log(
+            "ATTEMPTING WALLET TRANSACTION:",
+            {
+                currentBalance:
+                    initialWalletBalance,
+
+                price:
+                    price,
+
+                newBalance:
+                    initialWalletBalance - price
+
+            }
+        );
+
+
         const walletTransaction =
             await walletRef.transaction(
-                (currentBalance) => {
+                (
+                    currentBalance
+                ) => {
+
+
+                    /*
+                       Do NOT treat null as ₦0.
+
+                       If Firebase gives us null here,
+                       abort this attempt rather than
+                       accidentally writing a wrong balance.
+                    */
+
+                    if (
+                        currentBalance === null ||
+                        currentBalance === undefined
+                    ) {
+
+                        return;
+
+                    }
+
 
                     const balance =
                         Number(
                             currentBalance
-                        ) || 0;
+                        );
 
 
-                    console.log(
-                        "CURRENT WALLET:",
-                        balance
-                    );
+                    if (
+                        !Number.isFinite(
+                            balance
+                        )
+                    ) {
+
+                        return;
+
+                    }
 
 
                     if (
@@ -939,71 +1303,32 @@ module.exports = async function handler(req, res) {
             );
 
 
+        console.log(
+            "WALLET TRANSACTION RESULT:",
+            {
+                committed:
+                    walletTransaction.committed,
+
+                balance:
+                    walletTransaction
+                        .snapshot
+                        .val()
+            }
+        );
+
+
         /* =================================================
-           INSUFFICIENT WALLET
+           WALLET TRANSACTION FAILED
         ================================================= */
 
         if (
             !walletTransaction.committed
         ) {
 
-            console.log(
-                "INSUFFICIENT WALLET."
-            );
-
 
             /*
-               Restore inventory.
+               Read the real current balance again.
             */
-
-            await reservedItemRef.transaction(
-                (currentItem) => {
-
-                    if (
-                        !currentItem ||
-                        typeof currentItem !== "object"
-                    ) {
-
-                        return currentItem;
-
-                    }
-
-
-                    if (
-                        currentItem.status ===
-                            "processing" &&
-
-                        currentItem.processingToken ===
-                            reservationToken
-                    ) {
-
-                        const restoredItem =
-                            {
-                                ...currentItem
-                            };
-
-
-                        restoredItem.status =
-                            "available";
-
-
-                        delete restoredItem.processingBy;
-
-                        delete restoredItem.processingToken;
-
-                        delete restoredItem.processingAt;
-
-
-                        return restoredItem;
-
-                    }
-
-
-                    return currentItem;
-
-                }
-            );
-
 
             const latestWalletSnapshot =
                 await walletRef.once(
@@ -1014,7 +1339,98 @@ module.exports = async function handler(req, res) {
             const latestBalance =
                 Number(
                     latestWalletSnapshot.val()
-                ) || 0;
+                );
+
+
+            console.error(
+                "WALLET TRANSACTION DID NOT COMMIT:",
+                {
+                    latestBalance:
+                        latestBalance,
+
+                    price:
+                        price
+                }
+            );
+
+
+            /*
+               Restore inventory.
+            */
+
+            await reservedItemRef.transaction(
+                (
+                    currentItem
+                ) => {
+
+                    if (
+                        !currentItem ||
+                        typeof currentItem !== "object"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        currentItem.status ===
+                            "processing" &&
+
+                        currentItem.processingBy ===
+                            uid
+                    ) {
+
+                        const restored = {
+                            ...currentItem
+                        };
+
+
+                        restored.status =
+                            "available";
+
+
+                        delete restored.processingBy;
+
+                        delete restored.processingAt;
+
+
+                        return restored;
+
+                    }
+
+
+                    return;
+
+                }
+            );
+
+
+            /*
+               If the latest balance really is enough,
+               this was a transaction problem rather
+               than an insufficient-balance problem.
+            */
+
+            if (
+                Number.isFinite(
+                    latestBalance
+                ) &&
+                latestBalance >= price
+            ) {
+
+                return sendJson(
+                    res,
+                    500,
+                    {
+                        success: false,
+
+                        message:
+                            "The wallet transaction could not be completed. Your wallet was not charged. Please try again."
+                    }
+                );
+
+            }
 
 
             return sendJson(
@@ -1024,29 +1440,38 @@ module.exports = async function handler(req, res) {
                     success: false,
 
                     message:
-                        `Insufficient wallet balance. Your balance is ₦${formatMoney(latestBalance)}, but this product costs ₦${formatMoney(price)}.`
+                        `Insufficient wallet balance. Your balance is ₦${formatMoney(latestBalance || 0)}, but this product costs ₦${formatMoney(price)}.`
                 }
             );
 
         }
 
 
+        /* =================================================
+           NEW BALANCE
+        ================================================= */
+
         const newBalance =
             Number(
                 walletTransaction
                     .snapshot
                     .val()
-            ) || 0;
+            );
 
 
         console.log(
-            "WALLET DEDUCTED:",
-            price
-        );
+            "WALLET SUCCESS:",
+            {
+                oldBalance:
+                    initialWalletBalance,
 
-        console.log(
-            "NEW BALANCE:",
-            newBalance
+                price:
+                    price,
+
+                newBalance:
+                    newBalance
+
+            }
         );
 
 
@@ -1055,8 +1480,7 @@ module.exports = async function handler(req, res) {
         ================================================= */
 
         const deliveryDetails =
-            reservedInventory.details !==
-                undefined
+            reservedInventory.details !== undefined
                 ? String(
                     reservedInventory.details
                 )
@@ -1072,7 +1496,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           ORDER ID
+           CREATE ORDER
         ================================================= */
 
         const orderRef =
@@ -1084,10 +1508,6 @@ module.exports = async function handler(req, res) {
         const orderId =
             orderRef.key;
 
-
-        /* =================================================
-           ORDER DATA
-        ================================================= */
 
         const order = {
 
@@ -1164,12 +1584,35 @@ module.exports = async function handler(req, res) {
             */
 
             await walletRef.transaction(
-                (currentBalance) => {
+                (
+                    currentBalance
+                ) => {
+
+                    if (
+                        currentBalance === null ||
+                        currentBalance === undefined
+                    ) {
+
+                        return;
+
+                    }
+
 
                     const balance =
                         Number(
                             currentBalance
-                        ) || 0;
+                        );
+
+
+                    if (
+                        !Number.isFinite(
+                            balance
+                        )
+                    ) {
+
+                        return;
+
+                    }
 
 
                     return (
@@ -1185,14 +1628,16 @@ module.exports = async function handler(req, res) {
             */
 
             await reservedItemRef.transaction(
-                (currentItem) => {
+                (
+                    currentItem
+                ) => {
 
                     if (
                         !currentItem ||
                         typeof currentItem !== "object"
                     ) {
 
-                        return currentItem;
+                        return;
 
                     }
 
@@ -1201,33 +1646,30 @@ module.exports = async function handler(req, res) {
                         currentItem.status ===
                             "processing" &&
 
-                        currentItem.processingToken ===
-                            reservationToken
+                        currentItem.processingBy ===
+                            uid
                     ) {
 
-                        const restoredItem =
-                            {
-                                ...currentItem
-                            };
+                        const restored = {
+                            ...currentItem
+                        };
 
 
-                        restoredItem.status =
+                        restored.status =
                             "available";
 
 
-                        delete restoredItem.processingBy;
+                        delete restored.processingBy;
 
-                        delete restoredItem.processingToken;
-
-                        delete restoredItem.processingAt;
+                        delete restored.processingAt;
 
 
-                        return restoredItem;
+                        return restored;
 
                     }
 
 
-                    return currentItem;
+                    return;
 
                 }
             );
@@ -1240,7 +1682,7 @@ module.exports = async function handler(req, res) {
                     success: false,
 
                     message:
-                        "Your purchase could not be completed. Your wallet has not been charged."
+                        "Your purchase could not be completed. Your wallet has been restored."
                 }
             );
 
@@ -1259,73 +1701,68 @@ module.exports = async function handler(req, res) {
 
         const soldTransaction =
             await reservedItemRef.transaction(
-                (currentItem) => {
+                (
+                    currentItem
+                ) => {
+
 
                     if (
-                        !currentItem ||
-                        typeof currentItem !== "object"
+                        currentItem === null ||
+                        currentItem === undefined
                     ) {
 
-                        return currentItem;
+                        return;
 
                     }
 
 
-                    /*
-                       Only the purchase that reserved
-                       this item can mark it sold.
-                    */
+                    if (
+                        typeof currentItem !==
+                        "object"
+                    ) {
+
+                        return;
+
+                    }
+
 
                     if (
                         currentItem.status !==
-                            "processing"
+                        "processing"
                     ) {
 
-                        return currentItem;
+                        return;
 
                     }
 
 
                     if (
-                        currentItem.processingToken !==
-                            reservationToken
+                        currentItem.processingBy !==
+                        uid
                     ) {
 
-                        return currentItem;
+                        return;
 
                     }
 
 
-                    const soldItem =
-                        {
-                            ...currentItem
-                        };
+                    return {
 
+                        ...currentItem,
 
-                    soldItem.status =
-                        "sold";
+                        status:
+                            "sold",
 
+                        soldTo:
+                            uid,
 
-                    soldItem.soldTo =
-                        uid;
+                        soldOrderId:
+                            orderId,
 
+                        soldAt:
+                            Date.now()
 
-                    soldItem.soldOrderId =
-                        orderId;
-
-
-                    soldItem.soldAt =
-                        Date.now();
-
-
-                    delete soldItem.processingBy;
-
-                    delete soldItem.processingToken;
-
-                    delete soldItem.processingAt;
-
-
-                    return soldItem;
+                    };
 
                 }
             );
@@ -1335,13 +1772,17 @@ module.exports = async function handler(req, res) {
             "SOLD TRANSACTION:",
             {
                 committed:
-                    soldTransaction.committed
+                    soldTransaction.committed,
+
+                inventoryId:
+                    reservedInventoryId
+
             }
         );
 
 
         /* =================================================
-           FINAL SUCCESS
+           SOLD CHECK
         ================================================= */
 
         if (
@@ -1349,7 +1790,7 @@ module.exports = async function handler(req, res) {
         ) {
 
             console.error(
-                "WARNING: ORDER CREATED BUT INVENTORY COULD NOT BE MARKED SOLD.",
+                "ORDER CREATED BUT INVENTORY COULD NOT BE MARKED SOLD.",
                 {
                     productId:
                         productId,
@@ -1358,10 +1799,20 @@ module.exports = async function handler(req, res) {
                         reservedInventoryId,
 
                     orderId:
-                        orderId
+                        orderId,
+
+                    uid:
+                        uid
+
                 }
             );
 
+
+            /*
+               Do not charge again.
+
+               The purchase/order already exists.
+            */
 
             return sendJson(
                 res,
@@ -1381,7 +1832,6 @@ module.exports = async function handler(req, res) {
 
                     deliveryDetails:
                         deliveryDetails
-
                 }
             );
 
@@ -1389,7 +1839,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           PURCHASE COMPLETED
+           FINAL SUCCESS
         ================================================= */
 
         console.log(
@@ -1419,6 +1869,9 @@ module.exports = async function handler(req, res) {
 
             price:
                 price,
+
+            oldBalance:
+                initialWalletBalance,
 
             newBalance:
                 newBalance
@@ -1473,12 +1926,15 @@ module.exports = async function handler(req, res) {
         );
 
         console.error(
-            error
+            "MESSAGE:",
+            error &&
+            error.message
         );
 
         console.error(
-            "ERROR MESSAGE:",
-            error.message
+            "STACK:",
+            error &&
+            error.stack
         );
 
         console.error(
@@ -1490,8 +1946,7 @@ module.exports = async function handler(req, res) {
             res,
             500,
             {
-                success:
-                    false,
+                success: false,
 
                 message:
                     "Unable to complete your purchase right now. Please try again."
