@@ -477,16 +477,11 @@ import {
 import {
     getDatabase,
     ref,
-    get
+    get,
+    push,
+    set
 } from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
-
-
-import {
-    getFunctions,
-    httpsCallable
-} from
-"https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js";
 
 
 const firebaseConfig = {
@@ -528,38 +523,6 @@ const auth =
 
 const db =
     getDatabase(app);
-
-
-/*
-============================================
-FIREBASE CLOUD FUNCTIONS
-============================================
-
-Your function is:
-
-purchaseProduct
-
-and your backend uses:
-
-region: "us-central1"
-
-So we explicitly connect to
-us-central1 here.
-============================================
-*/
-
-const functions =
-    getFunctions(
-        app,
-        "us-central1"
-    );
-
-
-const purchaseProduct =
-    httpsCallable(
-        functions,
-        "purchaseProduct"
-    );
 
 
 const loading =
@@ -861,6 +824,21 @@ async function loadWallet(){
 }
 
 
+/*
+============================================
+CREATE PURCHASE REQUEST
+============================================
+
+The customer does NOT directly deduct
+money from the wallet.
+
+Instead, a purchase request is created.
+
+The admin will review the request and
+complete the purchase.
+============================================
+*/
+
 buyButton.addEventListener(
     "click",
     async () => {
@@ -905,68 +883,155 @@ buyButton.addEventListener(
         }
 
 
+        /*
+        ====================================
+        CHECK CUSTOMER WALLET
+        ====================================
+        */
+
+        let balance = 0;
+
+
+        try{
+
+            const walletRef =
+                ref(
+                    db,
+                    "users/" +
+                    currentUser.uid +
+                    "/walletBalance"
+                );
+
+
+            const walletSnapshot =
+                await get(walletRef);
+
+
+            balance =
+                Number(
+                    walletSnapshot.val()
+                ) || 0;
+
+        }
+        catch(error){
+
+            console.error(
+                "Wallet check error:",
+                error
+            );
+
+            showMessage(
+                "Purchase Failed",
+                "Unable to check your wallet balance. Please try again."
+            );
+
+            return;
+
+        }
+
+
+        /*
+        ====================================
+        CHECK BALANCE
+        ====================================
+        */
+
+        if(balance < price){
+
+            showMessage(
+                "Insufficient Balance",
+                "Your wallet balance is " +
+                money(balance) +
+                ". You need " +
+                money(price) +
+                " to purchase this product."
+            );
+
+            return;
+
+        }
+
+
+        /*
+        ====================================
+        DISABLE BUTTON
+        ====================================
+        */
+
         buyButton.disabled =
             true;
 
         buyButton.textContent =
-            "Processing...";
+            "Sending Request...";
 
 
         try{
 
             /*
             ====================================
-            CALL FIREBASE CLOUD FUNCTION
-            ====================================
-
-            The backend function is:
-
-            purchaseProduct
-
-            We only send productId.
-
-            Firebase automatically sends
-            the logged-in customer's auth.
+            PURCHASE REQUEST DATA
             ====================================
             */
 
-            const result =
-                await purchaseProduct({
-
-                    productId:
-                        currentProduct.id
-
-                });
-
-
-            const data =
-                result.data || {};
-
-
-            if(data.success !== true){
-
-                throw new Error(
-                    data.message ||
-                    "Purchase could not be completed."
+            const requestRef =
+                push(
+                    ref(
+                        db,
+                        "purchaseRequests"
+                    )
                 );
 
-            }
+
+            const purchaseRequest = {
+
+                uid:
+                    currentUser.uid,
+
+                email:
+                    currentUser.email ||
+                    "",
+
+                productId:
+                    currentProduct.id,
+
+                productName:
+                    currentProduct.name ||
+                    "Unnamed Product",
+
+                price:
+                    price,
+
+                category:
+                    currentProduct.category ||
+                    "Product",
+
+                image:
+                    currentProduct.image ||
+                    "",
+
+                description:
+                    currentProduct.description ||
+                    "",
+
+                status:
+                    "pending",
+
+                createdAt:
+                    Date.now()
+
+            };
 
 
             /*
             ====================================
-            REFRESH WALLET
+            SAVE REQUEST
             ====================================
             */
 
-            await loadWallet();
-
-
-            buyButton.disabled =
-                false;
-
-            buyButton.textContent =
-                "Buy Now";
+            await set(
+                requestRef,
+                purchaseRequest
+            );
 
 
             /*
@@ -975,9 +1040,16 @@ buyButton.addEventListener(
             ====================================
             */
 
+            buyButton.disabled =
+                false;
+
+            buyButton.textContent =
+                "Buy Now";
+
+
             showMessage(
-                "Purchase Successful",
-                "Your purchase was completed successfully. Your item has been delivered to your Orders page.",
+                "Purchase Request Sent",
+                "Your purchase request has been sent successfully. Please wait while your order is processed.",
                 true
             );
 
@@ -999,7 +1071,7 @@ buyButton.addEventListener(
         catch(error){
 
             console.error(
-                "Purchase error:",
+                "Purchase request error:",
                 error
             );
 
@@ -1012,14 +1084,8 @@ buyButton.addEventListener(
 
 
             let message =
-                "Unable to complete your purchase. Please try again.";
+                "Unable to send your purchase request. Please try again.";
 
-
-            /*
-            ====================================
-            FIREBASE ERROR MESSAGES
-            ====================================
-            */
 
             if(
                 error &&
@@ -1032,36 +1098,12 @@ buyButton.addEventListener(
             }
 
 
-            /*
-            Remove ugly Firebase
-            technical prefixes where possible.
-            */
-
-            message =
-                message.replace(
-                    /^FirebaseError:\s*/i,
-                    ""
-                );
-
-
             showMessage(
                 "Purchase Failed",
                 message
             );
 
         }
-
-    }
-);
-
-
-modalButton.addEventListener(
-    "click",
-    () => {
-
-        messageModal.classList.remove(
-            "show"
-        );
 
     }
 );
@@ -1086,6 +1128,18 @@ onAuthStateChanged(
 
 
         await loadProduct();
+
+    }
+);
+
+
+modalButton.addEventListener(
+    "click",
+    () => {
+
+        messageModal.classList.remove(
+            "show"
+        );
 
     }
 );
