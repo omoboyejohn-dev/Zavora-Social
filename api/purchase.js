@@ -77,24 +77,27 @@ function formatMoney(amount) {
 }
 
 
+/* =========================================================
+   INVENTORY CHECK
+========================================================= */
+
 /*
- * IMPORTANT
- *
- * Your admin inventory page creates:
- *
- * status: "available"
- *
- * But this function is intentionally more tolerant.
- *
- * Anything that is NOT:
- *
- * sold
- * processing
- *
- * can be treated as available.
- *
- * This helps older inventory records too.
- */
+   Your admin inventory page creates:
+
+   status: "available"
+
+   This function accepts:
+
+   available
+   AVAILABLE
+   Available
+   empty/legacy status
+
+   It rejects only:
+
+   sold
+   processing
+*/
 
 function isPurchasable(item) {
 
@@ -117,9 +120,8 @@ function isPurchasable(item) {
 
 
     /*
-     * Never sell an item that has already
-     * been sold.
-     */
+       Never sell an item already sold.
+    */
 
     if (
         status === "sold"
@@ -131,9 +133,9 @@ function isPurchasable(item) {
 
 
     /*
-     * Never sell an item currently being
-     * processed by another purchase.
-     */
+       Never sell an item currently being
+       processed by another purchase.
+    */
 
     if (
         status === "processing"
@@ -145,17 +147,13 @@ function isPurchasable(item) {
 
 
     /*
-     * Everything else is treated as
-     * purchasable.
-     *
-     * This includes:
-     *
-     * available
-     * AVAILABLE
-     * Available
-     * empty/legacy status
-     * old inventory formats
-     */
+       Any other status is considered
+       purchasable.
+
+       This allows older inventory records
+       that may have an empty or unexpected
+       status.
+    */
 
     return true;
 
@@ -170,7 +168,7 @@ module.exports = async function handler(req, res) {
 
 
     /* =====================================================
-       METHOD
+       METHOD CHECK
     ===================================================== */
 
     if (
@@ -182,6 +180,7 @@ module.exports = async function handler(req, res) {
             405,
             {
                 success: false,
+
                 message:
                     "Method not allowed."
             }
@@ -191,7 +190,7 @@ module.exports = async function handler(req, res) {
 
 
     /* =====================================================
-       ENVIRONMENT VARIABLES
+       ENVIRONMENT CHECK
     ===================================================== */
 
     if (
@@ -209,6 +208,7 @@ module.exports = async function handler(req, res) {
             500,
             {
                 success: false,
+
                 message:
                     "Purchase server is not configured correctly."
             }
@@ -229,9 +229,7 @@ module.exports = async function handler(req, res) {
 
 
         if (
-            !authorization.startsWith(
-                "Bearer "
-            )
+            !authorization.startsWith("Bearer ")
         ) {
 
             return sendJson(
@@ -239,6 +237,7 @@ module.exports = async function handler(req, res) {
                 401,
                 {
                     success: false,
+
                     message:
                         "You must be logged in to make a purchase."
                 }
@@ -260,6 +259,7 @@ module.exports = async function handler(req, res) {
                 401,
                 {
                     success: false,
+
                     message:
                         "Authentication token is missing."
                 }
@@ -302,6 +302,7 @@ module.exports = async function handler(req, res) {
                 400,
                 {
                     success: false,
+
                     message:
                         "Product ID is required."
                 }
@@ -344,15 +345,12 @@ module.exports = async function handler(req, res) {
 
         const productRef =
             db.ref(
-                "products/" +
-                productId
+                "products/" + productId
             );
 
 
         const productSnapshot =
-            await productRef.once(
-                "value"
-            );
+            await productRef.once("value");
 
 
         if (
@@ -369,6 +367,7 @@ module.exports = async function handler(req, res) {
                 404,
                 {
                     success: false,
+
                     message:
                         "Product not found."
                 }
@@ -388,7 +387,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           PRODUCT ACTIVE
+           PRODUCT ACTIVE CHECK
         ================================================= */
 
         if (
@@ -400,6 +399,7 @@ module.exports = async function handler(req, res) {
                 400,
                 {
                     success: false,
+
                     message:
                         "This product is currently unavailable."
                 }
@@ -413,9 +413,7 @@ module.exports = async function handler(req, res) {
         ================================================= */
 
         const price =
-            Number(
-                product.price
-            );
+            Number(product.price);
 
 
         if (
@@ -425,11 +423,7 @@ module.exports = async function handler(req, res) {
 
             console.error(
                 "INVALID PRODUCT PRICE:",
-                {
-                    productId,
-                    price:
-                        product.price
-                }
+                product.price
             );
 
             return sendJson(
@@ -437,6 +431,7 @@ module.exports = async function handler(req, res) {
                 400,
                 {
                     success: false,
+
                     message:
                         "This product has an invalid price."
                 }
@@ -452,20 +447,17 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           INVENTORY PATH
+           GET INVENTORY
         ================================================= */
 
         const inventoryRef =
             db.ref(
-                "inventory/" +
-                productId
+                "inventory/" + productId
             );
 
 
         const inventorySnapshot =
-            await inventoryRef.once(
-                "value"
-            );
+            await inventoryRef.once("value");
 
 
         const inventory =
@@ -473,7 +465,7 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           INVENTORY EXISTS
+           INVENTORY EXISTENCE
         ================================================= */
 
         if (
@@ -491,8 +483,32 @@ module.exports = async function handler(req, res) {
                 409,
                 {
                     success: false,
+
                     message:
-                        "This product has no inventory items."
+                        "This product has no inventory items.",
+
+                    debug: {
+
+                        productId:
+                            productId,
+
+                        total:
+                            0,
+
+                        available:
+                            0,
+
+                        sold:
+                            0,
+
+                        processing:
+                            0,
+
+                        other:
+                            0
+
+                    }
+
                 }
             );
 
@@ -500,9 +516,7 @@ module.exports = async function handler(req, res) {
 
 
         const inventoryEntries =
-            Object.entries(
-                inventory
-            );
+            Object.entries(inventory);
 
 
         console.log(
@@ -512,12 +526,15 @@ module.exports = async function handler(req, res) {
 
 
         /* =================================================
-           COUNT STATUSES
+           INVENTORY DIAGNOSTIC COUNT
         ================================================= */
 
         let availableCount = 0;
+
         let soldCount = 0;
+
         let processingCount = 0;
+
         let otherCount = 0;
 
 
@@ -550,7 +567,9 @@ module.exports = async function handler(req, res) {
             console.log(
                 "INVENTORY ITEM:",
                 {
-                    inventoryId,
+                    inventoryId:
+                        inventoryId,
+
                     status:
                         status || "(empty)"
                 }
@@ -564,6 +583,7 @@ module.exports = async function handler(req, res) {
                 soldCount++;
 
             }
+
             else if (
                 status === "processing"
             ) {
@@ -571,6 +591,7 @@ module.exports = async function handler(req, res) {
                 processingCount++;
 
             }
+
             else if (
                 status === "available" ||
                 status === ""
@@ -579,6 +600,7 @@ module.exports = async function handler(req, res) {
                 availableCount++;
 
             }
+
             else {
 
                 otherCount++;
@@ -589,23 +611,34 @@ module.exports = async function handler(req, res) {
 
 
         console.log(
-            "INVENTORY STATUS SUMMARY:",
-            {
-                total:
-                    inventoryEntries.length,
+            "========================================"
+        );
 
-                available:
-                    availableCount,
+        console.log(
+            "INVENTORY STATUS SUMMARY"
+        );
 
-                sold:
-                    soldCount,
+        console.log({
 
-                processing:
-                    processingCount,
+            total:
+                inventoryEntries.length,
 
-                other:
-                    otherCount
-            }
+            available:
+                availableCount,
+
+            sold:
+                soldCount,
+
+            processing:
+                processingCount,
+
+            other:
+                otherCount
+
+        });
+
+        console.log(
+            "========================================"
         );
 
 
@@ -658,6 +691,11 @@ module.exports = async function handler(req, res) {
                     (currentItem) => {
 
 
+                        /*
+                           If item disappeared,
+                           cancel transaction.
+                        */
+
                         if (
                             !currentItem ||
                             typeof currentItem !== "object"
@@ -669,9 +707,11 @@ module.exports = async function handler(req, res) {
 
 
                         /*
-                         * Re-check inside the
-                         * transaction.
-                         */
+                           Check again inside the
+                           transaction to prevent
+                           two customers from getting
+                           the same item.
+                        */
 
                         if (
                             !isPurchasable(
@@ -706,7 +746,9 @@ module.exports = async function handler(req, res) {
             console.log(
                 "RESERVATION RESULT:",
                 {
-                    inventoryId,
+                    inventoryId:
+                        inventoryId,
+
                     committed:
                         transactionResult.committed
                 }
@@ -744,24 +786,7 @@ module.exports = async function handler(req, res) {
         ) {
 
             console.error(
-                "NO PURCHASABLE INVENTORY.",
-                {
-                    productId,
-                    total:
-                        inventoryEntries.length,
-
-                    available:
-                        availableCount,
-
-                    sold:
-                        soldCount,
-
-                    processing:
-                        processingCount,
-
-                    other:
-                        otherCount
-                }
+                "NO PURCHASABLE INVENTORY."
             );
 
 
@@ -775,6 +800,10 @@ module.exports = async function handler(req, res) {
                         "This product currently has no purchasable inventory items.",
 
                     debug: {
+
+                        productId:
+                            productId,
+
                         total:
                             inventoryEntries.length,
 
@@ -789,7 +818,9 @@ module.exports = async function handler(req, res) {
 
                         other:
                             otherCount
+
                     }
+
                 }
             );
 
@@ -837,6 +868,12 @@ module.exports = async function handler(req, res) {
                     );
 
 
+                    /*
+                       Not enough money.
+                       Returning undefined aborts
+                       the transaction.
+                    */
+
                     if (
                         balance < price
                     ) {
@@ -869,8 +906,8 @@ module.exports = async function handler(req, res) {
 
 
             /*
-             * Restore inventory.
-             */
+               Restore reserved inventory.
+            */
 
             await reservedItemRef.transaction(
                 (currentItem) => {
@@ -888,14 +925,14 @@ module.exports = async function handler(req, res) {
                     if (
                         currentItem.status ===
                             "processing" &&
+
                         currentItem.processingBy ===
                             uid
                     ) {
 
-                        const restored =
-                            {
-                                ...currentItem
-                            };
+                        const restored = {
+                            ...currentItem
+                        };
 
 
                         restored.status =
@@ -919,9 +956,7 @@ module.exports = async function handler(req, res) {
 
 
             const latestWalletSnapshot =
-                await walletRef.once(
-                    "value"
-                );
+                await walletRef.once("value");
 
 
             const latestBalance =
@@ -955,8 +990,11 @@ module.exports = async function handler(req, res) {
         console.log(
             "WALLET CHARGED:",
             {
-                price,
-                newBalance
+                price:
+                    price,
+
+                newBalance:
+                    newBalance
             }
         );
 
@@ -966,8 +1004,7 @@ module.exports = async function handler(req, res) {
         ================================================= */
 
         const deliveryDetails =
-            reservedInventory.details !==
-                undefined
+            reservedInventory.details !== undefined
                 ? String(
                     reservedInventory.details
                 )
@@ -987,9 +1024,7 @@ module.exports = async function handler(req, res) {
         ================================================= */
 
         const orderRef =
-            db.ref(
-                "orders"
-            ).push();
+            db.ref("orders").push();
 
 
         const orderId =
@@ -1067,8 +1102,8 @@ module.exports = async function handler(req, res) {
 
 
             /*
-             * Refund wallet.
-             */
+               Refund wallet.
+            */
 
             await walletRef.transaction(
                 (currentBalance) => {
@@ -1088,8 +1123,8 @@ module.exports = async function handler(req, res) {
 
 
             /*
-             * Restore inventory.
-             */
+               Restore inventory.
+            */
 
             await reservedItemRef.transaction(
                 (currentItem) => {
@@ -1107,14 +1142,14 @@ module.exports = async function handler(req, res) {
                     if (
                         currentItem.status ===
                             "processing" &&
+
                         currentItem.processingBy ===
                             uid
                     ) {
 
-                        const restored =
-                            {
-                                ...currentItem
-                            };
+                        const restored = {
+                            ...currentItem
+                        };
 
 
                         restored.status =
@@ -1142,6 +1177,7 @@ module.exports = async function handler(req, res) {
                 500,
                 {
                     success: false,
+
                     message:
                         "Your purchase could not be completed. Your wallet has not been charged."
                 }
@@ -1194,10 +1230,9 @@ module.exports = async function handler(req, res) {
                     }
 
 
-                    const soldItem =
-                        {
-                            ...currentItem
-                        };
+                    const soldItem = {
+                        ...currentItem
+                    };
 
 
                     soldItem.status =
@@ -1238,21 +1273,27 @@ module.exports = async function handler(req, res) {
             console.error(
                 "WARNING: ORDER CREATED BUT ITEM COULD NOT BE MARKED SOLD.",
                 {
-                    productId,
+                    productId:
+                        productId,
+
                     inventoryId:
                         reservedInventoryId,
-                    orderId,
-                    uid
+
+                    orderId:
+                        orderId,
+
+                    uid:
+                        uid
                 }
             );
 
 
             /*
-             * The order exists and the wallet
-             * has already been charged.
-             *
-             * Do not charge again.
-             */
+               The customer has already been charged
+               and the order exists.
+
+               Do not charge again.
+            */
 
             return sendJson(
                 res,
@@ -1290,18 +1331,30 @@ module.exports = async function handler(req, res) {
             "PURCHASE COMPLETED"
         );
 
-        console.log(
-            {
+        console.log({
+
+            uid:
                 uid,
+
+            email:
                 email,
+
+            productId:
                 productId,
-                inventoryId:
-                    reservedInventoryId,
+
+            inventoryId:
+                reservedInventoryId,
+
+            orderId:
                 orderId,
+
+            price:
                 price,
+
+            newBalance:
                 newBalance
-            }
-        );
+
+        });
 
         console.log(
             "========================================"
@@ -1312,6 +1365,7 @@ module.exports = async function handler(req, res) {
             res,
             200,
             {
+
                 success:
                     true,
 
@@ -1362,8 +1416,7 @@ module.exports = async function handler(req, res) {
             res,
             500,
             {
-                success:
-                    false,
+                success: false,
 
                 message:
                     "Unable to complete your purchase right now. Please try again."
