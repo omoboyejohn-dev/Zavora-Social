@@ -4,9 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zavora Social | My Orders</title>
 
@@ -20,8 +18,11 @@
 
 body{
     font-family:Inter,Arial,sans-serif;
+
     background:#ffffff;
+
     color:#111827;
+
     min-height:100vh;
 }
 
@@ -29,56 +30,80 @@ header{
     position:sticky;
     top:0;
     z-index:100;
+
     background:#ffffff;
+
     border-bottom:1px solid #e5e7eb;
 }
 
 .navbar{
     max-width:1100px;
-    min-height:72px;
+
+    min-height:70px;
+
     margin:auto;
+
     padding:0 20px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
+    gap:15px;
 }
 
 .logo{
     color:#111827;
+
     text-decoration:none;
+
     font-size:22px;
+
     font-weight:900;
 }
 
 .logo span{
-    color:#16a34a;
+    color:#7e22ce;
 }
 
 .back{
     color:#ffffff;
-    background:#16a34a;
-    border:1px solid #15803d;
+
+    background:linear-gradient(
+        135deg,
+        #7e22ce,
+        #2563eb
+    );
+
+    border:none;
 
     padding:9px 13px;
+
     border-radius:9px;
 
     text-decoration:none;
-    font-size:13px;
-    font-weight:700;
+
+    font-size:12px;
+
+    font-weight:800;
 
     transition:.2s;
 }
 
 .back:hover{
-    background:#15803d;
     transform:translateY(-1px);
+
+    box-shadow:0 6px 18px rgba(37,99,235,.18);
 }
 
 .container{
     max-width:1000px;
+
     margin:auto;
-    padding:35px 20px 60px;
+
+    padding:32px 20px 60px;
 }
 
 .heading{
@@ -87,52 +112,71 @@ header{
 
 .heading h1{
     color:#111827;
+
     font-size:32px;
+
+    font-weight:900;
+
     margin-bottom:7px;
 }
 
 .heading p{
     color:#64748b;
+
+    font-size:13px;
+
+    line-height:1.6;
 }
 
 .order-card{
     background:#ffffff;
 
     border:1px solid #e5e7eb;
+
     border-radius:18px;
 
     padding:20px;
+
     margin-bottom:18px;
 
-    box-shadow:0 7px 22px rgba(0,0,0,.05);
+    box-shadow:0 7px 22px rgba(15,23,42,.05);
 
     transition:.2s;
 }
 
 .order-card:hover{
-    border-color:#86efac;
-    box-shadow:0 10px 28px rgba(22,163,74,.08);
+    border-color:#c4b5fd;
+
+    box-shadow:0 10px 28px rgba(37,99,235,.08);
 }
 
 .order-top{
     display:flex;
+
     justify-content:space-between;
+
     align-items:flex-start;
 
     gap:15px;
+
     margin-bottom:18px;
 }
 
 .order-name{
     color:#111827;
-    font-weight:800;
+
+    font-weight:850;
+
     font-size:18px;
 }
 
 .order-id{
     color:#94a3b8;
+
     font-size:12px;
+
     margin-top:5px;
+
     word-break:break-all;
 }
 
@@ -140,12 +184,19 @@ header{
     height:max-content;
 
     padding:7px 11px;
+
     border-radius:9px;
 
     font-size:11px;
-    font-weight:800;
 
-    background:#16a34a;
+    font-weight:900;
+
+    background:linear-gradient(
+        135deg,
+        #7e22ce,
+        #2563eb
+    );
+
     color:#ffffff;
 
     white-space:nowrap;
@@ -164,8 +215,9 @@ header{
 
     border-radius:11px;
 
-    background:#f0fdf4;
-    border:1px solid #dcfce7;
+    background:#faf5ff;
+
+    border:1px solid #ede9fe;
 
     min-width:0;
 }
@@ -177,7 +229,7 @@ header{
 
     margin-bottom:6px;
 
-    font-size:12px;
+    font-size:11px;
 }
 
 .info strong{
@@ -197,15 +249,16 @@ header{
 
     border-radius:14px;
 
-    background:#f0fdf4;
+    background:#faf5ff;
 
-    border:1px solid #bbf7d0;
+    border:1px solid #ddd6fe;
 }
 
 .delivery-header{
     display:flex;
 
     justify-content:space-between;
+
     align-items:center;
 
     gap:12px;
@@ -214,9 +267,10 @@ header{
 }
 
 .delivery-title{
-    color:#15803d;
+    color:#6d28d9;
 
     font-size:15px;
+
     font-weight:900;
 }
 
@@ -227,10 +281,16 @@ header{
 
     border-radius:8px;
 
-    font-size:11px;
-    font-weight:800;
+    font-size:10px;
 
-    background:#16a34a;
+    font-weight:900;
+
+    background:linear-gradient(
+        135deg,
+        #7e22ce,
+        #2563eb
+    );
+
     color:#ffffff;
 
     white-space:nowrap;
@@ -251,7 +311,7 @@ header{
 
     background:#ffffff;
 
-    border:1px solid #dcfce7;
+    border:1px solid #ede9fe;
 
     border-radius:10px;
 }
@@ -273,9 +333,9 @@ header{
 }
 
 .details-label{
-    color:#15803d;
+    color:#6d28d9;
 
-    font-size:12px;
+    font-size:11px;
 
     font-weight:900;
 
@@ -295,7 +355,7 @@ header{
 
     background:#ffffff;
 
-    border:1px solid #dcfce7;
+    border:1px solid #ede9fe;
 
     border-radius:11px;
 
@@ -313,7 +373,7 @@ header{
 
     background:#ffffff;
 
-    border:1px solid #dcfce7;
+    border:1px solid #ede9fe;
 
     border-radius:11px;
 
@@ -334,16 +394,19 @@ header{
 
 .empty-icon{
     font-size:48px;
+
     margin-bottom:12px;
 }
 
 .empty h2{
     color:#111827;
+
     margin-bottom:8px;
 }
 
 .empty p{
     color:#64748b;
+
     line-height:1.6;
 }
 
@@ -360,29 +423,35 @@ header{
 
     border-radius:11px;
 
-    font-weight:800;
+    font-weight:900;
 
-    background:#16a34a;
-
-    border:1px solid #15803d;
+    background:linear-gradient(
+        135deg,
+        #7e22ce,
+        #2563eb
+    );
 
     transition:.2s;
 }
 
 .shop-btn:hover{
-    background:#15803d;
-
     transform:translateY(-1px);
 
-    box-shadow:0 7px 18px rgba(22,163,74,.20);
+    box-shadow:0 7px 18px rgba(37,99,235,.20);
 }
 
 .loading{
     text-align:center;
 
-    padding:50px 20px;
+    padding:55px 20px;
 
     color:#64748b;
+
+    background:#faf5ff;
+
+    border:1px solid #ede9fe;
+
+    border-radius:17px;
 }
 
 .error{
@@ -406,15 +475,31 @@ footer{
 
     color:#94a3b8;
 
-    font-size:13px;
+    font-size:12px;
 
     padding:0 20px 30px;
 }
 
 @media(max-width:700px){
 
+    .navbar{
+        min-height:64px;
+
+        padding:0 12px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .back{
+        padding:8px 10px;
+
+        font-size:10px;
+    }
+
     .container{
-        padding:28px 15px 50px;
+        padding:25px 12px 50px;
     }
 
     .heading h1{
@@ -439,92 +524,70 @@ footer{
 
 </head>
 
-
 <body>
-
 
 <header>
 
 <div class="navbar">
 
-    <a href="dashboard.html"
-       class="logo">
+<a href="dashboard.html" class="logo">
+    Zavora <span>Social</span>
+</a>
 
-        Zavora <span>Social</span>
-
-    </a>
-
-
-    <a href="dashboard.html"
-       class="back">
-
-        ← Dashboard
-
-    </a>
+<a href="dashboard.html" class="back">
+    ← Dashboard
+</a>
 
 </div>
 
 </header>
 
-
-
 <main class="container">
-
 
 <div class="heading">
 
-    <h1>
-        My Orders
-    </h1>
+<h1>
+    My Orders
+</h1>
 
-    <p>
-        View your purchases, delivery status,
-        dates, times and delivered item details.
-    </p>
+<p>
+    View your purchases, delivery status,
+    dates, times and delivered item details.
+</p>
 
 </div>
-
-
 
 <div id="ordersArea">
 
-    <div class="loading">
-
-        Loading your orders...
-
-    </div>
+<div class="loading">
+    Loading your orders...
+</div>
 
 </div>
 
-
 </main>
-
-
 
 <footer>
 
-© <span id="year"></span>
+©️ <span id="year"></span>
 Zavora Social. All rights reserved.
 
 </footer>
 
-
-
 <script type="module">
-
 
 import {
     initializeApp
 }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged
 }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
     getDatabase,
@@ -534,15 +597,8 @@ import {
     equalTo,
     onValue
 }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
-
-
-
-/*
-|--------------------------------------------------------------------------
-| FIREBASE CONFIG
-|--------------------------------------------------------------------------
-*/
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 const firebaseConfig = {
@@ -574,25 +630,14 @@ const firebaseConfig = {
 };
 
 
-
-/*
-|--------------------------------------------------------------------------
-| INITIALIZE FIREBASE
-|--------------------------------------------------------------------------
-*/
-
-
 const app =
     initializeApp(firebaseConfig);
-
 
 const auth =
     getAuth(app);
 
-
 const db =
     getDatabase(app);
-
 
 
 const ordersArea =
@@ -607,19 +652,10 @@ document.getElementById(
     new Date().getFullYear();
 
 
-
-/*
-|--------------------------------------------------------------------------
-| FORMAT PRICE
-|--------------------------------------------------------------------------
-*/
-
-
 function formatPrice(amount){
 
     const number =
         Number(amount || 0);
-
 
     return "₦" +
         number.toLocaleString(
@@ -631,14 +667,6 @@ function formatPrice(amount){
         );
 
 }
-
-
-
-/*
-|--------------------------------------------------------------------------
-| FORMAT DATE AND TIME
-|--------------------------------------------------------------------------
-*/
 
 
 function formatDateTime(timestamp){
@@ -653,12 +681,10 @@ function formatDateTime(timestamp){
 
     }
 
-
     const date =
         new Date(
             Number(timestamp)
         );
-
 
     if(
         Number.isNaN(
@@ -670,7 +696,6 @@ function formatDateTime(timestamp){
 
     }
 
-
     return date.toLocaleString(
         "en-NG",
         {
@@ -680,14 +705,6 @@ function formatDateTime(timestamp){
     );
 
 }
-
-
-
-/*
-|--------------------------------------------------------------------------
-| FORMAT DATE ONLY
-|--------------------------------------------------------------------------
-*/
 
 
 function formatDate(timestamp){
@@ -702,12 +719,10 @@ function formatDate(timestamp){
 
     }
 
-
     const date =
         new Date(
             Number(timestamp)
         );
-
 
     if(
         Number.isNaN(
@@ -719,7 +734,6 @@ function formatDate(timestamp){
 
     }
 
-
     return date.toLocaleDateString(
         "en-NG",
         {
@@ -728,14 +742,6 @@ function formatDate(timestamp){
     );
 
 }
-
-
-
-/*
-|--------------------------------------------------------------------------
-| FORMAT TIME ONLY
-|--------------------------------------------------------------------------
-*/
 
 
 function formatTime(timestamp){
@@ -750,12 +756,10 @@ function formatTime(timestamp){
 
     }
 
-
     const date =
         new Date(
             Number(timestamp)
         );
-
 
     if(
         Number.isNaN(
@@ -766,7 +770,6 @@ function formatTime(timestamp){
         return "Time unavailable";
 
     }
-
 
     return date.toLocaleTimeString(
         "en-NG",
@@ -780,14 +783,6 @@ function formatTime(timestamp){
 }
 
 
-
-/*
-|--------------------------------------------------------------------------
-| ESCAPE HTML
-|--------------------------------------------------------------------------
-*/
-
-
 function escapeHTML(value){
 
     if(
@@ -799,51 +794,15 @@ function escapeHTML(value){
 
     }
 
-
     return String(value)
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
-
-
-
-/*
-|--------------------------------------------------------------------------
-| FORMAT DELIVERY DETAILS
-|--------------------------------------------------------------------------
-|
-| Supports:
-|
-| 1. Plain text
-| 2. Objects
-| 3. Arrays
-|
-|--------------------------------------------------------------------------
-*/
 
 
 function getDeliveryDetails(order){
@@ -857,7 +816,6 @@ function getDeliveryDetails(order){
         order.item ??
         "";
 
-
     if(
         details === null ||
         details === undefined ||
@@ -867,7 +825,6 @@ function getDeliveryDetails(order){
         return "";
 
     }
-
 
     if(
         typeof details === "object"
@@ -895,27 +852,9 @@ function getDeliveryDetails(order){
 
     }
 
-
     return String(details);
 
 }
-
-
-
-/*
-|--------------------------------------------------------------------------
-| GET DELIVERY DATE
-|--------------------------------------------------------------------------
-|
-| If the purchase API has deliveredAt,
-| use it.
-|
-| Otherwise use createdAt because your
-| current API marks the purchase delivered
-| immediately.
-|
-|--------------------------------------------------------------------------
-*/
 
 
 function getDeliveryTimestamp(order){
@@ -931,16 +870,7 @@ function getDeliveryTimestamp(order){
 }
 
 
-
-/*
-|--------------------------------------------------------------------------
-| RENDER ORDERS
-|--------------------------------------------------------------------------
-*/
-
-
 function renderOrders(orders){
-
 
     if(
         orders.length === 0
@@ -979,21 +909,16 @@ function renderOrders(orders){
     }
 
 
-
     ordersArea.innerHTML = "";
-
 
 
     orders.forEach(
         (order) => {
 
-
             const deliveryDetails =
                 getDeliveryDetails(
                     order
                 );
-
-
 
             const deliveryStatus =
                 String(
@@ -1001,43 +926,27 @@ function renderOrders(orders){
                     "pending"
                 );
 
-
-
             const orderStatus =
                 String(
                     order.status ||
                     "completed"
                 );
 
-
-
             const deliveryTimestamp =
                 getDeliveryTimestamp(
                     order
                 );
-
-
 
             const card =
                 document.createElement(
                     "div"
                 );
 
-
             card.className =
                 "order-card";
 
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | DELIVERY SECTION
-            |--------------------------------------------------------------------------
-            */
-
-
             let deliveryHTML = "";
-
 
 
             if(
@@ -1051,22 +960,16 @@ function renderOrders(orders){
                         <div class="delivery-header">
 
                             <div class="delivery-title">
-
                                 📦 Delivered Item
-
                             </div>
 
                             <div class="delivery-status">
-
                                 ${escapeHTML(
-                                    deliveryStatus
-                                        .toUpperCase()
+                                    deliveryStatus.toUpperCase()
                                 )}
-
                             </div>
 
                         </div>
-
 
                         <div class="delivery-meta">
 
@@ -1084,7 +987,6 @@ function renderOrders(orders){
 
                             </div>
 
-
                             <div class="delivery-meta-item">
 
                                 <small>
@@ -1101,20 +1003,14 @@ function renderOrders(orders){
 
                         </div>
 
-
                         <div class="details-label">
-
                             YOUR DELIVERED ITEM / ACCOUNT DETAILS
-
                         </div>
 
-
                         <div class="delivery-details">
-
                             ${escapeHTML(
                                 deliveryDetails
                             )}
-
                         </div>
 
                     </div>
@@ -1131,22 +1027,16 @@ function renderOrders(orders){
                         <div class="delivery-header">
 
                             <div class="delivery-title">
-
                                 📦 Delivery
-
                             </div>
 
                             <div class="delivery-status">
-
                                 ${escapeHTML(
-                                    deliveryStatus
-                                        .toUpperCase()
+                                    deliveryStatus.toUpperCase()
                                 )}
-
                             </div>
 
                         </div>
-
 
                         <div class="delivery-meta">
 
@@ -1164,7 +1054,6 @@ function renderOrders(orders){
 
                             </div>
 
-
                             <div class="delivery-meta-item">
 
                                 <small>
@@ -1181,7 +1070,6 @@ function renderOrders(orders){
 
                         </div>
 
-
                         <div class="no-details">
 
                             Your order has been completed,
@@ -1197,14 +1085,6 @@ function renderOrders(orders){
             }
 
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | ORDER CARD
-            |--------------------------------------------------------------------------
-            */
-
-
             card.innerHTML = `
 
                 <div class="order-top">
@@ -1212,41 +1092,30 @@ function renderOrders(orders){
                     <div>
 
                         <div class="order-name">
-
                             ${escapeHTML(
                                 order.productName ||
                                 "Product"
                             )}
-
                         </div>
 
-
                         <div class="order-id">
-
                             Order ID:
                             ${escapeHTML(
                                 order.id
                             )}
-
                         </div>
 
                     </div>
 
-
                     <div class="status">
-
                         ${escapeHTML(
                             orderStatus.toUpperCase()
                         )}
-
                     </div>
 
                 </div>
 
-
-
                 <div class="order-info">
-
 
                     <div class="info">
 
@@ -1255,17 +1124,13 @@ function renderOrders(orders){
                         </small>
 
                         <strong>
-
                             ${escapeHTML(
                                 order.productName ||
                                 "Product"
                             )}
-
                         </strong>
 
                     </div>
-
-
 
                     <div class="info">
 
@@ -1274,16 +1139,12 @@ function renderOrders(orders){
                         </small>
 
                         <strong>
-
                             ${formatPrice(
                                 order.price
                             )}
-
                         </strong>
 
                     </div>
-
-
 
                     <div class="info">
 
@@ -1292,17 +1153,13 @@ function renderOrders(orders){
                         </small>
 
                         <strong>
-
                             ${escapeHTML(
                                 order.category ||
                                 "—"
                             )}
-
                         </strong>
 
                     </div>
-
-
 
                     <div class="info">
 
@@ -1311,16 +1168,12 @@ function renderOrders(orders){
                         </small>
 
                         <strong>
-
                             ${formatDate(
                                 order.createdAt
                             )}
-
                         </strong>
 
                     </div>
-
-
 
                     <div class="info">
 
@@ -1329,16 +1182,12 @@ function renderOrders(orders){
                         </small>
 
                         <strong>
-
                             ${formatTime(
                                 order.createdAt
                             )}
-
                         </strong>
 
                     </div>
-
-
 
                     <div class="info">
 
@@ -1347,89 +1196,18 @@ function renderOrders(orders){
                         </small>
 
                         <strong>
-
                             ${escapeHTML(
-                                orderStatus
-                                    .charAt(0)
-                                    .toUpperCase() +
-                                orderStatus
-                                    .slice(1)
+                                orderStatus.toUpperCase()
                             )}
-
                         </strong>
 
                     </div>
-
-
-
-                    <div class="info">
-
-                        <small>
-                            Delivery Status
-                        </small>
-
-                        <strong>
-
-                            ${escapeHTML(
-                                deliveryStatus
-                                    .charAt(0)
-                                    .toUpperCase() +
-                                deliveryStatus
-                                    .slice(1)
-                            )}
-
-                        </strong>
-
-                    </div>
-
-
-
-                    <div class="info">
-
-                        <small>
-                            Customer Email
-                        </small>
-
-                        <strong>
-
-                            ${escapeHTML(
-                                order.email ||
-                                "—"
-                            )}
-
-                        </strong>
-
-                    </div>
-
-
-
-                    <div class="info">
-
-                        <small>
-                            Inventory ID
-                        </small>
-
-                        <strong>
-
-                            ${escapeHTML(
-                                order.inventoryId ||
-                                "—"
-                            )}
-
-                        </strong>
-
-                    </div>
-
 
                 </div>
-
-
 
                 ${deliveryHTML}
 
             `;
-
-
 
             ordersArea.appendChild(
                 card
@@ -1441,129 +1219,64 @@ function renderOrders(orders){
 }
 
 
-
-/*
-|--------------------------------------------------------------------------
-| AUTHENTICATION
-|--------------------------------------------------------------------------
-*/
-
-
 onAuthStateChanged(
     auth,
     (user) => {
 
+        if(
+            !user
+        ){
 
-        if(!user){
-
-            window.location.href =
-                "login.html";
+            window.location.replace(
+                "login.html"
+            );
 
             return;
 
         }
 
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | IMPORTANT
-        |--------------------------------------------------------------------------
-        |
-        | Only request orders belonging to
-        | the currently logged-in customer.
-        |
-        |--------------------------------------------------------------------------
-        */
-
-
-        const ordersQuery =
+        const ordersRef =
             query(
-
-                ref(
-                    db,
-                    "orders"
-                ),
-
-                orderByChild(
-                    "uid"
-                ),
-
-                equalTo(
-                    user.uid
-                )
-
+                ref(db,"orders"),
+                orderByChild("uid"),
+                equalTo(user.uid)
             );
-
 
 
         onValue(
 
-            ordersQuery,
-
+            ordersRef,
 
             (snapshot) => {
 
-
                 const data =
-                    snapshot.val();
+                    snapshot.val() || {};
 
+                const orders =
+                    Object.entries(data)
 
+                        .map(
+                            ([id,order]) => ({
 
-                const orders = [];
+                                id:id,
 
+                                ...order
 
-
-                if(data){
-
-                    Object.entries(
-                        data
-                    ).forEach(
-                        ([id, order]) => {
-
-
-                            if(
-                                order
-                            ){
-
-                                orders.push({
-
-                                    id,
-
-                                    ...order
-
-                                });
-
-                            }
-
-                        }
-                    );
-
-                }
-
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | NEWEST ORDER FIRST
-                |--------------------------------------------------------------------------
-                */
+                            })
+                        );
 
 
                 orders.sort(
                     (a,b) =>
-
                         Number(
                             b.createdAt || 0
                         )
-
                         -
-
                         Number(
                             a.createdAt || 0
                         )
                 );
-
 
 
                 renderOrders(
@@ -1572,36 +1285,19 @@ onAuthStateChanged(
 
             },
 
-
             (error) => {
 
-
                 console.error(
-                    "Orders error:",
+                    "Orders loading error:",
                     error
                 );
-
-
 
                 ordersArea.innerHTML = `
 
                     <div class="error">
 
-                        <strong>
-                            Unable to load your orders.
-                        </strong>
-
-                        <br><br>
-
-                        Your order was created,
-                        but this page could not read
-                        your order history.
-
-                        <br><br>
-
-                        Please make sure the Firebase
-                        <strong>orders</strong> database
-                        rules have been updated.
+                        Unable to load your orders.
+                        Please try again later.
 
                     </div>
 
@@ -1612,12 +1308,9 @@ onAuthStateChanged(
         );
 
     }
-
 );
 
 </script>
 
-
 </body>
-
 </html>
