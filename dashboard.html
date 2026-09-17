@@ -10,6 +10,10 @@
 
 <style>
 
+/* ==========================================
+   RESET
+========================================== */
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -23,7 +27,10 @@ body{
     min-height:100vh;
 }
 
-/* LOADING */
+
+/* ==========================================
+   LOADING SCREEN
+========================================== */
 
 .loading-screen{
     position:fixed;
@@ -43,47 +50,71 @@ body{
 .loader{
     width:45px;
     height:45px;
+
     border:4px solid #dcfce7;
     border-top-color:#16a34a;
     border-right-color:#16a34a;
+
     border-radius:50%;
+
     animation:spin .8s linear infinite;
+
     margin:auto auto 15px;
 }
 
 @keyframes spin{
+
     to{
         transform:rotate(360deg);
     }
+
 }
 
-/* HEADER */
+
+/* ==========================================
+   HEADER
+========================================== */
 
 header{
     width:100%;
+
     border-bottom:1px solid #e5e7eb;
+
     background:#ffffff;
+
     position:sticky;
     top:0;
+
     z-index:100;
 }
 
 .navbar{
     max-width:1250px;
+
     margin:auto;
+
     min-height:72px;
+
     padding:0 20px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:20px;
 }
 
 .logo{
     text-decoration:none;
+
     color:#111111;
+
     font-size:22px;
+
     font-weight:900;
+
     letter-spacing:-.5px;
 }
 
@@ -93,37 +124,61 @@ header{
 
 .user-area{
     display:flex;
+
     align-items:center;
+
     gap:14px;
 }
 
 .user-name{
     color:#555555;
+
     font-size:14px;
+
     font-weight:600;
 }
 
 .logout-btn{
     border:1px solid #16a34a;
+
     background:#16a34a;
+
     color:#ffffff;
+
     padding:10px 15px;
+
     border-radius:10px;
+
     cursor:pointer;
+
     font-weight:700;
+
+    transition:.2s ease;
 }
 
 .logout-btn:hover{
     background:#15803d;
+
+    border-color:#15803d;
 }
 
-/* MAIN */
+
+/* ==========================================
+   MAIN
+========================================== */
 
 .container{
     max-width:1250px;
+
     margin:auto;
+
     padding:35px 20px 60px;
 }
+
+
+/* ==========================================
+   WELCOME
+========================================== */
 
 .welcome{
     margin-bottom:30px;
@@ -131,8 +186,11 @@ header{
 
 .welcome h1{
     font-size:34px;
+
     line-height:1.2;
+
     margin-bottom:8px;
+
     color:#111111;
 }
 
@@ -142,311 +200,559 @@ header{
 
 .welcome p{
     color:#666666;
+
     font-size:15px;
 }
 
-/* STATS */
+
+/* ==========================================
+   STATS
+========================================== */
 
 .stats{
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
+
     gap:16px;
+
     margin-bottom:30px;
 }
 
 .stat-card{
     background:#16a34a;
+
     border:1px solid #15803d;
+
     border-radius:18px;
+
     padding:22px;
-    box-shadow:0 8px 25px rgba(22,163,74,.16);
+
+    box-shadow:
+        0 8px 25px rgba(22,163,74,.16);
+
     color:#ffffff;
 }
 
 .stat-icon{
     width:42px;
     height:42px;
+
     border-radius:12px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     background:#ffffff;
+
     color:#16a34a;
+
     font-size:20px;
+
     margin-bottom:15px;
 }
 
 .stat-title{
     color:#ffffff;
+
     opacity:.9;
+
     font-size:13px;
+
     margin-bottom:7px;
 }
 
 .stat-value{
     color:#ffffff;
+
     font-size:25px;
+
     font-weight:900;
 }
 
-/* QUICK ACTIONS */
+
+/* ==========================================
+   QUICK ACTIONS
+========================================== */
 
 .section-title{
     font-size:21px;
+
     margin-bottom:16px;
+
     color:#111111;
 }
 
 .quick-actions{
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
+
     gap:15px;
+
     margin-bottom:40px;
 }
 
 .quick-card{
     min-width:0;
+
     text-decoration:none;
+
     color:#ffffff;
+
     background:#16a34a;
+
     border:1px solid #15803d;
+
     border-radius:16px;
+
     padding:20px;
+
     transition:.2s ease;
-    box-shadow:0 7px 22px rgba(22,163,74,.12);
+
+    box-shadow:
+        0 7px 22px rgba(22,163,74,.12);
 }
 
 .quick-card:hover{
     transform:translateY(-3px);
+
     background:#15803d;
+
     border-color:#15803d;
-    box-shadow:0 12px 30px rgba(22,163,74,.20);
+
+    box-shadow:
+        0 12px 30px rgba(22,163,74,.20);
 }
 
 .quick-icon{
     width:45px;
     height:45px;
+
     border-radius:12px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     background:#ffffff;
+
     color:#16a34a;
+
     font-size:23px;
+
     margin-bottom:12px;
 }
 
 .quick-card strong{
     display:block;
+
     margin-bottom:5px;
+
     color:#ffffff;
 }
 
 .quick-card small{
     color:#ffffff;
+
     opacity:.85;
 }
 
-/* MARKETPLACE */
+
+/* ==========================================
+   MARKETPLACE
+========================================== */
 
 .marketplace{
     margin-top:10px;
 }
 
 .marketplace-header{
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .marketplace-header h2{
     font-size:25px;
+
     color:#111111;
+
     margin-bottom:5px;
 }
 
 .marketplace-header p{
     color:#777777;
+
     font-size:14px;
 }
 
-/* SEARCH */
 
-.marketplace-search{
-    position:relative;
-    margin-bottom:22px;
+/* ==========================================
+   PRODUCT CATEGORY
+========================================== */
+
+.product-category{
+    margin-bottom:28px;
 }
 
-.marketplace-search input{
-    width:100%;
-    height:52px;
-    border:1px solid #d1d5db;
-    border-radius:12px;
-    padding:0 18px 0 48px;
-    font-size:15px;
-    outline:none;
-    background:#ffffff;
-    color:#111111;
-    transition:.2s ease;
-}
 
-.marketplace-search input:focus{
-    border-color:#16a34a;
-    box-shadow:0 0 0 3px rgba(22,163,74,.10);
-}
+/* ==========================================
+   CATEGORY HEADER
+========================================== */
 
-.marketplace-search input::placeholder{
-    color:#9ca3af;
-}
+.product-category-header{
+    background:
+        linear-gradient(
+            90deg,
+            #6d1bb8,
+            #2457e8
+        );
 
-.search-icon{
-    position:absolute;
-    left:17px;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:20px;
-    color:#16a34a;
-    pointer-events:none;
-}
+    min-height:46px;
 
-/* ALL CATEGORIES */
+    padding:0 12px 0 10px;
 
-.all-categories-title{
-    font-size:18px;
-    font-weight:800;
-    color:#111111;
-    margin-bottom:12px;
-}
+    border-radius:8px;
 
-/* CATEGORY LIST */
-
-.category-list{
     display:flex;
-    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:space-between;
+
     gap:10px;
-}
 
-.category-item{
-    width:100%;
-    min-height:58px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:12px 16px;
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    cursor:pointer;
-    transition:.2s ease;
-    text-align:left;
-}
-
-.category-item:hover{
-    background:#f0fdf4;
-    border-color:#16a34a;
-    transform:translateX(3px);
-}
-
-.category-item-icon{
-    width:40px;
-    height:40px;
-    flex-shrink:0;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#16a34a;
-    color:#ffffff;
-    font-size:19px;
-}
-
-.category-item-content{
-    flex:1;
-    min-width:0;
-}
-
-.category-item-name{
-    font-size:15px;
-    font-weight:800;
-    color:#111111;
-    margin-bottom:3px;
-    text-transform:uppercase;
-}
-
-.category-item-subtitle{
-    color:#777777;
-    font-size:12px;
-}
-
-.category-arrow{
-    color:#16a34a;
-    font-size:20px;
-    font-weight:900;
-}
-
-/* LOADING */
-
-.category-loading{
-    padding:40px 20px;
-    border:1px dashed #86efac;
-    border-radius:14px;
-    text-align:center;
-    color:#16a34a;
-    background:#f0fdf4;
-}
-
-.category-loading .big{
-    font-size:35px;
-    margin-bottom:10px;
-}
-
-/* EMPTY */
-
-.empty-marketplace{
-    padding:40px 20px;
-    border:1px dashed #86efac;
-    border-radius:14px;
-    text-align:center;
-    color:#666666;
-    background:#f0fdf4;
-}
-
-.empty-marketplace .big{
-    font-size:38px;
-    margin-bottom:10px;
-}
-
-.empty-marketplace h3{
-    color:#111111;
     margin-bottom:7px;
 }
 
-/* NO SEARCH RESULT */
+.product-category-title{
+    color:#ffffff;
 
-.no-results{
-    padding:30px 20px;
-    text-align:center;
-    color:#777777;
-    background:#f9fafb;
-    border-radius:12px;
-    border:1px solid #e5e7eb;
+    font-size:14px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    line-height:1.2;
 }
 
-.no-results .big{
-    font-size:32px;
+.view-all-btn{
+    border:1px solid rgba(255,255,255,.8);
+
+    background:transparent;
+
+    color:#ffffff;
+
+    padding:6px 15px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:.2s ease;
+}
+
+.view-all-btn:hover{
+    background:#ffffff;
+
+    color:#2457e8;
+}
+
+
+/* ==========================================
+   PRODUCT LIST
+========================================== */
+
+.product-list{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+
+/* ==========================================
+   PRODUCT CARD
+========================================== */
+
+.product-card{
+    width:100%;
+
+    min-height:104px;
+
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:9px;
+
+    padding:15px 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.04);
+
+    transition:.2s ease;
+}
+
+.product-card:hover{
+    border-color:#d1d5db;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.07);
+}
+
+
+/* ==========================================
+   PRODUCT IMAGE
+========================================== */
+
+.product-image-box{
+    width:43px;
+    height:43px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#f3f4f6;
+
+    overflow:hidden;
+
+    font-size:24px;
+}
+
+.product-image-box img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* ==========================================
+   PRODUCT INFORMATION
+========================================== */
+
+.product-info{
+    flex:1;
+
+    min-width:0;
+}
+
+.product-name{
+    color:#374151;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    line-height:1.35;
+
+    margin-bottom:9px;
+
+    text-transform:uppercase;
+
+    word-break:break-word;
+}
+
+
+/* ==========================================
+   PRICE / STOCK
+========================================== */
+
+.product-meta{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+}
+
+.product-price{
+    background:#111827;
+
+    color:#ffffff;
+
+    border-radius:14px;
+
+    padding:8px 14px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+.product-divider{
+    color:#6b7280;
+
+    font-weight:800;
+
+    font-size:14px;
+}
+
+.product-stock{
+    background:#111827;
+
+    color:#ffffff;
+
+    border-radius:10px;
+
+    padding:8px 13px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+
+/* ==========================================
+   BUY BUTTON
+========================================== */
+
+.product-buy-btn{
+    width:43px;
+    height:43px;
+
+    flex-shrink:0;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:#ffffff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    font-size:19px;
+
+    transition:.2s ease;
+}
+
+.product-buy-btn:hover{
+    background:#1d4ed8;
+
+    transform:scale(1.05);
+}
+
+.product-buy-btn:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+
+/* ==========================================
+   LOADING PRODUCTS
+========================================== */
+
+.products-loading{
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#2563eb;
+
+    background:#f9fafb;
+
+    border:1px dashed #d1d5db;
+
+    border-radius:10px;
+}
+
+
+/* ==========================================
+   EMPTY PRODUCTS
+========================================== */
+
+.products-empty{
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    background:#f9fafb;
+
+    border:1px dashed #d1d5db;
+
+    border-radius:10px;
+}
+
+.products-empty .big{
+    font-size:35px;
+
     margin-bottom:8px;
 }
 
-/* FOOTER */
+.products-empty strong{
+    display:block;
+
+    color:#111111;
+
+    margin-bottom:5px;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
 
 footer{
     max-width:1250px;
+
     margin:auto;
+
     padding:0 20px 30px;
+
     color:#888888;
+
     font-size:13px;
+
     text-align:center;
 }
 
-/* TABLET */
+
+/* ==========================================
+   TABLET
+========================================== */
 
 @media(max-width:1000px){
 
@@ -460,7 +766,10 @@ footer{
 
 }
 
-/* MOBILE */
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media(max-width:650px){
 
@@ -482,6 +791,7 @@ footer{
 
     .stats{
         grid-template-columns:repeat(2,1fr);
+
         gap:10px;
     }
 
@@ -493,49 +803,128 @@ footer{
         font-size:21px;
     }
 
+
+    /* QUICK ACTIONS */
+
     .quick-actions{
-        grid-template-columns:repeat(4,minmax(0,1fr));
+        grid-template-columns:
+            repeat(4,minmax(0,1fr));
+
         gap:7px;
     }
 
     .quick-card{
         padding:12px 6px;
+
         border-radius:12px;
+
         text-align:center;
     }
 
     .quick-icon{
         width:36px;
         height:36px;
+
         border-radius:10px;
+
         font-size:18px;
+
         margin:0 auto 8px;
     }
 
     .quick-card strong{
         font-size:10px;
+
         line-height:1.2;
+
         margin-bottom:4px;
     }
 
     .quick-card small{
         display:block;
+
         font-size:8px;
+
         line-height:1.2;
     }
+
+
+    /* MARKETPLACE */
 
     .marketplace-header h2{
         font-size:22px;
     }
 
-    .category-item{
-        min-height:55px;
-        padding:10px 12px;
+
+    /* CATEGORY */
+
+    .product-category-header{
+        min-height:43px;
+
+        padding-left:9px;
     }
 
-    .category-item-icon{
-        width:38px;
-        height:38px;
+    .product-category-title{
+        font-size:12px;
+
+        line-height:1.25;
+    }
+
+    .view-all-btn{
+        padding:5px 12px;
+
+        font-size:11px;
+    }
+
+
+    /* PRODUCT */
+
+    .product-card{
+        min-height:96px;
+
+        padding:13px 10px;
+
+        gap:10px;
+    }
+
+    .product-image-box{
+        width:40px;
+        height:40px;
+
+        font-size:21px;
+    }
+
+    .product-name{
+        font-size:12px;
+
+        margin-bottom:8px;
+    }
+
+    .product-meta{
+        gap:6px;
+    }
+
+    .product-price{
+        font-size:12px;
+
+        padding:7px 10px;
+    }
+
+    .product-divider{
+        font-size:12px;
+    }
+
+    .product-stock{
+        font-size:12px;
+
+        padding:7px 9px;
+    }
+
+    .product-buy-btn{
+        width:39px;
+        height:39px;
+
+        font-size:17px;
     }
 
 }
@@ -548,7 +937,9 @@ footer{
 <body>
 
 
-<!-- LOADING SCREEN -->
+<!-- ==========================================
+     LOADING SCREEN
+========================================== -->
 
 <div
     class="loading-screen"
@@ -569,7 +960,9 @@ footer{
 
 
 
-<!-- HEADER -->
+<!-- ==========================================
+     HEADER
+========================================== -->
 
 <header>
 
@@ -608,12 +1001,16 @@ footer{
 
 
 
-<!-- MAIN -->
+<!-- ==========================================
+     MAIN
+========================================== -->
 
 <main class="container">
 
 
-    <!-- WELCOME -->
+    <!-- ======================================
+         WELCOME
+    ======================================= -->
 
     <section class="welcome">
 
@@ -622,7 +1019,9 @@ footer{
             Welcome back,
             <span id="welcomeName">
                 User
-            </span> 👋
+            </span>
+
+            👋
 
         </h1>
 
@@ -636,7 +1035,9 @@ footer{
 
 
 
-    <!-- LIVE STATS -->
+    <!-- ======================================
+         LIVE STATS
+    ======================================= -->
 
     <section class="stats">
 
@@ -736,7 +1137,9 @@ footer{
 
 
 
-    <!-- QUICK ACTIONS -->
+    <!-- ======================================
+         QUICK ACTIONS
+    ======================================= -->
 
     <section>
 
@@ -748,7 +1151,7 @@ footer{
         <div class="quick-actions">
 
 
-            <!-- 1 -->
+            <!-- BROWSE PRODUCTS -->
 
             <a
                 href="products.html"
@@ -771,7 +1174,7 @@ footer{
 
 
 
-            <!-- 2 -->
+            <!-- FUND WALLET -->
 
             <a
                 href="wallet.html"
@@ -794,7 +1197,7 @@ footer{
 
 
 
-            <!-- 3 -->
+            <!-- PROFILE -->
 
             <a
                 href="profile.html"
@@ -817,7 +1220,7 @@ footer{
 
 
 
-            <!-- 4 -->
+            <!-- ORDERS -->
 
             <a
                 href="orders.html"
@@ -840,7 +1243,7 @@ footer{
 
 
 
-            <!-- 5 -->
+            <!-- BUY NUMBER -->
 
             <a
                 href="numbers.html"
@@ -863,7 +1266,7 @@ footer{
 
 
 
-            <!-- 6 -->
+            <!-- GIFTS -->
 
             <a
                 href="gifts.html"
@@ -886,7 +1289,7 @@ footer{
 
 
 
-            <!-- 7 -->
+            <!-- BOOST -->
 
             <a
                 href="boost.html"
@@ -909,7 +1312,7 @@ footer{
 
 
 
-            <!-- 8 -->
+            <!-- API -->
 
             <a
                 href="api.html"
@@ -937,7 +1340,9 @@ footer{
 
 
 
-    <!-- MARKETPLACE -->
+    <!-- ======================================
+         MARKETPLACE
+    ======================================= -->
 
     <section class="marketplace">
 
@@ -949,57 +1354,19 @@ footer{
             </h2>
 
             <p>
-                Search products or choose a category.
+                Choose a product and buy instantly.
             </p>
 
         </div>
 
 
+        <!-- PRODUCTS WILL APPEAR HERE -->
 
-        <!-- SEARCH -->
+        <div id="productMarketplace">
 
-        <div class="marketplace-search">
+            <div class="products-loading">
 
-            <span class="search-icon">
-                🔎
-            </span>
-
-
-            <input
-                type="search"
-                id="categorySearch"
-                placeholder="Search Products"
-                autocomplete="off"
-            >
-
-        </div>
-
-
-
-        <!-- ALL CATEGORIES -->
-
-        <div class="all-categories-title">
-
-            All Categories
-
-        </div>
-
-
-
-        <!-- CATEGORY LIST -->
-
-        <div
-            class="category-list"
-            id="categoryGrid"
-        >
-
-            <div class="category-loading">
-
-                <div class="big">
-                    🗂️
-                </div>
-
-                Loading categories...
+                Loading products...
 
             </div>
 
@@ -1013,6 +1380,10 @@ footer{
 
 
 
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer>
 
     ©️
@@ -1024,13 +1395,16 @@ footer{
 
 
 
+<!-- ==========================================
+     FIREBASE
+========================================== -->
+
 <script type="module">
 
 
 /* ==========================================
-   FIREBASE
+   FIREBASE APP
 ========================================== */
-
 
 import {
     initializeApp
@@ -1049,10 +1423,7 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
     getDatabase,
     ref,
-    onValue,
-    query,
-    orderByChild,
-    equalTo
+    onValue
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
@@ -1139,12 +1510,6 @@ const logoutBtn =
     );
 
 
-const categoryGrid =
-    document.getElementById(
-        "categoryGrid"
-    );
-
-
 const walletBalance =
     document.getElementById(
         "walletBalance"
@@ -1163,19 +1528,10 @@ const availableProducts =
     );
 
 
-const notificationsCount =
+const productMarketplace =
     document.getElementById(
-        "notificationsCount"
+        "productMarketplace"
     );
-
-
-const categorySearch =
-    document.getElementById(
-        "categorySearch"
-    );
-
-
-let allCategories = [];
 
 
 
@@ -1189,6 +1545,11 @@ onAuthStateChanged(
 
     (user) => {
 
+
+        /* -------------------------------
+           NOT LOGGED IN
+        -------------------------------- */
+
         if(!user){
 
             window.location.href =
@@ -1199,11 +1560,10 @@ onAuthStateChanged(
         }
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | CUSTOMER NAME
-        |--------------------------------------------------------------------------
-        */
+
+        /* -------------------------------
+           CUSTOMER NAME
+        -------------------------------- */
 
         let displayName =
             user.displayName;
@@ -1228,22 +1588,18 @@ onAuthStateChanged(
 
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | SHOW DASHBOARD
-        |--------------------------------------------------------------------------
-        */
+        /* -------------------------------
+           SHOW DASHBOARD
+        -------------------------------- */
 
         loadingScreen.style.display =
             "none";
 
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | LOAD LIVE DATA
-        |--------------------------------------------------------------------------
-        */
+        /* -------------------------------
+           LOAD DATA
+        -------------------------------- */
 
         loadWallet(
             user.uid
@@ -1258,7 +1614,7 @@ onAuthStateChanged(
         loadAvailableProducts();
 
 
-        loadCategories();
+        loadProducts();
 
     }
 
@@ -1329,27 +1685,6 @@ function loadWallet(uid){
    LOAD CUSTOMER ORDERS
 ========================================== */
 
-
-/*
-|--------------------------------------------------------------------------
-| IMPORTANT
-|--------------------------------------------------------------------------
-|
-| We query ONLY the orders belonging to the
-| currently logged-in customer.
-|
-| Purchase API creates:
-|
-| orders/{orderId}/uid
-|
-| equal to:
-|
-| Firebase Auth user's UID
-|
-|--------------------------------------------------------------------------
-*/
-
-
 function loadCustomerOrders(uid){
 
     const ordersRef =
@@ -1359,31 +1694,24 @@ function loadCustomerOrders(uid){
         );
 
 
-    const customerOrdersQuery =
-        query(
-            ordersRef,
-            orderByChild("uid"),
-            equalTo(uid)
-        );
-
-
     onValue(
 
-        customerOrdersQuery,
+        ordersRef,
 
         (snapshot) => {
 
-            let count = 0;
+            const data =
+                snapshot.val();
 
 
-            if(snapshot.exists()){
+            let count =
+                0;
 
-                const orders =
-                    snapshot.val() || {};
 
+            if(data){
 
                 Object.values(
-                    orders
+                    data
                 ).forEach(
                     (order) => {
 
@@ -1391,14 +1719,6 @@ function loadCustomerOrders(uid){
                             order &&
                             order.uid === uid
                         ){
-
-                            /*
-                             * Every order created for
-                             * this customer is counted.
-                             *
-                             * Your purchase API creates
-                             * completed orders immediately.
-                             */
 
                             count++;
 
@@ -1412,7 +1732,6 @@ function loadCustomerOrders(uid){
 
             ordersCount.textContent =
                 count.toString();
-
 
         },
 
@@ -1437,46 +1756,21 @@ function loadCustomerOrders(uid){
 
 
 /* ==========================================
-   LOAD AVAILABLE PRODUCTS
+   LOAD AVAILABLE PRODUCTS COUNT
 ========================================== */
 
-
-/*
-|--------------------------------------------------------------------------
-| IMPORTANT
-|--------------------------------------------------------------------------
-|
-| DO NOT read /inventory here.
-|
-| /inventory contains the actual purchased
-| details/credentials and should not be exposed
-| to customers.
-|
-| Instead we read:
-|
-| /products/{productId}/stock
-|
-| Example:
-|
-| Product A = 7
-| Product B = 8
-| Product C = 5
-|
-| Available Products = 20
-|
-| Customer buys one:
-|
-| Product A = 6
-| Product B = 8
-| Product C = 5
-|
-| Available Products = 19
-|
-|--------------------------------------------------------------------------
-*/
-
-
 function loadAvailableProducts(){
+
+    /*
+    IMPORTANT:
+
+    Customer dashboard reads /products.
+
+    It does NOT read /inventory.
+
+    This keeps the actual account details
+    inside inventory protected.
+    */
 
     const productsRef =
         ref(
@@ -1495,7 +1789,8 @@ function loadAvailableProducts(){
                 snapshot.val() || {};
 
 
-            let totalAvailable = 0;
+            let total =
+                0;
 
 
             Object.values(
@@ -1503,18 +1798,8 @@ function loadAvailableProducts(){
             ).forEach(
                 (product) => {
 
-                    if(!product){
-
-                        return;
-
-                    }
-
-
-                    /*
-                     * Ignore inactive products.
-                     */
-
                     if(
+                        !product ||
                         product.active === false
                     ){
 
@@ -1526,21 +1811,12 @@ function loadAvailableProducts(){
                     const stock =
                         Number(
                             product.stock
-                        );
+                        ) || 0;
 
 
-                    /*
-                     * Only count valid positive
-                     * stock numbers.
-                     */
+                    if(stock > 0){
 
-                    if(
-                        Number.isFinite(stock) &&
-                        stock > 0
-                    ){
-
-                        totalAvailable +=
-                            stock;
+                        total += stock;
 
                     }
 
@@ -1549,7 +1825,7 @@ function loadAvailableProducts(){
 
 
             availableProducts.textContent =
-                totalAvailable.toString();
+                total.toString();
 
         },
 
@@ -1557,7 +1833,7 @@ function loadAvailableProducts(){
         (error) => {
 
             console.error(
-                "Products loading error:",
+                "Available products error:",
                 error
             );
 
@@ -1574,82 +1850,120 @@ function loadAvailableProducts(){
 
 
 /* ==========================================
-   LOAD CATEGORIES
+   LOAD PRODUCTS
 ========================================== */
 
-function loadCategories(){
+function loadProducts(){
 
-    const categoriesRef =
+    const productsRef =
         ref(
             db,
-            "categories"
+            "products"
         );
 
 
     onValue(
 
-        categoriesRef,
+        productsRef,
 
         (snapshot) => {
 
             const data =
-                snapshot.val();
+                snapshot.val() || {};
 
 
-            allCategories = [];
+            const products =
+                [];
 
 
-            if(data){
+            /*
+            --------------------------------
+            READ PRODUCTS
+            --------------------------------
+            */
 
-                Object.entries(
-                    data
-                ).forEach(
-                    ([id, category]) => {
+            Object.entries(
+                data
+            ).forEach(
+                ([id, product]) => {
 
-                        if(
-                            category &&
-                            category.active === true
-                        ){
 
-                            allCategories.push({
+                    if(
+                        !product ||
+                        product.active === false
+                    ){
 
-                                id:id,
-
-                                name:
-                                    category.name ||
-                                    "Unnamed",
-
-                                icon:
-                                    category.icon ||
-                                    "📦",
-
-                                createdAt:
-                                    category.createdAt ||
-                                    0
-
-                            });
-
-                        }
+                        return;
 
                     }
-                );
-
-            }
 
 
-            allCategories.sort(
-                (a,b) =>
-                    Number(
-                        a.createdAt || 0
-                    ) -
-                    Number(
-                        b.createdAt || 0
-                    )
+                    const stock =
+                        Number(
+                            product.stock
+                        ) || 0;
+
+
+                    /*
+                    Don't show products
+                    with no stock.
+                    */
+
+                    if(stock <= 0){
+
+                        return;
+
+                    }
+
+
+                    products.push({
+
+                        id:id,
+
+                        name:
+                            product.name ||
+                            "Unnamed Product",
+
+                        category:
+                            product.category ||
+                            "Other",
+
+                        price:
+                            Number(
+                                product.price
+                            ) || 0,
+
+                        stock:stock,
+
+                        image:
+                            product.image ||
+                            "",
+
+                        icon:
+                            product.icon ||
+                            getProductIcon(
+                                product.category
+                            ),
+
+                        createdAt:
+                            Number(
+                                product.createdAt
+                            ) || 0
+
+                    });
+
+                }
             );
 
 
-            renderCategories(
-                allCategories
+            /*
+            --------------------------------
+            RENDER
+            --------------------------------
+            */
+
+            renderProductMarketplace(
+                products
             );
 
         },
@@ -1658,25 +1972,25 @@ function loadCategories(){
         (error) => {
 
             console.error(
-                "Category loading error:",
+                "Product loading error:",
                 error
             );
 
 
-            categoryGrid.innerHTML = `
+            productMarketplace.innerHTML = `
 
-                <div class="empty-marketplace">
+                <div class="products-empty">
 
                     <div class="big">
                         ⚠️
                     </div>
 
-                    <h3>
-                        Categories unavailable
-                    </h3>
+                    <strong>
+                        Products unavailable
+                    </strong>
 
                     <p>
-                        We could not load the marketplace categories.
+                        We could not load the marketplace.
                     </p>
 
                 </div>
@@ -1692,31 +2006,35 @@ function loadCategories(){
 
 
 /* ==========================================
-   RENDER CATEGORIES
+   RENDER PRODUCT MARKETPLACE
 ========================================== */
 
-function renderCategories(
-    categories
+function renderProductMarketplace(
+    products
 ){
 
-    if(
-        categories.length === 0
-    ){
+    /*
+    --------------------------------
+    EMPTY
+    --------------------------------
+    */
 
-        categoryGrid.innerHTML = `
+    if(!products.length){
 
-            <div class="empty-marketplace">
+        productMarketplace.innerHTML = `
+
+            <div class="products-empty">
 
                 <div class="big">
-                    🗂️
+                    📦
                 </div>
 
-                <h3>
-                    No categories available
-                </h3>
+                <strong>
+                    No products available
+                </strong>
 
                 <p>
-                    New marketplace categories will appear here.
+                    Check back later for available products.
                 </p>
 
             </div>
@@ -1728,83 +2046,175 @@ function renderCategories(
     }
 
 
-    categoryGrid.innerHTML =
+
+    /*
+    --------------------------------
+    GROUP PRODUCTS BY CATEGORY
+    --------------------------------
+    */
+
+    const grouped =
+        {};
+
+
+    products.forEach(
+        (product) => {
+
+            const category =
+                product.category ||
+                "Other";
+
+
+            if(
+                !grouped[category]
+            ){
+
+                grouped[category] =
+                    [];
+
+            }
+
+
+            grouped[category].push(
+                product
+            );
+
+        }
+    );
+
+
+
+    /*
+    --------------------------------
+    CLEAR MARKETPLACE
+    --------------------------------
+    */
+
+    productMarketplace.innerHTML =
         "";
 
 
-    categories.forEach(
-        (category) => {
 
-            const card =
+    /*
+    --------------------------------
+    CREATE EACH CATEGORY
+    --------------------------------
+    */
+
+    Object.entries(
+        grouped
+    ).forEach(
+        ([categoryName, categoryProducts]) => {
+
+
+            const categorySection =
                 document.createElement(
                     "div"
                 );
 
 
-            card.className =
-                "category-item";
+            categorySection.className =
+                "product-category";
 
 
-            card.dataset.name =
-                String(
-                    category.name
-                ).toLowerCase();
+            /*
+            --------------------------------
+            CATEGORY HEADER
+            --------------------------------
+            */
 
+            categorySection.innerHTML = `
 
-            card.innerHTML = `
+                <div class="product-category-header">
 
-                <div class="category-item-icon">
-
-                    ${escapeHtml(
-                        category.icon
-                    )}
-
-                </div>
-
-
-                <div class="category-item-content">
-
-                    <div class="category-item-name">
+                    <div class="product-category-title">
 
                         ${escapeHtml(
-                            category.name
+                            categoryName
                         )}
 
                     </div>
 
 
-                    <div class="category-item-subtitle">
-
-                        Browse products
-
-                    </div>
-
-                </div>
-
-
-                <div class="category-arrow">
-
-                    →
+                    <button
+                        class="view-all-btn"
+                        type="button"
+                    >
+                        View all
+                    </button>
 
                 </div>
+
+
+                <div class="product-list"></div>
 
             `;
 
 
-            card.addEventListener(
-                "click",
-                () => {
 
-                    openCategory(
-                        category.name
+            const productList =
+                categorySection.querySelector(
+                    ".product-list"
+                );
+
+
+            const viewAllBtn =
+                categorySection.querySelector(
+                    ".view-all-btn"
+                );
+
+
+
+            /*
+            --------------------------------
+            SHOW UP TO 5 PRODUCTS
+            --------------------------------
+            */
+
+            const visibleProducts =
+                categoryProducts.slice(
+                    0,
+                    5
+                );
+
+
+            visibleProducts.forEach(
+                (product) => {
+
+                    productList.appendChild(
+                        createProductCard(
+                            product
+                        )
                     );
 
                 }
             );
 
 
-            categoryGrid.appendChild(
-                card
+
+            /*
+            --------------------------------
+            VIEW ALL
+            --------------------------------
+            */
+
+            viewAllBtn.addEventListener(
+                "click",
+                () => {
+
+                    window.location.href =
+                        "products.html?category=" +
+                        encodeURIComponent(
+                            categoryName
+                        );
+
+                }
+            );
+
+
+
+            productMarketplace.appendChild(
+                categorySection
             );
 
         }
@@ -1815,76 +2225,467 @@ function renderCategories(
 
 
 /* ==========================================
-   SEARCH CATEGORIES
+   CREATE PRODUCT CARD
 ========================================== */
 
-categorySearch.addEventListener(
-    "input",
-    () => {
+function createProductCard(
+    product
+){
 
-        const search =
-            categorySearch.value
-                .trim()
-                .toLowerCase();
+    const card =
+        document.createElement(
+            "div"
+        );
 
 
-        if(!search){
+    card.className =
+        "product-card";
 
-            renderCategories(
-                allCategories
+
+
+    /*
+    --------------------------------
+    IMAGE
+    --------------------------------
+    */
+
+    let imageHTML =
+        "";
+
+
+    if(
+        product.image
+    ){
+
+        imageHTML = `
+
+            <img
+                src="${escapeHtml(
+                    product.image
+                )}"
+                alt=""
+                loading="lazy"
+            >
+
+        `;
+
+    }
+    else{
+
+        imageHTML =
+            escapeHtml(
+                product.icon ||
+                "📦"
             );
 
-            return;
-
-        }
+    }
 
 
-        const filtered =
-            allCategories.filter(
-                (category) =>
 
-                    String(
-                        category.name
-                    )
-                    .toLowerCase()
-                    .includes(
-                        search
-                    )
-            );
+    /*
+    --------------------------------
+    CARD HTML
+    --------------------------------
+    */
+
+    card.innerHTML = `
+
+        <div class="product-image-box">
+
+            ${imageHTML}
+
+        </div>
 
 
-        if(
-            filtered.length === 0
-        ){
+        <div class="product-info">
 
-            categoryGrid.innerHTML = `
+            <div class="product-name">
 
-                <div class="no-results">
+                ${escapeHtml(
+                    product.name
+                )}
 
-                    <div class="big">
-                        🔎
-                    </div>
+            </div>
 
-                    No category found for
-                    "<strong>${escapeHtml(
-                        search
-                    )}</strong>"
+
+            <div class="product-meta">
+
+                <div class="product-price">
+
+                    ₦${Number(
+                        product.price
+                    ).toLocaleString(
+                        "en-NG"
+                    )}
 
                 </div>
 
-            `;
+
+                <div class="product-divider">
+
+                    |
+
+                </div>
+
+
+                <div class="product-stock">
+
+                    ${product.stock} Pcs
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="product-buy-btn"
+            type="button"
+            title="Buy product"
+        >
+
+            🛍️
+
+        </button>
+
+    `;
+
+
+
+    /*
+    --------------------------------
+    BUY BUTTON
+    --------------------------------
+    */
+
+    const buyButton =
+        card.querySelector(
+            ".product-buy-btn"
+        );
+
+
+    buyButton.addEventListener(
+        "click",
+        () => {
+
+            buyProduct(
+                product,
+                buyButton
+            );
+
+        }
+    );
+
+
+    return card;
+
+}
+
+
+
+/* ==========================================
+   PRODUCT ICON
+========================================== */
+
+function getProductIcon(
+    category
+){
+
+    const value =
+        String(
+            category || ""
+        ).toLowerCase();
+
+
+    if(
+        value.includes("instagram")
+    ){
+
+        return "📸";
+
+    }
+
+
+    if(
+        value.includes("facebook")
+    ){
+
+        return "🔵";
+
+    }
+
+
+    if(
+        value.includes("reddit")
+    ){
+
+        return "🔴";
+
+    }
+
+
+    if(
+        value.includes("tiktok")
+    ){
+
+        return "🎵";
+
+    }
+
+
+    if(
+        value.includes("twitter") ||
+        value.includes("x ")
+    ){
+
+        return "𝕏";
+
+    }
+
+
+    if(
+        value.includes("youtube")
+    ){
+
+        return "▶️";
+
+    }
+
+
+    return "📦";
+
+}
+
+
+
+/* ==========================================
+   BUY PRODUCT
+========================================== */
+
+async function buyProduct(
+    product,
+    button
+){
+
+    /*
+    --------------------------------
+    CONFIRM PURCHASE
+    --------------------------------
+    */
+
+    const confirmed =
+        confirm(
+            "Buy " +
+            product.name +
+            " for ₦" +
+            Number(
+                product.price
+            ).toLocaleString(
+                "en-NG"
+            ) +
+            "?"
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+
+    /*
+    --------------------------------
+    DISABLE BUTTON
+    --------------------------------
+    */
+
+    button.disabled =
+        true;
+
+    button.textContent =
+        "⏳";
+
+
+
+    try{
+
+        /*
+        --------------------------------
+        CURRENT USER
+        --------------------------------
+        */
+
+        const user =
+            auth.currentUser;
+
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
 
             return;
 
         }
 
 
-        renderCategories(
-            filtered
+
+        /*
+        --------------------------------
+        FIREBASE ID TOKEN
+        --------------------------------
+        */
+
+        const idToken =
+            await user.getIdToken();
+
+
+
+        /*
+        --------------------------------
+        PURCHASE API
+        --------------------------------
+
+        IMPORTANT:
+
+        The browser does NOT deduct
+        the wallet.
+
+        The Vercel API handles:
+
+        1. Authentication
+        2. Wallet balance check
+        3. Wallet deduction
+        4. Inventory reservation
+        5. Order creation
+        6. Inventory sold status
+        7. Stock synchronization
+        */
+
+        const response =
+            await fetch(
+                "/api/purchase",
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer " +
+                            idToken
+
+                    },
+
+                    body:JSON.stringify({
+
+                        productId:
+                            product.id
+
+                    })
+
+                }
+            );
+
+
+
+        /*
+        --------------------------------
+        RESPONSE
+        --------------------------------
+        */
+
+        let result =
+            {};
+
+
+        try{
+
+            result =
+                await response.json();
+
+        }
+        catch(error){
+
+            result =
+                {};
+
+        }
+
+
+
+        /*
+        --------------------------------
+        PURCHASE FAILED
+        --------------------------------
+        */
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                result.message ||
+                result.error ||
+                "Purchase failed."
+            );
+
+        }
+
+
+
+        /*
+        --------------------------------
+        SUCCESS
+        --------------------------------
+        */
+
+        alert(
+            "Purchase successful!"
         );
 
+
+        /*
+        Go to orders.
+        */
+
+        window.location.href =
+            "orders.html";
+
     }
-);
+    catch(error){
+
+        console.error(
+            "Purchase error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to complete purchase."
+        );
+
+
+        /*
+        Re-enable button.
+        */
+
+        button.disabled =
+            false;
+
+        button.textContent =
+            "🛍️";
+
+    }
+
+}
 
 
 
@@ -1892,7 +2693,9 @@ categorySearch.addEventListener(
    ESCAPE HTML
 ========================================== */
 
-function escapeHtml(value){
+function escapeHtml(
+    value
+){
 
     return String(
         value ?? ""
@@ -1928,29 +2731,13 @@ function escapeHtml(value){
 
 
 /* ==========================================
-   OPEN CATEGORY
-========================================== */
-
-window.openCategory =
-function(category){
-
-    window.location.href =
-        "products.html?category=" +
-        encodeURIComponent(
-            category
-        );
-
-};
-
-
-
-/* ==========================================
    LOGOUT
 ========================================== */
 
 logoutBtn.addEventListener(
     "click",
     async () => {
+
 
         logoutBtn.disabled =
             true;
@@ -1971,7 +2758,6 @@ logoutBtn.addEventListener(
                 "login.html";
 
         }
-
         catch(error){
 
             console.error(
@@ -2000,7 +2786,7 @@ logoutBtn.addEventListener(
 
 
 /* ==========================================
-   YEAR
+   FOOTER YEAR
 ========================================== */
 
 document.getElementById(
@@ -2014,4 +2800,4 @@ document.getElementById(
 
 </body>
 
-</html>
+    </html>
