@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -246,9 +247,7 @@ header{
     opacity:.85;
 }
 
-/* ==========================================
-MARKETPLACE
-========================================== */
+/* MARKETPLACE */
 
 .marketplace{
     margin-top:10px;
@@ -447,9 +446,7 @@ footer{
     text-align:center;
 }
 
-/* TABLET
-   QUICK ACTIONS STAY 4 ACROSS
-*/
+/* TABLET */
 
 @media(max-width:1000px){
 
@@ -463,9 +460,7 @@ footer{
 
 }
 
-/* MOBILE
-   QUICK ACTIONS STAY 4 ACROSS
-*/
+/* MOBILE */
 
 @media(max-width:650px){
 
@@ -497,11 +492,6 @@ footer{
     .stat-value{
         font-size:21px;
     }
-
-    /*
-       4 CARDS ACROSS
-       2 ROWS
-    */
 
     .quick-actions{
         grid-template-columns:repeat(4,minmax(0,1fr));
@@ -551,23 +541,32 @@ footer{
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- LOADING SCREEN -->
 
-<div class="loading-screen" id="loadingScreen">
+<div
+    class="loading-screen"
+    id="loadingScreen"
+>
 
     <div class="loader-box">
 
         <div class="loader"></div>
 
-        <p>Checking your account...</p>
+        <p>
+            Checking your account...
+        </p>
 
     </div>
 
 </div>
+
 
 
 <!-- HEADER -->
@@ -576,17 +575,28 @@ footer{
 
     <div class="navbar">
 
-        <a href="dashboard.html" class="logo">
+        <a
+            href="dashboard.html"
+            class="logo"
+        >
             Zavora <span>Social</span>
         </a>
 
+
         <div class="user-area">
 
-            <span class="user-name" id="userName">
+            <span
+                class="user-name"
+                id="userName"
+            >
                 Loading...
             </span>
 
-            <button class="logout-btn" id="logoutBtn">
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+            >
                 Logout
             </button>
 
@@ -597,29 +607,41 @@ footer{
 </header>
 
 
+
 <!-- MAIN -->
 
 <main class="container">
+
 
     <!-- WELCOME -->
 
     <section class="welcome">
 
         <h1>
+
             Welcome back,
-            <span id="welcomeName">User</span> 👋
+            <span id="welcomeName">
+                User
+            </span> 👋
+
         </h1>
 
+
         <p>
-            Manage your wallet, orders and marketplace purchases from one place.
+            Manage your wallet, orders and marketplace
+            purchases from one place.
         </p>
 
     </section>
 
 
-    <!-- STATS -->
+
+    <!-- LIVE STATS -->
 
     <section class="stats">
+
+
+        <!-- WALLET -->
 
         <div class="stat-card">
 
@@ -631,12 +653,18 @@ footer{
                 Wallet Balance
             </div>
 
-            <div class="stat-value" id="walletBalance">
+            <div
+                class="stat-value"
+                id="walletBalance"
+            >
                 ₦0.00
             </div>
 
         </div>
 
+
+
+        <!-- ORDERS -->
 
         <div class="stat-card">
 
@@ -648,12 +676,18 @@ footer{
                 Orders
             </div>
 
-            <div class="stat-value">
+            <div
+                class="stat-value"
+                id="ordersCount"
+            >
                 0
             </div>
 
         </div>
 
+
+
+        <!-- AVAILABLE PRODUCTS -->
 
         <div class="stat-card">
 
@@ -665,12 +699,18 @@ footer{
                 Available Products
             </div>
 
-            <div class="stat-value">
+            <div
+                class="stat-value"
+                id="availableProducts"
+            >
                 0
             </div>
 
         </div>
 
+
+
+        <!-- NOTIFICATIONS -->
 
         <div class="stat-card">
 
@@ -682,13 +722,18 @@ footer{
                 Notifications
             </div>
 
-            <div class="stat-value">
+            <div
+                class="stat-value"
+                id="notificationsCount"
+            >
                 0
             </div>
 
         </div>
 
+
     </section>
+
 
 
     <!-- QUICK ACTIONS -->
@@ -699,11 +744,16 @@ footer{
             Quick Actions
         </h2>
 
+
         <div class="quick-actions">
+
 
             <!-- 1 -->
 
-            <a href="products.html" class="quick-card">
+            <a
+                href="products.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     🛒
@@ -720,9 +770,13 @@ footer{
             </a>
 
 
+
             <!-- 2 -->
 
-            <a href="wallet.html" class="quick-card">
+            <a
+                href="wallet.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     💳
@@ -739,9 +793,13 @@ footer{
             </a>
 
 
+
             <!-- 3 -->
 
-            <a href="profile.html" class="quick-card">
+            <a
+                href="profile.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     👤
@@ -758,9 +816,13 @@ footer{
             </a>
 
 
+
             <!-- 4 -->
 
-            <a href="orders.html" class="quick-card">
+            <a
+                href="orders.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     📦
@@ -777,9 +839,13 @@ footer{
             </a>
 
 
+
             <!-- 5 -->
 
-            <a href="numbers.html" class="quick-card">
+            <a
+                href="numbers.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     ♻️
@@ -796,9 +862,13 @@ footer{
             </a>
 
 
+
             <!-- 6 -->
 
-            <a href="gifts.html" class="quick-card">
+            <a
+                href="gifts.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     🎁
@@ -815,28 +885,36 @@ footer{
             </a>
 
 
+
             <!-- 7 -->
 
-            <a href="boost.html" class="quick-card">
+            <a
+                href="boost.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     😁
                 </div>
 
                 <strong>
-                    Boost Social Media 
+                    Boost Social Media
                 </strong>
 
                 <small>
-                    Boost like, views & others 
+                    Boost like, views & others
                 </small>
 
             </a>
 
 
+
             <!-- 8 -->
 
-            <a href="api.html" class="quick-card">
+            <a
+                href="api.html"
+                class="quick-card"
+            >
 
                 <div class="quick-icon">
                     💎
@@ -852,14 +930,17 @@ footer{
 
             </a>
 
+
         </div>
 
     </section>
 
 
+
     <!-- MARKETPLACE -->
 
     <section class="marketplace">
+
 
         <div class="marketplace-header">
 
@@ -874,13 +955,15 @@ footer{
         </div>
 
 
-        <!-- SEARCH PRODUCTS -->
+
+        <!-- SEARCH -->
 
         <div class="marketplace-search">
 
             <span class="search-icon">
                 🔎
             </span>
+
 
             <input
                 type="search"
@@ -892,11 +975,15 @@ footer{
         </div>
 
 
+
         <!-- ALL CATEGORIES -->
 
         <div class="all-categories-title">
+
             All Categories
+
         </div>
+
 
 
         <!-- CATEGORY LIST -->
@@ -918,24 +1005,32 @@ footer{
 
         </div>
 
+
     </section>
+
 
 </main>
 
 
+
 <footer>
 
-    © <span id="year"></span> Zavora Social.
+    ©️
+    <span id="year"></span>
+    Zavora Social.
     All rights reserved.
 
 </footer>
 
 
+
 <script type="module">
 
+
 /* ==========================================
-FIREBASE
+   FIREBASE
 ========================================== */
+
 
 import {
     initializeApp
@@ -957,6 +1052,7 @@ import {
     onValue
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
 
 
 const firebaseConfig = {
@@ -988,8 +1084,11 @@ const firebaseConfig = {
 };
 
 
+
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
 
 
 const auth =
@@ -1000,42 +1099,87 @@ const db =
     getDatabase(app);
 
 
+
 /* ==========================================
-ELEMENTS
+   ELEMENTS
 ========================================== */
 
+
 const loadingScreen =
-    document.getElementById("loadingScreen");
+    document.getElementById(
+        "loadingScreen"
+    );
+
 
 const userName =
-    document.getElementById("userName");
+    document.getElementById(
+        "userName"
+    );
+
 
 const welcomeName =
-    document.getElementById("welcomeName");
+    document.getElementById(
+        "welcomeName"
+    );
+
 
 const logoutBtn =
-    document.getElementById("logoutBtn");
+    document.getElementById(
+        "logoutBtn"
+    );
+
 
 const categoryGrid =
-    document.getElementById("categoryGrid");
+    document.getElementById(
+        "categoryGrid"
+    );
+
 
 const walletBalance =
-    document.getElementById("walletBalance");
+    document.getElementById(
+        "walletBalance"
+    );
+
+
+const ordersCount =
+    document.getElementById(
+        "ordersCount"
+    );
+
+
+const availableProducts =
+    document.getElementById(
+        "availableProducts"
+    );
+
+
+const notificationsCount =
+    document.getElementById(
+        "notificationsCount"
+    );
+
 
 const categorySearch =
-    document.getElementById("categorySearch");
+    document.getElementById(
+        "categorySearch"
+    );
 
 
 let allCategories = [];
 
 
+
 /* ==========================================
-AUTHENTICATION
+   AUTHENTICATION
 ========================================== */
 
+
 onAuthStateChanged(
+
     auth,
+
     (user) => {
+
 
         if(!user){
 
@@ -1045,6 +1189,14 @@ onAuthStateChanged(
             return;
 
         }
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CUSTOMER NAME
+        |--------------------------------------------------------------------------
+        */
 
 
         let displayName =
@@ -1069,37 +1221,78 @@ onAuthStateChanged(
             displayName;
 
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | SHOW DASHBOARD
+        |--------------------------------------------------------------------------
+        */
+
+
         loadingScreen.style.display =
             "none";
 
 
-        loadWallet(user.uid);
+
+        /*
+        |--------------------------------------------------------------------------
+        | LOAD LIVE DATA
+        |--------------------------------------------------------------------------
+        */
+
+
+        loadWallet(
+            user.uid
+        );
+
+
+        loadCustomerOrders(
+            user.uid
+        );
+
+
+        loadAvailableProducts();
+
 
         loadCategories();
 
+
     }
+
 );
 
 
+
 /* ==========================================
-LOAD CUSTOMER WALLET
+   LOAD CUSTOMER WALLET
 ========================================== */
 
+
 function loadWallet(uid){
+
 
     const walletRef =
         ref(
             db,
-            "users/" + uid + "/walletBalance"
+            "users/" +
+            uid +
+            "/walletBalance"
         );
 
 
+
     onValue(
+
         walletRef,
+
         (snapshot) => {
 
+
             const balance =
-                Number(snapshot.val()) || 0;
+                Number(
+                    snapshot.val()
+                ) || 0;
+
 
 
             walletBalance.textContent =
@@ -1113,7 +1306,10 @@ function loadWallet(uid){
                 );
 
         },
+
+
         (error) => {
+
 
             console.error(
                 "Wallet loading error:",
@@ -1125,24 +1321,255 @@ function loadWallet(uid){
                 "₦0.00";
 
         }
+
     );
 
 }
 
 
+
 /* ==========================================
-LOAD CATEGORIES
+   LOAD CUSTOMER ORDERS
 ========================================== */
 
-function loadCategories(){
 
-    const categoriesRef =
-        ref(db,"categories");
+/*
+   IMPORTANT:
+
+   We read the orders belonging to the
+   logged-in customer only.
+
+   The purchase API creates the order at:
+
+   orders/{orderId}
+
+   with:
+
+   uid: customer UID
+*/
+
+
+function loadCustomerOrders(uid){
+
+
+    const ordersRef =
+        ref(
+            db,
+            "orders"
+        );
+
 
 
     onValue(
-        categoriesRef,
+
+        ordersRef,
+
         (snapshot) => {
+
+
+            const data =
+                snapshot.val();
+
+
+            let count =
+                0;
+
+
+
+            if(data){
+
+                Object.values(
+                    data
+                ).forEach(
+                    (order) => {
+
+
+                        if(
+                            order &&
+                            order.uid === uid
+                        ){
+
+                            count++;
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+
+            ordersCount.textContent =
+                count.toString();
+
+
+        },
+
+
+        (error) => {
+
+
+            console.error(
+                "Orders loading error:",
+                error
+            );
+
+
+            ordersCount.textContent =
+                "0";
+
+        }
+
+    );
+
+}
+
+
+
+/* ==========================================
+   LOAD AVAILABLE PRODUCTS / INVENTORY
+========================================== */
+
+
+/*
+   This counts every inventory item whose
+   status is "available".
+
+   Example:
+
+   Australia TikTok
+   7 available
+
+   Customer buys 1
+
+   6 available
+
+   Dashboard changes automatically.
+*/
+
+
+function loadAvailableProducts(){
+
+
+    const inventoryRef =
+        ref(
+            db,
+            "inventory"
+        );
+
+
+
+    onValue(
+
+        inventoryRef,
+
+        (snapshot) => {
+
+
+            const data =
+                snapshot.val();
+
+
+            let availableCount =
+                0;
+
+
+
+            if(data){
+
+                Object.values(
+                    data
+                ).forEach(
+                    (productInventory) => {
+
+
+                        if(
+                            productInventory &&
+                            typeof productInventory === "object"
+                        ){
+
+
+                            Object.values(
+                                productInventory
+                            ).forEach(
+                                (item) => {
+
+
+                                    if(
+                                        item &&
+                                        String(
+                                            item.status ||
+                                            ""
+                                        ).toLowerCase()
+                                        === "available"
+                                    ){
+
+                                        availableCount++;
+
+                                    }
+
+                                }
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+
+            availableProducts.textContent =
+                availableCount.toString();
+
+
+        },
+
+
+        (error) => {
+
+
+            console.error(
+                "Inventory loading error:",
+                error
+            );
+
+
+            availableProducts.textContent =
+                "0";
+
+        }
+
+    );
+
+}
+
+
+
+/* ==========================================
+   LOAD CATEGORIES
+========================================== */
+
+
+function loadCategories(){
+
+
+    const categoriesRef =
+        ref(
+            db,
+            "categories"
+        );
+
+
+
+    onValue(
+
+        categoriesRef,
+
+        (snapshot) => {
+
 
             const data =
                 snapshot.val();
@@ -1151,54 +1578,68 @@ function loadCategories(){
             allCategories = [];
 
 
+
             if(data){
 
-                Object.entries(data)
-                    .forEach(
-                        ([id,category]) => {
+                Object.entries(
+                    data
+                ).forEach(
+                    ([id, category]) => {
 
-                            if(
-                                category &&
-                                category.active === true
-                            ){
 
-                                allCategories.push({
+                        if(
+                            category &&
+                            category.active === true
+                        ){
 
-                                    id:id,
+                            allCategories.push({
 
-                                    name:
-                                        category.name ||
-                                        "Unnamed",
+                                id:id,
 
-                                    icon:
-                                        category.icon ||
-                                        "📦",
+                                name:
+                                    category.name ||
+                                    "Unnamed",
 
-                                    createdAt:
-                                        category.createdAt ||
-                                        0
+                                icon:
+                                    category.icon ||
+                                    "📦",
 
-                                });
+                                createdAt:
+                                    category.createdAt ||
+                                    0
 
-                            }
+                            });
 
                         }
-                    );
+
+                    }
+                );
 
             }
 
 
+
             allCategories.sort(
                 (a,b) =>
-                    a.createdAt -
-                    b.createdAt
+                    Number(
+                        a.createdAt || 0
+                    ) -
+                    Number(
+                        b.createdAt || 0
+                    )
             );
 
 
-            renderCategories(allCategories);
+
+            renderCategories(
+                allCategories
+            );
 
         },
+
+
         (error) => {
+
 
             console.error(
                 "Category loading error:",
@@ -1227,18 +1668,26 @@ function loadCategories(){
             `;
 
         }
+
     );
 
 }
 
 
+
 /* ==========================================
-RENDER CATEGORIES
+   RENDER CATEGORIES
 ========================================== */
 
-function renderCategories(categories){
 
-    if(categories.length === 0){
+function renderCategories(
+    categories
+){
+
+
+    if(
+        categories.length === 0
+    ){
 
         categoryGrid.innerHTML = `
 
@@ -1265,14 +1714,20 @@ function renderCategories(categories){
     }
 
 
-    categoryGrid.innerHTML = "";
+
+    categoryGrid.innerHTML =
+        "";
+
 
 
     categories.forEach(
         (category) => {
 
+
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             card.className =
@@ -1280,24 +1735,33 @@ function renderCategories(categories){
 
 
             card.dataset.name =
-                category.name.toLowerCase();
+                String(
+                    category.name
+                ).toLowerCase();
+
 
 
             card.innerHTML = `
 
                 <div class="category-item-icon">
 
-                    ${escapeHtml(category.icon)}
+                    ${escapeHtml(
+                        category.icon
+                    )}
 
                 </div>
+
 
                 <div class="category-item-content">
 
                     <div class="category-item-name">
 
-                        ${escapeHtml(category.name)}
+                        ${escapeHtml(
+                            category.name
+                        )}
 
                     </div>
+
 
                     <div class="category-item-subtitle">
 
@@ -1307,6 +1771,7 @@ function renderCategories(categories){
 
                 </div>
 
+
                 <div class="category-arrow">
 
                     →
@@ -1314,6 +1779,7 @@ function renderCategories(categories){
                 </div>
 
             `;
+
 
 
             card.addEventListener(
@@ -1328,7 +1794,10 @@ function renderCategories(categories){
             );
 
 
-            categoryGrid.appendChild(card);
+
+            categoryGrid.appendChild(
+                card
+            );
 
         }
     );
@@ -1336,18 +1805,22 @@ function renderCategories(categories){
 }
 
 
+
 /* ==========================================
-SEARCH CATEGORIES
+   SEARCH CATEGORIES
 ========================================== */
+
 
 categorySearch.addEventListener(
     "input",
     () => {
 
+
         const search =
             categorySearch.value
                 .trim()
                 .toLowerCase();
+
 
 
         if(!search){
@@ -1361,16 +1834,25 @@ categorySearch.addEventListener(
         }
 
 
+
         const filtered =
             allCategories.filter(
                 (category) =>
-                    category.name
-                        .toLowerCase()
-                        .includes(search)
+
+                    String(
+                        category.name
+                    )
+                    .toLowerCase()
+                    .includes(
+                        search
+                    )
             );
 
 
-        if(filtered.length === 0){
+
+        if(
+            filtered.length === 0
+        ){
 
             categoryGrid.innerHTML = `
 
@@ -1381,7 +1863,9 @@ categorySearch.addEventListener(
                     </div>
 
                     No category found for
-                    "<strong>${escapeHtml(search)}</strong>"
+                    "<strong>${escapeHtml(
+                        search
+                    )}</strong>"
 
                 </div>
 
@@ -1392,92 +1876,120 @@ categorySearch.addEventListener(
         }
 
 
-        renderCategories(filtered);
+
+        renderCategories(
+            filtered
+        );
 
     }
 );
 
 
+
 /* ==========================================
-SECURITY: ESCAPE TEXT
+   ESCAPE HTML
 ========================================== */
+
 
 function escapeHtml(value){
 
-    return String(value)
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+    return String(
+        value ?? ""
+    )
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
+
 /* ==========================================
-OPEN CATEGORY
+   OPEN CATEGORY
 ========================================== */
+
 
 window.openCategory =
 function(category){
 
+
     window.location.href =
         "products.html?category=" +
-        encodeURIComponent(category);
+        encodeURIComponent(
+            category
+        );
 
 };
 
 
+
 /* ==========================================
-LOGOUT
+   LOGOUT
 ========================================== */
+
 
 logoutBtn.addEventListener(
     "click",
     async () => {
 
+
         logoutBtn.disabled =
             true;
+
 
         logoutBtn.textContent =
             "Logging out...";
 
 
+
         try{
 
-            await signOut(auth);
+
+            await signOut(
+                auth
+            );
 
 
             window.location.href =
                 "login.html";
 
-        }catch(error){
 
-            console.error(error);
+        }
+        catch(error){
+
+
+            console.error(
+                "Logout error:",
+                error
+            );
 
 
             logoutBtn.disabled =
                 false;
+
 
             logoutBtn.textContent =
                 "Logout";
@@ -1493,15 +2005,21 @@ logoutBtn.addEventListener(
 );
 
 
+
 /* ==========================================
-YEAR
+   YEAR
 ========================================== */
 
-document.getElementById("year")
-    .textContent =
+
+document.getElementById(
+    "year"
+).textContent =
     new Date().getFullYear();
+
 
 </script>
 
+
 </body>
+
 </html>
