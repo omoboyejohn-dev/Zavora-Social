@@ -16,17 +16,19 @@
 
 body{
     font-family:Inter,Arial,sans-serif;
-    background:#f8fafc;
+    background:#ffffff;
     color:#111827;
     min-height:100vh;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
     width:100%;
+    background:rgba(255,255,255,.96);
     border-bottom:1px solid #e5e7eb;
-    background:rgba(255,255,255,.95);
     backdrop-filter:blur(18px);
     position:sticky;
     top:0;
@@ -35,9 +37,10 @@ header{
 
 .navbar{
     max-width:900px;
-    margin:auto;
     min-height:70px;
+    margin:auto;
     padding:0 20px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -51,79 +54,133 @@ header{
 }
 
 .logo span{
-    color:#16a34a;
+    color:#7e22ce;
 }
 
 .back-btn{
     text-decoration:none;
     color:#4b5563;
     font-size:14px;
-    font-weight:700;
+    font-weight:800;
+    transition:.2s ease;
 }
 
 .back-btn:hover{
-    color:#16a34a;
+    color:#7e22ce;
 }
 
-/* CONTAINER */
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
     max-width:900px;
     margin:auto;
-    padding:35px 20px 60px;
+    padding:32px 20px 60px;
 }
 
-/* WALLET CARD */
+/* =========================
+   WALLET CARD
+========================= */
 
 .wallet-card{
-    background:#fff;
-    border:1px solid #e5e7eb;
+    background:
+        linear-gradient(
+            135deg,
+            #7e22ce,
+            #2563eb
+        );
+
+    color:#fff;
+
     border-radius:22px;
     padding:28px;
-    margin-bottom:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+    margin-bottom:24px;
+
+    box-shadow:
+        0 12px 35px rgba(37,99,235,.16);
+}
+
+.wallet-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:22px;
+}
+
+.wallet-icon{
+    width:50px;
+    height:50px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.18);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+
+    border:1px solid rgba(255,255,255,.2);
 }
 
 .wallet-label{
-    color:#6b7280;
-    font-size:14px;
-    margin-bottom:10px;
+    font-size:13px;
+    color:rgba(255,255,255,.8);
+    margin-bottom:5px;
 }
 
 .wallet-balance{
-    color:#111827;
-    font-size:38px;
+    font-size:37px;
     font-weight:900;
-    margin-bottom:22px;
+    letter-spacing:-1px;
 }
 
 .deposit-main-btn{
     width:100%;
+
     border:0;
     border-radius:13px;
+
     padding:15px;
-    background:#16a34a;
-    color:#fff;
+
+    background:#fff;
+    color:#4c1d95;
+
     font-size:15px;
     font-weight:900;
+
     cursor:pointer;
+
     transition:.2s ease;
 }
 
 .deposit-main-btn:hover{
-    background:#15803d;
+    transform:translateY(-1px);
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
 }
 
-/* DEPOSIT STAGES */
+/* =========================
+   DEPOSIT STAGE BOX
+========================= */
 
 .stage-box{
     display:none;
+
     background:#fff;
+
     border:1px solid #e5e7eb;
-    border-radius:20px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,.04);
+
+    border-radius:22px;
+
+    padding:26px;
+
+    margin-bottom:28px;
+
+    box-shadow:
+        0 8px 28px rgba(17,24,39,.05);
 }
 
 .stage{
@@ -134,47 +191,147 @@ header{
     display:block;
 }
 
+/* =========================
+   STAGE HEADER
+========================= */
+
+.stage-header{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+
+    margin-bottom:24px;
+}
+
+.stage-icon{
+    width:48px;
+    height:48px;
+
+    flex-shrink:0;
+
+    border-radius:14px;
+
+    background:#f3e8ff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    border:1px solid #e9d5ff;
+}
+
 .stage-title{
     color:#111827;
-    font-size:22px;
+    font-size:23px;
     font-weight:900;
-    margin-bottom:8px;
+    margin-bottom:6px;
 }
 
 .stage-subtitle{
     color:#6b7280;
     font-size:14px;
     line-height:1.6;
-    margin-bottom:22px;
 }
 
-/* PAYMENT OPTIONS */
+/* =========================
+   STEP INDICATOR
+========================= */
+
+.steps{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    margin-bottom:24px;
+}
+
+.step{
+    height:5px;
+    flex:1;
+
+    border-radius:20px;
+
+    background:#e5e7eb;
+}
+
+.step.active{
+    background:
+        linear-gradient(
+            90deg,
+            #7e22ce,
+            #2563eb
+        );
+}
+
+/* =========================
+   PAYMENT OPTIONS
+========================= */
 
 .payment-options{
     display:grid;
-    gap:12px;
+    gap:13px;
 }
 
 .payment-option{
     width:100%;
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
     text-align:left;
+
     border:1px solid #e5e7eb;
+
     background:#fff;
+
     color:#111827;
-    border-radius:14px;
+
+    border-radius:15px;
+
     padding:17px;
+
     cursor:pointer;
+
     transition:.2s ease;
 }
 
 .payment-option:hover{
-    border-color:#16a34a;
-    background:#f0fdf4;
+    border-color:#8b5cf6;
+    background:#faf5ff;
+    transform:translateY(-1px);
+}
+
+.payment-option-icon{
+    width:45px;
+    height:45px;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7e22ce,
+            #2563eb
+        );
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
 }
 
 .payment-name{
-    font-weight:800;
-    margin-bottom:5px;
+    font-size:15px;
+    font-weight:900;
+    margin-bottom:4px;
 }
 
 .payment-description{
@@ -182,21 +339,31 @@ header{
     font-size:12px;
 }
 
-/* ACCOUNT */
+/* =========================
+   ACCOUNT DETAILS
+========================= */
 
 .account-box{
     background:#f9fafb;
+
     border:1px solid #e5e7eb;
-    border-radius:15px;
+
+    border-radius:17px;
+
     padding:18px;
+
     margin-bottom:18px;
 }
 
 .account-row{
     display:flex;
     justify-content:space-between;
+    align-items:center;
+
     gap:15px;
-    padding:10px 0;
+
+    padding:14px 0;
+
     border-bottom:1px solid #e5e7eb;
 }
 
@@ -206,130 +373,306 @@ header{
 
 .account-label{
     color:#6b7280;
-    font-size:13px;
+    font-size:12px;
+    font-weight:700;
 }
 
 .account-value{
     color:#111827;
-    font-weight:800;
+    font-size:14px;
+    font-weight:900;
     text-align:right;
+    word-break:break-word;
 }
 
-.copyable{
-    color:#16a34a;
+.account-number{
+    color:#2563eb;
+    font-size:21px;
+    letter-spacing:1px;
 }
 
-/* BUTTONS */
+.copy-btn{
+    margin-top:8px;
+
+    border:1px solid #ddd6fe;
+
+    background:#f5f3ff;
+
+    color:#6d28d9;
+
+    padding:7px 10px;
+
+    border-radius:8px;
+
+    font-size:11px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.copy-btn:hover{
+    background:#ede9fe;
+}
+
+/* =========================
+   INFO BOX
+========================= */
+
+.info-box{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+
+    background:#eff6ff;
+
+    border:1px solid #bfdbfe;
+
+    color:#374151;
+
+    border-radius:14px;
+
+    padding:14px;
+
+    margin-bottom:18px;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+.info-icon{
+    font-size:18px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
 
 .primary-btn{
     width:100%;
+
     border:0;
+
     border-radius:13px;
-    padding:14px;
-    background:#16a34a;
+
+    padding:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7e22ce,
+            #2563eb
+        );
+
     color:#fff;
+
+    font-size:14px;
     font-weight:900;
+
     cursor:pointer;
+
     transition:.2s ease;
 }
 
 .primary-btn:hover{
-    background:#15803d;
-}
+    transform:translateY(-1px);
 
-.secondary-btn{
-    width:100%;
-    border:1px solid #d1d5db;
-    border-radius:13px;
-    padding:14px;
-    background:#fff;
-    color:#374151;
-    font-weight:800;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.secondary-btn:hover{
-    background:#f9fafb;
-    border-color:#16a34a;
-    color:#16a34a;
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.18);
 }
 
 .primary-btn:disabled{
     opacity:.55;
     cursor:not-allowed;
+    transform:none;
 }
 
-/* FORM */
+.secondary-btn{
+    width:100%;
+
+    border:1px solid #d1d5db;
+
+    border-radius:13px;
+
+    padding:14px;
+
+    background:#fff;
+
+    color:#374151;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+    transition:.2s ease;
+}
+
+.secondary-btn:hover{
+    border-color:#8b5cf6;
+    color:#6d28d9;
+    background:#faf5ff;
+}
+
+/* =========================
+   PAYMENT FORM
+========================= */
 
 .form-group{
-    margin-bottom:16px;
+    margin-bottom:17px;
 }
 
 .form-group label{
     display:block;
+
     color:#374151;
+
     font-size:13px;
-    font-weight:700;
+
+    font-weight:800;
+
     margin-bottom:7px;
 }
 
 .form-group input{
     width:100%;
-    padding:14px;
-    border-radius:12px;
+
+    padding:15px;
+
+    border-radius:13px;
+
     border:1px solid #d1d5db;
+
     background:#fff;
+
     color:#111827;
+
     outline:none;
+
     font-size:14px;
+
+    transition:.2s ease;
 }
 
 .form-group input:focus{
-    border-color:#16a34a;
-    box-shadow:0 0 0 3px rgba(22,163,74,.10);
+    border-color:#7e22ce;
+
+    box-shadow:
+        0 0 0 3px rgba(126,34,206,.09);
 }
 
 .form-group input::placeholder{
     color:#9ca3af;
 }
 
-/* SUCCESS */
+/* =========================
+   SUCCESS
+========================= */
 
 .success-box{
     text-align:center;
-    padding:15px 5px;
+
+    padding:10px 4px 5px;
 }
 
 .success-icon{
-    width:65px;
-    height:65px;
+    width:78px;
+    height:78px;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:0 auto 18px;
-    background:#f0fdf4;
-    border:1px solid #bbf7d0;
-    color:#16a34a;
-    font-size:30px;
+
+    margin:0 auto 20px;
+
+    background:#f3e8ff;
+
+    border:1px solid #ddd6fe;
+
+    color:#7e22ce;
+
+    font-size:38px;
+
+    font-weight:900;
 }
 
 .success-box h2{
     color:#111827;
-    margin-bottom:9px;
+
+    font-size:24px;
+
+    margin-bottom:10px;
 }
 
 .success-box p{
     color:#6b7280;
+
     font-size:14px;
-    line-height:1.6;
+
+    line-height:1.7;
+
+    margin-bottom:18px;
 }
 
-/* HISTORY */
+.pending-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    color:#92400e;
+
+    background:#fffbeb;
+
+    border:1px solid #fde68a;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    margin-bottom:22px;
+}
+
+/* =========================
+   SUPPORT
+========================= */
+
+.support-text{
+    margin-top:17px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:13px;
+}
+
+.support-text a{
+    color:#6d28d9;
+
+    font-weight:900;
+
+    text-decoration:none;
+}
+
+.support-text a:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+   HISTORY
+========================= */
 
 .history-section{
-    margin-top:15px;
+    margin-top:10px;
 }
 
 .history-header{
@@ -338,13 +681,17 @@ header{
 
 .history-title{
     color:#111827;
+
     font-size:21px;
+
     font-weight:900;
 }
 
 .history-subtitle{
     color:#6b7280;
+
     font-size:12px;
+
     margin-top:4px;
 }
 
@@ -355,86 +702,120 @@ header{
 
 .history-card{
     background:#fff;
+
     border:1px solid #e5e7eb;
-    border-radius:16px;
+
+    border-radius:17px;
+
     padding:17px;
-    box-shadow:0 5px 18px rgba(0,0,0,.035);
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.035);
 }
 
 .history-top{
     display:flex;
+
     justify-content:space-between;
+
     align-items:flex-start;
+
     gap:15px;
+
     margin-bottom:13px;
 }
 
 .history-amount{
     color:#111827;
+
     font-size:19px;
+
     font-weight:900;
 }
 
 .history-date{
     color:#9ca3af;
+
     font-size:11px;
+
     margin-top:5px;
 }
 
 .status{
     padding:6px 10px;
+
     border-radius:20px;
+
     font-size:11px;
+
     font-weight:900;
+
     text-transform:capitalize;
 }
 
 .status.pending{
     color:#b45309;
+
     background:#fffbeb;
+
     border:1px solid #fde68a;
 }
 
 .status.approved{
     color:#15803d;
+
     background:#f0fdf4;
+
     border:1px solid #bbf7d0;
 }
 
 .status.rejected{
     color:#dc2626;
+
     background:#fef2f2;
+
     border:1px solid #fecaca;
 }
 
 .status.processing{
-    color:#047857;
-    background:#ecfdf5;
-    border:1px solid #a7f3d0;
+    color:#1d4ed8;
+
+    background:#eff6ff;
+
+    border:1px solid #bfdbfe;
 }
 
 .history-details{
     display:grid;
+
     grid-template-columns:repeat(2,1fr);
+
     gap:10px;
 }
 
 .history-detail{
     background:#f9fafb;
+
     border-radius:10px;
+
     padding:10px;
 }
 
 .detail-label{
     color:#9ca3af;
+
     font-size:10px;
+
     margin-bottom:4px;
 }
 
 .detail-value{
     color:#374151;
+
     font-size:12px;
+
     font-weight:700;
+
     word-break:break-word;
 }
 
@@ -442,46 +823,127 @@ header{
 .history-empty,
 .history-error{
     text-align:center;
+
     padding:35px 20px;
+
     border:1px dashed #d1d5db;
+
     border-radius:16px;
+
     color:#6b7280;
+
     background:#fff;
 }
 
 .history-empty .big,
 .history-error .big{
     font-size:34px;
+
     margin-bottom:10px;
 }
 
 .history-empty h3,
 .history-error h3{
     color:#111827;
+
     margin-bottom:6px;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
     max-width:900px;
+
     margin:auto;
+
     padding:0 20px 30px;
+
     text-align:center;
+
     color:#9ca3af;
+
     font-size:12px;
 }
 
-/* MOBILE */
+/* =========================
+   LOADING
+========================= */
+
+.loading-screen{
+    position:fixed;
+
+    inset:0;
+
+    background:#fff;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.spinner{
+    width:42px;
+    height:42px;
+
+    border:4px solid #e9d5ff;
+
+    border-top-color:#7e22ce;
+
+    border-right-color:#2563eb;
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+}
+
+.loading-screen p{
+    color:#6b7280;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
+    .navbar{
+        min-height:64px;
+
+        padding:0 15px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
     .container{
-        padding:25px 15px 50px;
+        padding:24px 15px 50px;
     }
 
     .wallet-card{
-        padding:22px;
+        padding:23px;
+
+        border-radius:19px;
     }
 
     .wallet-balance{
@@ -490,6 +952,28 @@ footer{
 
     .stage-box{
         padding:20px;
+
+        border-radius:19px;
+    }
+
+    .stage-title{
+        font-size:21px;
+    }
+
+    .account-row{
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:5px;
+    }
+
+    .account-value{
+        text-align:left;
+    }
+
+    .account-number{
+        font-size:19px;
     }
 
     .history-details{
@@ -500,6 +984,10 @@ footer{
         flex-direction:column;
     }
 
+    .success-box h2{
+        font-size:22px;
+    }
+
 }
 
 </style>
@@ -507,342 +995,522 @@ footer{
 
 <body>
 
-<header>
+<!-- LOADING -->
 
-<div class="navbar">
+<div class="loading-screen" id="loadingScreen">
 
-<a href="dashboard.html" class="logo">
-    Zavora <span>Social</span>
-</a>
+    <div class="spinner"></div>
 
-<a href="dashboard.html" class="back-btn">
-    ← Back
-</a>
+    <p>Loading Zavora Social...</p>
 
 </div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="navbar">
+
+        <a href="dashboard.html" class="logo">
+            Zavora <span>Social</span>
+        </a>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
 
 </header>
 
 
 <main class="container">
 
+<!-- =========================
+     WALLET
+========================= -->
+
 <section class="wallet-card">
 
-<div class="wallet-label">
-    Available Wallet Balance
-</div>
+    <div class="wallet-top">
 
-<div class="wallet-balance" id="walletBalance">
-    ₦0.00
-</div>
+        <div class="wallet-icon">
+            💳
+        </div>
 
-<button
-    class="deposit-main-btn"
-    id="depositBtn"
->
-    💳 Deposit Funds
-</button>
+        <div>
+
+            <div class="wallet-label">
+                Available Wallet Balance
+            </div>
+
+            <div class="wallet-balance" id="walletBalance">
+                ₦0.00
+            </div>
+
+        </div>
+
+    </div>
+
+    <button
+        class="deposit-main-btn"
+        id="depositBtn"
+    >
+        💳 Deposit Funds
+    </button>
 
 </section>
 
+
+<!-- =========================
+     DEPOSIT STAGES
+========================= -->
 
 <section
     class="stage-box"
     id="stageBox"
 >
 
-<!-- STAGE 1 -->
+    <!-- STEP INDICATOR -->
 
-<div
-    class="stage active"
-    id="stage1"
->
+    <div class="steps">
 
-<div class="stage-title">
-    Choose Payment
-</div>
+        <div class="step active" id="step1"></div>
+        <div class="step" id="step2"></div>
+        <div class="step" id="step3"></div>
+        <div class="step" id="step4"></div>
 
-<div class="stage-subtitle">
-    Select one of the available payment methods below.
-</div>
+    </div>
 
-<div class="payment-options">
 
-<button
-    class="payment-option"
-    data-payment="Payment 1"
->
+    <!-- =====================
+         STAGE 1
+    ====================== -->
 
-<div class="payment-name">
-    Payment 1
-</div>
+    <div
+        class="stage active"
+        id="stage1"
+    >
 
-<div class="payment-description">
-    Bank transfer
-</div>
+        <div class="stage-header">
 
-</button>
+            <div class="stage-icon">
+                🏦
+            </div>
 
+            <div>
 
-<button
-    class="payment-option"
-    data-payment="Payment 2"
->
+                <div class="stage-title">
+                    Choose Payment
+                </div>
 
-<div class="payment-name">
-    Payment 2
-</div>
+                <div class="stage-subtitle">
+                    Select a payment method below to get your Zavora Social deposit account details.
+                </div>
 
-<div class="payment-description">
-    Bank transfer
-</div>
+            </div>
 
-</button>
+        </div>
 
 
-<button
-    class="payment-option"
-    data-payment="Payment 3"
->
+        <div class="payment-options">
 
-<div class="payment-name">
-    Payment 3
-</div>
 
-<div class="payment-description">
-    Bank transfer
-</div>
+            <button
+                class="payment-option"
+                data-payment="Payment 1"
+            >
 
-</button>
+                <div class="payment-option-icon">
+                    🏦
+                </div>
 
-</div>
+                <div>
 
-</div>
+                    <div class="payment-name">
+                        Payment 1
+                    </div>
 
+                    <div class="payment-description">
+                        Bank transfer
+                    </div>
 
-<!-- STAGE 2 -->
+                </div>
 
-<div
-    class="stage"
-    id="stage2"
->
+            </button>
 
-<div class="stage-title">
-    Make Payment
-</div>
 
-<div class="stage-subtitle">
-    Send your payment to the account details below.
-</div>
+            <button
+                class="payment-option"
+                data-payment="Payment 2"
+            >
 
-<div class="account-box">
+                <div class="payment-option-icon">
+                    🏦
+                </div>
 
-<div class="account-row">
+                <div>
 
-<span class="account-label">
-    Account Number
-</span>
+                    <div class="payment-name">
+                        Payment 2
+                    </div>
 
-<span class="account-value copyable">
-    5777198543
-</span>
+                    <div class="payment-description">
+                        Bank transfer
+                    </div>
 
-</div>
+                </div>
 
+            </button>
 
-<div class="account-row">
 
-<span class="account-label">
-    Bank Name
-</span>
+            <button
+                class="payment-option"
+                data-payment="Payment 3"
+            >
 
-<span class="account-value">
-    TENN BANK
-</span>
+                <div class="payment-option-icon">
+                    🏦
+                </div>
 
-</div>
+                <div>
 
+                    <div class="payment-name">
+                        Payment 3
+                    </div>
 
-<div class="account-row">
+                    <div class="payment-description">
+                        Bank transfer
+                    </div>
 
-<span class="account-label">
-    Account Name
-</span>
+                </div>
 
-<span class="account-value">
-    Promise Adeyeye
-</span>
+            </button>
 
-</div>
 
-</div>
+        </div>
 
+    </div>
 
-<button
-    class="primary-btn"
-    id="paidBtn"
->
-    I Have Paid
-</button>
 
+    <!-- =====================
+         STAGE 2
+    ====================== -->
 
-<button
-    class="secondary-btn"
-    id="backToPaymentBtn"
->
-    ← Back
-</button>
+    <div
+        class="stage"
+        id="stage2"
+    >
 
-</div>
+        <div class="stage-header">
 
+            <div class="stage-icon">
+                🏦
+            </div>
 
-<!-- STAGE 3 -->
+            <div>
 
-<div
-    class="stage"
-    id="stage3"
->
+                <div class="stage-title">
+                    Your Deposit Account
+                </div>
 
-<div class="stage-title">
-    Prove Your Payment
-</div>
+                <div class="stage-subtitle">
+                    Transfer the amount you want to deposit to the account below.
+                </div>
 
-<div class="stage-subtitle">
-    Enter the details of the payment you just made.
-</div>
+            </div>
 
+        </div>
 
-<div class="form-group">
 
-<label>
-    Amount
-</label>
+        <div class="account-box">
 
-<input
-    type="number"
-    id="amount"
-    placeholder="Enter amount"
-    min="1"
->
 
-</div>
+            <div class="account-row">
 
+                <div class="account-label">
+                    BANK NAME
+                </div>
 
-<div class="form-group">
+                <div class="account-value">
+                    TENN BANK
+                </div>
 
-<label>
-    Sender Name
-</label>
+            </div>
 
-<input
-    type="text"
-    id="senderName"
-    placeholder="Name used for payment"
->
 
-</div>
+            <div class="account-row">
 
+                <div>
 
-<div class="form-group">
+                    <div class="account-label">
+                        ACCOUNT NUMBER
+                    </div>
 
-<label>
-    Transaction Reference
-</label>
+                    <div
+                        class="account-value account-number"
+                        id="accountNumber"
+                    >
+                        5777198543
+                    </div>
 
-<input
-    type="text"
-    id="transactionReference"
-    placeholder="Enter transaction reference"
->
+                </div>
 
-</div>
+                <button
+                    class="copy-btn"
+                    id="copyAccountBtn"
+                >
+                    Copy
+                </button>
 
+            </div>
 
-<button
-    class="primary-btn"
-    id="submitPaymentBtn"
->
-    Submit Payment
-</button>
 
+            <div class="account-row">
 
-<button
-    class="secondary-btn"
-    id="backToAccountBtn"
->
-    ← Back
-</button>
+                <div class="account-label">
+                    ACCOUNT NAME
+                </div>
 
-</div>
+                <div class="account-value">
+                    Promise Adeyeye
+                </div>
 
+            </div>
 
-<!-- STAGE 4 -->
 
-<div
-    class="stage"
-    id="stage4"
->
+        </div>
 
-<div class="success-box">
 
-<div class="success-icon">
-    ✓
-</div>
+        <div class="info-box">
 
-<h2>
-    Payment Submitted
-</h2>
+            <div class="info-icon">
+                ℹ️
+            </div>
 
-<p>
-    Your payment has been submitted successfully and is now pending review.
-</p>
+            <div>
+                After making the transfer, click
+                <strong>I Have Paid</strong>
+                and provide your payment details for review.
+            </div>
 
-<br>
+        </div>
 
-<button
-    class="primary-btn"
-    id="closeDepositBtn"
->
-    Done
-</button>
 
-</div>
+        <button
+            class="primary-btn"
+            id="paidBtn"
+        >
+            I HAVE PAID
+        </button>
 
-</div>
+
+        <button
+            class="secondary-btn"
+            id="backToPaymentBtn"
+        >
+            ← Back to Payment Methods
+        </button>
+
+    </div>
+
+
+    <!-- =====================
+         STAGE 3
+    ====================== -->
+
+    <div
+        class="stage"
+        id="stage3"
+    >
+
+        <div class="stage-header">
+
+            <div class="stage-icon">
+                🧾
+            </div>
+
+            <div>
+
+                <div class="stage-title">
+                    Payment Details
+                </div>
+
+                <div class="stage-subtitle">
+                    Enter the details of the payment you just made. Your payment will be reviewed by Zavora Social administration.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Amount Paid (₦)
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                placeholder="Example: 10000"
+                min="1"
+                step="0.01"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Sender Name
+            </label>
+
+            <input
+                type="text"
+                id="senderName"
+                placeholder="Name used for the transfer"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Transaction Reference
+            </label>
+
+            <input
+                type="text"
+                id="transactionReference"
+                placeholder="Enter transaction reference"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            id="submitPaymentBtn"
+        >
+            SUBMIT PAYMENT
+        </button>
+
+
+        <button
+            class="secondary-btn"
+            id="backToAccountBtn"
+        >
+            ← Back to Account
+        </button>
+
+
+        <div class="support-text">
+
+            🔒 Your payment information is securely submitted for review.
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================
+         STAGE 4
+    ====================== -->
+
+    <div
+        class="stage"
+        id="stage4"
+    >
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h2>
+                Payment Submitted Successfully
+            </h2>
+
+
+            <p>
+                Your deposit has been submitted and is now pending review.
+            </p>
+
+
+            <div class="pending-badge">
+                ⏳ Deposit Pending
+            </div>
+
+
+            <p>
+                Please wait while our administration confirms your payment.
+                Your wallet will be credited after the payment is approved.
+            </p>
+
+
+            <button
+                class="primary-btn"
+                id="closeDepositBtn"
+            >
+                Go Back to Dashboard
+            </button>
+
+
+            <div class="support-text">
+
+                Payment not reflecting?
+                <a href="mailto:support@zavorasocial.com">
+                    Contact Support
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- HISTORY -->
+<!-- =========================
+     DEPOSIT HISTORY
+========================= -->
 
 <section
     class="history-section"
     id="historySection"
 >
 
-<div class="history-header">
+    <div class="history-header">
 
-<div class="history-title">
-    Deposit History
-</div>
+        <div class="history-title">
+            Deposit History
+        </div>
 
-<div class="history-subtitle">
-    View all your wallet deposits and their status.
-</div>
+        <div class="history-subtitle">
+            View your wallet deposits and payment status.
+        </div>
 
-</div>
+    </div>
 
 
-<div
-    class="history-list"
-    id="historyList"
->
+    <div
+        class="history-list"
+        id="historyList"
+    >
 
-<div class="history-loading">
-    Loading deposit history...
-</div>
+        <div class="history-loading">
+            Loading deposit history...
+        </div>
 
-</div>
+    </div>
 
 </section>
 
@@ -850,21 +1518,29 @@ footer{
 
 
 <footer>
-©️ <span id="year"></span> Zavora Social.
-All rights reserved.
+
+    ©️ <span id="year"></span> Zavora Social.
+    All rights reserved.
+
 </footer>
 
 
 <script type="module">
 
+/* =========================
+   FIREBASE
+========================= */
+
 import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -914,7 +1590,12 @@ const db =
     getDatabase(app);
 
 
-/* ELEMENTS */
+/* =========================
+   ELEMENTS
+========================= */
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
 
 const walletBalance =
     document.getElementById("walletBalance");
@@ -928,6 +1609,9 @@ const stageBox =
 const historySection =
     document.getElementById("historySection");
 
+const historyList =
+    document.getElementById("historyList");
+
 const stage1 =
     document.getElementById("stage1");
 
@@ -939,6 +1623,18 @@ const stage3 =
 
 const stage4 =
     document.getElementById("stage4");
+
+const step1 =
+    document.getElementById("step1");
+
+const step2 =
+    document.getElementById("step2");
+
+const step3 =
+    document.getElementById("step3");
+
+const step4 =
+    document.getElementById("step4");
 
 const paidBtn =
     document.getElementById("paidBtn");
@@ -955,6 +1651,9 @@ const submitPaymentBtn =
 const closeDepositBtn =
     document.getElementById("closeDepositBtn");
 
+const copyAccountBtn =
+    document.getElementById("copyAccountBtn");
+
 const amountInput =
     document.getElementById("amount");
 
@@ -964,15 +1663,15 @@ const senderNameInput =
 const transactionReferenceInput =
     document.getElementById("transactionReference");
 
-const historyList =
-    document.getElementById("historyList");
-
 
 let currentUser = null;
+
 let selectedPayment = "";
 
 
-/* AUTH */
+/* =========================
+   AUTH
+========================= */
 
 onAuthStateChanged(
     auth,
@@ -987,17 +1686,31 @@ onAuthStateChanged(
 
         }
 
+
         currentUser =
             user;
 
-        loadWallet(user.uid);
-        loadDepositHistory(user.uid);
+
+        loadingScreen.style.display =
+            "none";
+
+
+        loadWallet(
+            user.uid
+        );
+
+
+        loadDepositHistory(
+            user.uid
+        );
 
     }
 );
 
 
-/* WALLET */
+/* =========================
+   WALLET
+========================= */
 
 function loadWallet(uid){
 
@@ -1009,12 +1722,14 @@ function loadWallet(uid){
             "/walletBalance"
         );
 
+
     onValue(
         walletRef,
         (snapshot) => {
 
             const balance =
                 Number(snapshot.val()) || 0;
+
 
             walletBalance.textContent =
                 "₦" +
@@ -1043,7 +1758,9 @@ function loadWallet(uid){
 }
 
 
-/* DEPOSIT HISTORY */
+/* =========================
+   DEPOSIT HISTORY
+========================= */
 
 function loadDepositHistory(uid){
 
@@ -1052,6 +1769,7 @@ function loadDepositHistory(uid){
             db,
             "deposits"
         );
+
 
     onValue(
         depositsRef,
@@ -1062,11 +1780,12 @@ function loadDepositHistory(uid){
 
             const deposits = [];
 
+
             if(data){
 
                 Object.entries(data)
                     .forEach(
-                        ([id,deposit]) => {
+                        ([id, deposit]) => {
 
                             if(
                                 deposit &&
@@ -1112,11 +1831,13 @@ function loadDepositHistory(uid){
 
             }
 
+
             deposits.sort(
                 (a,b) =>
                     b.createdAt -
                     a.createdAt
             );
+
 
             renderDepositHistory(
                 deposits
@@ -1129,6 +1850,7 @@ function loadDepositHistory(uid){
                 "Deposit history error:",
                 error
             );
+
 
             historyList.innerHTML = `
 
@@ -1156,7 +1878,9 @@ function loadDepositHistory(uid){
 }
 
 
-/* RENDER HISTORY */
+/* =========================
+   RENDER HISTORY
+========================= */
 
 function renderDepositHistory(deposits){
 
@@ -1187,14 +1911,18 @@ function renderDepositHistory(deposits){
     }
 
 
-    historyList.innerHTML = "";
+    historyList.innerHTML =
+        "";
 
 
     deposits.forEach(
         (deposit) => {
 
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             card.className =
                 "history-card";
@@ -1203,7 +1931,12 @@ function renderDepositHistory(deposits){
             const status =
                 String(
                     deposit.status
-                ).toLowerCase();
+                )
+                .toLowerCase()
+                .replace(
+                    /[^a-z0-9_-]/g,
+                    ""
+                );
 
 
             card.innerHTML = `
@@ -1235,7 +1968,9 @@ function renderDepositHistory(deposits){
                         class="status ${escapeHtml(status)}"
                     >
 
-                        ${escapeHtml(status)}
+                        ${escapeHtml(
+                            deposit.status
+                        )}
 
                     </span>
 
@@ -1247,7 +1982,7 @@ function renderDepositHistory(deposits){
                     <div class="history-detail">
 
                         <div class="detail-label">
-                            Payment
+                            PAYMENT
                         </div>
 
                         <div class="detail-value">
@@ -1262,7 +1997,7 @@ function renderDepositHistory(deposits){
                     <div class="history-detail">
 
                         <div class="detail-label">
-                            Sender Name
+                            SENDER NAME
                         </div>
 
                         <div class="detail-value">
@@ -1277,7 +2012,7 @@ function renderDepositHistory(deposits){
                     <div class="history-detail">
 
                         <div class="detail-label">
-                            Transaction Reference
+                            TRANSACTION REFERENCE
                         </div>
 
                         <div class="detail-value">
@@ -1292,7 +2027,7 @@ function renderDepositHistory(deposits){
                     <div class="history-detail">
 
                         <div class="detail-label">
-                            Deposit ID
+                            DEPOSIT ID
                         </div>
 
                         <div class="detail-value">
@@ -1308,7 +2043,9 @@ function renderDepositHistory(deposits){
             `;
 
 
-            historyList.appendChild(card);
+            historyList.appendChild(
+                card
+            );
 
         }
     );
@@ -1316,23 +2053,29 @@ function renderDepositHistory(deposits){
 }
 
 
-/* MONEY */
+/* =========================
+   MONEY
+========================= */
 
 function formatMoney(amount){
 
-    return Number(amount || 0)
-        .toLocaleString(
-            "en-NG",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
+    return Number(
+        amount || 0
+    )
+    .toLocaleString(
+        "en-NG",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
 
 }
 
 
-/* DATE */
+/* =========================
+   DATE
+========================= */
 
 function formatDate(timestamp){
 
@@ -1341,6 +2084,7 @@ function formatDate(timestamp){
         return "Date unavailable";
 
     }
+
 
     return new Date(timestamp)
         .toLocaleString(
@@ -1357,7 +2101,9 @@ function formatDate(timestamp){
 }
 
 
-/* OPEN DEPOSIT */
+/* =========================
+   OPEN DEPOSIT
+========================= */
 
 depositBtn.addEventListener(
     "click",
@@ -1366,10 +2112,13 @@ depositBtn.addEventListener(
         historySection.style.display =
             "none";
 
+
         stageBox.style.display =
             "block";
 
+
         showStage(1);
+
 
         stageBox.scrollIntoView({
             behavior:"smooth",
@@ -1380,7 +2129,9 @@ depositBtn.addEventListener(
 );
 
 
-/* PAYMENT */
+/* =========================
+   PAYMENT OPTIONS
+========================= */
 
 document.querySelectorAll(
     ".payment-option"
@@ -1395,7 +2146,14 @@ document.querySelectorAll(
                 selectedPayment =
                     button.dataset.payment;
 
+
                 showStage(2);
+
+
+                stageBox.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
 
             }
         );
@@ -1404,7 +2162,57 @@ document.querySelectorAll(
 );
 
 
-/* PAID */
+/* =========================
+   COPY ACCOUNT NUMBER
+========================= */
+
+copyAccountBtn.addEventListener(
+    "click",
+    async () => {
+
+        const accountNumber =
+            document.getElementById(
+                "accountNumber"
+            ).textContent.trim();
+
+
+        try{
+
+            await navigator.clipboard.writeText(
+                accountNumber
+            );
+
+
+            copyAccountBtn.textContent =
+                "Copied!";
+
+
+            setTimeout(
+                () => {
+
+                    copyAccountBtn.textContent =
+                        "Copy";
+
+                },
+                1500
+            );
+
+        }catch(error){
+
+            alert(
+                "Account number: " +
+                accountNumber
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   I HAVE PAID
+========================= */
 
 paidBtn.addEventListener(
     "click",
@@ -1416,7 +2224,9 @@ paidBtn.addEventListener(
 );
 
 
-/* BACK */
+/* =========================
+   BACK TO PAYMENT
+========================= */
 
 backToPaymentBtn.addEventListener(
     "click",
@@ -1428,6 +2238,10 @@ backToPaymentBtn.addEventListener(
 );
 
 
+/* =========================
+   BACK TO ACCOUNT
+========================= */
+
 backToAccountBtn.addEventListener(
     "click",
     () => {
@@ -1438,32 +2252,133 @@ backToAccountBtn.addEventListener(
 );
 
 
-/* SHOW STAGE */
+/* =========================
+   SHOW STAGE
+========================= */
 
 function showStage(number){
 
-    stage1.classList.remove("active");
-    stage2.classList.remove("active");
-    stage3.classList.remove("active");
-    stage4.classList.remove("active");
+    stage1.classList.remove(
+        "active"
+    );
+
+    stage2.classList.remove(
+        "active"
+    );
+
+    stage3.classList.remove(
+        "active"
+    );
+
+    stage4.classList.remove(
+        "active"
+    );
 
 
-    if(number === 1)
-        stage1.classList.add("active");
+    step1.classList.remove(
+        "active"
+    );
 
-    if(number === 2)
-        stage2.classList.add("active");
+    step2.classList.remove(
+        "active"
+    );
 
-    if(number === 3)
-        stage3.classList.add("active");
+    step3.classList.remove(
+        "active"
+    );
 
-    if(number === 4)
-        stage4.classList.add("active");
+    step4.classList.remove(
+        "active"
+    );
+
+
+    if(number === 1){
+
+        stage1.classList.add(
+            "active"
+        );
+
+        step1.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(number === 2){
+
+        stage2.classList.add(
+            "active"
+        );
+
+        step1.classList.add(
+            "active"
+        );
+
+        step2.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(number === 3){
+
+        stage3.classList.add(
+            "active"
+        );
+
+        step1.classList.add(
+            "active"
+        );
+
+        step2.classList.add(
+            "active"
+        );
+
+        step3.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(number === 4){
+
+        stage4.classList.add(
+            "active"
+        );
+
+        step1.classList.add(
+            "active"
+        );
+
+        step2.classList.add(
+            "active"
+        );
+
+        step3.classList.add(
+            "active"
+        );
+
+        step4.classList.add(
+            "active"
+        );
+
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
-/* SUBMIT */
+/* =========================
+   SUBMIT PAYMENT
+========================= */
 
 submitPaymentBtn.addEventListener(
     "click",
@@ -1474,18 +2389,25 @@ submitPaymentBtn.addEventListener(
                 amountInput.value
             );
 
+
         const senderName =
             senderNameInput.value.trim();
+
 
         const transactionReference =
             transactionReferenceInput.value.trim();
 
 
-        if(!amount || amount <= 0){
+        if(
+            !amount ||
+            amount <= 0
+        ){
 
             alert(
                 "Please enter a valid amount."
             );
+
+            amountInput.focus();
 
             return;
 
@@ -1498,6 +2420,8 @@ submitPaymentBtn.addEventListener(
                 "Please enter the sender name."
             );
 
+            senderNameInput.focus();
+
             return;
 
         }
@@ -1509,6 +2433,8 @@ submitPaymentBtn.addEventListener(
                 "Please enter the transaction reference."
             );
 
+            transactionReferenceInput.focus();
+
             return;
 
         }
@@ -1519,6 +2445,8 @@ submitPaymentBtn.addEventListener(
             alert(
                 "Please select a payment method."
             );
+
+            showStage(1);
 
             return;
 
@@ -1542,8 +2470,9 @@ submitPaymentBtn.addEventListener(
         submitPaymentBtn.disabled =
             true;
 
+
         submitPaymentBtn.textContent =
-            "Submitting...";
+            "Submitting Payment...";
 
 
         try{
@@ -1565,7 +2494,8 @@ submitPaymentBtn.addEventListener(
                         currentUser.uid,
 
                     email:
-                        currentUser.email || "",
+                        currentUser.email ||
+                        "",
 
                     amount:
                         amount,
@@ -1601,9 +2531,14 @@ submitPaymentBtn.addEventListener(
             showStage(4);
 
 
-            amountInput.value = "";
-            senderNameInput.value = "";
-            transactionReferenceInput.value = "";
+            amountInput.value =
+                "";
+
+            senderNameInput.value =
+                "";
+
+            transactionReferenceInput.value =
+                "";
 
 
         }catch(error){
@@ -1612,6 +2547,7 @@ submitPaymentBtn.addEventListener(
                 "Payment submission error:",
                 error
             );
+
 
             alert(
                 "Unable to submit your payment. Please try again."
@@ -1622,8 +2558,9 @@ submitPaymentBtn.addEventListener(
             submitPaymentBtn.disabled =
                 false;
 
+
             submitPaymentBtn.textContent =
-                "Submit Payment";
+                "SUBMIT PAYMENT";
 
         }
 
@@ -1631,7 +2568,9 @@ submitPaymentBtn.addEventListener(
 );
 
 
-/* DONE */
+/* =========================
+   DONE
+========================= */
 
 closeDepositBtn.addEventListener(
     "click",
@@ -1640,39 +2579,70 @@ closeDepositBtn.addEventListener(
         stageBox.style.display =
             "none";
 
+
         historySection.style.display =
             "block";
 
+
         showStage(1);
+
 
         window.scrollTo({
             top:0,
             behavior:"smooth"
         });
 
+
+        window.location.href =
+            "dashboard.html";
+
     }
 );
 
 
-/* ESCAPE */
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHtml(value){
 
     return String(value)
 
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
-/* YEAR */
+/* =========================
+   YEAR
+========================= */
 
-document.getElementById("year")
-    .textContent =
+document.getElementById(
+    "year"
+).textContent =
     new Date().getFullYear();
 
 </script>
