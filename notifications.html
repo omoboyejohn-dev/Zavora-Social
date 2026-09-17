@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zavora Social | Notifications</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#ffffff;
+    color:#111111;
+    min-height:100vh;
+}
+
+/* Header */
+.header{
+    background:#ffffff;
+    color:#111111;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #e5e7eb;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:-.4px;
+}
+
+.logo span{
+    color:#7e22ce;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:14px;
+    padding:10px 16px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    transition:.2s ease;
+}
+
+.back:hover{
+    transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(126,34,206,.22);
+}
+
+/* Main */
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:30px 20px 45px;
+}
+
+/* Hero */
+.hero{
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    color:#ffffff;
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(37,99,235,.12);
+}
+
+.hero-content{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.hero-icon{
+    width:58px;
+    height:58px;
+    border-radius:15px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    flex-shrink:0;
+}
+
+.hero h2{
+    font-size:28px;
+    margin-bottom:7px;
+    letter-spacing:-.5px;
+}
+
+.hero p{
+    color:rgba(255,255,255,.88);
+    font-size:15px;
+    line-height:1.6;
+}
+
+/* Notification Card */
+.notifications{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.notification{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 16px rgba(17,24,39,.04);
+    transition:.2s ease;
+}
+
+.notification:hover{
+    transform:translateY(-2px);
+    border-color:#d8b4fe;
+    box-shadow:0 9px 22px rgba(17,24,39,.07);
+}
+
+.notification-icon{
+    width:50px;
+    height:50px;
+    min-width:50px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    box-shadow:0 5px 14px rgba(126,34,206,.15);
+}
+
+.notification-content{
+    flex:1;
+}
+
+.notification-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:6px;
+}
+
+.notification h3{
+    color:#111827;
+    font-size:16px;
+}
+
+.notification-time{
+    color:#9ca3af;
+    font-size:12px;
+    white-space:nowrap;
+}
+
+.notification p{
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* Unread notification */
+.notification.unread{
+    border-color:#c4b5fd;
+    background:#faf5ff;
+}
+
+.notification.unread .notification-content::before{
+    content:"";
+    display:inline-block;
+    width:7px;
+    height:7px;
+    background:#7e22ce;
+    border-radius:50%;
+    margin-right:7px;
+    vertical-align:middle;
+}
+
+/* Empty State */
+.empty{
+    display:none;
+    text-align:center;
+    padding:55px 25px;
+    background:#faf5ff;
+    border:1px solid #e9d5ff;
+    border-radius:16px;
+}
+
+.empty-icon{
+    width:65px;
+    height:65px;
+    margin:0 auto 15px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+.empty h3{
+    color:#111827;
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.empty p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+/* Info */
+.info{
+    margin-top:24px;
+    padding:18px 20px;
+    border:1px solid #e9d5ff;
+    background:#faf5ff;
+    border-radius:14px;
+    color:#6b21a8;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.info strong{
+    color:#581c87;
+}
+
+/* Footer */
+.footer{
+    text-align:center;
+    color:#9ca3af;
+    font-size:13px;
+    padding:0 20px 25px;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .header{
+        padding:14px 16px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .back{
+        padding:9px 12px;
+        font-size:13px;
+    }
+
+    .container{
+        padding:22px 15px 35px;
+    }
+
+    .hero{
+        padding:22px;
+        border-radius:16px;
+    }
+
+    .hero-content{
+        align-items:flex-start;
+    }
+
+    .hero-icon{
+        width:48px;
+        height:48px;
+        font-size:24px;
+        border-radius:12px;
+    }
+
+    .hero h2{
+        font-size:23px;
+    }
+
+    .hero p{
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .notification{
+        padding:17px;
+        gap:13px;
+    }
+
+    .notification-icon{
+        width:45px;
+        height:45px;
+        min-width:45px;
+        font-size:21px;
+    }
+
+    .notification-top{
+        display:block;
+    }
+
+    .notification h3{
+        margin-bottom:4px;
+    }
+
+    .notification-time{
+        display:block;
+        margin-bottom:5px;
+    }
+}
+
+@media(max-width:380px){
+
+    .logo{
+        font-size:17px;
+    }
+
+    .back{
+        font-size:12px;
+        padding:8px 10px;
+    }
+
+    .hero h2{
+        font-size:21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        Zavora <span>Social</span>
+    </div>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-icon">
+                🔔
+            </div>
+
+            <div>
+                <h2>Notifications</h2>
+                <p>
+                    Stay updated with your Zavora Social account,
+                    orders and services.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="notifications" id="notifications">
+
+
+        <div class="notification unread">
+
+            <div class="notification-icon">
+                👋
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+                    <h3>Welcome to Zavora Social</h3>
+                    <span class="notification-time">Just now</span>
+                </div>
+
+                <p>
+                    Welcome to Zavora Social. Your account is ready
+                    and you can start exploring our services.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="notification">
+
+            <div class="notification-icon">
+                🛍️
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+                    <h3>Explore the Marketplace</h3>
+                    <span class="notification-time">Today</span>
+                </div>
+
+                <p>
+                    Browse available products and services in the
+                    Zavora Social marketplace.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="notification">
+
+            <div class="notification-icon">
+                💳
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+                    <h3>Wallet</h3>
+                    <span class="notification-time">Today</span>
+                </div>
+
+                <p>
+                    Keep your wallet funded to make purchases quickly
+                    when you find something you need.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="notification">
+
+            <div class="notification-icon">
+                🚀
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+                    <h3>New Services Coming Soon</h3>
+                    <span class="notification-time">Recently</span>
+                </div>
+
+                <p>
+                    More Zavora Social services including social media
+                    boosting, virtual numbers and API features are
+                    being prepared.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <div class="empty" id="emptyState">
+
+        <div class="empty-icon">
+            🔔
+        </div>
+
+        <h3>No Notifications</h3>
+
+        <p>
+            You don't have any notifications yet.
+        </p>
+
+    </div>
+
+
+    <div class="info">
+        <strong>🔔 Stay updated:</strong>
+        Important account, order and service updates will appear
+        here.
+    </div>
+
+</main>
+
+
+<footer class="footer">
+    © <span id="year"></span> Zavora Social. All rights reserved.
+</footer>
+
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
