@@ -18,20 +18,20 @@
 body{
     font-family:Inter,Arial,sans-serif;
     min-height:100vh;
-    color:#fff;
-    background:
-        radial-gradient(circle at top left,rgba(124,58,237,.18),transparent 35%),
-        radial-gradient(circle at top right,rgba(6,182,212,.12),transparent 30%),
-        #080b16;
+    color:#111111;
+    background:#ffffff;
 }
+
+/* ================================
+   HEADER
+================================ */
 
 header{
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(8,11,22,.86);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
 }
 
 .navbar{
@@ -45,28 +45,32 @@ header{
 }
 
 .logo{
-    color:#fff;
+    color:#111111;
     text-decoration:none;
     font-size:22px;
     font-weight:900;
+    letter-spacing:-.5px;
 }
 
 .logo span{
-    background:linear-gradient(90deg,#a78bfa,#22d3ee);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:#16a34a;
 }
 
 .back-btn{
-    color:#cbd5e1;
+    color:#555555;
     text-decoration:none;
     font-size:14px;
     font-weight:700;
+    transition:.2s ease;
 }
 
 .back-btn:hover{
-    color:#fff;
+    color:#16a34a;
 }
+
+/* ================================
+   MAIN
+================================ */
 
 .container{
     max-width:900px;
@@ -80,21 +84,27 @@ header{
 
 .page-title h1{
     font-size:32px;
+    line-height:1.2;
     margin-bottom:7px;
+    color:#111111;
 }
 
 .page-title p{
-    color:#94a3b8;
+    color:#666666;
+    font-size:15px;
 }
 
-/* PROFILE */
+/* ================================
+   PROFILE
+================================ */
 
 .profile-card{
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:22px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
     padding:28px;
     margin-bottom:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
 }
 
 .profile-top{
@@ -103,7 +113,7 @@ header{
     gap:18px;
     padding-bottom:25px;
     margin-bottom:25px;
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid #e5e7eb;
 }
 
 .avatar{
@@ -115,19 +125,26 @@ header{
     justify-content:center;
     font-size:27px;
     font-weight:900;
-    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    background:#16a34a;
+    color:#ffffff;
     flex-shrink:0;
+    box-shadow:0 7px 18px rgba(22,163,74,.20);
 }
 
 .profile-top h2{
     font-size:21px;
+    color:#111111;
     margin-bottom:5px;
 }
 
 .profile-top p{
-    color:#94a3b8;
+    color:#666666;
     font-size:14px;
 }
+
+/* ================================
+   INFORMATION
+================================ */
 
 .info-grid{
     display:grid;
@@ -138,12 +155,12 @@ header{
 .info-box{
     padding:18px;
     border-radius:14px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.06);
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
 }
 
 .info-label{
-    color:#64748b;
+    color:#777777;
     font-size:12px;
     margin-bottom:7px;
     text-transform:uppercase;
@@ -151,33 +168,41 @@ header{
 }
 
 .info-value{
-    color:#fff;
+    color:#111111;
     font-size:15px;
     font-weight:700;
     word-break:break-word;
 }
 
-/* CHANGE PASSWORD */
+/* ================================
+   CHANGE PASSWORD
+================================ */
 
 .password-card{
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:22px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
     padding:28px;
     margin-bottom:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
 }
 
 .password-card h2{
     font-size:20px;
+    color:#111111;
     margin-bottom:7px;
 }
 
 .password-card > p{
-    color:#94a3b8;
+    color:#666666;
     font-size:13px;
     line-height:1.5;
     margin-bottom:22px;
 }
+
+/* ================================
+   FORM
+================================ */
 
 .form-group{
     margin-bottom:17px;
@@ -185,7 +210,7 @@ header{
 
 .form-group label{
     display:block;
-    color:#cbd5e1;
+    color:#333333;
     font-size:13px;
     font-weight:700;
     margin-bottom:8px;
@@ -199,21 +224,22 @@ header{
     width:100%;
     height:50px;
     padding:0 50px 0 15px;
-    border:1px solid rgba(255,255,255,.1);
+    border:1px solid #d1d5db;
     border-radius:12px;
     outline:none;
-    color:#fff;
-    background:rgba(0,0,0,.2);
+    color:#111111;
+    background:#ffffff;
     font-size:14px;
+    transition:.2s ease;
 }
 
 .form-group input:focus{
-    border-color:#8b5cf6;
-    box-shadow:0 0 0 3px rgba(139,92,246,.1);
+    border-color:#16a34a;
+    box-shadow:0 0 0 3px rgba(22,163,74,.10);
 }
 
 .form-group input::placeholder{
-    color:#64748b;
+    color:#9ca3af;
 }
 
 .show-password{
@@ -223,31 +249,44 @@ header{
     transform:translateY(-50%);
     border:0;
     background:transparent;
-    color:#94a3b8;
+    color:#777777;
     cursor:pointer;
     font-size:16px;
 }
 
+.show-password:hover{
+    color:#16a34a;
+}
+
+/* ================================
+   PASSWORD BUTTON
+================================ */
+
 .change-password-btn{
     width:100%;
     height:50px;
-    border:0;
+    border:1px solid #15803d;
     border-radius:12px;
-    color:#fff;
+    color:#ffffff;
     cursor:pointer;
     font-size:14px;
     font-weight:800;
-    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    background:#16a34a;
+    transition:.2s ease;
 }
 
 .change-password-btn:hover{
-    opacity:.92;
+    background:#15803d;
 }
 
 .change-password-btn:disabled{
     opacity:.55;
     cursor:not-allowed;
 }
+
+/* ================================
+   MESSAGES
+================================ */
 
 .message{
     display:none;
@@ -260,29 +299,33 @@ header{
 
 .message.success{
     display:block;
-    color:#86efac;
-    background:rgba(34,197,94,.1);
-    border:1px solid rgba(34,197,94,.2);
+    color:#166534;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
 }
 
 .message.error{
     display:block;
-    color:#fca5a5;
-    background:rgba(239,68,68,.1);
-    border:1px solid rgba(239,68,68,.2);
+    color:#b91c1c;
+    background:#fef2f2;
+    border:1px solid #fecaca;
 }
 
-/* ACCOUNT */
+/* ================================
+   ACCOUNT
+================================ */
 
 .account-card{
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:22px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
     padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
 }
 
 .account-card h2{
     font-size:20px;
+    color:#111111;
     margin-bottom:18px;
 }
 
@@ -295,16 +338,18 @@ header{
     padding:16px;
     margin-bottom:10px;
     border-radius:13px;
-    border:1px solid rgba(255,255,255,.07);
-    background:rgba(255,255,255,.035);
-    color:#fff;
+    border:1px solid #e5e7eb;
+    background:#ffffff;
+    color:#111111;
     text-decoration:none;
     cursor:pointer;
+    transition:.2s ease;
 }
 
 .action:hover{
-    background:rgba(124,58,237,.10);
-    border-color:rgba(139,92,246,.35);
+    background:#f0fdf4;
+    border-color:#16a34a;
+    transform:translateX(2px);
 }
 
 .action-left{
@@ -320,44 +365,71 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(124,58,237,.15);
+    background:#f0fdf4;
+    color:#16a34a;
+    font-size:18px;
 }
 
 .action-text strong{
     display:block;
     font-size:14px;
+    color:#111111;
     margin-bottom:3px;
 }
 
 .action-text small{
-    color:#64748b;
+    color:#777777;
+    font-size:12px;
 }
 
 .arrow{
-    color:#64748b;
+    color:#16a34a;
+    font-size:20px;
+    font-weight:800;
 }
 
+/* LOGOUT */
+
 .logout{
-    color:#fca5a5;
+    color:#b91c1c;
+    font-family:inherit;
 }
 
 .logout .action-icon{
-    background:rgba(239,68,68,.1);
+    background:#fef2f2;
+    color:#dc2626;
 }
+
+.logout .action-text strong{
+    color:#b91c1c;
+}
+
+.logout .arrow{
+    color:#dc2626;
+}
+
+.logout:hover{
+    background:#fef2f2;
+    border-color:#fca5a5;
+}
+
+/* ================================
+   LOADING
+================================ */
 
 .loading{
     text-align:center;
     padding:50px;
-    color:#94a3b8;
+    color:#666666;
 }
 
 .spinner{
     width:40px;
     height:40px;
     margin:0 auto 15px;
-    border:4px solid rgba(255,255,255,.1);
-    border-top-color:#8b5cf6;
-    border-right-color:#06b6d4;
+    border:4px solid #dcfce7;
+    border-top-color:#16a34a;
+    border-right-color:#16a34a;
     border-radius:50%;
     animation:spin .8s linear infinite;
 }
@@ -368,14 +440,31 @@ header{
     }
 }
 
+/* ================================
+   FOOTER
+================================ */
+
 footer{
     text-align:center;
-    color:#64748b;
+    color:#888888;
     font-size:13px;
     padding:0 20px 30px;
 }
 
+/* ================================
+   MOBILE
+================================ */
+
 @media(max-width:650px){
+
+    .navbar{
+        min-height:65px;
+        padding:0 15px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
 
     .container{
         padding:28px 15px 50px;
@@ -400,6 +489,21 @@ footer{
         align-items:flex-start;
     }
 
+    .avatar{
+        width:60px;
+        height:60px;
+        border-radius:17px;
+        font-size:23px;
+    }
+
+    .profile-top h2{
+        font-size:19px;
+    }
+
+    .action{
+        padding:14px;
+    }
+
 }
 
 </style>
@@ -409,15 +513,25 @@ footer{
 <body>
 
 
+<!-- ================================
+     HEADER
+================================ -->
+
 <header>
 
     <div class="navbar">
 
-        <a href="dashboard.html" class="logo">
+        <a
+            href="dashboard.html"
+            class="logo"
+        >
             Zavora <span>Social</span>
         </a>
 
-        <a href="dashboard.html" class="back-btn">
+        <a
+            href="dashboard.html"
+            class="back-btn"
+        >
             ← Dashboard
         </a>
 
@@ -426,7 +540,12 @@ footer{
 </header>
 
 
+<!-- ================================
+     MAIN
+================================ -->
+
 <main class="container">
+
 
     <div class="page-title">
 
@@ -441,7 +560,12 @@ footer{
     </div>
 
 
-    <div class="loading" id="loading">
+    <!-- LOADING -->
+
+    <div
+        class="loading"
+        id="loading"
+    >
 
         <div class="spinner"></div>
 
@@ -450,16 +574,24 @@ footer{
     </div>
 
 
-    <div id="profileContent" style="display:none;">
+    <div
+        id="profileContent"
+        style="display:none;"
+    >
 
 
-        <!-- PROFILE INFORMATION -->
+        <!-- ================================
+             PROFILE INFORMATION
+        ================================= -->
 
         <div class="profile-card">
 
             <div class="profile-top">
 
-                <div class="avatar" id="avatar">
+                <div
+                    class="avatar"
+                    id="avatar"
+                >
                     U
                 </div>
 
@@ -480,13 +612,17 @@ footer{
 
             <div class="info-grid">
 
+
                 <div class="info-box">
 
                     <div class="info-label">
                         Full Name
                     </div>
 
-                    <div class="info-value" id="fullNameInfo">
+                    <div
+                        class="info-value"
+                        id="fullNameInfo"
+                    >
                         —
                     </div>
 
@@ -512,7 +648,10 @@ footer{
                         Email Address
                     </div>
 
-                    <div class="info-value" id="emailInfo">
+                    <div
+                        class="info-value"
+                        id="emailInfo"
+                    >
                         —
                     </div>
 
@@ -538,7 +677,10 @@ footer{
                         Account ID
                     </div>
 
-                    <div class="info-value" id="accountId">
+                    <div
+                        class="info-value"
+                        id="accountId"
+                    >
                         —
                     </div>
 
@@ -562,7 +704,9 @@ footer{
         </div>
 
 
-        <!-- CHANGE PASSWORD -->
+        <!-- ================================
+             CHANGE PASSWORD
+        ================================= -->
 
         <div class="password-card">
 
@@ -576,9 +720,10 @@ footer{
             </p>
 
 
-            <div id="passwordMessage"
-                 class="message">
-            </div>
+            <div
+                id="passwordMessage"
+                class="message"
+            ></div>
 
 
             <form id="passwordForm">
@@ -603,7 +748,8 @@ footer{
                         <button
                             type="button"
                             class="show-password"
-                            data-target="currentPassword">
+                            data-target="currentPassword"
+                        >
                             👁
                         </button>
 
@@ -632,7 +778,8 @@ footer{
                         <button
                             type="button"
                             class="show-password"
-                            data-target="newPassword">
+                            data-target="newPassword"
+                        >
                             👁
                         </button>
 
@@ -661,7 +808,8 @@ footer{
                         <button
                             type="button"
                             class="show-password"
-                            data-target="confirmPassword">
+                            data-target="confirmPassword"
+                        >
                             👁
                         </button>
 
@@ -673,10 +821,9 @@ footer{
                 <button
                     type="submit"
                     class="change-password-btn"
-                    id="changePasswordBtn">
-
+                    id="changePasswordBtn"
+                >
                     Change Password
-
                 </button>
 
             </form>
@@ -684,7 +831,9 @@ footer{
         </div>
 
 
-        <!-- ACCOUNT LINKS -->
+        <!-- ================================
+             ACCOUNT LINKS
+        ================================= -->
 
         <div class="account-card">
 
@@ -693,7 +842,12 @@ footer{
             </h2>
 
 
-            <a href="wallet.html" class="action">
+            <!-- WALLET -->
+
+            <a
+                href="wallet.html"
+                class="action"
+            >
 
                 <div class="action-left">
 
@@ -722,7 +876,12 @@ footer{
             </a>
 
 
-            <a href="orders.html" class="action">
+            <!-- ORDERS -->
+
+            <a
+                href="orders.html"
+                class="action"
+            >
 
                 <div class="action-left">
 
@@ -751,7 +910,12 @@ footer{
             </a>
 
 
-            <a href="notifications.html" class="action">
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="notifications.html"
+                class="action"
+            >
 
                 <div class="action-left">
 
@@ -780,7 +944,12 @@ footer{
             </a>
 
 
-            <a href="products.html" class="action">
+            <!-- PRODUCTS -->
+
+            <a
+                href="products.html"
+                class="action"
+            >
 
                 <div class="action-left">
 
@@ -809,8 +978,12 @@ footer{
             </a>
 
 
-            <button class="action logout"
-                    id="logoutBtn">
+            <!-- LOGOUT -->
+
+            <button
+                class="action logout"
+                id="logoutBtn"
+            >
 
                 <div class="action-left">
 
@@ -845,15 +1018,26 @@ footer{
 </main>
 
 
+<!-- ================================
+     FOOTER
+================================ -->
+
 <footer>
 
-    © <span id="year"></span> Zavora Social.
+    ©️
+    <span id="year"></span>
+    Zavora Social.
     All rights reserved.
 
 </footer>
 
 
 <script type="module">
+
+
+/* ==========================================
+   FIREBASE
+========================================== */
 
 import {
     initializeApp
@@ -898,159 +1082,226 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(
+        firebaseConfig
+    );
 
-const auth = getAuth(app);
+
+const auth =
+    getAuth(app);
 
 
-/* ================================
+/* ==========================================
    ELEMENTS
-================================ */
+========================================== */
 
 const loading =
-    document.getElementById("loading");
+    document.getElementById(
+        "loading"
+    );
 
 const profileContent =
-    document.getElementById("profileContent");
+    document.getElementById(
+        "profileContent"
+    );
 
 const fullName =
-    document.getElementById("fullName");
+    document.getElementById(
+        "fullName"
+    );
 
 const email =
-    document.getElementById("email");
+    document.getElementById(
+        "email"
+    );
 
 const fullNameInfo =
-    document.getElementById("fullNameInfo");
+    document.getElementById(
+        "fullNameInfo"
+    );
 
 const emailInfo =
-    document.getElementById("emailInfo");
+    document.getElementById(
+        "emailInfo"
+    );
 
 const accountId =
-    document.getElementById("accountId");
+    document.getElementById(
+        "accountId"
+    );
 
 const avatar =
-    document.getElementById("avatar");
+    document.getElementById(
+        "avatar"
+    );
 
 const logoutBtn =
-    document.getElementById("logoutBtn");
+    document.getElementById(
+        "logoutBtn"
+    );
 
 const passwordForm =
-    document.getElementById("passwordForm");
+    document.getElementById(
+        "passwordForm"
+    );
 
 const currentPassword =
-    document.getElementById("currentPassword");
+    document.getElementById(
+        "currentPassword"
+    );
 
 const newPassword =
-    document.getElementById("newPassword");
+    document.getElementById(
+        "newPassword"
+    );
 
 const confirmPassword =
-    document.getElementById("confirmPassword");
+    document.getElementById(
+        "confirmPassword"
+    );
 
 const changePasswordBtn =
-    document.getElementById("changePasswordBtn");
+    document.getElementById(
+        "changePasswordBtn"
+    );
 
 const passwordMessage =
-    document.getElementById("passwordMessage");
+    document.getElementById(
+        "passwordMessage"
+    );
 
 
 let currentUser = null;
 
 
-/* ================================
+/* ==========================================
    AUTH CHECK
-================================ */
+========================================== */
 
-onAuthStateChanged(auth,(user)=>{
-
-    if(!user){
-
-        window.location.href =
-            "login.html";
-
-        return;
-
-    }
+onAuthStateChanged(
+    auth,
+    (user) => {
 
 
-    currentUser = user;
+        if(!user){
 
+            window.location.href =
+                "login.html";
 
-    const name =
-        user.displayName ||
-        (
-            user.email
-            ? user.email.split("@")[0]
-            : "User"
-        );
-
-
-    fullName.textContent =
-        name;
-
-    fullNameInfo.textContent =
-        user.displayName || "Not set";
-
-    email.textContent =
-        user.email || "No email";
-
-    emailInfo.textContent =
-        user.email || "No email";
-
-    accountId.textContent =
-        user.uid;
-
-    avatar.textContent =
-        name.charAt(0).toUpperCase();
-
-
-    loading.style.display =
-        "none";
-
-    profileContent.style.display =
-        "block";
-
-});
-
-
-/* ================================
-   SHOW / HIDE PASSWORD
-================================ */
-
-document.querySelectorAll(".show-password")
-.forEach(button => {
-
-    button.addEventListener("click",()=>{
-
-        const target =
-            document.getElementById(
-                button.dataset.target
-            );
-
-
-        if(target.type === "password"){
-
-            target.type = "text";
-
-            button.textContent = "🙈";
-
-        }else{
-
-            target.type = "password";
-
-            button.textContent = "👁";
+            return;
 
         }
 
-    });
 
-});
+        currentUser =
+            user;
 
 
-/* ================================
+        const name =
+            user.displayName ||
+            (
+                user.email
+                ? user.email.split("@")[0]
+                : "User"
+            );
+
+
+        fullName.textContent =
+            name;
+
+
+        fullNameInfo.textContent =
+            user.displayName ||
+            "Not set";
+
+
+        email.textContent =
+            user.email ||
+            "No email";
+
+
+        emailInfo.textContent =
+            user.email ||
+            "No email";
+
+
+        accountId.textContent =
+            user.uid;
+
+
+        avatar.textContent =
+            name
+                .charAt(0)
+                .toUpperCase();
+
+
+        loading.style.display =
+            "none";
+
+
+        profileContent.style.display =
+            "block";
+
+    }
+);
+
+
+/* ==========================================
+   SHOW / HIDE PASSWORD
+========================================== */
+
+document
+    .querySelectorAll(".show-password")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const target =
+                        document.getElementById(
+                            button.dataset.target
+                        );
+
+
+                    if(
+                        target.type ===
+                        "password"
+                    ){
+
+                        target.type =
+                            "text";
+
+                        button.textContent =
+                            "🙈";
+
+                    }else{
+
+                        target.type =
+                            "password";
+
+                        button.textContent =
+                            "👁";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* ==========================================
    MESSAGE
-================================ */
+========================================== */
 
-function showMessage(message,type){
+function showMessage(
+    message,
+    type
+){
 
     passwordMessage.textContent =
         message;
@@ -1061,13 +1312,13 @@ function showMessage(message,type){
 }
 
 
-/* ================================
+/* ==========================================
    CHANGE PASSWORD
-================================ */
+========================================== */
 
 passwordForm.addEventListener(
     "submit",
-    async(event)=>{
+    async(event) => {
 
         event.preventDefault();
 
@@ -1087,8 +1338,10 @@ passwordForm.addEventListener(
         const current =
             currentPassword.value.trim();
 
+
         const newPass =
             newPassword.value;
+
 
         const confirm =
             confirmPassword.value;
@@ -1142,7 +1395,9 @@ passwordForm.addEventListener(
         }
 
 
-        changePasswordBtn.disabled = true;
+        changePasswordBtn.disabled =
+            true;
+
 
         changePasswordBtn.textContent =
             "Changing Password...";
@@ -1159,12 +1414,6 @@ passwordForm.addEventListener(
 
             }
 
-
-            /*
-                Firebase requires recent authentication
-                before a sensitive action like changing
-                a password.
-            */
 
             const credential =
                 EmailAuthProvider.credential(
@@ -1198,20 +1447,26 @@ passwordForm.addEventListener(
                 "Password Changed ✓";
 
 
-            setTimeout(()=>{
+            setTimeout(
+                () => {
 
-                changePasswordBtn.disabled =
-                    false;
+                    changePasswordBtn.disabled =
+                        false;
 
-                changePasswordBtn.textContent =
-                    "Change Password";
+                    changePasswordBtn.textContent =
+                        "Change Password";
 
-            },3000);
+                },
+                3000
+            );
 
 
-        }catch(error){
+        }
+        catch(error){
 
-            console.error(error);
+            console.error(
+                error
+            );
 
 
             let message =
@@ -1270,6 +1525,7 @@ passwordForm.addEventListener(
             changePasswordBtn.disabled =
                 false;
 
+
             changePasswordBtn.textContent =
                 "Change Password";
 
@@ -1279,29 +1535,40 @@ passwordForm.addEventListener(
 );
 
 
-/* ================================
+/* ==========================================
    LOGOUT
-================================ */
+========================================== */
 
 logoutBtn.addEventListener(
     "click",
-    async()=>{
+    async() => {
 
-        logoutBtn.disabled = true;
+
+        logoutBtn.disabled =
+            true;
+
 
         try{
 
-            await signOut(auth);
+            await signOut(
+                auth
+            );
+
 
             window.location.href =
                 "login.html";
 
-        }catch(error){
+        }
+        catch(error){
 
-            console.error(error);
+            console.error(
+                error
+            );
+
 
             logoutBtn.disabled =
                 false;
+
 
             alert(
                 "Unable to logout. Please try again."
@@ -1313,12 +1580,13 @@ logoutBtn.addEventListener(
 );
 
 
-/* ================================
+/* ==========================================
    YEAR
-================================ */
+========================================== */
 
-document.getElementById("year")
-    .textContent =
+document.getElementById(
+    "year"
+).textContent =
     new Date().getFullYear();
 
 </script>
