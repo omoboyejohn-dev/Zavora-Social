@@ -17,7 +17,7 @@
 
 body{
     font-family:Arial,sans-serif;
-    background:#080612;
+    background:#070b12;
     color:#fff;
     min-height:100vh;
 }
@@ -28,7 +28,7 @@ button{
 
 .header{
     height:70px;
-    background:#0e0a1d;
+    background:#0b111b;
     border-bottom:1px solid rgba(255,255,255,.08);
     display:flex;
     align-items:center;
@@ -51,7 +51,7 @@ button{
 }
 
 .logo span{
-    background:linear-gradient(90deg,#a855f7,#22d3ee);
+    background:linear-gradient(90deg,#22c55e,#06b6d4);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -69,9 +69,9 @@ button{
 .admin-badge{
     padding:7px 12px;
     border-radius:20px;
-    background:rgba(168,85,247,.12);
-    border:1px solid rgba(168,85,247,.25);
-    color:#c084fc;
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.25);
+    color:#4ade80;
     font-size:11px;
     font-weight:700;
     letter-spacing:.5px;
@@ -85,13 +85,13 @@ button{
 .sidebar{
     width:240px;
     flex-shrink:0;
-    background:#0d0919;
+    background:#0a1019;
     border-right:1px solid rgba(255,255,255,.07);
     padding:22px 14px;
 }
 
 .sidebar-title{
-    color:#77718b;
+    color:#687386;
     font-size:11px;
     text-transform:uppercase;
     letter-spacing:1px;
@@ -105,7 +105,7 @@ button{
     padding:13px 14px;
     margin-bottom:5px;
     border-radius:11px;
-    color:#aaa3b8;
+    color:#9aa5b5;
     text-decoration:none;
     font-size:14px;
     transition:.2s;
@@ -115,8 +115,8 @@ button{
 .nav-link.active{
     background:linear-gradient(
         90deg,
-        rgba(168,85,247,.18),
-        rgba(34,211,238,.08)
+        rgba(34,197,94,.16),
+        rgba(6,182,212,.08)
     );
     color:#fff;
 }
@@ -140,7 +140,7 @@ button{
     flex:1;
     min-width:0;
     padding:30px;
-    max-width:1500px;
+    max-width:1600px;
 }
 
 .page-title{
@@ -150,10 +150,15 @@ button{
 }
 
 .page-subtitle{
-    color:#8f899e;
+    color:#788496;
     font-size:14px;
     margin-bottom:28px;
 }
+
+
+/* ================================
+   STATISTICS
+================================ */
 
 .stats{
     display:grid;
@@ -164,7 +169,7 @@ button{
 }
 
 .stat-card{
-    background:#100b1f;
+    background:#0d141f;
     border:1px solid rgba(255,255,255,.07);
     border-radius:17px;
     padding:20px;
@@ -178,9 +183,36 @@ button{
     width:90px;
     height:90px;
     border-radius:50%;
-    background:rgba(168,85,247,.07);
     right:-35px;
     top:-35px;
+}
+
+.stat-card.customers::after{
+    background:rgba(59,130,246,.10);
+}
+
+.stat-card.products::after{
+    background:rgba(34,197,94,.10);
+}
+
+.stat-card.orders::after{
+    background:rgba(168,85,247,.10);
+}
+
+.stat-card.sales::after{
+    background:rgba(245,158,11,.10);
+}
+
+.stat-card.sold::after{
+    background:rgba(6,182,212,.10);
+}
+
+.stat-card.remaining::after{
+    background:rgba(34,197,94,.10);
+}
+
+.stat-card.deposits::after{
+    background:rgba(249,115,22,.10);
 }
 
 .stat-icon{
@@ -189,7 +221,7 @@ button{
 }
 
 .stat-label{
-    color:#8f899e;
+    color:#788496;
     font-size:12px;
     margin-bottom:8px;
 }
@@ -199,14 +231,19 @@ button{
     font-weight:800;
 }
 
+
+/* ================================
+   CONTENT
+================================ */
+
 .content-grid{
     display:grid;
-    grid-template-columns:1.4fr .8fr;
+    grid-template-columns:1.45fr .75fr;
     gap:20px;
 }
 
 .card{
-    background:#100b1f;
+    background:#0d141f;
     border:1px solid rgba(255,255,255,.07);
     border-radius:18px;
     padding:22px;
@@ -224,10 +261,15 @@ button{
 }
 
 .view-all{
-    color:#a855f7;
+    color:#22c55e;
     text-decoration:none;
     font-size:12px;
 }
+
+
+/* ================================
+   QUICK ACTIONS
+================================ */
 
 .quick-actions{
     display:grid;
@@ -239,7 +281,7 @@ button{
 .quick-action{
     text-decoration:none;
     color:#fff;
-    background:#0b0715;
+    background:#080e17;
     border:1px solid rgba(255,255,255,.06);
     padding:17px;
     border-radius:13px;
@@ -247,7 +289,7 @@ button{
 }
 
 .quick-action:hover{
-    border-color:rgba(168,85,247,.3);
+    border-color:rgba(34,197,94,.30);
     transform:translateY(-2px);
 }
 
@@ -262,10 +304,15 @@ button{
 }
 
 .quick-description{
-    color:#77718b;
+    color:#687386;
     font-size:11px;
     margin-top:5px;
 }
+
+
+/* ================================
+   SYSTEM STATUS
+================================ */
 
 .activity{
     display:flex;
@@ -278,7 +325,7 @@ button{
     align-items:center;
     gap:12px;
     padding:13px;
-    background:#0b0715;
+    background:#080e17;
     border-radius:11px;
     border:1px solid rgba(255,255,255,.05);
 }
@@ -290,7 +337,7 @@ button{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(168,85,247,.1);
+    background:rgba(34,197,94,.09);
 }
 
 .activity-text{
@@ -303,22 +350,118 @@ button{
 }
 
 .activity-sub{
-    color:#77718b;
+    color:#687386;
     font-size:10px;
     margin-top:4px;
+}
+
+
+/* ================================
+   PRODUCT TABLE
+================================ */
+
+.table-card{
+    margin-top:20px;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+.product-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+.product-table th{
+    text-align:left;
+    color:#687386;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    padding:13px 12px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.product-table td{
+    padding:15px 12px;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    font-size:13px;
+}
+
+.product-table tr:last-child td{
+    border-bottom:0;
+}
+
+.product-name{
+    font-weight:700;
+}
+
+.product-category{
+    color:#687386;
+    font-size:11px;
+    margin-top:4px;
+}
+
+.number{
+    font-weight:700;
+}
+
+.available-number{
+    color:#4ade80;
+}
+
+.sold-number{
+    color:#f87171;
+}
+
+.total-number{
+    color:#fff;
+}
+
+.sales-number{
+    color:#fbbf24;
+    font-weight:700;
+}
+
+.stock-badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.stock-ok{
+    color:#4ade80;
+    background:rgba(34,197,94,.10);
+    border:1px solid rgba(34,197,94,.18);
+}
+
+.stock-out{
+    color:#f87171;
+    background:rgba(239,68,68,.10);
+    border:1px solid rgba(239,68,68,.18);
 }
 
 .empty{
     text-align:center;
     padding:30px 15px;
-    color:#77718b;
+    color:#687386;
     font-size:13px;
 }
+
+
+/* ================================
+   LOADING
+================================ */
 
 .loading{
     position:fixed;
     inset:0;
-    background:#080612;
+    background:#070b12;
     z-index:100;
     display:flex;
     align-items:center;
@@ -331,7 +474,7 @@ button{
     width:35px;
     height:35px;
     border:3px solid rgba(255,255,255,.1);
-    border-top-color:#a855f7;
+    border-top-color:#22c55e;
     border-radius:50%;
     animation:spin .8s linear infinite;
 }
@@ -342,7 +485,12 @@ button{
     }
 }
 
-@media(max-width:1050px){
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width:1100px){
 
     .stats{
         grid-template-columns:
@@ -398,6 +546,10 @@ button{
         font-size:24px;
     }
 
+    .stat-value{
+        font-size:23px;
+    }
+
 }
 
 </style>
@@ -406,16 +558,21 @@ button{
 
 <body>
 
+
+<!-- LOADING -->
+
 <div class="loading" id="loading">
 
     <div class="spinner"></div>
 
-    <div style="color:#8f899e;font-size:13px;">
-        Checking administrator...
+    <div style="color:#788496;font-size:13px;">
+        Loading administrator dashboard...
     </div>
 
 </div>
 
+
+<!-- HEADER -->
 
 <header class="header">
 
@@ -444,433 +601,563 @@ button{
 <div class="layout">
 
 
-    <aside
-        class="sidebar"
-        id="sidebar"
-    >
+<!-- SIDEBAR -->
 
-        <div class="sidebar-title">
-            Management
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-title">
+        Management
+    </div>
+
+    <a href="index.html" class="nav-link active">
+        📊 Dashboard
+    </a>
+
+    <a href="categories.html" class="nav-link">
+        🗂️ Categories
+    </a>
+
+    <a href="products.html" class="nav-link">
+        📦 Products
+    </a>
+
+    <a href="inventory.html" class="nav-link">
+        🏷️ Inventory
+    </a>
+
+    <a href="orders.html" class="nav-link">
+        🛒 Orders
+    </a>
+
+    <a href="customers.html" class="nav-link">
+        👥 Customers
+    </a>
+
+    <a href="deposits.html" class="nav-link">
+        💰 Deposits
+    </a>
+
+    <a href="transactions.html" class="nav-link">
+        📈 Transactions
+    </a>
+
+    <a href="settings.html" class="nav-link">
+        ⚙️ Settings
+    </a>
+
+    <button
+        class="logout"
+        id="logoutButton"
+    >
+        🚪 Logout
+    </button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <h1 class="page-title">
+        Admin Dashboard
+    </h1>
+
+    <p class="page-subtitle">
+        Live overview of your Zavora Social marketplace.
+    </p>
+
+
+    <!-- =========================
+         STAT CARDS
+    ========================== -->
+
+    <section class="stats">
+
+
+        <div class="stat-card customers">
+
+            <div class="stat-icon">
+                👥
+            </div>
+
+            <div class="stat-label">
+                TOTAL CUSTOMERS
+            </div>
+
+            <div
+                class="stat-value"
+                id="customersCount"
+            >
+                0
+            </div>
+
         </div>
 
-        <a
-            href="index.html"
-            class="nav-link active"
-        >
-            📊 Dashboard
-        </a>
 
-        <a
-            href="categories.html"
-            class="nav-link"
-        >
-            🗂️ Categories
-        </a>
+        <div class="stat-card products">
 
-        <a
-            href="products.html"
-            class="nav-link"
-        >
-            📦 Products
-        </a>
+            <div class="stat-icon">
+                📦
+            </div>
 
-        <a
-            href="inventory.html"
-            class="nav-link"
-        >
-            🏷️ Inventory
-        </a>
+            <div class="stat-label">
+                TOTAL PRODUCTS
+            </div>
 
-        <a
-            href="orders.html"
-            class="nav-link"
-        >
-            🛒 Orders
-        </a>
+            <div
+                class="stat-value"
+                id="productsCount"
+            >
+                0
+            </div>
 
-        <a
-            href="customers.html"
-            class="nav-link"
-        >
-            👥 Customers
-        </a>
-
-        <a
-            href="deposits.html"
-            class="nav-link"
-        >
-            💰 Deposits
-        </a>
-
-        <a
-            href="transactions.html"
-            class="nav-link"
-        >
-            📈 Transactions
-        </a>
-
-        <a
-            href="settings.html"
-            class="nav-link"
-        >
-            ⚙️ Settings
-        </a>
-
-        <button
-            class="logout"
-            id="logoutButton"
-        >
-            🚪 Logout
-        </button>
-
-    </aside>
+        </div>
 
 
-    <main class="main">
+        <div class="stat-card orders">
 
-        <h1 class="page-title">
-            Admin Dashboard
-        </h1>
+            <div class="stat-icon">
+                🛒
+            </div>
 
-        <p class="page-subtitle">
-            Manage your Zavora Social marketplace from one place.
-        </p>
+            <div class="stat-label">
+                TOTAL ORDERS
+            </div>
+
+            <div
+                class="stat-value"
+                id="ordersCount"
+            >
+                0
+            </div>
+
+        </div>
 
 
-        <section class="stats">
+        <div class="stat-card sales">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <div class="stat-label">
+                TOTAL SALES
+            </div>
+
+            <div
+                class="stat-value"
+                id="salesAmount"
+            >
+                ₦0.00
+            </div>
+
+        </div>
 
 
-            <div class="stat-card">
+        <div class="stat-card sold">
 
-                <div class="stat-icon">
-                    👥
-                </div>
+            <div class="stat-icon">
+                🏷️
+            </div>
 
-                <div class="stat-label">
-                    CUSTOMERS
-                </div>
+            <div class="stat-label">
+                ITEMS SOLD
+            </div>
 
-                <div
-                    class="stat-value"
-                    id="customersCount"
+            <div
+                class="stat-value"
+                id="itemsSold"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card remaining">
+
+            <div class="stat-icon">
+                📦
+            </div>
+
+            <div class="stat-label">
+                ITEMS REMAINING
+            </div>
+
+            <div
+                class="stat-value"
+                id="itemsRemaining"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card deposits">
+
+            <div class="stat-icon">
+                ⏳
+            </div>
+
+            <div class="stat-label">
+                PENDING DEPOSITS
+            </div>
+
+            <div
+                class="stat-value"
+                id="depositsCount"
+            >
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUICK MANAGEMENT + STATUS
+    ========================== -->
+
+    <section class="content-grid">
+
+
+        <div class="card">
+
+            <div class="card-title">
+
+                <h2>
+                    Quick Management
+                </h2>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a
+                    href="categories.html"
+                    class="quick-action"
                 >
-                    0
-                </div>
 
-            </div>
+                    <div class="quick-icon">
+                        🗂️
+                    </div>
+
+                    <div class="quick-title">
+                        Categories
+                    </div>
+
+                    <div class="quick-description">
+                        Add and manage marketplace categories
+                    </div>
+
+                </a>
 
 
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    📦
-                </div>
-
-                <div class="stat-label">
-                    PRODUCTS
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="productsCount"
+                <a
+                    href="products.html"
+                    class="quick-action"
                 >
-                    0
-                </div>
 
-            </div>
+                    <div class="quick-icon">
+                        📦
+                    </div>
+
+                    <div class="quick-title">
+                        Products
+                    </div>
+
+                    <div class="quick-description">
+                        Add and manage marketplace products
+                    </div>
+
+                </a>
 
 
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🛒
-                </div>
-
-                <div class="stat-label">
-                    ORDERS
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="ordersCount"
+                <a
+                    href="inventory.html"
+                    class="quick-action"
                 >
-                    0
-                </div>
 
-            </div>
+                    <div class="quick-icon">
+                        🏷️
+                    </div>
+
+                    <div class="quick-title">
+                        Inventory
+                    </div>
+
+                    <div class="quick-description">
+                        Manage available product stock
+                    </div>
+
+                </a>
 
 
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    💰
-                </div>
-
-                <div class="stat-label">
-                    PENDING DEPOSITS
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="depositsCount"
+                <a
+                    href="orders.html"
+                    class="quick-action"
                 >
-                    0
-                </div>
+
+                    <div class="quick-icon">
+                        🛒
+                    </div>
+
+                    <div class="quick-title">
+                        Orders
+                    </div>
+
+                    <div class="quick-description">
+                        View customer purchases and deliveries
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="customers.html"
+                    class="quick-action"
+                >
+
+                    <div class="quick-icon">
+                        👥
+                    </div>
+
+                    <div class="quick-title">
+                        Customers
+                    </div>
+
+                    <div class="quick-description">
+                        View registered customers
+                    </div>
+
+                </a>
+
+
+                <a
+                    href="deposits.html"
+                    class="quick-action"
+                >
+
+                    <div class="quick-icon">
+                        💰
+                    </div>
+
+                    <div class="quick-title">
+                        Deposits
+                    </div>
+
+                    <div class="quick-description">
+                        Review customer wallet deposits
+                    </div>
+
+                </a>
+
 
             </div>
 
-        </section>
+        </div>
 
 
-        <section class="content-grid">
+        <div class="card">
 
+            <div class="card-title">
 
-            <div class="card">
-
-                <div class="card-title">
-
-                    <h2>
-                        Quick Management
-                    </h2>
-
-                </div>
-
-
-                <div class="quick-actions">
-
-
-                    <a
-                        href="categories.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-icon">
-                            🗂️
-                        </div>
-
-                        <div class="quick-title">
-                            Categories
-                        </div>
-
-                        <div class="quick-description">
-                            Add and manage marketplace categories
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="products.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-icon">
-                            📦
-                        </div>
-
-                        <div class="quick-title">
-                            Products
-                        </div>
-
-                        <div class="quick-description">
-                            Add and manage marketplace products
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="inventory.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-icon">
-                            🏷️
-                        </div>
-
-                        <div class="quick-title">
-                            Inventory
-                        </div>
-
-                        <div class="quick-description">
-                            Manage available product stock
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="orders.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-icon">
-                            🛒
-                        </div>
-
-                        <div class="quick-title">
-                            Orders
-                        </div>
-
-                        <div class="quick-description">
-                            View and manage customer orders
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="customers.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-icon">
-                            👥
-                        </div>
-
-                        <div class="quick-title">
-                            Customers
-                        </div>
-
-                        <div class="quick-description">
-                            View registered customers
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="deposits.html"
-                        class="quick-action"
-                    >
-
-                        <div class="quick-icon">
-                            💰
-                        </div>
-
-                        <div class="quick-title">
-                            Deposits
-                        </div>
-
-                        <div class="quick-description">
-                            Review pending wallet deposits
-                        </div>
-
-                    </a>
-
-
-                </div>
+                <h2>
+                    System Status
+                </h2>
 
             </div>
 
 
-            <div class="card">
-
-                <div class="card-title">
-
-                    <h2>
-                        System Status
-                    </h2>
-
-                </div>
+            <div class="activity">
 
 
-                <div class="activity">
+                <div class="activity-item">
 
+                    <div class="activity-icon">
+                        🔐
+                    </div>
 
-                    <div class="activity-item">
+                    <div class="activity-text">
 
-                        <div class="activity-icon">
-                            🔐
+                        <div class="activity-title">
+                            Authentication
                         </div>
 
-                        <div class="activity-text">
-
-                            <div class="activity-title">
-                                Authentication
-                            </div>
-
-                            <div class="activity-sub">
-                                Firebase Authentication active
-                            </div>
-
-                        </div>
-
-                        <div style="color:#4ade80;">
-                            ●
+                        <div class="activity-sub">
+                            Firebase Authentication active
                         </div>
 
                     </div>
 
-
-                    <div class="activity-item">
-
-                        <div class="activity-icon">
-                            🗄️
-                        </div>
-
-                        <div class="activity-text">
-
-                            <div class="activity-title">
-                                Database
-                            </div>
-
-                            <div class="activity-sub">
-                                Realtime Database connected
-                            </div>
-
-                        </div>
-
-                        <div style="color:#4ade80;">
-                            ●
-                        </div>
-
-                    </div>
-
-
-                    <div class="activity-item">
-
-                        <div class="activity-icon">
-                            🛍️
-                        </div>
-
-                        <div class="activity-text">
-
-                            <div class="activity-title">
-                                Marketplace
-                            </div>
-
-                            <div class="activity-sub">
-                                Ready for products
-                            </div>
-
-                        </div>
-
-                        <div style="color:#facc15;">
-                            ●
-                        </div>
-
-                    </div>
-
-
-                    <div class="empty">
-                        More live statistics will appear here
-                        after database integration.
+                    <div style="color:#4ade80;">
+                        ●
                     </div>
 
                 </div>
 
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        🗄️
+                    </div>
+
+                    <div class="activity-text">
+
+                        <div class="activity-title">
+                            Database
+                        </div>
+
+                        <div class="activity-sub">
+                            Realtime Database connected
+                        </div>
+
+                    </div>
+
+                    <div style="color:#4ade80;">
+                        ●
+                    </div>
+
+                </div>
+
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        🛍️
+                    </div>
+
+                    <div class="activity-text">
+
+                        <div class="activity-title">
+                            Marketplace
+                        </div>
+
+                        <div class="activity-sub">
+                            Live inventory monitoring
+                        </div>
+
+                    </div>
+
+                    <div style="color:#4ade80;">
+                        ●
+                    </div>
+
+                </div>
+
+
+                <div class="empty">
+                    Statistics update automatically from Firebase.
+                </div>
+
             </div>
 
+        </div>
 
-        </section>
 
-    </main>
+    </section>
+
+
+    <!-- =========================
+         PRODUCT STOCK
+    ========================== -->
+
+    <section class="card table-card">
+
+        <div class="card-title">
+
+            <h2>
+                Product Stock & Sales
+            </h2>
+
+            <a
+                href="inventory.html"
+                class="view-all"
+            >
+                Manage Inventory →
+            </a>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table class="product-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Available
+                        </th>
+
+                        <th>
+                            Sold
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Sales
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="productTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            Loading product statistics...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</main>
 
 </div>
 
 
 <script type="module">
+
+
+/* =====================================
+   FIREBASE
+===================================== */
 
 import {
     initializeApp
@@ -882,10 +1169,12 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-/* =====================================
-   FIREBASE
-===================================== */
 
 const firebaseConfig = {
 
@@ -894,6 +1183,9 @@ const firebaseConfig = {
 
     authDomain:
         "zavorasocial.firebaseapp.com",
+
+    databaseURL:
+        "https://zavorasocial-default-rtdb.firebaseio.com/",
 
     projectId:
         "zavorasocial",
@@ -919,6 +1211,9 @@ const app =
 const auth =
     getAuth(app);
 
+const db =
+    getDatabase(app);
+
 
 /* =====================================
    ELEMENTS
@@ -935,6 +1230,30 @@ const mobileMenu =
 
 const logoutButton =
     document.getElementById("logoutButton");
+
+const customersCount =
+    document.getElementById("customersCount");
+
+const productsCount =
+    document.getElementById("productsCount");
+
+const ordersCount =
+    document.getElementById("ordersCount");
+
+const salesAmount =
+    document.getElementById("salesAmount");
+
+const itemsSold =
+    document.getElementById("itemsSold");
+
+const itemsRemaining =
+    document.getElementById("itemsRemaining");
+
+const depositsCount =
+    document.getElementById("depositsCount");
+
+const productTableBody =
+    document.getElementById("productTableBody");
 
 
 /* =====================================
@@ -975,56 +1294,692 @@ logoutButton.addEventListener("click",async () => {
 
 
 /* =====================================
-   AUTH CHECK
+   NUMBER FORMAT
 ===================================== */
 
-onAuthStateChanged(auth,(user) => {
+function formatMoney(amount){
 
-    if(!user){
+    return "₦" + Number(amount || 0).toLocaleString(
+        "en-NG",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
 
-        window.location.href =
-            "login.html";
+}
+
+
+/* =====================================
+   CUSTOMERS
+===================================== */
+
+function loadCustomers(){
+
+    const usersRef =
+        ref(db,"users");
+
+    onValue(
+        usersRef,
+        snapshot => {
+
+            const data =
+                snapshot.val() || {};
+
+            const count =
+                Object.keys(data).length;
+
+            customersCount.textContent =
+                count.toLocaleString();
+
+        },
+        error => {
+
+            console.error(
+                "Customers error:",
+                error
+            );
+
+            customersCount.textContent =
+                "—";
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   PRODUCTS
+===================================== */
+
+function loadProducts(){
+
+    const productsRef =
+        ref(db,"products");
+
+    onValue(
+        productsRef,
+        snapshot => {
+
+            const data =
+                snapshot.val() || {};
+
+            const products =
+                Object.values(data);
+
+            productsCount.textContent =
+                products.length.toLocaleString();
+
+        },
+        error => {
+
+            console.error(
+                "Products error:",
+                error
+            );
+
+            productsCount.textContent =
+                "—";
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   ORDERS + SALES
+===================================== */
+
+function loadOrders(){
+
+    const ordersRef =
+        ref(db,"orders");
+
+    onValue(
+        ordersRef,
+        snapshot => {
+
+            const data =
+                snapshot.val() || {};
+
+            const orders =
+                Object.values(data);
+
+            let totalSales = 0;
+
+            let soldCount = 0;
+
+
+            orders.forEach(order => {
+
+                const status =
+                    String(
+                        order.status || ""
+                    ).toLowerCase();
+
+
+                /*
+                    Only completed purchases
+                    count as sales.
+                */
+
+                if(
+                    status === "completed" ||
+                    status === "delivered" ||
+                    status === "success" ||
+                    status === "successful"
+                ){
+
+                    const price =
+                        Number(order.price || 0);
+
+                    totalSales += price;
+
+                    soldCount++;
+
+                }
+
+            });
+
+
+            ordersCount.textContent =
+                orders.length.toLocaleString();
+
+            salesAmount.textContent =
+                formatMoney(totalSales);
+
+            itemsSold.textContent =
+                soldCount.toLocaleString();
+
+        },
+        error => {
+
+            console.error(
+                "Orders error:",
+                error
+            );
+
+            ordersCount.textContent =
+                "—";
+
+            salesAmount.textContent =
+                "—";
+
+            itemsSold.textContent =
+                "—";
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   PENDING DEPOSITS
+===================================== */
+
+function loadDeposits(){
+
+    const depositsRef =
+        ref(db,"deposits");
+
+    onValue(
+        depositsRef,
+        snapshot => {
+
+            const data =
+                snapshot.val() || {};
+
+            let pending = 0;
+
+
+            Object.values(data).forEach(
+                deposit => {
+
+                    const status =
+                        String(
+                            deposit.status || ""
+                        ).toLowerCase();
+
+
+                    if(
+                        status === "pending"
+                    ){
+
+                        pending++;
+
+                    }
+
+                }
+            );
+
+
+            depositsCount.textContent =
+                pending.toLocaleString();
+
+        },
+        error => {
+
+            console.error(
+                "Deposits error:",
+                error
+            );
+
+            depositsCount.textContent =
+                "—";
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   INVENTORY
+===================================== */
+
+function loadInventory(){
+
+    const inventoryRef =
+        ref(db,"inventory");
+
+    onValue(
+        inventoryRef,
+        snapshot => {
+
+            const data =
+                snapshot.val() || {};
+
+            let remaining = 0;
+
+            let sold = 0;
+
+
+            Object.values(data).forEach(
+                productInventory => {
+
+                    if(
+                        !productInventory ||
+                        typeof productInventory !== "object"
+                    ){
+
+                        return;
+
+                    }
+
+
+                    Object.values(
+                        productInventory
+                    ).forEach(item => {
+
+                        if(!item){
+                            return;
+                        }
+
+                        const status =
+                            String(
+                                item.status || ""
+                            ).toLowerCase();
+
+
+                        if(
+                            status === "available"
+                        ){
+
+                            remaining++;
+
+                        }
+
+
+                        if(
+                            status === "sold"
+                        ){
+
+                            sold++;
+
+                        }
+
+                    });
+
+                }
+            );
+
+
+            itemsRemaining.textContent =
+                remaining.toLocaleString();
+
+
+            /*
+                Inventory is the source of truth
+                for remaining stock.
+
+                Sold count is displayed here as
+                well, while the Orders collection
+                also tracks completed purchases.
+            */
+
+            productTableBody.dataset.loaded =
+                "true";
+
+
+            loadProductTable(data);
+
+        },
+        error => {
+
+            console.error(
+                "Inventory error:",
+                error
+            );
+
+            itemsRemaining.textContent =
+                "—";
+
+            productTableBody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="empty"
+                    >
+                        Unable to load inventory statistics.
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   PRODUCT TABLE DATA
+===================================== */
+
+let productsData = {};
+
+let ordersData = {};
+
+function rebuildProductTable(){
+
+    if(
+        !productsData ||
+        !ordersData
+    ){
 
         return;
 
     }
 
-    /*
-        The user is authenticated.
-
-        IMPORTANT:
-        Admin authorization will be added
-        before sensitive database operations
-        are enabled.
-
-        For now this page confirms that the
-        Firebase account is signed in.
-    */
-
-    loading.style.display = "none";
-
-});
+}
 
 
 /* =====================================
-   PLACEHOLDER STATISTICS
+   PRODUCT TABLE
 ===================================== */
 
-document.getElementById(
-    "customersCount"
-).textContent = "0";
+function loadProductTable(
+    inventoryData
+){
 
-document.getElementById(
-    "productsCount"
-).textContent = "0";
+    const productsRef =
+        ref(db,"products");
 
-document.getElementById(
-    "ordersCount"
-).textContent = "0";
 
-document.getElementById(
-    "depositsCount"
-).textContent = "0";
+    onValue(
+        productsRef,
+        productSnapshot => {
+
+            const products =
+                productSnapshot.val() || {};
+
+            renderProductTable(
+                products,
+                inventoryData
+            );
+
+        },
+        error => {
+
+            console.error(
+                "Product table error:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+function renderProductTable(
+    products,
+    inventoryData
+){
+
+    productTableBody.innerHTML = "";
+
+
+    const productIds =
+        Object.keys(products);
+
+
+    if(productIds.length === 0){
+
+        productTableBody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    No products found.
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    productIds.forEach(productId => {
+
+        const product =
+            products[productId] || {};
+
+
+        const productInventory =
+            inventoryData[productId] || {};
+
+
+        let available = 0;
+
+        let sold = 0;
+
+        let total = 0;
+
+
+        Object.values(
+            productInventory
+        ).forEach(item => {
+
+            if(!item){
+                return;
+            }
+
+
+            total++;
+
+
+            const status =
+                String(
+                    item.status || ""
+                ).toLowerCase();
+
+
+            if(
+                status === "available"
+            ){
+
+                available++;
+
+            }
+
+
+            if(
+                status === "sold"
+            ){
+
+                sold++;
+
+            }
+
+        });
+
+
+        /*
+            Sales are calculated from inventory
+            sold count × product price.
+
+            This matches the current
+            one-item-per-order purchase system.
+        */
+
+        const price =
+            Number(product.price || 0);
+
+        const sales =
+            sold * price;
+
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+
+                <div class="product-name">
+                    ${escapeHtml(
+                        product.name ||
+                        "Unnamed Product"
+                    )}
+                </div>
+
+                <div class="product-category">
+                    ${escapeHtml(
+                        product.category ||
+                        "No category"
+                    )}
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <span class="number available-number">
+                    ${available.toLocaleString()}
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="number sold-number">
+                    ${sold.toLocaleString()}
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="number total-number">
+                    ${total.toLocaleString()}
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="sales-number">
+                    ${formatMoney(sales)}
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${
+                    available > 0
+
+                    ?
+
+                    `
+                    <span class="stock-badge stock-ok">
+                        IN STOCK
+                    </span>
+                    `
+
+                    :
+
+                    `
+                    <span class="stock-badge stock-out">
+                        OUT OF STOCK
+                    </span>
+                    `
+                }
+
+            </td>
+
+        `;
+
+
+        productTableBody.appendChild(row);
+
+    });
+
+}
+
+
+/* =====================================
+   HTML SAFETY
+===================================== */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================
+   AUTH
+===================================== */
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        /*
+            User is authenticated.
+
+            Keep your existing Firebase
+            security rules responsible for
+            restricting admin database access.
+        */
+
+
+        loading.style.display =
+            "none";
+
+
+        /*
+            Start all live listeners.
+        */
+
+        loadCustomers();
+
+        loadProducts();
+
+        loadOrders();
+
+        loadDeposits();
+
+        loadInventory();
+
+    }
+);
 
 </script>
 
