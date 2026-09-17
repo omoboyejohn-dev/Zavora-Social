@@ -14,104 +14,276 @@
 
 body{
     font-family:Arial,sans-serif;
-    background:#f6f8f7;
-    color:#102016;
+    background:#ffffff;
+    color:#111111;
+    min-height:100vh;
 }
 
+/* Header */
 .header{
-    background:#16a34a;
-    color:#fff;
-    padding:18px 20px;
+    background:#ffffff;
+    color:#111111;
+    padding:16px 24px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    border-bottom:1px solid #e5e7eb;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.header h1{
+.logo{
     font-size:21px;
+    font-weight:800;
+    letter-spacing:-.4px;
+}
+
+.logo span{
+    color:#7e22ce;
 }
 
 .back{
-    color:#fff;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    color:#ffffff;
     text-decoration:none;
-    font-weight:bold;
+    font-weight:700;
+    font-size:14px;
+    padding:10px 16px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    transition:.2s ease;
 }
 
+.back:hover{
+    transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(126,34,206,.22);
+}
+
+/* Main */
 .container{
     max-width:1100px;
     margin:auto;
-    padding:25px 18px;
+    padding:30px 20px 45px;
 }
 
+/* Hero */
 .hero{
-    background:#fff;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    color:#ffffff;
     border-radius:18px;
-    padding:28px;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    padding:30px;
     margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(37,99,235,.12);
+}
+
+.hero-content{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.hero-icon{
+    width:58px;
+    height:58px;
+    border-radius:15px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    flex-shrink:0;
 }
 
 .hero h2{
     font-size:28px;
-    margin-bottom:8px;
+    margin-bottom:7px;
+    letter-spacing:-.5px;
 }
 
 .hero p{
-    color:#66736a;
+    color:rgba(255,255,255,.88);
+    font-size:15px;
 }
 
+/* Grid */
 .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
 
+/* Cards */
 .card{
-    background:#fff;
-    border:1px solid #e5eae7;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
     border-radius:16px;
-    padding:22px;
+    padding:24px;
+    box-shadow:0 4px 16px rgba(17,24,39,.04);
+    transition:.2s ease;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#d8b4fe;
+    box-shadow:0 10px 25px rgba(17,24,39,.08);
+}
+
+.icon-box{
+    width:58px;
+    height:58px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:18px;
+    box-shadow:0 6px 15px rgba(126,34,206,.15);
 }
 
 .icon{
-    font-size:35px;
-    margin-bottom:15px;
+    font-size:30px;
 }
 
 .card h3{
+    color:#111827;
+    font-size:18px;
     margin-bottom:8px;
 }
 
 .card p{
-    color:#66736a;
+    color:#6b7280;
     font-size:14px;
-    margin-bottom:18px;
+    line-height:1.6;
+    margin-bottom:20px;
 }
 
+/* Buttons */
 .btn{
     display:block;
     width:100%;
     border:0;
-    background:#16a34a;
-    color:#fff;
-    padding:12px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    color:#ffffff;
+    padding:13px;
     border-radius:10px;
-    font-weight:bold;
+    font-weight:700;
+    font-size:14px;
     text-align:center;
     cursor:pointer;
+    text-decoration:none;
+    transition:.2s ease;
 }
 
 .btn:hover{
-    background:#15803d;
+    transform:translateY(-1px);
+    box-shadow:0 7px 18px rgba(126,34,206,.22);
 }
 
-@media(max-width:700px){
+.btn:active{
+    transform:translateY(0);
+}
+
+/* Info */
+.info{
+    margin-top:24px;
+    padding:18px 20px;
+    border:1px solid #e9d5ff;
+    background:#faf5ff;
+    border-radius:14px;
+    color:#6b21a8;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.info strong{
+    color:#581c87;
+}
+
+/* Footer */
+.footer{
+    text-align:center;
+    color:#9ca3af;
+    font-size:13px;
+    padding:0 20px 25px;
+}
+
+/* Tablet */
+@media(max-width:800px){
     .grid{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+/* Mobile */
+@media(max-width:600px){
+    .header{
+        padding:14px 16px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .back{
+        padding:9px 12px;
+        font-size:13px;
+    }
+
+    .container{
+        padding:22px 15px 35px;
+    }
+
+    .hero{
+        padding:22px;
+        border-radius:16px;
+    }
+
+    .hero-content{
+        align-items:flex-start;
+    }
+
+    .hero-icon{
+        width:48px;
+        height:48px;
+        font-size:24px;
+        border-radius:12px;
     }
 
     .hero h2{
         font-size:23px;
+    }
+
+    .hero p{
+        font-size:14px;
+        line-height:1.5;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .card{
+        padding:21px;
+    }
+}
+
+@media(max-width:380px){
+    .logo{
+        font-size:17px;
+    }
+
+    .back{
+        font-size:12px;
+        padding:8px 10px;
+    }
+
+    .hero h2{
+        font-size:21px;
     }
 }
 </style>
@@ -120,69 +292,157 @@ body{
 <body>
 
 <header class="header">
-    <h1>😁 Boost S/M</h1>
-    <a href="dashboard.html" class="back">← Dashboard</a>
+    <div class="logo">Zavora <span>Social</span></div>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
 </header>
 
 <main class="container">
 
     <section class="hero">
-        <h2>Social Media Boost</h2>
-        <p>Grow your social media presence with Zavora Social.</p>
+        <div class="hero-content">
+
+            <div class="hero-icon">🚀</div>
+
+            <div>
+                <h2>Social Media Boost</h2>
+                <p>Grow your social media presence with Zavora Social.</p>
+            </div>
+
+        </div>
     </section>
 
     <section class="grid">
 
         <div class="card">
-            <div class="icon">📘</div>
+            <div class="icon-box">
+                <div class="icon">📘</div>
+            </div>
+
             <h3>Facebook</h3>
-            <p>Boost Facebook services and grow your audience.</p>
-            <button class="btn" onclick="comingSoon()">View Services</button>
+
+            <p>
+                Boost Facebook services and grow your audience.
+            </p>
+
+            <button class="btn" onclick="comingSoon()">
+                View Services
+            </button>
         </div>
 
+
         <div class="card">
-            <div class="icon">📸</div>
+            <div class="icon-box">
+                <div class="icon">📸</div>
+            </div>
+
             <h3>Instagram</h3>
-            <p>Boost Instagram services for your account.</p>
-            <button class="btn" onclick="comingSoon()">View Services</button>
+
+            <p>
+                Boost Instagram services and increase your account
+                visibility and engagement.
+            </p>
+
+            <button class="btn" onclick="comingSoon()">
+                View Services
+            </button>
         </div>
 
+
         <div class="card">
-            <div class="icon">🎵</div>
+            <div class="icon-box">
+                <div class="icon">🎵</div>
+            </div>
+
             <h3>TikTok</h3>
-            <p>Grow your TikTok presence and engagement.</p>
-            <button class="btn" onclick="comingSoon()">View Services</button>
+
+            <p>
+                Grow your TikTok presence and engagement with
+                social media services.
+            </p>
+
+            <button class="btn" onclick="comingSoon()">
+                View Services
+            </button>
         </div>
 
+
         <div class="card">
-            <div class="icon">▶️</div>
+            <div class="icon-box">
+                <div class="icon">▶️</div>
+            </div>
+
             <h3>YouTube</h3>
-            <p>Boost YouTube services and reach more viewers.</p>
-            <button class="btn" onclick="comingSoon()">View Services</button>
+
+            <p>
+                Boost YouTube services and reach more viewers
+                with your content.
+            </p>
+
+            <button class="btn" onclick="comingSoon()">
+                View Services
+            </button>
         </div>
 
+
         <div class="card">
-            <div class="icon">👻</div>
+            <div class="icon-box">
+                <div class="icon">👻</div>
+            </div>
+
             <h3>Snapchat</h3>
-            <p>Explore Snapchat growth services.</p>
-            <button class="btn" onclick="comingSoon()">View Services</button>
+
+            <p>
+                Explore Snapchat growth services for your account
+                and content.
+            </p>
+
+            <button class="btn" onclick="comingSoon()">
+                View Services
+            </button>
         </div>
 
+
         <div class="card">
-            <div class="icon">🐦</div>
+            <div class="icon-box">
+                <div class="icon">🌐</div>
+            </div>
+
             <h3>More Platforms</h3>
-            <p>More social media services will be added.</p>
-            <button class="btn" onclick="comingSoon()">View Services</button>
+
+            <p>
+                More social media services will be added to
+                Zavora Social soon.
+            </p>
+
+            <button class="btn" onclick="comingSoon()">
+                View Services
+            </button>
         </div>
 
     </section>
 
+    <div class="info">
+        <strong>🚀 Coming soon:</strong>
+        Social media boosting services are currently being prepared.
+        Available platforms and services will appear here when the
+        feature launches.
+    </div>
+
 </main>
+
+<footer class="footer">
+    © <span id="year"></span> Zavora Social. All rights reserved.
+</footer>
 
 <script>
 function comingSoon(){
     alert("Social media services will be available soon.");
 }
+
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>
