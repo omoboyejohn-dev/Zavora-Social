@@ -4,7 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
 
 <title>Zavora Social | My Orders</title>
 
@@ -18,11 +20,8 @@
 
 body{
     font-family:Inter,Arial,sans-serif;
-
     background:#ffffff;
-
     color:#111827;
-
     min-height:100vh;
 }
 
@@ -30,34 +29,25 @@ header{
     position:sticky;
     top:0;
     z-index:100;
-
     background:#ffffff;
-
     border-bottom:1px solid #e5e7eb;
 }
 
 .navbar{
     max-width:1100px;
     min-height:72px;
-
     margin:auto;
-
     padding:0 20px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
 .logo{
     color:#111827;
-
     text-decoration:none;
-
     font-size:22px;
-
     font-weight:900;
 }
 
@@ -67,19 +57,14 @@ header{
 
 .back{
     color:#ffffff;
-
     background:#16a34a;
-
     border:1px solid #15803d;
 
     padding:9px 13px;
-
     border-radius:9px;
 
     text-decoration:none;
-
     font-size:13px;
-
     font-weight:700;
 
     transition:.2s;
@@ -87,15 +72,12 @@ header{
 
 .back:hover{
     background:#15803d;
-
     transform:translateY(-1px);
 }
 
 .container{
     max-width:1000px;
-
     margin:auto;
-
     padding:35px 20px 60px;
 }
 
@@ -105,9 +87,7 @@ header{
 
 .heading h1{
     color:#111827;
-
     font-size:32px;
-
     margin-bottom:7px;
 }
 
@@ -119,12 +99,10 @@ header{
     background:#ffffff;
 
     border:1px solid #e5e7eb;
-
     border-radius:18px;
 
     padding:20px;
-
-    margin-bottom:15px;
+    margin-bottom:18px;
 
     box-shadow:0 7px 22px rgba(0,0,0,.05);
 
@@ -133,35 +111,28 @@ header{
 
 .order-card:hover{
     border-color:#86efac;
-
     box-shadow:0 10px 28px rgba(22,163,74,.08);
 }
 
 .order-top{
     display:flex;
-
     justify-content:space-between;
+    align-items:flex-start;
 
     gap:15px;
-
     margin-bottom:18px;
 }
 
 .order-name{
     color:#111827;
-
     font-weight:800;
-
-    font-size:17px;
+    font-size:18px;
 }
 
 .order-id{
     color:#94a3b8;
-
     font-size:12px;
-
     margin-top:5px;
-
     word-break:break-all;
 }
 
@@ -169,16 +140,15 @@ header{
     height:max-content;
 
     padding:7px 11px;
-
     border-radius:9px;
 
     font-size:11px;
-
     font-weight:800;
 
     background:#16a34a;
-
     color:#ffffff;
+
+    white-space:nowrap;
 }
 
 .order-info{
@@ -195,8 +165,9 @@ header{
     border-radius:11px;
 
     background:#f0fdf4;
-
     border:1px solid #dcfce7;
+
+    min-width:0;
 }
 
 .info small{
@@ -204,19 +175,25 @@ header{
 
     color:#64748b;
 
-    margin-bottom:5px;
+    margin-bottom:6px;
+
+    font-size:12px;
 }
 
 .info strong{
     color:#111827;
 
     font-size:14px;
+
+    line-height:1.5;
+
+    word-break:break-word;
 }
 
 .delivery-box{
-    margin-top:16px;
+    margin-top:18px;
 
-    padding:16px;
+    padding:18px;
 
     border-radius:14px;
 
@@ -225,14 +202,22 @@ header{
     border:1px solid #bbf7d0;
 }
 
+.delivery-header{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:14px;
+}
+
 .delivery-title{
     color:#15803d;
 
-    font-size:14px;
-
+    font-size:15px;
     font-weight:900;
-
-    margin-bottom:10px;
 }
 
 .delivery-status{
@@ -243,14 +228,58 @@ header{
     border-radius:8px;
 
     font-size:11px;
-
     font-weight:800;
 
     background:#16a34a;
-
     color:#ffffff;
 
-    margin-bottom:10px;
+    white-space:nowrap;
+}
+
+.delivery-meta{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.delivery-meta-item{
+    padding:11px;
+
+    background:#ffffff;
+
+    border:1px solid #dcfce7;
+
+    border-radius:10px;
+}
+
+.delivery-meta-item small{
+    display:block;
+
+    color:#64748b;
+
+    font-size:11px;
+
+    margin-bottom:4px;
+}
+
+.delivery-meta-item strong{
+    color:#111827;
+
+    font-size:13px;
+}
+
+.details-label{
+    color:#15803d;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    margin-bottom:8px;
 }
 
 .delivery-details{
@@ -263,14 +292,32 @@ header{
     white-space:pre-wrap;
 
     word-break:break-word;
+
+    background:#ffffff;
+
+    border:1px solid #dcfce7;
+
+    border-radius:11px;
+
+    padding:14px;
+
+    font-family:Inter,Arial,sans-serif;
 }
 
-.delivery-pending{
+.no-details{
     color:#64748b;
 
     font-size:13px;
 
     line-height:1.6;
+
+    background:#ffffff;
+
+    border:1px solid #dcfce7;
+
+    border-radius:11px;
+
+    padding:14px;
 }
 
 .empty{
@@ -287,19 +334,16 @@ header{
 
 .empty-icon{
     font-size:48px;
-
     margin-bottom:12px;
 }
 
 .empty h2{
     color:#111827;
-
     margin-bottom:8px;
 }
 
 .empty p{
     color:#64748b;
-
     line-height:1.6;
 }
 
@@ -353,6 +397,8 @@ header{
     border:1px solid #fecaca;
 
     color:#dc2626;
+
+    line-height:1.6;
 }
 
 footer{
@@ -365,7 +411,7 @@ footer{
     padding:0 20px 30px;
 }
 
-@media(max-width:650px){
+@media(max-width:700px){
 
     .container{
         padding:28px 15px 50px;
@@ -383,74 +429,120 @@ footer{
         grid-template-columns:1fr;
     }
 
+    .delivery-meta{
+        grid-template-columns:1fr;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="navbar">
 
-    <a href="dashboard.html" class="logo">
+    <a href="dashboard.html"
+       class="logo">
+
         Zavora <span>Social</span>
+
     </a>
 
-    <a href="dashboard.html" class="back">
+
+    <a href="dashboard.html"
+       class="back">
+
         ← Dashboard
+
     </a>
 
 </div>
 
 </header>
 
+
+
 <main class="container">
+
 
 <div class="heading">
 
-    <h1>My Orders</h1>
+    <h1>
+        My Orders
+    </h1>
 
     <p>
-        View your purchases and order status.
+        View your purchases, delivery status,
+        dates, times and delivered item details.
     </p>
 
 </div>
 
+
+
 <div id="ordersArea">
 
     <div class="loading">
+
         Loading your orders...
+
     </div>
 
 </div>
 
+
 </main>
+
+
 
 <footer>
 
-© <span id="year"></span> Zavora Social. All rights reserved.
+© <span id="year"></span>
+Zavora Social. All rights reserved.
 
 </footer>
 
+
+
 <script type="module">
+
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
     getDatabase,
     ref,
+    query,
+    orderByChild,
+    equalTo,
     onValue
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+
+/*
+|--------------------------------------------------------------------------
+| FIREBASE CONFIG
+|--------------------------------------------------------------------------
+*/
 
 
 const firebaseConfig = {
@@ -482,14 +574,25 @@ const firebaseConfig = {
 };
 
 
+
+/*
+|--------------------------------------------------------------------------
+| INITIALIZE FIREBASE
+|--------------------------------------------------------------------------
+*/
+
+
 const app =
     initializeApp(firebaseConfig);
+
 
 const auth =
     getAuth(app);
 
+
 const db =
     getDatabase(app);
+
 
 
 const ordersArea =
@@ -498,14 +601,28 @@ const ordersArea =
     );
 
 
-document.getElementById("year").textContent =
+document.getElementById(
+    "year"
+).textContent =
     new Date().getFullYear();
+
+
+
+/*
+|--------------------------------------------------------------------------
+| FORMAT PRICE
+|--------------------------------------------------------------------------
+*/
 
 
 function formatPrice(amount){
 
+    const number =
+        Number(amount || 0);
+
+
     return "₦" +
-        Number(amount || 0).toLocaleString(
+        number.toLocaleString(
             "en-NG",
             {
                 minimumFractionDigits:2,
@@ -516,15 +633,45 @@ function formatPrice(amount){
 }
 
 
-function formatDate(timestamp){
 
-    if(!timestamp){
+/*
+|--------------------------------------------------------------------------
+| FORMAT DATE AND TIME
+|--------------------------------------------------------------------------
+*/
+
+
+function formatDateTime(timestamp){
+
+    if(
+        timestamp === null ||
+        timestamp === undefined ||
+        timestamp === ""
+    ){
 
         return "Date unavailable";
 
     }
 
-    return new Date(timestamp).toLocaleString(
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date unavailable";
+
+    }
+
+
+    return date.toLocaleString(
         "en-NG",
         {
             dateStyle:"medium",
@@ -533,6 +680,112 @@ function formatDate(timestamp){
     );
 
 }
+
+
+
+/*
+|--------------------------------------------------------------------------
+| FORMAT DATE ONLY
+|--------------------------------------------------------------------------
+*/
+
+
+function formatDate(timestamp){
+
+    if(
+        timestamp === null ||
+        timestamp === undefined ||
+        timestamp === ""
+    ){
+
+        return "Date unavailable";
+
+    }
+
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date unavailable";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-NG",
+        {
+            dateStyle:"medium"
+        }
+    );
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| FORMAT TIME ONLY
+|--------------------------------------------------------------------------
+*/
+
+
+function formatTime(timestamp){
+
+    if(
+        timestamp === null ||
+        timestamp === undefined ||
+        timestamp === ""
+    ){
+
+        return "Time unavailable";
+
+    }
+
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Time unavailable";
+
+    }
+
+
+    return date.toLocaleTimeString(
+        "en-NG",
+        {
+            hour:"numeric",
+            minute:"2-digit",
+            second:"2-digit"
+        }
+    );
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ESCAPE HTML
+|--------------------------------------------------------------------------
+*/
 
 
 function escapeHTML(value){
@@ -546,39 +799,152 @@ function escapeHTML(value){
 
     }
 
+
     return String(value)
 
-        .replace(/&/g,"&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g,"&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g,"&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g,"&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g,"&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
+
+/*
+|--------------------------------------------------------------------------
+| FORMAT DELIVERY DETAILS
+|--------------------------------------------------------------------------
+|
+| Supports:
+|
+| 1. Plain text
+| 2. Objects
+| 3. Arrays
+|
+|--------------------------------------------------------------------------
+*/
+
+
 function getDeliveryDetails(order){
 
+    const details =
+        order.deliveryDetails ??
+        order.delivery ??
+        order.details ??
+        order.itemDetails ??
+        order.accountDetails ??
+        order.item ??
+        "";
+
+
+    if(
+        details === null ||
+        details === undefined ||
+        details === ""
+    ){
+
+        return "";
+
+    }
+
+
+    if(
+        typeof details === "object"
+    ){
+
+        try{
+
+            return JSON.stringify(
+                details,
+                null,
+                2
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Unable to format delivery details:",
+                error
+            );
+
+            return String(details);
+
+        }
+
+    }
+
+
+    return String(details);
+
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| GET DELIVERY DATE
+|--------------------------------------------------------------------------
+|
+| If the purchase API has deliveredAt,
+| use it.
+|
+| Otherwise use createdAt because your
+| current API marks the purchase delivered
+| immediately.
+|
+|--------------------------------------------------------------------------
+*/
+
+
+function getDeliveryTimestamp(order){
+
     return (
-        order.deliveryDetails ||
-        order.delivery ||
-        order.details ||
-        order.itemDetails ||
-        order.accountDetails ||
-        order.item ||
-        ""
+        order.deliveredAt ||
+        order.deliveryAt ||
+        order.completedAt ||
+        order.createdAt ||
+        null
     );
 
 }
 
 
+
+/*
+|--------------------------------------------------------------------------
+| RENDER ORDERS
+|--------------------------------------------------------------------------
+*/
+
+
 function renderOrders(orders){
 
-    if(orders.length === 0){
+
+    if(
+        orders.length === 0
+    ){
 
         ordersArea.innerHTML = `
 
@@ -593,11 +959,14 @@ function renderOrders(orders){
                 </h2>
 
                 <p>
-                    Your purchases will appear here after
-                    you place an order.
+                    Your purchases will appear here
+                    after you place an order.
                 </p>
 
-                <a href="products.html" class="shop-btn">
+                <a
+                    href="products.html"
+                    class="shop-btn"
+                >
                     Browse Products
                 </a>
 
@@ -610,237 +979,480 @@ function renderOrders(orders){
     }
 
 
+
     ordersArea.innerHTML = "";
 
 
-    orders.forEach(order => {
 
-        const deliveryDetails =
-            getDeliveryDetails(order);
-
-
-        const deliveryStatus =
-            order.deliveryStatus ||
-            "pending";
+    orders.forEach(
+        (order) => {
 
 
-        const card =
-            document.createElement("div");
+            const deliveryDetails =
+                getDeliveryDetails(
+                    order
+                );
 
 
-        card.className =
-            "order-card";
+
+            const deliveryStatus =
+                String(
+                    order.deliveryStatus ||
+                    "pending"
+                );
 
 
-        let deliveryHTML = "";
+
+            const orderStatus =
+                String(
+                    order.status ||
+                    "completed"
+                );
 
 
-        if(deliveryDetails){
 
-            deliveryHTML = `
+            const deliveryTimestamp =
+                getDeliveryTimestamp(
+                    order
+                );
 
-                <div class="delivery-box">
 
-                    <div class="delivery-title">
-                        📦 Delivered Item
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "order-card";
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | DELIVERY SECTION
+            |--------------------------------------------------------------------------
+            */
+
+
+            let deliveryHTML = "";
+
+
+
+            if(
+                deliveryDetails
+            ){
+
+                deliveryHTML = `
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-header">
+
+                            <div class="delivery-title">
+
+                                📦 Delivered Item
+
+                            </div>
+
+                            <div class="delivery-status">
+
+                                ${escapeHTML(
+                                    deliveryStatus
+                                        .toUpperCase()
+                                )}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="delivery-meta">
+
+                            <div class="delivery-meta-item">
+
+                                <small>
+                                    Delivery Date
+                                </small>
+
+                                <strong>
+                                    ${formatDate(
+                                        deliveryTimestamp
+                                    )}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="delivery-meta-item">
+
+                                <small>
+                                    Delivery Time
+                                </small>
+
+                                <strong>
+                                    ${formatTime(
+                                        deliveryTimestamp
+                                    )}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="details-label">
+
+                            YOUR DELIVERED ITEM / ACCOUNT DETAILS
+
+                        </div>
+
+
+                        <div class="delivery-details">
+
+                            ${escapeHTML(
+                                deliveryDetails
+                            )}
+
+                        </div>
+
                     </div>
 
-                    <div class="delivery-status">
-                        ${escapeHTML(
-                            String(
-                                deliveryStatus
-                            ).toUpperCase()
-                        )}
+                `;
+
+            }
+            else{
+
+                deliveryHTML = `
+
+                    <div class="delivery-box">
+
+                        <div class="delivery-header">
+
+                            <div class="delivery-title">
+
+                                📦 Delivery
+
+                            </div>
+
+                            <div class="delivery-status">
+
+                                ${escapeHTML(
+                                    deliveryStatus
+                                        .toUpperCase()
+                                )}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="delivery-meta">
+
+                            <div class="delivery-meta-item">
+
+                                <small>
+                                    Delivery Date
+                                </small>
+
+                                <strong>
+                                    ${formatDate(
+                                        deliveryTimestamp
+                                    )}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="delivery-meta-item">
+
+                                <small>
+                                    Delivery Time
+                                </small>
+
+                                <strong>
+                                    ${formatTime(
+                                        deliveryTimestamp
+                                    )}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="no-details">
+
+                            Your order has been completed,
+                            but no delivery details were found
+                            for this order.
+
+                        </div>
+
                     </div>
 
-                    <div class="delivery-details">
+                `;
+
+            }
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ORDER CARD
+            |--------------------------------------------------------------------------
+            */
+
+
+            card.innerHTML = `
+
+                <div class="order-top">
+
+                    <div>
+
+                        <div class="order-name">
+
+                            ${escapeHTML(
+                                order.productName ||
+                                "Product"
+                            )}
+
+                        </div>
+
+
+                        <div class="order-id">
+
+                            Order ID:
+                            ${escapeHTML(
+                                order.id
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status">
+
                         ${escapeHTML(
-                            deliveryDetails
+                            orderStatus.toUpperCase()
                         )}
+
                     </div>
 
                 </div>
+
+
+
+                <div class="order-info">
+
+
+                    <div class="info">
+
+                        <small>
+                            Product
+                        </small>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                order.productName ||
+                                "Product"
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Amount Paid
+                        </small>
+
+                        <strong>
+
+                            ${formatPrice(
+                                order.price
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Category
+                        </small>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                order.category ||
+                                "—"
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Order Date
+                        </small>
+
+                        <strong>
+
+                            ${formatDate(
+                                order.createdAt
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Order Time
+                        </small>
+
+                        <strong>
+
+                            ${formatTime(
+                                order.createdAt
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Order Status
+                        </small>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                orderStatus
+                                    .charAt(0)
+                                    .toUpperCase() +
+                                orderStatus
+                                    .slice(1)
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Delivery Status
+                        </small>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                deliveryStatus
+                                    .charAt(0)
+                                    .toUpperCase() +
+                                deliveryStatus
+                                    .slice(1)
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Customer Email
+                        </small>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                order.email ||
+                                "—"
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info">
+
+                        <small>
+                            Inventory ID
+                        </small>
+
+                        <strong>
+
+                            ${escapeHTML(
+                                order.inventoryId ||
+                                "—"
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                ${deliveryHTML}
 
             `;
 
-        }
-        else{
 
-            deliveryHTML = `
 
-                <div class="delivery-box">
-
-                    <div class="delivery-title">
-                        📦 Delivery
-                    </div>
-
-                    <div class="delivery-status">
-                        ${escapeHTML(
-                            String(
-                                deliveryStatus
-                            ).toUpperCase()
-                        )}
-                    </div>
-
-                    <div class="delivery-pending">
-                        Your order has been completed successfully.
-                        The item details will appear here when
-                        delivery has been assigned.
-                    </div>
-
-                </div>
-
-            `;
+            ordersArea.appendChild(
+                card
+            );
 
         }
-
-
-        card.innerHTML = `
-
-            <div class="order-top">
-
-                <div>
-
-                    <div class="order-name">
-                        ${escapeHTML(
-                            order.productName ||
-                            "Product"
-                        )}
-                    </div>
-
-                    <div class="order-id">
-                        Order ID:
-                        ${escapeHTML(order.id)}
-                    </div>
-
-                </div>
-
-                <div class="status">
-
-                    ${escapeHTML(
-                        String(
-                            order.status ||
-                            "completed"
-                        ).toUpperCase()
-                    )}
-
-                </div>
-
-            </div>
-
-
-            <div class="order-info">
-
-                <div class="info">
-
-                    <small>
-                        Product
-                    </small>
-
-                    <strong>
-                        ${escapeHTML(
-                            order.productName ||
-                            "Product"
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="info">
-
-                    <small>
-                        Amount Paid
-                    </small>
-
-                    <strong>
-                        ${formatPrice(
-                            order.price
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="info">
-
-                    <small>
-                        Category
-                    </small>
-
-                    <strong>
-                        ${escapeHTML(
-                            order.category ||
-                            "—"
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="info">
-
-                    <small>
-                        Order Date
-                    </small>
-
-                    <strong>
-                        ${formatDate(
-                            order.createdAt
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="info">
-
-                    <small>
-                        Order Status
-                    </small>
-
-                    <strong>
-                        ${escapeHTML(
-                            order.status ||
-                            "Completed"
-                        )}
-                    </strong>
-
-                </div>
-
-
-                <div class="info">
-
-                    <small>
-                        Delivery
-                    </small>
-
-                    <strong>
-                        ${escapeHTML(
-                            deliveryStatus
-                        )}
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            ${deliveryHTML}
-
-        `;
-
-
-        ordersArea.appendChild(card);
-
-    });
+    );
 
 }
+
+
+
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATION
+|--------------------------------------------------------------------------
+*/
 
 
 onAuthStateChanged(
     auth,
     (user) => {
+
 
         if(!user){
 
@@ -852,34 +1464,66 @@ onAuthStateChanged(
         }
 
 
-        const ordersRef =
-            ref(
-                db,
-                "orders"
+
+        /*
+        |--------------------------------------------------------------------------
+        | IMPORTANT
+        |--------------------------------------------------------------------------
+        |
+        | Only request orders belonging to
+        | the currently logged-in customer.
+        |
+        |--------------------------------------------------------------------------
+        */
+
+
+        const ordersQuery =
+            query(
+
+                ref(
+                    db,
+                    "orders"
+                ),
+
+                orderByChild(
+                    "uid"
+                ),
+
+                equalTo(
+                    user.uid
+                )
+
             );
+
 
 
         onValue(
 
-            ordersRef,
+            ordersQuery,
+
 
             (snapshot) => {
+
 
                 const data =
                     snapshot.val();
 
 
+
                 const orders = [];
+
 
 
                 if(data){
 
-                    Object.entries(data).forEach(
-                        ([id,order]) => {
+                    Object.entries(
+                        data
+                    ).forEach(
+                        ([id, order]) => {
+
 
                             if(
-                                order &&
-                                order.uid === user.uid
+                                order
                             ){
 
                                 orders.push({
@@ -898,25 +1542,39 @@ onAuthStateChanged(
                 }
 
 
-                orders.sort(
 
+                /*
+                |--------------------------------------------------------------------------
+                | NEWEST ORDER FIRST
+                |--------------------------------------------------------------------------
+                */
+
+
+                orders.sort(
                     (a,b) =>
+
                         Number(
                             b.createdAt || 0
-                        ) -
+                        )
+
+                        -
 
                         Number(
                             a.createdAt || 0
                         )
-
                 );
 
 
-                renderOrders(orders);
+
+                renderOrders(
+                    orders
+                );
 
             },
 
+
             (error) => {
+
 
                 console.error(
                     "Orders error:",
@@ -924,16 +1582,26 @@ onAuthStateChanged(
                 );
 
 
+
                 ordersArea.innerHTML = `
 
                     <div class="error">
 
-                        Unable to load your orders.
+                        <strong>
+                            Unable to load your orders.
+                        </strong>
 
                         <br><br>
 
-                        Please refresh the page
-                        and try again.
+                        Your order was created,
+                        but this page could not read
+                        your order history.
+
+                        <br><br>
+
+                        Please make sure the Firebase
+                        <strong>orders</strong> database
+                        rules have been updated.
 
                     </div>
 
@@ -944,9 +1612,11 @@ onAuthStateChanged(
         );
 
     }
+
 );
 
 </script>
+
 
 </body>
 
