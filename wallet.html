@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Zavora Social | Wallet</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -20,11 +22,15 @@ body{
     min-height:100vh;
 }
 
+button,input{
+    font-family:inherit;
+}
+
 /* HEADER */
 
 header{
     width:100%;
-    background:#ffffff;
+    background:#fff;
     border-bottom:1px solid #e5e7eb;
     position:sticky;
     top:0;
@@ -71,47 +77,6 @@ header{
     padding:35px 20px 60px;
 }
 
-/* WALLET */
-
-.wallet-card{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:22px;
-    padding:28px;
-    margin-bottom:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,.05);
-}
-
-.wallet-label{
-    color:#6b7280;
-    font-size:14px;
-    margin-bottom:10px;
-}
-
-.wallet-balance{
-    color:#111827;
-    font-size:38px;
-    font-weight:900;
-    margin-bottom:22px;
-}
-
-.deposit-main-btn{
-    width:100%;
-    border:0;
-    border-radius:13px;
-    padding:15px;
-    background:linear-gradient(135deg,#7e22ce,#2563eb);
-    color:#fff;
-    font-size:15px;
-    font-weight:900;
-    cursor:pointer;
-    transition:.2s ease;
-}
-
-.deposit-main-btn:hover{
-    opacity:.92;
-}
-
 /* BRAND */
 
 .brand{
@@ -146,6 +111,46 @@ header{
 .brand p{
     color:#6b7280;
     font-size:15px;
+}
+
+/* WALLET */
+
+.wallet-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.wallet-label{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.wallet-balance{
+    color:#111827;
+    font-size:38px;
+    font-weight:900;
+    margin-bottom:22px;
+}
+
+.deposit-main-btn{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:15px;
+    background:linear-gradient(135deg,#7e22ce,#2563eb);
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.deposit-main-btn:hover{
+    opacity:.92;
 }
 
 /* STAGE */
@@ -202,10 +207,10 @@ header{
     margin-bottom:22px;
 }
 
-/* GENERATE ACCOUNT */
+/* GENERATE */
 
 .generate-box{
-    background:#ffffff;
+    background:#fff;
     border:1px solid #e5e7eb;
     border-radius:18px;
     padding:28px 20px;
@@ -240,7 +245,7 @@ header{
 /* ACCOUNT */
 
 .account-box{
-    background:#ffffff;
+    background:#fff;
     border:1px solid #dbeafe;
     border-radius:18px;
     padding:20px;
@@ -315,11 +320,15 @@ header{
     font-size:15px;
     font-weight:900;
     cursor:pointer;
-    transition:.2s ease;
 }
 
 .primary-btn:hover{
     opacity:.92;
+}
+
+.primary-btn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
 }
 
 .secondary-btn{
@@ -339,11 +348,6 @@ header{
     border-color:#7e22ce;
     color:#7e22ce;
     background:#faf5ff;
-}
-
-.primary-btn:disabled{
-    opacity:.55;
-    cursor:not-allowed;
 }
 
 /* FORM */
@@ -448,10 +452,6 @@ header{
     font-weight:900;
     text-decoration:none;
     margin-bottom:22px;
-}
-
-.support-link:hover{
-    text-decoration:underline;
 }
 
 /* HISTORY */
@@ -659,6 +659,7 @@ footer{
     }
 
 }
+
 </style>
 </head>
 
@@ -682,8 +683,6 @@ footer{
 
 
 <main class="container">
-
-<!-- BRAND -->
 
 <section class="brand">
 
@@ -710,7 +709,10 @@ footer{
     Available Wallet Balance
 </div>
 
-<div class="wallet-balance" id="walletBalance">
+<div
+    class="wallet-balance"
+    id="walletBalance"
+>
     ₦0.00
 </div>
 
@@ -724,7 +726,7 @@ footer{
 </section>
 
 
-<!-- DEPOSIT FLOW -->
+<!-- DEPOSIT -->
 
 <section
     class="stage-box"
@@ -732,7 +734,7 @@ footer{
 >
 
 
-<!-- STAGE 1: GENERATE VIRTUAL ACCOUNT -->
+<!-- STEP 1 -->
 
 <div
     class="stage active"
@@ -752,7 +754,10 @@ footer{
 </div>
 
 <div class="stage-subtitle">
-    Generate your virtual account below to get the Zavora Social account details you will use for your deposit.
+
+Generate your virtual account below to get the
+account details you will use for your deposit.
+
 </div>
 
 
@@ -767,7 +772,8 @@ footer{
 </h2>
 
 <p>
-    Tap the button below to display the account details for making your deposit.
+    Tap the button below to display the account
+    details for making your deposit.
 </p>
 
 </div>
@@ -791,7 +797,7 @@ footer{
 </div>
 
 
-<!-- STAGE 2: ACCOUNT DETAILS -->
+<!-- STEP 2 -->
 
 <div
     class="stage"
@@ -811,7 +817,10 @@ footer{
 </div>
 
 <div class="stage-subtitle">
-    Transfer the amount you want to deposit to the account below.
+
+Transfer the amount you want to deposit
+to the account below.
+
 </div>
 
 
@@ -865,7 +874,11 @@ footer{
 </div>
 
 <p>
-    After making the transfer, click <strong>I Have Paid</strong> and provide your payment details.
+
+After making the transfer, click
+<strong>I Have Paid</strong> and provide your
+payment details.
+
 </p>
 
 </div>
@@ -889,7 +902,7 @@ footer{
 </div>
 
 
-<!-- STAGE 3: PAYMENT DETAILS -->
+<!-- STEP 3 -->
 
 <div
     class="stage"
@@ -909,7 +922,11 @@ footer{
 </div>
 
 <div class="stage-subtitle">
-    Enter the details of the payment you just made. Your payment will be reviewed by Zavora Social administration.
+
+Enter the details of the payment you just made.
+Your payment will be reviewed by Zavora Social
+administration.
+
 </div>
 
 
@@ -969,7 +986,12 @@ footer{
 
 
 <div class="security-box">
-    🔒 Your payment information is securely submitted to Zavora Social administration for review. Your wallet will only be credited after your payment is approved.
+
+🔒 Your payment information is securely submitted
+to Zavora Social administration for review.
+Your wallet will only be credited after your payment
+is approved.
+
 </div>
 
 
@@ -983,7 +1005,7 @@ footer{
 </div>
 
 
-<!-- STAGE 4: SUCCESS -->
+<!-- STEP 4 -->
 
 <div
     class="stage"
@@ -1001,27 +1023,27 @@ footer{
 </h2>
 
 <p>
-    Your deposit is now pending.
+    Your deposit has been submitted and is now
+    pending approval.
 </p>
-
-<br>
-
-<p>
-    Please wait 1 to 10 minutes while we confirm your payment.
-</p>
-
 
 <div class="pending-badge">
     ⏳ Deposit Pending
 </div>
 
+<p>
+    Your wallet will be credited after administration
+    confirms the payment.
+</p>
+
+<br>
 
 <a
     href="#"
     class="support-link"
     id="supportLink"
 >
-    Payment not reflecting? Click to contact support
+    Payment not reflecting? Contact support
 </a>
 
 
@@ -1036,11 +1058,10 @@ footer{
 
 </div>
 
-
 </section>
 
 
-<!-- DEPOSIT HISTORY -->
+<!-- HISTORY -->
 
 <section
     class="history-section"
@@ -1077,7 +1098,10 @@ footer{
 
 
 <footer>
-©️ <span id="year"></span> Zavora Social. All rights reserved.
+
+©️ <span id="year"></span>
+Zavora Social. All rights reserved.
+
 </footer>
 
 
@@ -1101,7 +1125,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
-/* FIREBASE */
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 const firebaseConfig = {
 
@@ -1142,7 +1168,9 @@ const db =
     getDatabase(app);
 
 
-/* ELEMENTS */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const walletBalance =
     document.getElementById("walletBalance");
@@ -1208,11 +1236,13 @@ const historyList =
 let currentUser = null;
 
 
-/* AUTH */
+/* =====================================================
+   AUTH
+===================================================== */
 
 onAuthStateChanged(
     auth,
-    (user) => {
+    user => {
 
         if(!user){
 
@@ -1223,8 +1253,7 @@ onAuthStateChanged(
 
         }
 
-        currentUser =
-            user;
+        currentUser = user;
 
         loadWallet(user.uid);
 
@@ -1234,7 +1263,9 @@ onAuthStateChanged(
 );
 
 
-/* WALLET */
+/* =====================================================
+   WALLET
+===================================================== */
 
 function loadWallet(uid){
 
@@ -1248,23 +1279,16 @@ function loadWallet(uid){
 
     onValue(
         walletRef,
-        (snapshot) => {
+        snapshot => {
 
             const balance =
                 Number(snapshot.val()) || 0;
 
             walletBalance.textContent =
-                "₦" +
-                balance.toLocaleString(
-                    "en-NG",
-                    {
-                        minimumFractionDigits:2,
-                        maximumFractionDigits:2
-                    }
-                );
+                money(balance);
 
         },
-        (error) => {
+        error => {
 
             console.error(
                 "Wallet error:",
@@ -1280,7 +1304,28 @@ function loadWallet(uid){
 }
 
 
-/* DEPOSIT HISTORY */
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(amount){
+
+    return "₦" +
+        Number(amount || 0)
+        .toLocaleString(
+            "en-NG",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* =====================================================
+   DEPOSIT HISTORY
+===================================================== */
 
 function loadDepositHistory(uid){
 
@@ -1292,7 +1337,7 @@ function loadDepositHistory(uid){
 
     onValue(
         depositsRef,
-        (snapshot) => {
+        snapshot => {
 
             const data =
                 snapshot.val();
@@ -1303,50 +1348,50 @@ function loadDepositHistory(uid){
             if(data){
 
                 Object.entries(data)
-                    .forEach(
-                        ([id,deposit]) => {
+                .forEach(
+                    ([id,deposit]) => {
 
-                            if(
-                                deposit &&
-                                deposit.uid === uid
-                            ){
+                        if(
+                            deposit &&
+                            deposit.uid === uid
+                        ){
 
-                                deposits.push({
+                            deposits.push({
 
-                                    id:id,
+                                id:id,
 
-                                    amount:
-                                        Number(
-                                            deposit.amount
-                                        ) || 0,
+                                amount:
+                                    Number(
+                                        deposit.amount
+                                    ) || 0,
 
-                                    senderName:
-                                        deposit.senderName ||
-                                        "-",
+                                senderName:
+                                    deposit.senderName ||
+                                    "-",
 
-                                    transactionReference:
-                                        deposit.transactionReference ||
-                                        "-",
+                                transactionReference:
+                                    deposit.transactionReference ||
+                                    "-",
 
-                                    payment:
-                                        deposit.payment ||
-                                        "Virtual Account",
+                                payment:
+                                    deposit.payment ||
+                                    "Virtual Account",
 
-                                    status:
-                                        deposit.status ||
-                                        "pending",
+                                status:
+                                    deposit.status ||
+                                    "pending",
 
-                                    createdAt:
-                                        Number(
-                                            deposit.createdAt
-                                        ) || 0
+                                createdAt:
+                                    Number(
+                                        deposit.createdAt
+                                    ) || 0
 
-                                });
-
-                            }
+                            });
 
                         }
-                    );
+
+                    }
+                );
 
             }
 
@@ -1363,7 +1408,7 @@ function loadDepositHistory(uid){
             );
 
         },
-        (error) => {
+        error => {
 
             console.error(
                 "Deposit history error:",
@@ -1396,11 +1441,13 @@ function loadDepositHistory(uid){
 }
 
 
-/* RENDER HISTORY */
+/* =====================================================
+   RENDER HISTORY
+===================================================== */
 
 function renderDepositHistory(deposits){
 
-    if(deposits.length === 0){
+    if(!deposits.length){
 
         historyList.innerHTML = `
 
@@ -1431,7 +1478,7 @@ function renderDepositHistory(deposits){
 
 
     deposits.forEach(
-        (deposit) => {
+        deposit => {
 
             const card =
                 document.createElement("div");
@@ -1454,7 +1501,7 @@ function renderDepositHistory(deposits){
 
                         <div class="history-amount">
 
-                            ₦${formatMoney(
+                            ${money(
                                 deposit.amount
                             )}
 
@@ -1554,23 +1601,9 @@ function renderDepositHistory(deposits){
 }
 
 
-/* MONEY */
-
-function formatMoney(amount){
-
-    return Number(amount || 0)
-        .toLocaleString(
-            "en-NG",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
-
-}
-
-
-/* DATE */
+/* =====================================================
+   DATE
+===================================================== */
 
 function formatDate(timestamp){
 
@@ -1595,7 +1628,9 @@ function formatDate(timestamp){
 }
 
 
-/* OPEN FUND WALLET */
+/* =====================================================
+   OPEN DEPOSIT
+===================================================== */
 
 depositBtn.addEventListener(
     "click",
@@ -1618,7 +1653,9 @@ depositBtn.addEventListener(
 );
 
 
-/* GENERATE VIRTUAL ACCOUNT */
+/* =====================================================
+   GENERATE ACCOUNT
+===================================================== */
 
 generateAccountBtn.addEventListener(
     "click",
@@ -1626,16 +1663,18 @@ generateAccountBtn.addEventListener(
 
         showStage(2);
 
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
+        stageBox.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
         });
 
     }
 );
 
 
-/* BACK FROM GENERATE */
+/* =====================================================
+   BACK TO DASHBOARD
+===================================================== */
 
 backFromGenerateBtn.addEventListener(
     "click",
@@ -1656,7 +1695,9 @@ backFromGenerateBtn.addEventListener(
 );
 
 
-/* I HAVE PAID */
+/* =====================================================
+   I HAVE PAID
+===================================================== */
 
 paidBtn.addEventListener(
     "click",
@@ -1673,7 +1714,9 @@ paidBtn.addEventListener(
 );
 
 
-/* BACK TO ACCOUNT */
+/* =====================================================
+   BACK TO ACCOUNT
+===================================================== */
 
 backToGenerateBtn.addEventListener(
     "click",
@@ -1685,7 +1728,9 @@ backToGenerateBtn.addEventListener(
 );
 
 
-/* BACK FROM PAYMENT DETAILS */
+/* =====================================================
+   BACK TO PAYMENT DETAILS
+===================================================== */
 
 backToAccountBtn.addEventListener(
     "click",
@@ -1697,7 +1742,9 @@ backToAccountBtn.addEventListener(
 );
 
 
-/* SHOW STAGE */
+/* =====================================================
+   SHOW STAGE
+===================================================== */
 
 function showStage(number){
 
@@ -1707,22 +1754,36 @@ function showStage(number){
     stage4.classList.remove("active");
 
 
-    if(number === 1)
+    if(number === 1){
+
         stage1.classList.add("active");
 
-    if(number === 2)
+    }
+
+    if(number === 2){
+
         stage2.classList.add("active");
 
-    if(number === 3)
+    }
+
+    if(number === 3){
+
         stage3.classList.add("active");
 
-    if(number === 4)
+    }
+
+    if(number === 4){
+
         stage4.classList.add("active");
+
+    }
 
 }
 
 
-/* SUBMIT PAYMENT */
+/* =====================================================
+   SUBMIT PAYMENT
+===================================================== */
 
 submitPaymentBtn.addEventListener(
     "click",
@@ -1740,7 +1801,12 @@ submitPaymentBtn.addEventListener(
             transactionReferenceInput.value.trim();
 
 
-        if(!amount || amount <= 0){
+        /* VALIDATE AMOUNT */
+
+        if(
+            !amount ||
+            amount <= 0
+        ){
 
             alert(
                 "Please enter a valid amount."
@@ -1752,6 +1818,8 @@ submitPaymentBtn.addEventListener(
 
         }
 
+
+        /* VALIDATE SENDER */
 
         if(!senderName){
 
@@ -1766,6 +1834,8 @@ submitPaymentBtn.addEventListener(
         }
 
 
+        /* VALIDATE REFERENCE */
+
         if(!transactionReference){
 
             alert(
@@ -1778,6 +1848,8 @@ submitPaymentBtn.addEventListener(
 
         }
 
+
+        /* AUTH */
 
         if(!currentUser){
 
@@ -1861,7 +1933,7 @@ submitPaymentBtn.addEventListener(
             transactionReferenceInput.value = "";
 
 
-            /* SHOW SUCCESS */
+            /* SUCCESS */
 
             showStage(4);
 
@@ -1896,11 +1968,13 @@ submitPaymentBtn.addEventListener(
 );
 
 
-/* SUPPORT */
+/* =====================================================
+   SUPPORT
+===================================================== */
 
 supportLink.addEventListener(
     "click",
-    (event) => {
+    event => {
 
         event.preventDefault();
 
@@ -1912,7 +1986,9 @@ supportLink.addEventListener(
 );
 
 
-/* GO BACK TO DASHBOARD */
+/* =====================================================
+   CLOSE DEPOSIT
+===================================================== */
 
 closeDepositBtn.addEventListener(
     "click",
@@ -1925,7 +2001,9 @@ closeDepositBtn.addEventListener(
 );
 
 
-/* ESCAPE HTML */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function escapeHtml(value){
 
@@ -1940,7 +2018,9 @@ function escapeHtml(value){
 }
 
 
-/* YEAR */
+/* =====================================================
+   YEAR
+===================================================== */
 
 document.getElementById("year")
     .textContent =
