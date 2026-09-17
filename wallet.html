@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zavora Social | Deposit Funds</title>
+<title>Zavora Social | Wallet</title>
 
 <style>
 
@@ -21,20 +21,25 @@ body{
     min-height:100vh;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header{
     width:100%;
-    background:#ffffff;
     border-bottom:1px solid #e5e7eb;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 .navbar{
     max-width:900px;
     margin:auto;
-    min-height:68px;
+    min-height:70px;
     padding:0 20px;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -51,161 +56,184 @@ header{
     color:#7e22ce;
 }
 
-.back-top{
+.back-btn{
     text-decoration:none;
     color:#6b7280;
     font-size:14px;
     font-weight:800;
+    transition:.2s ease;
 }
 
-.back-top:hover{
+.back-btn:hover{
     color:#7e22ce;
 }
 
-/* PAGE */
+/* =========================
+   MAIN CONTAINER
+========================= */
 
-.page{
+.container{
     max-width:900px;
     margin:auto;
     padding:35px 20px 60px;
 }
 
-/* SCREEN */
+/* =========================
+   WALLET CARD
+========================= */
 
-.screen{
+.wallet-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(17,24,39,.05);
+}
+
+.wallet-label{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.wallet-balance{
+    color:#111827;
+    font-size:38px;
+    font-weight:900;
+    margin-bottom:22px;
+}
+
+.deposit-main-btn{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:15px;
+    background:linear-gradient(
+        135deg,
+        #7e22ce,
+        #2563eb
+    );
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.2s ease;
+    box-shadow:0 7px 18px rgba(37,99,235,.16);
+}
+
+.deposit-main-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 24px rgba(37,99,235,.22);
+}
+
+/* =========================
+   DEPOSIT PAGE
+========================= */
+
+.stage-box{
+    display:none;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(17,24,39,.05);
+}
+
+.stage{
     display:none;
 }
 
-.screen.active{
+.stage.active{
     display:block;
 }
 
-/* MAIN CARD */
+/* =========================
+   STAGE HEADER
+========================= */
 
-.card{
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    border-radius:22px;
-    padding:30px;
-
-    box-shadow:
-        0 10px 30px rgba(17,24,39,.06);
+.page-back{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#6b7280;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:800;
+    margin-bottom:25px;
+    transition:.2s ease;
 }
 
-.card-title{
-    font-size:27px;
-    font-weight:900;
+.page-back:hover{
+    color:#7e22ce;
+}
+
+.stage-title{
     color:#111827;
-    margin-bottom:9px;
+    font-size:26px;
+    font-weight:900;
+    margin-bottom:10px;
 }
 
-.card-subtitle{
+.stage-subtitle{
     color:#6b7280;
     font-size:14px;
     line-height:1.7;
     margin-bottom:25px;
 }
 
-/* ICON */
+/* =========================
+   GENERATE VIRTUAL ACCOUNT
+========================= */
 
-.icon-box{
-    width:58px;
-    height:58px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7e22ce,
-            #2563eb
-        );
-
-    color:#ffffff;
-    font-size:27px;
-
+.generate-box{
+    background:linear-gradient(
+        135deg,
+        #faf5ff,
+        #eff6ff
+    );
+    border:1px solid #ddd6fe;
+    border-radius:17px;
+    padding:22px;
     margin-bottom:20px;
 }
 
-/* GENERATE AREA */
-
-.generate-box{
-    border:1px solid #e5e7eb;
-    border-radius:18px;
-    padding:25px;
-    text-align:center;
-
-    background:#ffffff;
-
-    margin-top:10px;
-}
-
-.generate-icon{
-    width:65px;
-    height:65px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin:0 auto 15px;
-
-    border-radius:18px;
-
-    background:#f5f3ff;
-
-    font-size:31px;
-}
-
-.generate-box h3{
-    font-size:21px;
-    font-weight:900;
+.generate-title{
     color:#111827;
+    font-size:16px;
+    font-weight:900;
     margin-bottom:8px;
 }
 
-.generate-box p{
+.generate-text{
     color:#6b7280;
-    font-size:14px;
+    font-size:13px;
     line-height:1.6;
-    margin-bottom:22px;
+    margin-bottom:18px;
 }
-
-/* BUTTON */
 
 .primary-btn{
     width:100%;
     border:0;
     border-radius:13px;
-
     padding:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7e22ce,
-            #2563eb
-        );
-
-    color:#ffffff;
-
+    background:linear-gradient(
+        135deg,
+        #7e22ce,
+        #2563eb
+    );
+    color:#fff;
     font-size:14px;
     font-weight:900;
-
     cursor:pointer;
-
     transition:.2s ease;
+    box-shadow:0 7px 18px rgba(37,99,235,.14);
 }
 
 .primary-btn:hover{
     transform:translateY(-1px);
-
-    box-shadow:
-        0 8px 20px rgba(37,99,235,.20);
+    box-shadow:0 10px 24px rgba(37,99,235,.20);
 }
 
 .primary-btn:disabled{
@@ -214,214 +242,122 @@ header{
     transform:none;
 }
 
-/* BACK BUTTON */
-
-.secondary-btn{
-    width:100%;
-    border:1px solid #d1d5db;
-    border-radius:13px;
-
-    padding:14px;
-
-    background:#ffffff;
-    color:#374151;
-
-    font-size:14px;
-    font-weight:800;
-
-    cursor:pointer;
-
-    margin-top:10px;
-}
-
-.secondary-btn:hover{
-    border-color:#7e22ce;
-    color:#7e22ce;
-    background:#faf5ff;
-}
-
-/* ACCOUNT */
+/* =========================
+   ACCOUNT DETAILS
+========================= */
 
 .account-box{
-    border:1px solid #dbeafe;
-    border-radius:18px;
-    overflow:hidden;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
+}
 
-    background:#ffffff;
-
-    margin-bottom:18px;
+.account-heading{
+    font-size:15px;
+    font-weight:900;
+    color:#111827;
+    margin-bottom:17px;
 }
 
 .account-row{
-    padding:17px 18px;
-
+    padding:14px 0;
     border-bottom:1px solid #e5e7eb;
 }
 
 .account-row:last-child{
     border-bottom:0;
+    padding-bottom:2px;
 }
 
 .account-label{
     display:block;
-
     color:#6b7280;
     font-size:11px;
     font-weight:800;
-
+    text-transform:uppercase;
     letter-spacing:.5px;
-
-    margin-bottom:7px;
+    margin-bottom:6px;
 }
 
 .account-value{
     display:block;
-
     color:#111827;
-
     font-size:16px;
     font-weight:900;
-
     word-break:break-word;
 }
 
 .account-number{
-    color:#2563eb;
+    color:#7e22ce;
     font-size:22px;
     letter-spacing:1px;
 }
 
-/* INFO */
+/* =========================
+   INFORMATION BOX
+========================= */
 
 .info-box{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-
-    background:#eff6ff;
-    border:1px solid #bfdbfe;
-
+    background:#faf5ff;
+    border:1px solid #ddd6fe;
     border-radius:13px;
-
-    padding:14px;
-
-    color:#374151;
-
+    padding:15px;
+    color:#4b5563;
     font-size:13px;
     line-height:1.6;
-
     margin-bottom:18px;
 }
 
 .info-icon{
-    flex-shrink:0;
-    font-size:18px;
-}
-
-/* FORM */
-
-.receipt-label{
-    display:inline-block;
-
-    padding:6px 10px;
-
-    border-radius:20px;
-
-    background:#f5f3ff;
-    border:1px solid #ddd6fe;
-
     color:#7e22ce;
-
-    font-size:10px;
     font-weight:900;
-
-    letter-spacing:.7px;
-
-    margin-bottom:14px;
+    margin-right:5px;
 }
 
-.form-group{
-    margin-bottom:17px;
-}
+/* =========================
+   SECONDARY BUTTON
+========================= */
 
-.form-group label{
-    display:block;
-
-    color:#374151;
-
-    font-size:13px;
-    font-weight:800;
-
-    margin-bottom:7px;
-}
-
-.form-group input{
+.secondary-btn{
     width:100%;
-
-    padding:14px;
-
-    border-radius:12px;
-
     border:1px solid #d1d5db;
-
-    background:#ffffff;
-
-    color:#111827;
-
-    outline:none;
-
-    font-size:14px;
-}
-
-.form-group input:focus{
-    border-color:#7e22ce;
-
-    box-shadow:
-        0 0 0 3px rgba(126,34,206,.10);
-}
-
-.form-group input::placeholder{
-    color:#9ca3af;
-}
-
-/* SECURITY */
-
-.security-box{
-    margin-top:15px;
-
-    border:1px solid #e5e7eb;
-    border-radius:14px;
-
+    border-radius:13px;
     padding:14px;
-
-    color:#6b7280;
-
-    font-size:12px;
-    line-height:1.6;
-
-    background:#fafafa;
+    background:#fff;
+    color:#374151;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:10px;
+    transition:.2s ease;
 }
 
-/* LOADING */
+.secondary-btn:hover{
+    background:#faf5ff;
+    border-color:#c4b5fd;
+    color:#7e22ce;
+}
 
-.loading-screen{
+/* =========================
+   LOADING PAGE
+========================= */
+
+.loading-page{
     text-align:center;
-    padding:60px 20px;
+    padding:50px 15px;
 }
 
-.spinner{
-    width:58px;
-    height:58px;
-
+.loader{
+    width:50px;
+    height:50px;
     border-radius:50%;
-
-    border:5px solid #ede9fe;
+    border:4px solid #e9d5ff;
     border-top-color:#7e22ce;
     border-right-color:#2563eb;
-
     animation:spin .8s linear infinite;
-
-    margin:0 auto 22px;
+    margin:0 auto 20px;
 }
 
 @keyframes spin{
@@ -430,120 +366,335 @@ header{
     }
 }
 
-.loading-screen h2{
-    font-size:21px;
+.loading-title{
+    color:#111827;
+    font-size:18px;
     font-weight:900;
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
-.loading-screen p{
+.loading-text{
     color:#6b7280;
     font-size:13px;
+    line-height:1.6;
 }
 
-/* SUCCESS */
+/* =========================
+   FORM
+========================= */
 
-.success-card{
+.receipt-label{
+    display:inline-block;
+    color:#7e22ce;
+    background:#faf5ff;
+    border:1px solid #ddd6fe;
+    border-radius:20px;
+    padding:7px 12px;
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:17px;
+    letter-spacing:.5px;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    color:#374151;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.form-group input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    background:#fff;
+    color:#111827;
+    outline:none;
+    font-size:14px;
+    transition:.2s ease;
+}
+
+.form-group input:focus{
+    border-color:#7e22ce;
+    box-shadow:
+        0 0 0 3px
+        rgba(126,34,206,.09);
+}
+
+.form-group input::placeholder{
+    color:#9ca3af;
+}
+
+/* =========================
+   SECURITY NOTE
+========================= */
+
+.security-note{
+    margin-top:18px;
+    padding:14px;
+    border-radius:13px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    color:#6b7280;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.security-lock{
+    color:#7e22ce;
+    font-weight:900;
+}
+
+/* =========================
+   SUCCESS PAGE
+========================= */
+
+.success-box{
     text-align:center;
-    padding:45px 25px;
+    padding:20px 5px 5px;
 }
 
 .success-icon{
-    width:75px;
-    height:75px;
-
+    width:70px;
+    height:70px;
+    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    margin:0 auto 22px;
-
-    border-radius:50%;
-
-    background:#f5f3ff;
-
-    border:1px solid #ddd6fe;
-
-    color:#7e22ce;
-
-    font-size:36px;
+    margin:0 auto 20px;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    color:#16a34a;
+    font-size:32px;
     font-weight:900;
 }
 
-.success-card h1{
-    font-size:27px;
+.success-box h2{
+    color:#111827;
+    font-size:25px;
     font-weight:900;
-
     margin-bottom:10px;
 }
 
-.success-card p{
+.success-box p{
     color:#6b7280;
     font-size:14px;
     line-height:1.7;
-
     max-width:500px;
-    margin:0 auto 20px;
+    margin:0 auto;
 }
 
-.pending-badge{
-    display:inline-flex;
+.pending-box{
+    display:flex;
     align-items:center;
-    gap:7px;
-
-    padding:8px 13px;
-
-    border-radius:20px;
-
+    gap:12px;
+    text-align:left;
     background:#fffbeb;
     border:1px solid #fde68a;
+    border-radius:14px;
+    padding:15px;
+    margin:22px 0;
+}
 
-    color:#b45309;
+.pending-icon{
+    font-size:23px;
+}
 
-    font-size:12px;
+.pending-title{
+    color:#92400e;
+    font-size:13px;
     font-weight:900;
-
-    margin-bottom:18px;
+    margin-bottom:3px;
 }
 
-.support{
+.pending-text{
+    color:#a16207;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* =========================
+   SUPPORT
+========================= */
+
+.support-link{
     display:block;
-
-    color:#2563eb;
-
-    text-decoration:none;
-
-    font-size:14px;
+    margin:18px 0;
+    text-align:center;
+    color:#7e22ce;
+    font-size:13px;
     font-weight:800;
-
-    margin-bottom:20px;
+    text-decoration:none;
 }
 
-.support:hover{
+.support-link:hover{
     text-decoration:underline;
 }
 
-/* FOOTER */
+/* =========================
+   HISTORY
+========================= */
+
+.history-section{
+    margin-top:15px;
+}
+
+.history-header{
+    margin-bottom:15px;
+}
+
+.history-title{
+    color:#111827;
+    font-size:21px;
+    font-weight:900;
+}
+
+.history-subtitle{
+    color:#6b7280;
+    font-size:12px;
+    margin-top:4px;
+}
+
+.history-list{
+    display:grid;
+    gap:12px;
+}
+
+.history-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:17px;
+    box-shadow:0 5px 18px rgba(0,0,0,.035);
+}
+
+.history-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:13px;
+}
+
+.history-amount{
+    color:#111827;
+    font-size:19px;
+    font-weight:900;
+}
+
+.history-date{
+    color:#9ca3af;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:900;
+    text-transform:capitalize;
+}
+
+.status.pending{
+    color:#b45309;
+    background:#fffbeb;
+    border:1px solid #fde68a;
+}
+
+.status.approved{
+    color:#15803d;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+}
+
+.status.rejected{
+    color:#dc2626;
+    background:#fef2f2;
+    border:1px solid #fecaca;
+}
+
+.status.processing{
+    color:#047857;
+    background:#ecfdf5;
+    border:1px solid #a7f3d0;
+}
+
+.history-details{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.history-detail{
+    background:#f9fafb;
+    border-radius:10px;
+    padding:10px;
+}
+
+.detail-label{
+    color:#9ca3af;
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.detail-value{
+    color:#374151;
+    font-size:12px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+.history-loading,
+.history-empty,
+.history-error{
+    text-align:center;
+    padding:35px 20px;
+    border:1px dashed #d1d5db;
+    border-radius:16px;
+    color:#6b7280;
+    background:#fff;
+}
+
+.history-empty .big,
+.history-error .big{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.history-empty h3,
+.history-error h3{
+    color:#111827;
+    margin-bottom:6px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
     max-width:900px;
     margin:auto;
-
     padding:0 20px 30px;
-
     text-align:center;
-
     color:#9ca3af;
-
     font-size:12px;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
     .navbar{
-        min-height:62px;
+        min-height:64px;
         padding:0 15px;
     }
 
@@ -551,55 +702,36 @@ footer{
         font-size:19px;
     }
 
-    .page{
-        padding:25px 15px 45px;
+    .container{
+        padding:25px 15px 50px;
     }
 
-    .card{
+    .wallet-card{
         padding:22px;
-        border-radius:18px;
     }
 
-    .card-title{
+    .wallet-balance{
+        font-size:31px;
+    }
+
+    .stage-box{
+        padding:21px;
+    }
+
+    .stage-title{
         font-size:23px;
-    }
-
-    .card-subtitle{
-        font-size:13px;
-    }
-
-    .account-value{
-        font-size:15px;
     }
 
     .account-number{
         font-size:20px;
     }
 
-    .success-card{
-        padding:35px 15px;
+    .history-details{
+        grid-template-columns:1fr;
     }
 
-    .success-card h1{
-        font-size:23px;
-    }
-
-}
-
-/* SMALL PHONE */
-
-@media(max-width:380px){
-
-    .card{
-        padding:18px;
-    }
-
-    .card-title{
-        font-size:21px;
-    }
-
-    .primary-btn{
-        padding:14px 10px;
+    .history-top{
+        flex-direction:column;
     }
 
 }
@@ -607,9 +739,7 @@ footer{
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -619,7 +749,7 @@ footer{
     Zavora <span>Social</span>
 </a>
 
-<a href="dashboard.html" class="back-top">
+<a href="dashboard.html" class="back-btn">
     • Back
 </a>
 
@@ -628,121 +758,164 @@ footer{
 </header>
 
 
-<main class="page">
+<main class="container">
 
-
-<!-- =====================================================
-     PAGE 1
-     DEPOSIT FUNDS
-===================================================== -->
+<!-- =========================
+     WALLET
+========================= -->
 
 <section
-    class="screen active"
-    id="pageDeposit"
+    class="wallet-card"
+    id="walletCard"
 >
 
-<div class="card">
-
-<div class="icon-box">
-    💳
+<div class="wallet-label">
+    Available Wallet Balance
 </div>
 
-<div class="card-title">
+<div
+    class="wallet-balance"
+    id="walletBalance"
+>
+    ₦0.00
+</div>
+
+<button
+    class="deposit-main-btn"
+    id="depositBtn"
+>
+    Fund Wallet
+</button>
+
+</section>
+
+
+<!-- =========================
+     DEPOSIT STAGES
+========================= -->
+
+<section
+    class="stage-box"
+    id="stageBox"
+>
+
+
+<!-- =========================
+     STAGE 1
+     DEPOSIT FUNDS
+========================= -->
+
+<div
+    class="stage active"
+    id="stage1"
+>
+
+<a
+    href="dashboard.html"
+    class="page-back"
+>
+    • Back
+</a>
+
+<div class="stage-title">
     Deposit Funds
 </div>
 
-<div class="card-subtitle">
+<div class="stage-subtitle">
     Generate your virtual account below to get the account details you will use for your deposit.
 </div>
 
-
 <div class="generate-box">
 
-<div class="generate-icon">
-    💳
+<div class="generate-title">
+    Generate Your Virtual Account
 </div>
 
-<h3>
-    Generate Your Virtual Account
-</h3>
-
-<p>
+<div class="generate-text">
     Tap the button below to display the account details for making your deposit.
-</p>
+</div>
 
 <button
     class="primary-btn"
-    id="generateBtn"
+    id="generateAccountBtn"
 >
     GENERATE VIRTUAL ACCOUNT
 </button>
 
 </div>
 
+<button
+    class="secondary-btn"
+    id="backToDashboard1"
+>
+    ‹ Back to Dashboard
+</button>
+
 </div>
 
-</section>
 
+<!-- =========================
+     LOADING 1
+========================= -->
 
-
-<!-- =====================================================
-     LOADING AFTER GENERATE
-===================================================== -->
-
-<section
-    class="screen"
-    id="loadingAccount"
+<div
+    class="stage"
+    id="loadingStage1"
 >
 
-<div class="card loading-screen">
+<div class="loading-page">
 
-<div class="spinner"></div>
+<div class="loader"></div>
 
-<h2>
+<div class="loading-title">
     Generating Virtual Account
-</h2>
+</div>
 
-<p>
-    Please wait a moment...
-</p>
+<div class="loading-text">
+    Please wait while we prepare your account details...
+</div>
 
 </div>
 
-</section>
+</div>
 
 
-
-<!-- =====================================================
-     PAGE 2
+<!-- =========================
+     STAGE 2
      VIRTUAL ACCOUNT
-===================================================== -->
+========================= -->
 
-<section
-    class="screen"
-    id="pageAccount"
+<div
+    class="stage"
+    id="stage2"
 >
 
-<div class="card">
+<a
+    href="javascript:void(0)"
+    class="page-back"
+    id="backToStage1"
+>
+    ‹ Back
+</a>
 
-<div class="icon-box">
-    🏦
-</div>
-
-<div class="card-title">
+<div class="stage-title">
     Your Virtual Account
 </div>
 
-<div class="card-subtitle">
+<div class="stage-subtitle">
     Transfer the amount you want to deposit to the account below.
 </div>
 
-
 <div class="account-box">
+
+<div class="account-heading">
+    Account Details
+</div>
 
 <div class="account-row">
 
 <span class="account-label">
-    BANK NAME
+    Bank Name
 </span>
 
 <span class="account-value">
@@ -751,11 +924,10 @@ footer{
 
 </div>
 
-
 <div class="account-row">
 
 <span class="account-label">
-    ACCOUNT NUMBER
+    Account Number
 </span>
 
 <span class="account-value account-number">
@@ -764,11 +936,10 @@ footer{
 
 </div>
 
-
 <div class="account-row">
 
 <span class="account-label">
-    ACCOUNT NAME
+    Account Name
 </span>
 
 <span class="account-value">
@@ -779,19 +950,15 @@ footer{
 
 </div>
 
-
 <div class="info-box">
 
-<div class="info-icon">
-    ℹ️
-</div>
+<span class="info-icon">ℹ</span>
 
-<div>
-    After making the transfer, click <strong>I Have Paid</strong> and provide your payment details.
-</div>
+After making the transfer, click
+<strong>I Have Paid</strong>
+and provide your payment details.
 
 </div>
-
 
 <button
     class="primary-btn"
@@ -800,72 +967,69 @@ footer{
     I HAVE PAID
 </button>
 
-
 <button
     class="secondary-btn"
-    id="backAccountBtn"
+    id="backToStage1Button"
 >
-    ← Back
+    ‹ Back
 </button>
 
 </div>
 
-</section>
 
+<!-- =========================
+     LOADING 2
+========================= -->
 
-
-<!-- =====================================================
-     LOADING BEFORE PAYMENT DETAILS
-===================================================== -->
-
-<section
-    class="screen"
-    id="loadingPayment"
+<div
+    class="stage"
+    id="loadingStage2"
 >
 
-<div class="card loading-screen">
+<div class="loading-page">
 
-<div class="spinner"></div>
+<div class="loader"></div>
 
-<h2>
-    Loading Payment Details
-</h2>
+<div class="loading-title">
+    Preparing Payment Receipt
+</div>
 
-<p>
-    Please wait a moment...
-</p>
+<div class="loading-text">
+    Please wait while we prepare the payment details form...
+</div>
 
 </div>
 
-</section>
+</div>
 
 
+<!-- =========================
+     STAGE 3
+     PAYMENT RECEIPT
+========================= -->
 
-<!-- =====================================================
-     PAGE 3
-     PAYMENT DETAILS
-===================================================== -->
-
-<section
-    class="screen"
-    id="pagePayment"
+<div
+    class="stage"
+    id="stage3"
 >
 
-<div class="card">
+<a
+    href="javascript:void(0)"
+    class="page-back"
+    id="backToStage2"
+>
+    ‹ Back
+</a>
 
 <div class="receipt-label">
     RECEIPT
 </div>
 
-<div class="icon-box">
-    🧾
-</div>
-
-<div class="card-title">
+<div class="stage-title">
     Payment Details
 </div>
 
-<div class="card-subtitle">
+<div class="stage-subtitle">
     Enter the details of the payment you just made. Your payment will be reviewed by Zavora Social and credited to your account.
 </div>
 
@@ -881,7 +1045,7 @@ footer{
     id="amount"
     placeholder="Example: 10000"
     min="1"
-    step="0.01"
+    inputmode="decimal"
 >
 
 </div>
@@ -897,6 +1061,7 @@ footer{
     type="text"
     id="senderName"
     placeholder="Name used for the transfer"
+    autocomplete="name"
 >
 
 </div>
@@ -919,112 +1084,136 @@ footer{
 
 <button
     class="primary-btn"
-    id="submitBtn"
+    id="submitPaymentBtn"
 >
     SUBMIT PAYMENT
 </button>
 
 
-<div class="security-box">
-    🔒 Your payment information is securely submitted to Zavora Social administration for review. Your wallet will only be credited after your payment is approved.
+<div class="security-note">
+
+<span class="security-lock">
+    🔒
+</span>
+
+Your payment information is securely submitted to Zavora Social administration for review. Your wallet will only be credited after your payment is approved.
+
 </div>
 
 
 <button
     class="secondary-btn"
-    id="backPaymentBtn"
+    id="backToAccountBtn"
 >
     ‹ Back
 </button>
 
 </div>
 
-</section>
 
-
-
-<!-- =====================================================
-     LOADING AFTER SUBMISSION
-===================================================== -->
-
-<section
-    class="screen"
-    id="loadingSubmit"
->
-
-<div class="card loading-screen">
-
-<div class="spinner"></div>
-
-<h2>
-    Submitting Payment
-</h2>
-
-<p>
-    Please wait while we securely submit your payment...
-</p>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PAGE 4
+<!-- =========================
+     STAGE 4
      SUCCESS
-===================================================== -->
+========================= -->
 
-<section
-    class="screen"
-    id="pageSuccess"
+<div
+    class="stage"
+    id="stage4"
 >
 
-<div class="card success-card">
+<div class="success-box">
 
 <div class="success-icon">
     ✓
 </div>
 
-<h1>
+<h2>
     Payment Submitted Successfully
-</h1>
+</h2>
 
 <p>
     Your deposit has been submitted and is now pending approval.
 </p>
 
 
-<div class="pending-badge">
-    ⏳ Deposit Pending
+<div class="pending-box">
+
+<div class="pending-icon">
+    ⏳
+</div>
+
+<div>
+
+<div class="pending-title">
+    Deposit Pending
+</div>
+
+<div class="pending-text">
+    Your wallet will be credited after administration confirms the payment.
+</div>
+
+</div>
+
 </div>
 
 
-<p>
-    Your wallet will be credited after administration confirms the payment.
-</p>
-
-
 <a
-    href="mailto:support@zavorasocial.com"
-    class="support"
+    href="javascript:void(0)"
+    class="support-link"
+    id="supportLink"
 >
     Payment not reflecting? Contact support
 </a>
 
 
-<a
-    href="dashboard.html"
+<button
     class="primary-btn"
-    style="display:block;text-decoration:none;"
+    id="goDashboardBtn"
 >
     Go Back to Dashboard
-</a>
+</button>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- =========================
+     DEPOSIT HISTORY
+========================= -->
+
+<section
+    class="history-section"
+    id="historySection"
+>
+
+<div class="history-header">
+
+<div class="history-title">
+    Deposit History
+</div>
+
+<div class="history-subtitle">
+    View all your wallet deposits and their status.
+</div>
+
+</div>
+
+<div
+    class="history-list"
+    id="historyList"
+>
+
+<div class="history-loading">
+    Loading deposit history...
+</div>
 
 </div>
 
 </section>
-
 
 </main>
 
@@ -1036,12 +1225,11 @@ footer{
 </footer>
 
 
-
 <script type="module">
 
-/* =====================================================
+/* =========================
    FIREBASE
-===================================================== */
+========================= */
 
 import {
     initializeApp
@@ -1055,6 +1243,7 @@ import {
 import {
     getDatabase,
     ref,
+    onValue,
     push,
     set
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
@@ -1099,47 +1288,72 @@ const db =
     getDatabase(app);
 
 
-/* =====================================================
+/* =========================
    ELEMENTS
-===================================================== */
+========================= */
 
-const pageDeposit =
-    document.getElementById("pageDeposit");
+const walletCard =
+    document.getElementById("walletCard");
 
-const loadingAccount =
-    document.getElementById("loadingAccount");
+const walletBalance =
+    document.getElementById("walletBalance");
 
-const pageAccount =
-    document.getElementById("pageAccount");
+const depositBtn =
+    document.getElementById("depositBtn");
 
-const loadingPayment =
-    document.getElementById("loadingPayment");
+const stageBox =
+    document.getElementById("stageBox");
 
-const pagePayment =
-    document.getElementById("pagePayment");
+const historySection =
+    document.getElementById("historySection");
 
-const loadingSubmit =
-    document.getElementById("loadingSubmit");
+const stage1 =
+    document.getElementById("stage1");
 
-const pageSuccess =
-    document.getElementById("pageSuccess");
+const loadingStage1 =
+    document.getElementById("loadingStage1");
 
+const stage2 =
+    document.getElementById("stage2");
 
-const generateBtn =
-    document.getElementById("generateBtn");
+const loadingStage2 =
+    document.getElementById("loadingStage2");
+
+const stage3 =
+    document.getElementById("stage3");
+
+const stage4 =
+    document.getElementById("stage4");
+
+const generateAccountBtn =
+    document.getElementById("generateAccountBtn");
 
 const paidBtn =
     document.getElementById("paidBtn");
 
-const submitBtn =
-    document.getElementById("submitBtn");
+const submitPaymentBtn =
+    document.getElementById("submitPaymentBtn");
 
-const backAccountBtn =
-    document.getElementById("backAccountBtn");
+const backToStage1 =
+    document.getElementById("backToStage1");
 
-const backPaymentBtn =
-    document.getElementById("backPaymentBtn");
+const backToStage1Button =
+    document.getElementById("backToStage1Button");
 
+const backToStage2 =
+    document.getElementById("backToStage2");
+
+const backToAccountBtn =
+    document.getElementById("backToAccountBtn");
+
+const backToDashboard1 =
+    document.getElementById("backToDashboard1");
+
+const goDashboardBtn =
+    document.getElementById("goDashboardBtn");
+
+const supportLink =
+    document.getElementById("supportLink");
 
 const amountInput =
     document.getElementById("amount");
@@ -1150,13 +1364,16 @@ const senderNameInput =
 const transactionReferenceInput =
     document.getElementById("transactionReference");
 
+const historyList =
+    document.getElementById("historyList");
+
 
 let currentUser = null;
 
 
-/* =====================================================
+/* =========================
    AUTH
-===================================================== */
+========================= */
 
 onAuthStateChanged(
     auth,
@@ -1171,45 +1388,473 @@ onAuthStateChanged(
 
         }
 
-        currentUser = user;
+        currentUser =
+            user;
+
+        loadWallet(
+            user.uid
+        );
+
+        loadDepositHistory(
+            user.uid
+        );
 
     }
 );
 
 
-/* =====================================================
-   SHOW PAGE
-===================================================== */
+/* =========================
+   WALLET
+========================= */
 
-function showPage(page){
+function loadWallet(uid){
 
-    const screens = [
+    const walletRef =
+        ref(
+            db,
+            "users/" +
+            uid +
+            "/walletBalance"
+        );
 
-        pageDeposit,
-        loadingAccount,
-        pageAccount,
-        loadingPayment,
-        pagePayment,
-        loadingSubmit,
-        pageSuccess
+    onValue(
+        walletRef,
+        (snapshot) => {
 
-    ];
+            const balance =
+                Number(
+                    snapshot.val()
+                ) || 0;
+
+            walletBalance.textContent =
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                );
+
+        },
+        (error) => {
+
+            console.error(
+                "Wallet error:",
+                error
+            );
+
+            walletBalance.textContent =
+                "₦0.00";
+
+        }
+    );
+
+}
 
 
-    screens.forEach(
-        (screen) => {
+/* =========================
+   DEPOSIT HISTORY
+========================= */
 
-            screen.classList.remove(
-                "active"
+function loadDepositHistory(uid){
+
+    const depositsRef =
+        ref(
+            db,
+            "deposits"
+        );
+
+    onValue(
+        depositsRef,
+        (snapshot) => {
+
+            const data =
+                snapshot.val();
+
+            const deposits = [];
+
+            if(data){
+
+                Object.entries(data)
+                    .forEach(
+                        ([id,deposit]) => {
+
+                            if(
+                                deposit &&
+                                deposit.uid === uid
+                            ){
+
+                                deposits.push({
+
+                                    id:id,
+
+                                    amount:
+                                        Number(
+                                            deposit.amount
+                                        ) || 0,
+
+                                    senderName:
+                                        deposit.senderName ||
+                                        "-",
+
+                                    transactionReference:
+                                        deposit.transactionReference ||
+                                        "-",
+
+                                    status:
+                                        deposit.status ||
+                                        "pending",
+
+                                    createdAt:
+                                        Number(
+                                            deposit.createdAt
+                                        ) || 0
+
+                                });
+
+                            }
+
+                        }
+                    );
+
+            }
+
+            deposits.sort(
+                (a,b) =>
+                    b.createdAt -
+                    a.createdAt
+            );
+
+            renderDepositHistory(
+                deposits
+            );
+
+        },
+        (error) => {
+
+            console.error(
+                "Deposit history error:",
+                error
+            );
+
+            historyList.innerHTML = `
+
+                <div class="history-error">
+
+                    <div class="big">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Unable to load history
+                    </h3>
+
+                    <p>
+                        Please refresh the page and try again.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =========================
+   RENDER HISTORY
+========================= */
+
+function renderDepositHistory(
+    deposits
+){
+
+    if(deposits.length === 0){
+
+        historyList.innerHTML = `
+
+            <div class="history-empty">
+
+                <div class="big">
+                    💳
+                </div>
+
+                <h3>
+                    No deposits yet
+                </h3>
+
+                <p>
+                    Your deposit history will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    historyList.innerHTML = "";
+
+
+    deposits.forEach(
+        (deposit) => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "history-card";
+
+
+            const status =
+                String(
+                    deposit.status
+                ).toLowerCase();
+
+
+            card.innerHTML = `
+
+                <div class="history-top">
+
+                    <div>
+
+                        <div class="history-amount">
+
+                            ₦${formatMoney(
+                                deposit.amount
+                            )}
+
+                        </div>
+
+                        <div class="history-date">
+
+                            ${formatDate(
+                                deposit.createdAt
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="status ${escapeHtml(status)}"
+                    >
+
+                        ${escapeHtml(status)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="history-details">
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Sender Name
+                        </div>
+
+                        <div class="detail-value">
+
+                            ${escapeHtml(
+                                deposit.senderName
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Transaction Reference
+                        </div>
+
+                        <div class="detail-value">
+
+                            ${escapeHtml(
+                                deposit.transactionReference
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="history-detail">
+
+                        <div class="detail-label">
+                            Deposit ID
+                        </div>
+
+                        <div class="detail-value">
+
+                            ${escapeHtml(
+                                deposit.id
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            historyList.appendChild(
+                card
             );
 
         }
     );
 
+}
 
-    page.classList.add(
+
+/* =========================
+   MONEY
+========================= */
+
+function formatMoney(amount){
+
+    return Number(
+        amount || 0
+    ).toLocaleString(
+        "en-NG",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function formatDate(timestamp){
+
+    if(!timestamp){
+
+        return "Date unavailable";
+
+    }
+
+    return new Date(
+        timestamp
+    ).toLocaleString(
+        "en-NG",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================
+   SHOW ONLY STAGE
+========================= */
+
+function showStage(
+    stage
+){
+
+    stage1.classList.remove(
         "active"
     );
+
+    loadingStage1.classList.remove(
+        "active"
+    );
+
+    stage2.classList.remove(
+        "active"
+    );
+
+    loadingStage2.classList.remove(
+        "active"
+    );
+
+    stage3.classList.remove(
+        "active"
+    );
+
+    stage4.classList.remove(
+        "active"
+    );
+
+
+    if(stage === 1){
+
+        stage1.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(stage === "loading1"){
+
+        loadingStage1.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(stage === 2){
+
+        stage2.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(stage === "loading2"){
+
+        loadingStage2.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(stage === 3){
+
+        stage3.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if(stage === 4){
+
+        stage4.classList.add(
+            "active"
+        );
+
+    }
 
 
     window.scrollTo({
@@ -1220,30 +1865,56 @@ function showPage(page){
 }
 
 
-/* =====================================================
-   GENERATE VIRTUAL ACCOUNT
-===================================================== */
+/* =========================
+   OPEN DEPOSIT
+========================= */
 
-generateBtn.addEventListener(
+depositBtn.addEventListener(
     "click",
     () => {
 
-        generateBtn.disabled =
+        walletCard.style.display =
+            "none";
+
+        historySection.style.display =
+            "none";
+
+        stageBox.style.display =
+            "block";
+
+        showStage(1);
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
+
+/* =========================
+   GENERATE VIRTUAL ACCOUNT
+========================= */
+
+generateAccountBtn.addEventListener(
+    "click",
+    () => {
+
+        generateAccountBtn.disabled =
             true;
 
-        showPage(
-            loadingAccount
+        showStage(
+            "loading1"
         );
 
 
         setTimeout(
             () => {
 
-                showPage(
-                    pageAccount
-                );
+                showStage(2);
 
-                generateBtn.disabled =
+                generateAccountBtn.disabled =
                     false;
 
             },
@@ -1254,25 +1925,48 @@ generateBtn.addEventListener(
 );
 
 
-/* =====================================================
-   BACK FROM ACCOUNT
-===================================================== */
+/* =========================
+   BACK TO DASHBOARD
+========================= */
 
-backAccountBtn.addEventListener(
+backToDashboard1.addEventListener(
     "click",
     () => {
 
-        showPage(
-            pageDeposit
-        );
+        window.location.href =
+            "dashboard.html";
 
     }
 );
 
 
-/* =====================================================
+/* =========================
+   BACK TO STAGE 1
+========================= */
+
+backToStage1.addEventListener(
+    "click",
+    () => {
+
+        showStage(1);
+
+    }
+);
+
+
+backToStage1Button.addEventListener(
+    "click",
+    () => {
+
+        showStage(1);
+
+    }
+);
+
+
+/* =========================
    I HAVE PAID
-===================================================== */
+========================= */
 
 paidBtn.addEventListener(
     "click",
@@ -1281,17 +1975,15 @@ paidBtn.addEventListener(
         paidBtn.disabled =
             true;
 
-        showPage(
-            loadingPayment
+        showStage(
+            "loading2"
         );
 
 
         setTimeout(
             () => {
 
-                showPage(
-                    pagePayment
-                );
+                showStage(3);
 
                 paidBtn.disabled =
                     false;
@@ -1304,27 +1996,35 @@ paidBtn.addEventListener(
 );
 
 
-/* =====================================================
-   BACK FROM PAYMENT
-===================================================== */
+/* =========================
+   BACK TO ACCOUNT
+========================= */
 
-backPaymentBtn.addEventListener(
+backToStage2.addEventListener(
     "click",
     () => {
 
-        showPage(
-            pageAccount
-        );
+        showStage(2);
 
     }
 );
 
 
-/* =====================================================
-   SUBMIT PAYMENT
-===================================================== */
+backToAccountBtn.addEventListener(
+    "click",
+    () => {
 
-submitBtn.addEventListener(
+        showStage(2);
+
+    }
+);
+
+
+/* =========================
+   SUBMIT PAYMENT
+========================= */
+
+submitPaymentBtn.addEventListener(
     "click",
     async () => {
 
@@ -1333,10 +2033,8 @@ submitBtn.addEventListener(
                 amountInput.value
             );
 
-
         const senderName =
             senderNameInput.value.trim();
-
 
         const transactionReference =
             transactionReferenceInput.value.trim();
@@ -1390,7 +2088,7 @@ submitBtn.addEventListener(
         }
 
 
-        /* CHECK LOGIN */
+        /* CHECK USER */
 
         if(!currentUser){
 
@@ -1406,19 +2104,14 @@ submitBtn.addEventListener(
         }
 
 
-        submitBtn.disabled =
+        submitPaymentBtn.disabled =
             true;
 
-        showPage(
-            loadingSubmit
-        );
+        submitPaymentBtn.textContent =
+            "SUBMITTING...";
 
 
         try{
-
-            /*
-             * CREATE NEW DEPOSIT
-             */
 
             const depositRef =
                 push(
@@ -1437,7 +2130,8 @@ submitBtn.addEventListener(
                         currentUser.uid,
 
                     email:
-                        currentUser.email || "",
+                        currentUser.email ||
+                        "",
 
                     amount:
                         amount,
@@ -1448,11 +2142,11 @@ submitBtn.addEventListener(
                     transactionReference:
                         transactionReference,
 
-                    bankName:
-                        "TENN-MFB",
-
                     accountNumber:
                         "5777198543",
+
+                    bankName:
+                        "TENN-MFB",
 
                     accountName:
                         "Promise Omowumi Adeyeye",
@@ -1467,45 +2161,41 @@ submitBtn.addEventListener(
             );
 
 
-            /*
-             * SHOW SUCCESS AFTER 3 SECONDS
-             */
+            /* CLEAR FORM */
 
-            setTimeout(
-                () => {
+            amountInput.value =
+                "";
 
-                    showPage(
-                        pageSuccess
-                    );
+            senderNameInput.value =
+                "";
 
-                    submitBtn.disabled =
-                        false;
+            transactionReferenceInput.value =
+                "";
 
-                },
-                3000
-            );
+
+            /* SHOW SUCCESS PAGE */
+
+            showStage(4);
 
 
         }catch(error){
 
             console.error(
-                "Deposit submission error:",
+                "Payment submission error:",
                 error
             );
-
-
-            showPage(
-                pagePayment
-            );
-
-
-            submitBtn.disabled =
-                false;
-
 
             alert(
                 "Unable to submit your payment. Please try again."
             );
+
+        }finally{
+
+            submitPaymentBtn.disabled =
+                false;
+
+            submitPaymentBtn.textContent =
+                "SUBMIT PAYMENT";
 
         }
 
@@ -1513,12 +2203,84 @@ submitBtn.addEventListener(
 );
 
 
-/* =====================================================
-   FOOTER YEAR
-===================================================== */
+/* =========================
+   SUPPORT
+========================= */
 
-document.getElementById("year")
-    .textContent =
+supportLink.addEventListener(
+    "click",
+    () => {
+
+        /*
+         * Change this to your real
+         * support page/link later.
+         */
+
+        window.location.href =
+            "support.html";
+
+    }
+);
+
+
+/* =========================
+   GO BACK TO DASHBOARD
+========================= */
+
+goDashboardBtn.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "dashboard.html";
+
+    }
+);
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   YEAR
+========================= */
+
+document.getElementById(
+    "year"
+).textContent =
     new Date().getFullYear();
 
 </script>
