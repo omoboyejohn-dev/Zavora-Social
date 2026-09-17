@@ -1049,11 +1049,18 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
     getDatabase,
     ref,
-    onValue
+    onValue,
+    query,
+    orderByChild,
+    equalTo
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
+
+/* ==========================================
+   FIREBASE CONFIG
+========================================== */
 
 const firebaseConfig = {
 
@@ -1085,6 +1092,10 @@ const firebaseConfig = {
 
 
 
+/* ==========================================
+   INITIALIZE FIREBASE
+========================================== */
+
 const app =
     initializeApp(
         firebaseConfig
@@ -1103,7 +1114,6 @@ const db =
 /* ==========================================
    ELEMENTS
 ========================================== */
-
 
 const loadingScreen =
     document.getElementById(
@@ -1173,13 +1183,11 @@ let allCategories = [];
    AUTHENTICATION
 ========================================== */
 
-
 onAuthStateChanged(
 
     auth,
 
     (user) => {
-
 
         if(!user){
 
@@ -1191,13 +1199,11 @@ onAuthStateChanged(
         }
 
 
-
         /*
         |--------------------------------------------------------------------------
         | CUSTOMER NAME
         |--------------------------------------------------------------------------
         */
-
 
         let displayName =
             user.displayName;
@@ -1228,7 +1234,6 @@ onAuthStateChanged(
         |--------------------------------------------------------------------------
         */
 
-
         loadingScreen.style.display =
             "none";
 
@@ -1239,7 +1244,6 @@ onAuthStateChanged(
         | LOAD LIVE DATA
         |--------------------------------------------------------------------------
         */
-
 
         loadWallet(
             user.uid
@@ -1256,7 +1260,6 @@ onAuthStateChanged(
 
         loadCategories();
 
-
     }
 
 );
@@ -1267,9 +1270,7 @@ onAuthStateChanged(
    LOAD CUSTOMER WALLET
 ========================================== */
 
-
 function loadWallet(uid){
-
 
     const walletRef =
         ref(
@@ -1280,19 +1281,16 @@ function loadWallet(uid){
         );
 
 
-
     onValue(
 
         walletRef,
 
         (snapshot) => {
 
-
             const balance =
                 Number(
                     snapshot.val()
                 ) || 0;
-
 
 
             walletBalance.textContent =
@@ -1309,7 +1307,6 @@ function loadWallet(uid){
 
 
         (error) => {
-
 
             console.error(
                 "Wallet loading error:",
@@ -1334,23 +1331,26 @@ function loadWallet(uid){
 
 
 /*
-   IMPORTANT:
-
-   We read the orders belonging to the
-   logged-in customer only.
-
-   The purchase API creates the order at:
-
-   orders/{orderId}
-
-   with:
-
-   uid: customer UID
+|--------------------------------------------------------------------------
+| IMPORTANT
+|--------------------------------------------------------------------------
+|
+| We query ONLY the orders belonging to the
+| currently logged-in customer.
+|
+| Purchase API creates:
+|
+| orders/{orderId}/uid
+|
+| equal to:
+|
+| Firebase Auth user's UID
+|
+|--------------------------------------------------------------------------
 */
 
 
 function loadCustomerOrders(uid){
-
 
     const ordersRef =
         ref(
@@ -1359,35 +1359,46 @@ function loadCustomerOrders(uid){
         );
 
 
+    const customerOrdersQuery =
+        query(
+            ordersRef,
+            orderByChild("uid"),
+            equalTo(uid)
+        );
+
 
     onValue(
 
-        ordersRef,
+        customerOrdersQuery,
 
         (snapshot) => {
 
-
-            const data =
-                snapshot.val();
+            let count = 0;
 
 
-            let count =
-                0;
+            if(snapshot.exists()){
 
+                const orders =
+                    snapshot.val() || {};
 
-
-            if(data){
 
                 Object.values(
-                    data
+                    orders
                 ).forEach(
                     (order) => {
-
 
                         if(
                             order &&
                             order.uid === uid
                         ){
+
+                            /*
+                             * Every order created for
+                             * this customer is counted.
+                             *
+                             * Your purchase API creates
+                             * completed orders immediately.
+                             */
 
                             count++;
 
@@ -1399,7 +1410,6 @@ function loadCustomerOrders(uid){
             }
 
 
-
             ordersCount.textContent =
                 count.toString();
 
@@ -1408,7 +1418,6 @@ function loadCustomerOrders(uid){
 
 
         (error) => {
-
 
             console.error(
                 "Orders loading error:",
@@ -1428,111 +1437,127 @@ function loadCustomerOrders(uid){
 
 
 /* ==========================================
-   LOAD AVAILABLE PRODUCTS / INVENTORY
+   LOAD AVAILABLE PRODUCTS
 ========================================== */
 
 
 /*
-   This counts every inventory item whose
-   status is "available".
-
-   Example:
-
-   Australia TikTok
-   7 available
-
-   Customer buys 1
-
-   6 available
-
-   Dashboard changes automatically.
+|--------------------------------------------------------------------------
+| IMPORTANT
+|--------------------------------------------------------------------------
+|
+| DO NOT read /inventory here.
+|
+| /inventory contains the actual purchased
+| details/credentials and should not be exposed
+| to customers.
+|
+| Instead we read:
+|
+| /products/{productId}/stock
+|
+| Example:
+|
+| Product A = 7
+| Product B = 8
+| Product C = 5
+|
+| Available Products = 20
+|
+| Customer buys one:
+|
+| Product A = 6
+| Product B = 8
+| Product C = 5
+|
+| Available Products = 19
+|
+|--------------------------------------------------------------------------
 */
 
 
 function loadAvailableProducts(){
 
-
-    const inventoryRef =
+    const productsRef =
         ref(
             db,
-            "inventory"
+            "products"
         );
-
 
 
     onValue(
 
-        inventoryRef,
+        productsRef,
 
         (snapshot) => {
 
-
-            const data =
-                snapshot.val();
-
-
-            let availableCount =
-                0;
+            const products =
+                snapshot.val() || {};
 
 
-
-            if(data){
-
-                Object.values(
-                    data
-                ).forEach(
-                    (productInventory) => {
+            let totalAvailable = 0;
 
 
-                        if(
-                            productInventory &&
-                            typeof productInventory === "object"
-                        ){
+            Object.values(
+                products
+            ).forEach(
+                (product) => {
 
+                    if(!product){
 
-                            Object.values(
-                                productInventory
-                            ).forEach(
-                                (item) => {
-
-
-                                    if(
-                                        item &&
-                                        String(
-                                            item.status ||
-                                            ""
-                                        ).toLowerCase()
-                                        === "available"
-                                    ){
-
-                                        availableCount++;
-
-                                    }
-
-                                }
-                            );
-
-                        }
+                        return;
 
                     }
-                );
 
-            }
 
+                    /*
+                     * Ignore inactive products.
+                     */
+
+                    if(
+                        product.active === false
+                    ){
+
+                        return;
+
+                    }
+
+
+                    const stock =
+                        Number(
+                            product.stock
+                        );
+
+
+                    /*
+                     * Only count valid positive
+                     * stock numbers.
+                     */
+
+                    if(
+                        Number.isFinite(stock) &&
+                        stock > 0
+                    ){
+
+                        totalAvailable +=
+                            stock;
+
+                    }
+
+                }
+            );
 
 
             availableProducts.textContent =
-                availableCount.toString();
-
+                totalAvailable.toString();
 
         },
 
 
         (error) => {
 
-
             console.error(
-                "Inventory loading error:",
+                "Products loading error:",
                 error
             );
 
@@ -1552,9 +1577,7 @@ function loadAvailableProducts(){
    LOAD CATEGORIES
 ========================================== */
 
-
 function loadCategories(){
-
 
     const categoriesRef =
         ref(
@@ -1563,13 +1586,11 @@ function loadCategories(){
         );
 
 
-
     onValue(
 
         categoriesRef,
 
         (snapshot) => {
-
 
             const data =
                 snapshot.val();
@@ -1578,14 +1599,12 @@ function loadCategories(){
             allCategories = [];
 
 
-
             if(data){
 
                 Object.entries(
                     data
                 ).forEach(
                     ([id, category]) => {
-
 
                         if(
                             category &&
@@ -1618,7 +1637,6 @@ function loadCategories(){
             }
 
 
-
             allCategories.sort(
                 (a,b) =>
                     Number(
@@ -1630,7 +1648,6 @@ function loadCategories(){
             );
 
 
-
             renderCategories(
                 allCategories
             );
@@ -1639,7 +1656,6 @@ function loadCategories(){
 
 
         (error) => {
-
 
             console.error(
                 "Category loading error:",
@@ -1679,11 +1695,9 @@ function loadCategories(){
    RENDER CATEGORIES
 ========================================== */
 
-
 function renderCategories(
     categories
 ){
-
 
     if(
         categories.length === 0
@@ -1714,15 +1728,12 @@ function renderCategories(
     }
 
 
-
     categoryGrid.innerHTML =
         "";
 
 
-
     categories.forEach(
         (category) => {
-
 
             const card =
                 document.createElement(
@@ -1738,7 +1749,6 @@ function renderCategories(
                 String(
                     category.name
                 ).toLowerCase();
-
 
 
             card.innerHTML = `
@@ -1781,7 +1791,6 @@ function renderCategories(
             `;
 
 
-
             card.addEventListener(
                 "click",
                 () => {
@@ -1792,7 +1801,6 @@ function renderCategories(
 
                 }
             );
-
 
 
             categoryGrid.appendChild(
@@ -1810,17 +1818,14 @@ function renderCategories(
    SEARCH CATEGORIES
 ========================================== */
 
-
 categorySearch.addEventListener(
     "input",
     () => {
-
 
         const search =
             categorySearch.value
                 .trim()
                 .toLowerCase();
-
 
 
         if(!search){
@@ -1832,7 +1837,6 @@ categorySearch.addEventListener(
             return;
 
         }
-
 
 
         const filtered =
@@ -1847,7 +1851,6 @@ categorySearch.addEventListener(
                         search
                     )
             );
-
 
 
         if(
@@ -1876,7 +1879,6 @@ categorySearch.addEventListener(
         }
 
 
-
         renderCategories(
             filtered
         );
@@ -1890,9 +1892,7 @@ categorySearch.addEventListener(
    ESCAPE HTML
 ========================================== */
 
-
 function escapeHtml(value){
-
 
     return String(
         value ?? ""
@@ -1931,10 +1931,8 @@ function escapeHtml(value){
    OPEN CATEGORY
 ========================================== */
 
-
 window.openCategory =
 function(category){
-
 
     window.location.href =
         "products.html?category=" +
@@ -1950,11 +1948,9 @@ function(category){
    LOGOUT
 ========================================== */
 
-
 logoutBtn.addEventListener(
     "click",
     async () => {
-
 
         logoutBtn.disabled =
             true;
@@ -1964,9 +1960,7 @@ logoutBtn.addEventListener(
             "Logging out...";
 
 
-
         try{
-
 
             await signOut(
                 auth
@@ -1976,10 +1970,9 @@ logoutBtn.addEventListener(
             window.location.href =
                 "login.html";
 
-
         }
-        catch(error){
 
+        catch(error){
 
             console.error(
                 "Logout error:",
@@ -2009,7 +2002,6 @@ logoutBtn.addEventListener(
 /* ==========================================
    YEAR
 ========================================== */
-
 
 document.getElementById(
     "year"
