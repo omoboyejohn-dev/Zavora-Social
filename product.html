@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -26,6 +27,7 @@ header{
     position:sticky;
     top:0;
     z-index:100;
+
     border-bottom:1px solid #e5e7eb;
     background:#ffffff;
 }
@@ -39,6 +41,8 @@ header{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
+    gap:15px;
 }
 
 .logo{
@@ -54,13 +58,20 @@ header{
 
 .back-btn{
     text-decoration:none;
+
     color:#ffffff;
+
     background:#16a34a;
+
     border:1px solid #15803d;
+
     padding:9px 13px;
+
     border-radius:9px;
+
     font-size:12px;
     font-weight:700;
+
     transition:.2s;
 }
 
@@ -70,8 +81,9 @@ header{
 }
 
 .container{
-    width:min(950px,92%);
-    margin:30px auto 60px;
+    max-width:950px;
+    margin:auto;
+    padding:30px 15px 60px;
 }
 
 .loading{
@@ -83,11 +95,15 @@ header{
 .product-box{
     display:grid;
     grid-template-columns:1fr 1fr;
+
     gap:25px;
 
     background:#ffffff;
+
     border:1px solid #e5e7eb;
+
     border-radius:20px;
+
     padding:20px;
 
     box-shadow:0 10px 35px rgba(0,0,0,.07);
@@ -95,45 +111,58 @@ header{
 
 .product-image-box{
     min-height:350px;
+
     border-radius:15px;
+
     overflow:hidden;
 
     background:#f0fdf4;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     border:1px solid #dcfce7;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 }
 
 .product-image{
     width:100%;
     height:100%;
+
     min-height:350px;
+
     object-fit:contain;
+
     display:block;
 }
 
 .product-info{
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
 }
 
 .category{
     display:inline-block;
+
     width:max-content;
 
     color:#ffffff;
+
     background:#16a34a;
 
     border:1px solid #15803d;
 
     padding:6px 10px;
+
     border-radius:7px;
 
     font-size:11px;
+
     font-weight:800;
 
     margin-bottom:13px;
@@ -141,32 +170,45 @@ header{
 
 .product-name{
     color:#111827;
+
     font-size:29px;
+
     line-height:1.2;
+
     font-weight:900;
+
     margin-bottom:15px;
 }
 
 .description{
     color:#64748b;
+
     font-size:14px;
+
     line-height:1.7;
+
     white-space:pre-line;
+
     margin-bottom:20px;
 }
 
 .price{
     color:#15803d;
+
     font-size:28px;
+
     font-weight:900;
+
     margin-bottom:18px;
 }
 
 .wallet{
     padding:14px;
+
     border-radius:12px;
 
     background:#16a34a;
+
     border:1px solid #15803d;
 
     margin-bottom:15px;
@@ -174,34 +216,45 @@ header{
 
 .wallet-label{
     color:rgba(255,255,255,.85);
+
     font-size:11px;
+
     margin-bottom:5px;
 }
 
 .wallet-balance{
     color:#ffffff;
+
     font-size:21px;
+
     font-weight:900;
 }
 
 .buy-btn{
     width:100%;
+
     border:none;
 
     color:#ffffff;
+
     background:#16a34a;
 
     padding:14px;
+
     border-radius:10px;
 
     cursor:pointer;
+
     font-size:14px;
+
     font-weight:900;
+
     transition:.2s;
 }
 
 .buy-btn:hover{
     background:#15803d;
+
     transform:translateY(-1px);
 
     box-shadow:0 7px 20px rgba(22,163,74,.25);
@@ -209,16 +262,25 @@ header{
 
 .buy-btn:disabled{
     opacity:.65;
+
     cursor:not-allowed;
+
     transform:none;
+
+    box-shadow:none;
 }
 
 .continue{
     display:block;
+
     text-align:center;
+
     color:#64748b;
+
     text-decoration:none;
+
     margin-top:14px;
+
     font-size:12px;
 }
 
@@ -228,10 +290,13 @@ header{
 
 .error{
     text-align:center;
+
     padding:60px 20px;
 
     background:#fef2f2;
+
     border:1px solid #fecaca;
+
     border-radius:15px;
 
     color:#dc2626;
@@ -239,19 +304,25 @@ header{
 
 .error h2{
     color:#111827;
+
     margin-bottom:8px;
 }
 
 .modal{
     position:fixed;
+
     inset:0;
+
     z-index:9999;
 
     background:rgba(0,0,0,.55);
 
     display:none;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
 }
 
@@ -263,10 +334,13 @@ header{
     width:min(420px,100%);
 
     background:#ffffff;
+
     border:1px solid #e5e7eb;
 
     border-radius:18px;
+
     padding:25px;
+
     text-align:center;
 
     box-shadow:0 20px 60px rgba(0,0,0,.2);
@@ -274,29 +348,39 @@ header{
 
 .modal-title{
     color:#111827;
+
     font-size:21px;
+
     margin-bottom:12px;
 }
 
 .modal-message{
     color:#64748b;
+
     line-height:1.6;
+
     font-size:14px;
+
     margin-bottom:20px;
+
     white-space:pre-line;
 }
 
 .modal-btn{
     width:100%;
+
     border:none;
 
     color:#ffffff;
+
     background:#16a34a;
 
     padding:13px;
+
     border-radius:9px;
 
     cursor:pointer;
+
     font-weight:800;
 }
 
@@ -314,8 +398,32 @@ header{
 
 @media(max-width:700px){
 
+    .navbar{
+        padding:0 12px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .back-btn{
+        padding:8px 10px;
+
+        font-size:11px;
+    }
+
+    .container{
+        padding:22px 10px 50px;
+    }
+
     .product-box{
         grid-template-columns:1fr;
+
+        gap:18px;
+
+        padding:12px;
+
+        border-radius:15px;
     }
 
     .product-image-box{
@@ -330,6 +438,26 @@ header{
         font-size:24px;
     }
 
+    .price{
+        font-size:25px;
+    }
+
+}
+
+@media(max-width:380px){
+
+    .product-image-box{
+        min-height:240px;
+    }
+
+    .product-image{
+        min-height:240px;
+    }
+
+    .product-name{
+        font-size:21px;
+    }
+
 }
 
 </style>
@@ -338,15 +466,23 @@ header{
 
 <body>
 
+
 <header>
 
     <div class="navbar">
 
-        <a href="dashboard.html" class="logo">
+        <a
+            href="dashboard.html"
+            class="logo"
+        >
             Zavora <span>Social</span>
         </a>
 
-        <a href="products.html" class="back-btn">
+
+        <a
+            href="products.html"
+            class="back-btn"
+        >
             ← Products
         </a>
 
@@ -357,14 +493,22 @@ header{
 
 <main class="container">
 
-    <div id="loading" class="loading">
+
+    <div
+        id="loading"
+        class="loading"
+    >
         Loading product...
     </div>
 
 
-    <div id="productArea" style="display:none;">
+    <div
+        id="productArea"
+        style="display:none;"
+    >
 
         <div class="product-box">
+
 
             <div class="product-image-box">
 
@@ -380,22 +524,35 @@ header{
 
             <div class="product-info">
 
-                <div id="productCategory" class="category">
+
+                <div
+                    id="productCategory"
+                    class="category"
+                >
                     Product
                 </div>
 
 
-                <h1 id="productName" class="product-name">
+                <h1
+                    id="productName"
+                    class="product-name"
+                >
                     Product
                 </h1>
 
 
-                <div id="productDescription" class="description">
+                <div
+                    id="productDescription"
+                    class="description"
+                >
                     Loading description...
                 </div>
 
 
-                <div id="productPrice" class="price">
+                <div
+                    id="productPrice"
+                    class="price"
+                >
                     ₦0.00
                 </div>
 
@@ -406,7 +563,10 @@ header{
                         Your Wallet Balance
                     </div>
 
-                    <div id="walletBalance" class="wallet-balance">
+                    <div
+                        id="walletBalance"
+                        class="wallet-balance"
+                    >
                         ₦0.00
                     </div>
 
@@ -427,6 +587,7 @@ header{
                 >
                     ← Continue Shopping
                 </a>
+
 
             </div>
 
@@ -463,9 +624,6 @@ header{
 </main>
 
 
-<!-- =========================================
-     PURCHASE MESSAGE MODAL
-========================================= -->
 
 <div
     id="messageModal"
@@ -473,6 +631,7 @@ header{
 >
 
     <div class="modal-box">
+
 
         <h2
             id="modalTitle"
@@ -497,12 +656,15 @@ header{
             Continue
         </button>
 
+
     </div>
 
 </div>
 
 
+
 <script type="module">
+
 
 /*
 ==================================================
@@ -532,6 +694,22 @@ import {
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+
+/*
+==================================================
+FIREBASE FUNCTIONS
+==================================================
+*/
+
+import {
+    getFunctions,
+    httpsCallable
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-functions.js";
+
 
 
 /*
@@ -569,6 +747,7 @@ const firebaseConfig = {
 };
 
 
+
 /*
 ==================================================
 INITIALIZE FIREBASE
@@ -587,6 +766,27 @@ const auth =
 
 const db =
     getDatabase(app);
+
+
+/*
+==================================================
+FIREBASE FUNCTIONS
+==================================================
+*/
+
+const functions =
+    getFunctions(
+        app,
+        "us-central1"
+    );
+
+
+const purchaseProduct =
+    httpsCallable(
+        functions,
+        "purchaseProduct"
+    );
+
 
 
 /*
@@ -685,14 +885,10 @@ const modalButton =
     );
 
 
+
 /*
 ==================================================
-GET PRODUCT ID FROM URL
-==================================================
-
-Example:
-
-product.html?id=PRODUCT_ID
+GET PRODUCT ID
 ==================================================
 */
 
@@ -704,6 +900,7 @@ const urlParams =
 
 const productId =
     urlParams.get("id");
+
 
 
 /*
@@ -720,6 +917,7 @@ let currentProduct =
     null;
 
 
+
 /*
 ==================================================
 MONEY FORMAT
@@ -729,25 +927,25 @@ MONEY FORMAT
 function money(amount){
 
     return "₦" +
+
         Number(
             amount || 0
         ).toLocaleString(
             "en-NG",
             {
-                minimumFractionDigits:
-                    2,
+                minimumFractionDigits:2,
 
-                maximumFractionDigits:
-                    2
+                maximumFractionDigits:2
             }
         );
 
 }
 
 
+
 /*
 ==================================================
-SHOW MODAL
+SHOW MESSAGE
 ==================================================
 */
 
@@ -769,6 +967,7 @@ function showMessage(
 
     modalTitle.className =
         "modal-title " +
+
         (
             success
                 ? "success"
@@ -807,6 +1006,7 @@ function showMessage(
     );
 
 }
+
 
 
 /*
@@ -877,12 +1077,6 @@ async function loadProduct(){
             snapshot.val();
 
 
-        /*
-        ========================================
-        CHECK PRODUCT ACTIVE
-        ========================================
-        */
-
         if(
             product.active === false
         ){
@@ -904,12 +1098,6 @@ async function loadProduct(){
         }
 
 
-        /*
-        ========================================
-        STORE PRODUCT
-        ========================================
-        */
-
         currentProduct = {
 
             id:
@@ -919,12 +1107,6 @@ async function loadProduct(){
 
         };
 
-
-        /*
-        ========================================
-        DISPLAY PRODUCT
-        ========================================
-        */
 
         productName.textContent =
             product.name ||
@@ -947,12 +1129,6 @@ async function loadProduct(){
             );
 
 
-        /*
-        ========================================
-        PRODUCT IMAGE
-        ========================================
-        */
-
         if(
             product.image
         ){
@@ -972,12 +1148,6 @@ async function loadProduct(){
         }
 
 
-        /*
-        ========================================
-        SHOW PRODUCT
-        ========================================
-        */
-
         loading.style.display =
             "none";
 
@@ -985,12 +1155,6 @@ async function loadProduct(){
         productArea.style.display =
             "block";
 
-
-        /*
-        ========================================
-        LOAD WALLET
-        ========================================
-        */
 
         await loadWallet();
 
@@ -1017,6 +1181,7 @@ async function loadProduct(){
     }
 
 }
+
 
 
 /*
@@ -1081,34 +1246,19 @@ async function loadWallet(){
 }
 
 
+
 /*
 ==================================================
 BUY PRODUCT
 ==================================================
-
-The browser DOES NOT deduct money.
-
-The browser DOES NOT select inventory.
-
-The browser DOES NOT create the order.
-
-Everything important is handled by:
-
-/api/purchase
-
-on Vercel.
-==================================================
 */
 
 buyButton.addEventListener(
+
     "click",
+
     async () => {
 
-        /*
-        ========================================
-        CHECK LOGIN
-        ========================================
-        */
 
         if(
             !currentUser
@@ -1121,12 +1271,6 @@ buyButton.addEventListener(
 
         }
 
-
-        /*
-        ========================================
-        CHECK PRODUCT
-        ========================================
-        */
 
         if(
             !currentProduct
@@ -1141,12 +1285,6 @@ buyButton.addEventListener(
 
         }
 
-
-        /*
-        ========================================
-        PRICE CHECK
-        ========================================
-        */
 
         const price =
             Number(
@@ -1168,12 +1306,6 @@ buyButton.addEventListener(
         }
 
 
-        /*
-        ========================================
-        DISABLE BUTTON
-        ========================================
-        */
-
         buyButton.disabled =
             true;
 
@@ -1184,128 +1316,75 @@ buyButton.addEventListener(
 
         try{
 
+
             /*
-            ====================================
-            GET FRESH FIREBASE ID TOKEN
-            ====================================
+            ========================================
+            CALL SECURE FIREBASE FUNCTION
+            ========================================
             */
 
-            const idToken =
-                await currentUser.getIdToken(
-                    true
-                );
+            const result =
+                await purchaseProduct({
+
+                    productId:
+                        currentProduct.id
+
+                });
 
 
-            /*
-            ====================================
-            SEND PURCHASE TO VERCEL
-            ====================================
-            */
+            const data =
+                result.data || {};
 
-            const response =
-                await fetch(
-                    "/api/purchase",
-                    {
-                        method:
-                            "POST",
-
-                        headers:{
-                            "Content-Type":
-                                "application/json",
-
-                            "Authorization":
-                                "Bearer " +
-                                idToken
-                        },
-
-                        body:
-                            JSON.stringify({
-                                productId:
-                                    currentProduct.id
-                            })
-                    }
-                );
 
 
             /*
-            ====================================
-            READ API RESPONSE
-            ====================================
-            */
-
-            let result =
-                null;
-
-
-            try{
-
-                result =
-                    await response.json();
-
-            }
-            catch(
-                jsonError
-            ){
-
-                console.error(
-                    "Invalid API response:",
-                    jsonError
-                );
-
-            }
-
-
-            /*
-            ====================================
-            API FAILED
-            ====================================
+            ========================================
+            CHECK RESULT
+            ========================================
             */
 
             if(
-                !response.ok ||
-                !result ||
-                !result.success
+                !data.success
             ){
 
-                const message =
-                    result &&
-                    result.message
-                        ? result.message
-                        : "Unable to complete your purchase. Please try again.";
-
-
-                showMessage(
-                    "Purchase Failed",
-                    message,
-                    false,
-                    "Continue"
+                throw new Error(
+                    data.message ||
+                    "Unable to complete your purchase."
                 );
-
-
-                buyButton.disabled =
-                    false;
-
-
-                buyButton.textContent =
-                    "Buy Now";
-
-
-                return;
 
             }
 
 
+
             /*
-            ====================================
-            PURCHASE SUCCESS
-            ====================================
+            ========================================
+            UPDATE WALLET
+            ========================================
             */
 
-            walletBalance.textContent =
-                money(
-                    result.balance
-                );
+            if(
+                data.balance !== undefined
+            ){
 
+                walletBalance.textContent =
+                    money(
+                        data.balance
+                    );
+
+            }
+            else{
+
+                await loadWallet();
+
+            }
+
+
+
+            /*
+            ========================================
+            BUTTON
+            ========================================
+            */
 
             buyButton.disabled =
                 true;
@@ -1315,10 +1394,11 @@ buyButton.addEventListener(
                 "Purchase Complete";
 
 
+
             /*
-            ====================================
-            DELIVERY MESSAGE
-            ====================================
+            ========================================
+            DELIVERY
+            ========================================
             */
 
             let deliveryMessage =
@@ -1326,33 +1406,40 @@ buyButton.addEventListener(
 
 
             if(
-                result.deliveryDetails
+                data.deliveryDetails
             ){
 
                 deliveryMessage +=
                     "\n\nDelivery:\n" +
-                    result.deliveryDetails;
+                    data.deliveryDetails;
 
             }
 
 
+
             /*
-            ====================================
-            SHOW SUCCESS
-            ====================================
+            ========================================
+            SUCCESS
+            ========================================
             */
 
             showMessage(
+
                 "Purchase Successful",
+
                 deliveryMessage,
+
                 true,
+
                 "View My Orders",
+
                 () => {
 
                     window.location.href =
                         "orders.html";
 
                 }
+
             );
 
         }
@@ -1364,11 +1451,31 @@ buyButton.addEventListener(
             );
 
 
+            let message =
+                "Unable to complete your purchase. Please try again.";
+
+
+            if(
+                error &&
+                error.message
+            ){
+
+                message =
+                    error.message;
+
+            }
+
+
             showMessage(
+
                 "Purchase Failed",
-                "Unable to connect to the purchase server. Please try again.",
+
+                message,
+
                 false,
+
                 "Continue"
+
             );
 
 
@@ -1382,24 +1489,23 @@ buyButton.addEventListener(
         }
 
     }
+
 );
+
 
 
 /*
 ==================================================
-FIREBASE AUTH STATE
+AUTH STATE
 ==================================================
 */
 
 onAuthStateChanged(
+
     auth,
+
     async (user) => {
 
-        /*
-        ========================================
-        USER NOT LOGGED IN
-        ========================================
-        */
 
         if(
             !user
@@ -1413,36 +1519,28 @@ onAuthStateChanged(
         }
 
 
-        /*
-        ========================================
-        STORE CURRENT USER
-        ========================================
-        */
-
         currentUser =
             user;
 
 
-        /*
-        ========================================
-        LOAD PRODUCT
-        ========================================
-        */
-
         await loadProduct();
 
     }
+
 );
+
 
 
 /*
 ==================================================
-CLOSE MODAL WHEN CLICKING OUTSIDE
+CLOSE MODAL
 ==================================================
 */
 
 messageModal.addEventListener(
+
     "click",
+
     (event) => {
 
         if(
@@ -1457,6 +1555,7 @@ messageModal.addEventListener(
         }
 
     }
+
 );
 
 </script>
