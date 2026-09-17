@@ -77,7 +77,7 @@ function money(value) {
 
 
 /*
-   An item is available when:
+   An inventory item is available when:
 
    status = "available"
 
@@ -156,11 +156,14 @@ async function restoreInventory(
 
             await itemRef.update({
 
-                status: "available",
+                status:
+                    "available",
 
-                processingBy: null,
+                processingBy:
+                    null,
 
-                processingAt: null
+                processingAt:
+                    null
 
             });
 
@@ -186,6 +189,224 @@ async function restoreInventory(
 
 
 /* =========================================================
+   DECREASE PRODUCT STOCK
+========================================================= */
+
+/*
+   products/{productId}/stock is the customer-facing
+   available stock counter.
+
+   Example:
+
+   Before purchase:
+   stock = 20
+
+   After purchase:
+   stock = 19
+
+   The transaction prevents two simultaneous purchases
+   from incorrectly using the same stock number.
+*/
+
+async function decreaseProductStock(
+    productId
+) {
+
+    const stockRef =
+        db.ref(
+            "products/" +
+            productId +
+            "/stock"
+        );
+
+
+    const stockSnapshot =
+        await stockRef.once(
+            "value"
+        );
+
+
+    const originalValue =
+        stockSnapshot.val();
+
+
+    const originalStock =
+        Number(originalValue);
+
+
+    /*
+       If stock does not exist yet, we do not invent a
+       number here.
+
+       The inventory itself is still the real source of
+       purchasable items.
+    */
+
+    if (
+        !Number.isFinite(
+            originalStock
+        )
+    ) {
+
+        throw new Error(
+            "Product stock is not configured for this product."
+        );
+
+    }
+
+
+    if (
+        originalStock <= 0
+    ) {
+
+        throw new Error(
+            "Product stock is already zero."
+        );
+
+    }
+
+
+    const transaction =
+        await stockRef.transaction(
+            (currentValue) => {
+
+                const value =
+                    currentValue === null ||
+                    currentValue === undefined
+                        ? originalValue
+                        : currentValue;
+
+
+                const stock =
+                    Number(value);
+
+
+                if (
+                    !Number.isFinite(stock)
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    stock <= 0
+                ) {
+
+                    return;
+
+                }
+
+
+                return Math.max(
+                    0,
+                    stock - 1
+                );
+
+            }
+        );
+
+
+    if (
+        !transaction.committed
+    ) {
+
+        throw new Error(
+            "Product stock could not be updated."
+        );
+
+    }
+
+
+    const newStock =
+        Number(
+            transaction.snapshot.val()
+        );
+
+
+    console.log(
+        "PRODUCT STOCK UPDATED:",
+        {
+            productId,
+            previousStock:
+                originalStock,
+            newStock
+        }
+    );
+
+
+    return {
+
+        previousStock:
+            originalStock,
+
+        newStock
+
+    };
+
+}
+
+
+/* =========================================================
+   RESTORE PRODUCT STOCK
+========================================================= */
+
+async function restoreProductStock(
+    productId
+) {
+
+    try {
+
+        const stockRef =
+            db.ref(
+                "products/" +
+                productId +
+                "/stock"
+            );
+
+
+        await stockRef.transaction(
+            (currentValue) => {
+
+                const stock =
+                    Number(currentValue);
+
+
+                if (
+                    !Number.isFinite(stock)
+                ) {
+
+                    return;
+
+                }
+
+
+                return stock + 1;
+
+            }
+        );
+
+
+        console.log(
+            "PRODUCT STOCK RESTORED:",
+            productId
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "RESTORE PRODUCT STOCK ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
    MAIN PURCHASE API
 ========================================================= */
 
@@ -202,8 +423,11 @@ module.exports = async function handler(
             res,
             405,
             {
-                success: false,
-                message: "Method not allowed."
+                success:
+                    false,
+
+                message:
+                    "Method not allowed."
             }
         );
 
@@ -217,6 +441,10 @@ module.exports = async function handler(
     let reservedInventoryId = null;
     let reservedInventory = null;
 
+    let walletCharged = false;
+    let orderCreated = false;
+    let productStockDecreased = false;
+
 
     try {
 
@@ -229,14 +457,18 @@ module.exports = async function handler(
 
 
         if (
-            !authorization.startsWith("Bearer ")
+            !authorization.startsWith(
+                "Bearer "
+            )
         ) {
 
             return send(
                 res,
                 401,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Please log in before purchasing."
                 }
@@ -257,7 +489,9 @@ module.exports = async function handler(
                 res,
                 401,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Authentication token is missing."
                 }
@@ -267,7 +501,9 @@ module.exports = async function handler(
 
 
         const decoded =
-            await auth.verifyIdToken(token);
+            await auth.verifyIdToken(
+                token
+            );
 
 
         uid =
@@ -316,7 +552,9 @@ module.exports = async function handler(
                 res,
                 400,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Product ID is required."
                 }
@@ -356,7 +594,9 @@ module.exports = async function handler(
                 res,
                 404,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Product not found."
                 }
@@ -371,7 +611,8 @@ module.exports = async function handler(
 
         console.log(
             "PRODUCT FOUND:",
-            product.name || "Unnamed Product"
+            product.name ||
+            "Unnamed Product"
         );
 
 
@@ -383,7 +624,9 @@ module.exports = async function handler(
                 res,
                 400,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "This product is currently unavailable."
                 }
@@ -407,7 +650,9 @@ module.exports = async function handler(
                 res,
                 400,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "This product has an invalid price."
                 }
@@ -447,7 +692,9 @@ module.exports = async function handler(
                 res,
                 409,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "This product is currently out of stock."
                 }
@@ -469,7 +716,9 @@ module.exports = async function handler(
                 res,
                 409,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "This product is currently out of stock."
                 }
@@ -506,7 +755,8 @@ module.exports = async function handler(
                 "ITEM:",
                 inventoryId,
                 "STATUS:",
-                item && item.status,
+                item &&
+                item.status,
                 "AVAILABLE:",
                 available
             );
@@ -535,7 +785,9 @@ module.exports = async function handler(
                 res,
                 409,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "This product is currently out of stock."
                 }
@@ -546,11 +798,6 @@ module.exports = async function handler(
 
         /* =====================================================
            FIND + ATOMICALLY RESERVE INVENTORY
-
-           We try every available inventory item.
-
-           The transaction is atomic, so two customers cannot
-           successfully reserve the same item.
         ===================================================== */
 
         for (
@@ -563,11 +810,6 @@ module.exports = async function handler(
                     inventoryId
                 );
 
-
-            /*
-              Get the latest version before attempting
-              the transaction.
-            */
 
             const latestSnapshot =
                 await itemRef.once(
@@ -589,7 +831,9 @@ module.exports = async function handler(
 
 
             if (
-                !isAvailable(latestItem)
+                !isAvailable(
+                    latestItem
+                )
             ) {
 
                 console.log(
@@ -619,18 +863,6 @@ module.exports = async function handler(
                 inventoryId
             );
 
-
-            /*
-              IMPORTANT:
-
-              Firebase Admin can initially provide null to a
-              transaction callback when the value is not yet
-              locally available.
-
-              Because latestItem was already obtained from a
-              fresh read immediately above, use latestItem in
-              that situation instead of aborting the transaction.
-            */
 
             const transaction =
                 await itemRef.transaction(
@@ -691,18 +923,10 @@ module.exports = async function handler(
                 );
 
 
-                /*
-                  Try the next available item.
-                */
-
                 continue;
 
             }
 
-
-            /*
-              Successfully reserved the inventory item.
-            */
 
             reservedInventoryId =
                 inventoryId;
@@ -748,7 +972,9 @@ module.exports = async function handler(
                 res,
                 409,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "This product is currently out of stock. Please try again."
                 }
@@ -768,13 +994,6 @@ module.exports = async function handler(
                 "/walletBalance"
             );
 
-
-        /*
-          Read wallet first.
-
-          This gives the transaction a current server value
-          to work with.
-        */
 
         const walletSnapshot =
             await walletRef.once(
@@ -798,7 +1017,9 @@ module.exports = async function handler(
                 res,
                 400,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Your wallet balance could not be found."
                 }
@@ -843,7 +1064,9 @@ module.exports = async function handler(
                 res,
                 400,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Your wallet balance is invalid."
                 }
@@ -868,7 +1091,9 @@ module.exports = async function handler(
                 res,
                 400,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         `Insufficient wallet balance. Your balance is ₦${money(currentBalance)}, but this product costs ₦${money(price)}.`
                 }
@@ -889,15 +1114,6 @@ module.exports = async function handler(
         const walletTransaction =
             await walletRef.transaction(
                 (currentValue) => {
-
-                    /*
-                      Same Firebase null protection as the
-                      inventory transaction.
-
-                      We already performed a fresh wallet read,
-                      so use walletSnapshot.val() if the
-                      transaction initially supplies null.
-                    */
 
                     const value =
                         currentValue === null ||
@@ -983,7 +1199,9 @@ module.exports = async function handler(
                     res,
                     400,
                     {
-                        success: false,
+                        success:
+                            false,
+
                         message:
                             `Insufficient wallet balance. Your balance is ₦${money(latestBalance)}, but this product costs ₦${money(price)}.`
                     }
@@ -996,13 +1214,18 @@ module.exports = async function handler(
                 res,
                 500,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Your wallet could not be charged. Please try again."
                 }
             );
 
         }
+
+
+        walletCharged = true;
 
 
         const newBalance =
@@ -1095,6 +1318,9 @@ module.exports = async function handler(
             );
 
 
+            orderCreated = true;
+
+
             console.log(
                 "ORDER CREATED:",
                 orderId
@@ -1158,6 +1384,9 @@ module.exports = async function handler(
             }
 
 
+            walletCharged = false;
+
+
             /*
               Restore inventory.
             */
@@ -1174,9 +1403,150 @@ module.exports = async function handler(
                 res,
                 500,
                 {
-                    success: false,
+                    success:
+                        false,
+
                     message:
                         "Purchase could not be completed. Your wallet has been refunded."
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           DECREASE CUSTOMER-FACING STOCK
+        ===================================================== */
+
+        console.log(
+            "DECREASING PRODUCT STOCK..."
+        );
+
+
+        try {
+
+            await decreaseProductStock(
+                productId
+            );
+
+
+            productStockDecreased = true;
+
+        }
+        catch (stockError) {
+
+            console.error(
+                "PRODUCT STOCK UPDATE ERROR:",
+                stockError
+            );
+
+
+            /*
+              The order has already been created and wallet
+              already charged, so we must roll the purchase
+              back if stock cannot be updated.
+            */
+
+            try {
+
+                await orderRef.remove();
+
+                orderCreated = false;
+
+                console.log(
+                    "ORDER ROLLED BACK:",
+                    orderId
+                );
+
+            }
+            catch (deleteOrderError) {
+
+                console.error(
+                    "ORDER ROLLBACK ERROR:",
+                    deleteOrderError
+                );
+
+            }
+
+
+            /*
+              Refund wallet.
+            */
+
+            try {
+
+                await walletRef.transaction(
+                    (currentValue) => {
+
+                        const value =
+                            currentValue === null ||
+                            currentValue === undefined
+                                ? newBalance
+                                : currentValue;
+
+
+                        const balance =
+                            Number(value);
+
+
+                        if (
+                            !Number.isFinite(
+                                balance
+                            )
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        return (
+                            balance + price
+                        );
+
+                    }
+                );
+
+
+                walletCharged = false;
+
+
+                console.log(
+                    "WALLET REFUNDED AFTER STOCK ERROR"
+                );
+
+            }
+            catch (refundError) {
+
+                console.error(
+                    "STOCK ERROR REFUND FAILED:",
+                    refundError
+                );
+
+            }
+
+
+            /*
+              Restore inventory.
+            */
+
+            await restoreInventory(
+                inventoryRef.child(
+                    reservedInventoryId
+                ),
+                uid
+            );
+
+
+            return send(
+                res,
+                500,
+                {
+                    success:
+                        false,
+
+                    message:
+                        "Purchase could not be completed because stock could not be updated. Your wallet has been refunded."
                 }
             );
 
@@ -1193,33 +1563,166 @@ module.exports = async function handler(
             );
 
 
-        await reservedRef.update({
+        try {
 
-            status:
-                "sold",
+            await reservedRef.update({
 
-            soldTo:
-                uid,
+                status:
+                    "sold",
 
-            soldOrderId:
-                orderId,
+                soldTo:
+                    uid,
 
-            soldAt:
-                Date.now(),
+                soldOrderId:
+                    orderId,
 
-            processingBy:
-                null,
+                soldAt:
+                    Date.now(),
 
-            processingAt:
-                null
+                processingBy:
+                    null,
 
-        });
+                processingAt:
+                    null
+
+            });
 
 
-        console.log(
-            "INVENTORY SOLD:",
-            reservedInventoryId
-        );
+            console.log(
+                "INVENTORY SOLD:",
+                reservedInventoryId
+            );
+
+        }
+        catch (inventorySoldError) {
+
+            console.error(
+                "MARK INVENTORY SOLD ERROR:",
+                inventorySoldError
+            );
+
+
+            /*
+              Stock was already decreased, so restore it.
+            */
+
+            if (
+                productStockDecreased
+            ) {
+
+                await restoreProductStock(
+                    productId
+                );
+
+                productStockDecreased =
+                    false;
+
+            }
+
+
+            /*
+              Delete order.
+            */
+
+            try {
+
+                await orderRef.remove();
+
+                orderCreated = false;
+
+            }
+            catch (error) {
+
+                console.error(
+                    "ORDER DELETE ERROR:",
+                    error
+                );
+
+            }
+
+
+            /*
+              Refund wallet.
+            */
+
+            if (
+                walletCharged
+            ) {
+
+                try {
+
+                    await walletRef.transaction(
+                        (currentValue) => {
+
+                            const value =
+                                currentValue === null ||
+                                currentValue === undefined
+                                    ? newBalance
+                                    : currentValue;
+
+
+                            const balance =
+                                Number(value);
+
+
+                            if (
+                                !Number.isFinite(
+                                    balance
+                                )
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            return (
+                                balance + price
+                            );
+
+                        }
+                    );
+
+
+                    walletCharged =
+                        false;
+
+                }
+                catch (refundError) {
+
+                    console.error(
+                        "INVENTORY ERROR REFUND FAILED:",
+                        refundError
+                    );
+
+                }
+
+            }
+
+
+            /*
+              Restore reserved inventory.
+            */
+
+            await restoreInventory(
+                reservedRef,
+                uid
+            );
+
+
+            return send(
+                res,
+                500,
+                {
+                    success:
+                        false,
+
+                    message:
+                        "Purchase could not be completed. Your wallet has been refunded."
+                }
+            );
+
+        }
 
 
         /* =====================================================
@@ -1229,6 +1732,12 @@ module.exports = async function handler(
         console.log(
             "PURCHASE COMPLETED:",
             orderId
+        );
+
+
+        console.log(
+            "PRODUCT STOCK DECREASED:",
+            productId
         );
 
 
@@ -1267,9 +1776,66 @@ module.exports = async function handler(
         );
 
 
+        /* =====================================================
+           FINAL ERROR CLEANUP
+        ===================================================== */
+
         /*
-          If inventory was reserved and an unexpected error
-          happened before completion, restore it.
+          If product stock was decreased but something later
+          failed, restore the stock.
+        */
+
+        if (
+            productStockDecreased &&
+            productId
+        ) {
+
+            try {
+
+                await restoreProductStock(
+                    productId
+                );
+
+            }
+            catch (stockRestoreError) {
+
+                console.error(
+                    "FINAL STOCK RESTORE ERROR:",
+                    stockRestoreError
+                );
+
+            }
+
+        }
+
+
+        /*
+          If an order was created but the request failed
+          afterwards, remove it.
+        */
+
+        if (
+            orderCreated &&
+            productId
+        ) {
+
+            /*
+              We cannot safely reconstruct the orderRef here
+              without keeping it outside the inner scope.
+              Normal purchase errors happen before this point,
+              so the explicit rollback blocks above handle
+              the important cases.
+            */
+
+            console.error(
+                "FINAL ERROR: Order may require manual review."
+            );
+
+        }
+
+
+        /*
+          Restore reserved inventory.
         */
 
         if (
@@ -1310,7 +1876,9 @@ module.exports = async function handler(
             res,
             500,
             {
-                success: false,
+                success:
+                    false,
+
                 message:
                     "Unable to complete your purchase right now. Please try again."
             }
