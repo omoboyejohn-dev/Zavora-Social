@@ -296,38 +296,6 @@ td{
     color:#625b6d;
 }
 
-.status{
-    display:inline-flex;
-    padding:6px 9px;
-    border-radius:20px;
-    font-size:10px;
-    font-weight:700;
-}
-
-.status.unlimited{
-    color:#67e8f9;
-    background:rgba(34,211,238,.08);
-    border:1px solid rgba(34,211,238,.12);
-}
-
-.status.in-stock{
-    color:#86efac;
-    background:rgba(34,197,94,.08);
-    border:1px solid rgba(34,197,94,.12);
-}
-
-.status.low-stock{
-    color:#fde68a;
-    background:rgba(234,179,8,.08);
-    border:1px solid rgba(234,179,8,.12);
-}
-
-.status.out-stock{
-    color:#fca5a5;
-    background:rgba(239,68,68,.08);
-    border:1px solid rgba(239,68,68,.12);
-}
-
 .save-btn,
 .manage-btn{
     border:0;
@@ -540,8 +508,6 @@ td{
     border:1px solid rgba(239,68,68,.12);
 }
 
-/* PROCESSING STATUS */
-
 .item-status.processing{
     color:#fde68a;
     background:rgba(234,179,8,.08);
@@ -571,6 +537,11 @@ td{
     cursor:pointer;
     font-size:10px;
     font-weight:700;
+}
+
+.delete-item-btn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
 }
 
 .no-items{
@@ -1099,7 +1070,8 @@ import {
     update,
     push,
     set,
-    remove
+    remove,
+    runTransaction
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
@@ -1222,55 +1194,62 @@ let selectedProductId = null;
    AUTH CHECK
 ========================================= */
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(
+    auth,
+    (user) => {
 
-    console.log(
-        "Zavora inventory auth:",
-        user ? user.email : "No user"
-    );
-
-
-    if(!user){
-
-        window.location.replace(
-            "login.html"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !user.email ||
-        user.email.toLowerCase() !==
-        ADMIN_EMAIL.toLowerCase()
-    ){
-
-        alert(
-            "Admin access only."
+        console.log(
+            "Zavora inventory auth:",
+            user
+                ? user.email
+                : "No user"
         );
 
 
-        signOut(auth).finally(() => {
+        if(!user){
 
             window.location.replace(
                 "login.html"
             );
 
-        });
+            return;
+
+        }
 
 
-        return;
+        if(
+            !user.email ||
+            user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+        ){
+
+            alert(
+                "Admin access only."
+            );
+
+
+            signOut(auth).finally(
+                () => {
+
+                    window.location.replace(
+                        "login.html"
+                    );
+
+                }
+            );
+
+
+            return;
+
+        }
+
+
+        currentUser = user;
+
+        loadProducts();
 
     }
-
-
-    currentUser = user;
-
-    loadProducts();
-
-});
+);
 
 
 /* =========================================
@@ -1287,7 +1266,10 @@ function loadProducts(){
 
 
     const productsRef =
-        ref(db,"products");
+        ref(
+            db,
+            "products"
+        );
 
 
     unsubscribeProducts =
@@ -1304,19 +1286,20 @@ function loadProducts(){
 
                 if(data){
 
-                    Object.entries(data).forEach(
-                        ([id,product]) => {
+                    Object.entries(data)
+                        .forEach(
+                            ([id,product]) => {
 
-                            allProducts.push({
+                                allProducts.push({
 
-                                id:id,
+                                    id:id,
 
-                                ...product
+                                    ...product
 
-                            });
+                                });
 
-                        }
-                    );
+                            }
+                        );
 
                 }
 
@@ -1392,26 +1375,28 @@ function renderProducts(){
 
 
     const filtered =
-        allProducts.filter(product => {
+        allProducts.filter(
+            product => {
 
-            const name =
-                String(
-                    product.name || ""
-                ).toLowerCase();
-
-
-            const category =
-                String(
-                    product.category || ""
-                ).toLowerCase();
+                const name =
+                    String(
+                        product.name || ""
+                    ).toLowerCase();
 
 
-            return (
-                name.includes(search) ||
-                category.includes(search)
-            );
+                const category =
+                    String(
+                        product.category || ""
+                    ).toLowerCase();
 
-        });
+
+                return (
+                    name.includes(search) ||
+                    category.includes(search)
+                );
+
+            }
+        );
 
 
     updateStats();
@@ -1450,220 +1435,231 @@ function renderProducts(){
 
 
     inventoryBody.innerHTML =
-        filtered.map(product => {
+        filtered.map(
+            product => {
 
-            const stock =
-                getStockValue(product);
-
-
-            const status =
-                getStockStatus(stock);
+                const stock =
+                    getStockValue(product);
 
 
-            const image =
-                product.image ||
-                "https://placehold.co/100x100/11162a/ffffff?text=Product";
+                const status =
+                    getStockStatus(stock);
 
 
-            const safeImage =
-                escapeAttribute(image);
+                const image =
+                    product.image ||
+                    "https://placehold.co/100x100/11162a/ffffff?text=Product";
 
 
-            const safeName =
-                escapeHTML(
-                    product.name ||
-                    "Unnamed Product"
-                );
+                const safeImage =
+                    escapeAttribute(image);
 
 
-            const safeCategory =
-                escapeHTML(
-                    product.category ||
-                    "Uncategorized"
-                );
+                const safeName =
+                    escapeHTML(
+                        product.name ||
+                        "Unnamed Product"
+                    );
 
 
-            const price =
-                Number(
-                    product.price || 0
-                );
+                const safeCategory =
+                    escapeHTML(
+                        product.category ||
+                        "Uncategorized"
+                    );
 
 
-            return `
+                const price =
+                    Number(
+                        product.price || 0
+                    );
 
-                <tr>
 
-                    <td>
+                return `
 
-                        <div class="product-info">
+                    <tr>
 
-                            <img
-                                src="${safeImage}"
-                                class="product-image"
-                                alt="${safeName}"
-                                onerror="
-                                    this.onerror=null;
-                                    this.src='https://placehold.co/100x100/11162a/ffffff?text=Product';
-                                "
-                            >
+                        <td>
 
-                            <div>
+                            <div class="product-info">
 
-                                <div class="product-name">
-                                    ${safeName}
-                                </div>
+                                <img
+                                    src="${safeImage}"
+                                    class="product-image"
+                                    alt="${safeName}"
+                                    onerror="
+                                        this.onerror=null;
+                                        this.src='https://placehold.co/100x100/11162a/ffffff?text=Product';
+                                    "
+                                >
 
-                                <div class="product-category">
-                                    ${safeCategory}
+                                <div>
+
+                                    <div class="product-name">
+                                        ${safeName}
+                                    </div>
+
+                                    <div class="product-category">
+                                        ${safeCategory}
+                                    </div>
+
                                 </div>
 
                             </div>
 
-                        </div>
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <span class="price">
-                            ₦${price.toLocaleString()}
-                        </span>
+                            <span class="price">
+                                ₦${price.toLocaleString()}
+                            </span>
 
-                    </td>
-
-
-                    <td>
-
-                        <input
-                            type="number"
-                            min="0"
-                            class="stock-input"
-                            id="stock-${escapeAttribute(product.id)}"
-                            value="${stock === null ? "" : stock}"
-                            placeholder="Unlimited"
-                        >
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <span
-                            class="status ${status.className}"
-                        >
-                            ${status.label}
-                        </span>
+                            <input
+                                type="number"
+                                min="0"
+                                step="1"
+                                class="stock-input"
+                                id="stock-${escapeAttribute(product.id)}"
+                                value="${stock === null ? "" : stock}"
+                                placeholder="Unlimited"
+                            >
 
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <button
-                            class="save-btn"
-                            data-id="${escapeAttribute(product.id)}"
-                        >
-                            Save
-                        </button>
+                            <span
+                                class="status ${status.className}"
+                            >
+                                ${status.label}
+                            </span>
 
-                        <button
-                            class="manage-btn"
-                            data-manage-id="${escapeAttribute(product.id)}"
-                        >
-                            Items
-                        </button>
+                        </td>
 
-                    </td>
 
-                </tr>
+                        <td>
 
-            `;
+                            <button
+                                class="save-btn"
+                                data-id="${escapeAttribute(product.id)}"
+                            >
+                                Save
+                            </button>
 
-        }).join("");
+                            <button
+                                class="manage-btn"
+                                data-manage-id="${escapeAttribute(product.id)}"
+                            >
+                                Items
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        ).join("");
 
 
     document
         .querySelectorAll(".save-btn")
-        .forEach(button => {
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+                button.addEventListener(
+                    "click",
+                    () => {
 
-                    saveStock(
-                        button.dataset.id,
-                        button
-                    );
+                        saveStock(
+                            button.dataset.id,
+                            button
+                        );
 
-                }
-            );
+                    }
+                );
 
-        });
+            }
+        );
 
 
     document
         .querySelectorAll(".manage-btn")
-        .forEach(button => {
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+                button.addEventListener(
+                    "click",
+                    () => {
 
-                    openItemManager(
-                        button.dataset.manageId
-                    );
+                        openItemManager(
+                            button.dataset.manageId
+                        );
 
-                }
-            );
+                    }
+                );
 
-        });
+            }
+        );
 
 
     document
         .querySelectorAll(".stock-input")
-        .forEach(input => {
+        .forEach(
+            input => {
 
-            input.addEventListener(
-                "input",
-                () => {
+                input.addEventListener(
+                    "input",
+                    () => {
 
-                    const value =
-                        input.value.trim();
-
-
-                    const stock =
-                        value === ""
-                        ? null
-                        : Number(value);
+                        const value =
+                            input.value.trim();
 
 
-                    const status =
-                        getStockStatus(stock);
+                        const stock =
+                            value === ""
+                                ? null
+                                : Number(value);
 
 
-                    const row =
-                        input.closest("tr");
+                        const status =
+                            getStockStatus(
+                                stock
+                            );
 
 
-                    const statusElement =
-                        row.querySelector(
-                            ".status"
-                        );
+                        const row =
+                            input.closest("tr");
 
 
-                    statusElement.className =
-                        "status " +
-                        status.className;
+                        const statusElement =
+                            row.querySelector(
+                                ".status"
+                            );
 
 
-                    statusElement.textContent =
-                        status.label;
+                        statusElement.className =
+                            "status " +
+                            status.className;
 
-                }
-            );
 
-        });
+                        statusElement.textContent =
+                            status.label;
+
+                    }
+                );
+
+            }
+        );
 
 }
 
@@ -1686,10 +1682,14 @@ function getStockValue(product){
 
 
     const value =
-        Number(product.stock);
+        Number(
+            product.stock
+        );
 
 
-    if(Number.isNaN(value)){
+    if(
+        Number.isNaN(value)
+    ){
 
         return null;
 
@@ -1711,9 +1711,11 @@ function getStockStatus(stock){
 
         return {
 
-            label:"Unlimited",
+            label:
+                "Unlimited",
 
-            className:"unlimited"
+            className:
+                "unlimited"
 
         };
 
@@ -1724,9 +1726,11 @@ function getStockStatus(stock){
 
         return {
 
-            label:"Out of Stock",
+            label:
+                "Out of Stock",
 
-            className:"out-stock"
+            className:
+                "out-stock"
 
         };
 
@@ -1737,9 +1741,11 @@ function getStockStatus(stock){
 
         return {
 
-            label:"Low Stock",
+            label:
+                "Low Stock",
 
-            className:"low-stock"
+            className:
+                "low-stock"
 
         };
 
@@ -1748,9 +1754,11 @@ function getStockStatus(stock){
 
     return {
 
-        label:"In Stock",
+        label:
+            "In Stock",
 
-        className:"in-stock"
+        className:
+            "in-stock"
 
     };
 
@@ -1768,38 +1776,42 @@ function updateStats(){
     let outOfStockCount = 0;
 
 
-    allProducts.forEach(product => {
+    allProducts.forEach(
+        product => {
 
-        const stock =
-            getStockValue(product);
+            const stock =
+                getStockValue(
+                    product
+                );
 
 
-        if(stock === null){
+            if(stock === null){
 
-            return;
+                return;
+
+            }
+
+
+            if(stock <= 0){
+
+                outOfStockCount++;
+
+            }
+
+            else if(stock <= 5){
+
+                lowStockCount++;
+
+            }
+
+            else{
+
+                inStockCount++;
+
+            }
 
         }
-
-
-        if(stock <= 0){
-
-            outOfStockCount++;
-
-        }
-
-        else if(stock <= 5){
-
-            lowStockCount++;
-
-        }
-
-        else{
-
-            inStockCount++;
-
-        }
-
-    });
+    );
 
 
     totalProducts.textContent =
@@ -1831,7 +1843,8 @@ async function saveStock(
 
     const input =
         document.getElementById(
-            "stock-" + productId
+            "stock-" +
+            productId
         );
 
 
@@ -1862,12 +1875,13 @@ async function saveStock(
 
 
         if(
-            Number.isNaN(stockValue) ||
-            stockValue < 0
+            !Number.isFinite(stockValue) ||
+            stockValue < 0 ||
+            !Number.isInteger(stockValue)
         ){
 
             alert(
-                "Please enter a valid stock number."
+                "Please enter a valid whole stock number."
             );
 
             return;
@@ -1878,6 +1892,7 @@ async function saveStock(
 
 
     button.disabled = true;
+
 
     const oldText =
         button.textContent;
@@ -1892,14 +1907,16 @@ async function saveStock(
         const productRef =
             ref(
                 db,
-                "products/" + productId
+                "products/" +
+                productId
             );
 
 
         await update(
             productRef,
             {
-                stock:stockValue
+                stock:
+                    stockValue
             }
         );
 
@@ -1908,15 +1925,18 @@ async function saveStock(
             "Saved ✓";
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            button.textContent =
-                oldText;
+                button.textContent =
+                    oldText;
 
-            button.disabled = false;
+                button.disabled =
+                    false;
 
-        },1000);
-
+            },
+            1000
+        );
 
     }
 
@@ -1930,11 +1950,16 @@ async function saveStock(
 
         alert(
             "Unable to save stock: " +
-            (error.message || "Firebase error")
+            (
+                error.message ||
+                "Firebase error"
+            )
         );
 
 
-        button.disabled = false;
+        button.disabled =
+            false;
+
 
         button.textContent =
             oldText;
@@ -1948,7 +1973,9 @@ async function saveStock(
    OPEN ITEM MANAGER
 ========================================= */
 
-function openItemManager(productId){
+function openItemManager(
+    productId
+){
 
     selectedProductId =
         productId;
@@ -1957,7 +1984,8 @@ function openItemManager(productId){
     const product =
         allProducts.find(
             item =>
-                item.id === productId
+                item.id ===
+                productId
         );
 
 
@@ -1980,10 +2008,14 @@ function openItemManager(productId){
     itemDetails.value = "";
 
 
-    itemModal.classList.add("show");
+    itemModal.classList.add(
+        "show"
+    );
 
 
-    loadProductItems(productId);
+    loadProductItems(
+        productId
+    );
 
 }
 
@@ -1992,7 +2024,9 @@ function openItemManager(productId){
    LOAD PRODUCT ITEMS
 ========================================= */
 
-function loadProductItems(productId){
+function loadProductItems(
+    productId
+){
 
     if(unsubscribeItems){
 
@@ -2004,7 +2038,8 @@ function loadProductItems(productId){
     const itemsRef =
         ref(
             db,
-            "inventory/" + productId
+            "inventory/" +
+            productId
         );
 
 
@@ -2022,19 +2057,20 @@ function loadProductItems(productId){
 
                 if(data){
 
-                    Object.entries(data).forEach(
-                        ([id,item]) => {
+                    Object.entries(data)
+                        .forEach(
+                            ([id,item]) => {
 
-                            items.push({
+                                items.push({
 
-                                id:id,
+                                    id:id,
 
-                                ...item
+                                    ...item
 
-                            });
+                                });
 
-                        }
-                    );
+                            }
+                        );
 
                 }
 
@@ -2077,26 +2113,31 @@ function loadProductItems(productId){
    RENDER ITEMS
 ========================================= */
 
-function renderItems(items){
+function renderItems(
+    items
+){
 
     const availableCount =
         items.filter(
             item =>
-                item.status === "available"
+                item.status ===
+                "available"
         ).length;
 
 
     const soldCount =
         items.filter(
             item =>
-                item.status === "sold"
+                item.status ===
+                "sold"
         ).length;
 
 
     const processingCount =
         items.filter(
             item =>
-                item.status === "processing"
+                item.status ===
+                "processing"
         ).length;
 
 
@@ -2107,8 +2148,10 @@ function renderItems(items){
         " Sold" +
         (
             processingCount > 0
-            ? " • " + processingCount + " Processing"
-            : ""
+                ? " • " +
+                    processingCount +
+                    " Processing"
+                : ""
         );
 
 
@@ -2138,29 +2181,23 @@ function renderItems(items){
                     );
 
 
-                /*
-                 * IMPORTANT:
-                 *
-                 * Only "available" is available.
-                 * "processing" is now displayed
-                 * separately instead of being
-                 * incorrectly shown as available.
-                 */
-
                 const status =
-                    item.status === "sold"
-                    ? "sold"
-                    : item.status === "processing"
-                    ? "processing"
-                    : "available";
+                    item.status ===
+                    "sold"
+                        ? "sold"
+                        : item.status ===
+                          "processing"
+                            ? "processing"
+                            : "available";
 
 
                 const statusLabel =
                     status === "sold"
-                    ? "SOLD"
-                    : status === "processing"
-                    ? "PROCESSING"
-                    : "AVAILABLE";
+                        ? "SOLD"
+                        : status ===
+                          "processing"
+                            ? "PROCESSING"
+                            : "AVAILABLE";
 
 
                 return `
@@ -2188,7 +2225,8 @@ function renderItems(items){
 
 
                         ${
-                            status === "available"
+                            status ===
+                            "available"
                             ? `
                                 <div class="item-actions">
 
@@ -2213,21 +2251,225 @@ function renderItems(items){
 
 
     document
-        .querySelectorAll(".delete-item-btn")
-        .forEach(button => {
+        .querySelectorAll(
+            ".delete-item-btn"
+        )
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+                button.addEventListener(
+                    "click",
+                    () => {
 
-                    deleteInventoryItem(
-                        button.dataset.deleteId
-                    );
+                        deleteInventoryItem(
+                            button.dataset.deleteId,
+                            button
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================
+   INCREASE PRODUCT STOCK
+========================================= */
+
+async function increaseProductStock(
+    productId
+){
+
+    const stockRef =
+        ref(
+            db,
+            "products/" +
+            productId +
+            "/stock"
+        );
+
+
+    const transaction =
+        await runTransaction(
+            stockRef,
+            (currentValue) => {
+
+                /*
+                   If stock is missing, start at 0.
+
+                   Adding the first inventory item therefore
+                   creates stock = 1.
+                */
+
+                if(
+                    currentValue === null ||
+                    currentValue === undefined ||
+                    currentValue === ""
+                ){
+
+                    return 1;
 
                 }
-            );
 
-        });
+
+                const currentStock =
+                    Number(
+                        currentValue
+                    );
+
+
+                if(
+                    !Number.isFinite(
+                        currentStock
+                    ) ||
+                    currentStock < 0
+                ){
+
+                    return;
+
+                }
+
+
+                return (
+                    Math.floor(
+                        currentStock
+                    ) + 1
+                );
+
+            }
+        );
+
+
+    if(
+        !transaction.committed
+    ){
+
+        throw new Error(
+            "Unable to update product stock."
+        );
+
+    }
+
+
+    console.log(
+        "PRODUCT STOCK INCREASED:",
+        {
+            productId,
+            stock:
+                transaction.snapshot.val()
+        }
+    );
+
+
+    return Number(
+        transaction.snapshot.val()
+    );
+
+}
+
+
+/* =========================================
+   DECREASE PRODUCT STOCK
+========================================= */
+
+async function decreaseProductStock(
+    productId
+){
+
+    const stockRef =
+        ref(
+            db,
+            "products/" +
+            productId +
+            "/stock"
+        );
+
+
+    const transaction =
+        await runTransaction(
+            stockRef,
+            (currentValue) => {
+
+                /*
+                   If stock is missing, we cannot safely
+                   subtract from it.
+                */
+
+                if(
+                    currentValue === null ||
+                    currentValue === undefined ||
+                    currentValue === ""
+                ){
+
+                    return;
+
+                }
+
+
+                const currentStock =
+                    Number(
+                        currentValue
+                    );
+
+
+                if(
+                    !Number.isFinite(
+                        currentStock
+                    )
+                ){
+
+                    return;
+
+                }
+
+
+                if(
+                    currentStock <= 0
+                ){
+
+                    return;
+
+                }
+
+
+                return Math.max(
+                    0,
+                    Math.floor(
+                        currentStock
+                    ) - 1
+                );
+
+            }
+        );
+
+
+    if(
+        !transaction.committed
+    ){
+
+        throw new Error(
+            "Unable to update product stock."
+        );
+
+    }
+
+
+    console.log(
+        "PRODUCT STOCK DECREASED:",
+        {
+            productId,
+            stock:
+                transaction.snapshot.val()
+        }
+    );
+
+
+    return Number(
+        transaction.snapshot.val()
+    );
 
 }
 
@@ -2268,10 +2510,17 @@ addItemBtn.addEventListener(
         }
 
 
-        addItemBtn.disabled = true;
+        addItemBtn.disabled =
+            true;
+
 
         addItemBtn.textContent =
             "Adding Item...";
+
+
+        let newItemRef = null;
+        let itemCreated = false;
+        let stockIncreased = false;
 
 
         try{
@@ -2284,19 +2533,28 @@ addItemBtn.addEventListener(
                 );
 
 
-            const newItemRef =
-                push(itemsRef);
+            newItemRef =
+                push(
+                    itemsRef
+                );
 
+
+            /*
+              First create the actual inventory item.
+            */
 
             await set(
                 newItemRef,
                 {
 
-                    details:details,
+                    details:
+                        details,
 
-                    status:"available",
+                    status:
+                        "available",
 
-                    createdAt:Date.now(),
+                    createdAt:
+                        Date.now(),
 
                     createdBy:
                         currentUser.email
@@ -2305,22 +2563,95 @@ addItemBtn.addEventListener(
             );
 
 
-            itemDetails.value = "";
+            itemCreated =
+                true;
+
+
+            /*
+              Then increase the customer-facing stock
+              counter by exactly 1.
+            */
+
+            try{
+
+                await increaseProductStock(
+                    selectedProductId
+                );
+
+
+                stockIncreased =
+                    true;
+
+            }
+
+            catch(stockError){
+
+                console.error(
+                    "Stock increase failed:",
+                    stockError
+                );
+
+
+                /*
+                  Roll back the newly-created inventory item
+                  so the inventory and stock cannot silently
+                  become inconsistent.
+                */
+
+                if(
+                    itemCreated &&
+                    newItemRef
+                ){
+
+                    try{
+
+                        await remove(
+                            newItemRef
+                        );
+
+                        itemCreated =
+                            false;
+
+                    }
+                    catch(removeError){
+
+                        console.error(
+                            "Inventory rollback failed:",
+                            removeError
+                        );
+
+                    }
+
+                }
+
+
+                throw new Error(
+                    "Inventory item could not be added because product stock could not be updated."
+                );
+
+            }
+
+
+            itemDetails.value =
+                "";
 
 
             addItemBtn.textContent =
                 "✓ Item Added";
 
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                addItemBtn.textContent =
-                    "＋ Add Available Item";
+                    addItemBtn.textContent =
+                        "＋ Add Available Item";
 
-                addItemBtn.disabled = false;
+                    addItemBtn.disabled =
+                        false;
 
-            },900);
-
+                },
+                900
+            );
 
         }
 
@@ -2332,6 +2663,37 @@ addItemBtn.addEventListener(
             );
 
 
+            /*
+              Extra safety:
+              if somehow the item exists but stock did not
+              increase, remove the item.
+            */
+
+            if(
+                itemCreated &&
+                !stockIncreased &&
+                newItemRef
+            ){
+
+                try{
+
+                    await remove(
+                        newItemRef
+                    );
+
+                }
+                catch(cleanupError){
+
+                    console.error(
+                        "Add item cleanup error:",
+                        cleanupError
+                    );
+
+                }
+
+            }
+
+
             alert(
                 "Unable to add item: " +
                 (
@@ -2341,7 +2703,9 @@ addItemBtn.addEventListener(
             );
 
 
-            addItemBtn.disabled = false;
+            addItemBtn.disabled =
+                false;
+
 
             addItemBtn.textContent =
                 "＋ Add Available Item";
@@ -2356,7 +2720,10 @@ addItemBtn.addEventListener(
    DELETE INVENTORY ITEM
 ========================================= */
 
-async function deleteInventoryItem(itemId){
+async function deleteInventoryItem(
+    itemId,
+    button
+){
 
     if(!selectedProductId){
 
@@ -2378,18 +2745,176 @@ async function deleteInventoryItem(itemId){
     }
 
 
-    try{
+    if(button){
 
-        await remove(
-            ref(
-                db,
-                "inventory/" +
-                selectedProductId +
-                "/" +
-                itemId
-            )
+        button.disabled =
+            true;
+
+        button.textContent =
+            "Deleting...";
+
+    }
+
+
+    const itemRef =
+        ref(
+            db,
+            "inventory/" +
+            selectedProductId +
+            "/" +
+            itemId
         );
 
+
+    let originalItem = null;
+    let itemDeleted = false;
+    let stockDecreased = false;
+
+
+    try{
+
+        /*
+          Read the item first so we only adjust stock when
+          the item being deleted is actually available.
+        */
+
+        const snapshot =
+            await new Promise(
+                (resolve,reject) => {
+
+                    onValue(
+                        itemRef,
+                        resolve,
+                        {
+                            error:
+                                reject,
+
+                            onlyOnce:
+                                true
+                        }
+                    );
+
+                }
+            );
+
+
+        if(
+            !snapshot.exists()
+        ){
+
+            alert(
+                "This inventory item no longer exists."
+            );
+
+            return;
+
+        }
+
+
+        originalItem =
+            snapshot.val();
+
+
+        /*
+          Never allow a sold or processing item to be deleted.
+        */
+
+        if(
+            !originalItem ||
+            originalItem.status !==
+            "available"
+        ){
+
+            alert(
+                "Only available inventory items can be deleted."
+            );
+
+            return;
+
+        }
+
+
+        /*
+          Remove the actual inventory item first.
+        */
+
+        await remove(
+            itemRef
+        );
+
+
+        itemDeleted =
+            true;
+
+
+        /*
+          Decrease the customer-facing stock by exactly 1.
+        */
+
+        try{
+
+            await decreaseProductStock(
+                selectedProductId
+            );
+
+
+            stockDecreased =
+                true;
+
+        }
+
+        catch(stockError){
+
+            console.error(
+                "Stock decrease failed after delete:",
+                stockError
+            );
+
+
+            /*
+              Restore the deleted inventory item because the
+              stock counter could not be updated.
+            */
+
+            try{
+
+                await set(
+                    itemRef,
+                    originalItem
+                );
+
+
+                itemDeleted =
+                    false;
+
+            }
+            catch(restoreError){
+
+                console.error(
+                    "Deleted item restore failed:",
+                    restoreError
+                );
+
+            }
+
+
+            throw new Error(
+                "Inventory item was not deleted because product stock could not be updated."
+            );
+
+        }
+
+
+        console.log(
+            "INVENTORY ITEM DELETED:",
+            itemId
+        );
+
+
+        console.log(
+            "PRODUCT STOCK AFTER DELETE:",
+            selectedProductId
+        );
 
     }
 
@@ -2399,6 +2924,37 @@ async function deleteInventoryItem(itemId){
             "Delete item error:",
             error
         );
+
+
+        /*
+          Final safety restoration if the item was removed
+          but stock update did not happen.
+        */
+
+        if(
+            itemDeleted &&
+            !stockDecreased &&
+            originalItem
+        ){
+
+            try{
+
+                await set(
+                    itemRef,
+                    originalItem
+                );
+
+            }
+            catch(restoreError){
+
+                console.error(
+                    "Final inventory restoration error:",
+                    restoreError
+                );
+
+            }
+
+        }
 
 
         alert(
@@ -2411,6 +2967,20 @@ async function deleteInventoryItem(itemId){
 
     }
 
+    finally{
+
+        if(button){
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "Delete Item";
+
+        }
+
+    }
+
 }
 
 
@@ -2420,21 +2990,27 @@ async function deleteInventoryItem(itemId){
 
 function closeItemManager(){
 
-    itemModal.classList.remove("show");
+    itemModal.classList.remove(
+        "show"
+    );
 
 
     if(unsubscribeItems){
 
         unsubscribeItems();
 
-        unsubscribeItems = null;
+        unsubscribeItems =
+            null;
 
     }
 
 
-    selectedProductId = null;
+    selectedProductId =
+        null;
 
-    itemDetails.value = "";
+
+    itemDetails.value =
+        "";
 
 }
 
@@ -2450,7 +3026,8 @@ itemModal.addEventListener(
     (event) => {
 
         if(
-            event.target === itemModal
+            event.target ===
+            itemModal
         ){
 
             closeItemManager();
@@ -2479,7 +3056,9 @@ refreshBtn.addEventListener(
     "click",
     () => {
 
-        refreshBtn.disabled = true;
+        refreshBtn.disabled =
+            true;
+
 
         refreshBtn.textContent =
             "↻ Loading...";
@@ -2488,14 +3067,18 @@ refreshBtn.addEventListener(
         renderProducts();
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            refreshBtn.disabled = false;
+                refreshBtn.disabled =
+                    false;
 
-            refreshBtn.textContent =
-                "↻ Refresh";
+                refreshBtn.textContent =
+                    "↻ Refresh";
 
-        },500);
+            },
+            500
+        );
 
     }
 );
@@ -2514,7 +3097,9 @@ logoutBtn.addEventListener(
 
         try{
 
-            await signOut(auth);
+            await signOut(
+                auth
+            );
 
 
             window.location.replace(
@@ -2548,11 +3133,26 @@ logoutBtn.addEventListener(
 function escapeHTML(value){
 
     return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -2564,10 +3164,22 @@ function escapeHTML(value){
 function escapeAttribute(value){
 
     return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/"/g,"&quot;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        );
 
 }
 
