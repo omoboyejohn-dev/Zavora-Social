@@ -1299,7 +1299,7 @@ footer{
 
     <!-- ======================================
          QUICK ACTIONS
-    ======================================= -->
+    ====================================== -->
 
     <section>
 
@@ -1502,7 +1502,7 @@ footer{
 
     <!-- ======================================
          MARKETPLACE
-    ======================================= -->
+    ====================================== -->
 
     <section class="marketplace">
 
@@ -1634,22 +1634,27 @@ import {
     onValue,
     query,
     orderByChild,
-    equalTo
+    equalTo,
+    forceLongPolling
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 
+/* ==========================================
+   FIREBASE CONFIG
+========================================== */
+
 const firebaseConfig = {
 
     apiKey:
-        "AIzaSyBzjZ9_rGqPW21duk4sxyLUO3hy3-6GwGs",
+        "AIzaSyBzj9_RgqPW21duk4sxyLUO3hy3-6GwGs",
 
     authDomain:
         "zavorasocial.firebaseapp.com",
 
     databaseURL:
-        "https://zavorasocial-default-rtdb.firebaseio.com/",
+        "https://zavorasocial-default-rtdb.firebaseio.com",
 
     projectId:
         "zavorasocial",
@@ -1670,6 +1675,10 @@ const firebaseConfig = {
 
 
 
+/* ==========================================
+   INITIALIZE FIREBASE
+========================================== */
+
 const app =
     initializeApp(
         firebaseConfig
@@ -1678,6 +1687,24 @@ const app =
 
 const auth =
     getAuth(app);
+
+
+/*
+   IMPORTANT FOR MOBILE NETWORKS
+
+   Firebase Realtime Database normally
+   prefers WebSockets.
+
+   Some mobile networks can have problems
+   maintaining WebSocket connections.
+
+   Long polling provides an alternative
+   connection method and can improve
+   Firebase reliability on networks such
+   as Glo.
+*/
+
+forceLongPolling();
 
 
 const db =
@@ -1785,7 +1812,6 @@ onAuthStateChanged(
     auth,
 
     (user) => {
-
 
         if(!user){
 
@@ -1915,7 +1941,10 @@ function loadCustomerOrders(uid){
 
     const ordersQuery =
         query(
-            ref(db,"orders"),
+            ref(
+                db,
+                "orders"
+            ),
             orderByChild("uid"),
             equalTo(uid)
         );
@@ -1972,22 +2001,18 @@ function loadCustomerOrders(uid){
 ========================================== */
 
 /*
-   IMPORTANT:
+   This counts the NUMBER OF PRODUCTS,
+   not the total number of stock pieces.
 
-   The customer dashboard reads ONLY:
+   Example:
 
-       /products
+   Product A = 500 pcs
+   Product B = 1000 pcs
+   Product C = 300 pcs
 
-   It does NOT read:
+   Dashboard will show:
 
-       /inventory
-
-   Inventory can contain private
-   delivery details, so it should remain
-   server/admin side.
-
-   Product stock is the customer-safe
-   stock number.
+   Available Products = 3
 */
 
 function loadAvailableProducts(){
@@ -2008,7 +2033,8 @@ function loadAvailableProducts(){
             const data =
                 snapshot.val() || {};
 
-            let totalAvailable =
+
+            let totalProducts =
                 0;
 
 
@@ -2027,28 +2053,14 @@ function loadAvailableProducts(){
                     }
 
 
-                    const stock =
-                        Number(
-                            product.stock
-                        );
-
-
-                    if(
-                        Number.isFinite(stock) &&
-                        stock > 0
-                    ){
-
-                        totalAvailable +=
-                            stock;
-
-                    }
+                    totalProducts++;
 
                 }
             );
 
 
             availableProducts.textContent =
-                totalAvailable.toString();
+                totalProducts.toString();
 
         },
 
@@ -2136,7 +2148,8 @@ function loadProducts(){
                            Keep product even if
                            stock is zero.
 
-                           It will show "Out of stock".
+                           It will show
+                           "Sold Out".
                         */
 
                         allProducts.push({
@@ -2245,6 +2258,7 @@ function loadProducts(){
 
                     <p>
                         We could not load the marketplace products.
+                        Please check your internet connection and try again.
                     </p>
 
                 </div>
@@ -2359,7 +2373,6 @@ function renderProducts(
 
     categories.forEach(
         (category) => {
-
 
             const section =
                 document.createElement(
@@ -2992,14 +3005,6 @@ function openProduct(
     productId
 ){
 
-    /*
-       Opens your product detail page.
-
-       Example:
-
-       product.html?id=PRODUCT_ID
-    */
-
     window.location.href =
         "product.html?id=" +
         encodeURIComponent(
@@ -3237,4 +3242,4 @@ document.getElementById(
 
 </body>
 
-                   </html>
+</html>
