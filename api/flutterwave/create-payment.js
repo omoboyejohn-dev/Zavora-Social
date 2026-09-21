@@ -1,4 +1,5 @@
 import { getApps, initializeApp, cert } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
 import { getDatabase } from "firebase-admin/database";
 
 if (!getApps().length) {
@@ -12,6 +13,7 @@ if (!getApps().length) {
   });
 }
 
+const adminAuth = getAuth();
 const db = getDatabase();
 
 export default async function handler(req, res) {
@@ -23,125 +25,230 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {
-      amount,
-      uid,
-      email
-    } = req.body || {};
+    /*
+     * Get Firebase ID token from the browser.
+     */
+    const authorization =
+      req.headers.authorization || "";
 
-    if (!amount || Number(amount) <= 0) {
-      return res.status(400).json({
+    if (!authorization.startsWith("Bearer ")) {
+      return res.status(401).json({
         success: false,
-        message: "Invalid amount"
+        message: "Authentication required"
       });
     }
 
-    if (!uid || !email) {
-      return res.status(400).json({
-        success: false,
-        message: "Missing customer information"
-      });
-    }
-
-    const numericAmount = Number(amount);
+    const idToken =
+      authorization.substring(7);
 
     /*
-     * Generate a unique Zavora transaction reference.
+     * Verify the Firebase customer.
+     */
+    const decodedToken =
+      await adminAuth.verifyIdToken(idToken);
+
+    const uid =
+      decodedToken.uid;
+
+    const email =
+      decodedToken.email || "";
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Your account does not have an email address."
+      });
+    }
+
+    const amount =
+      Number(req.body?.amount);
+
+    /*
+     * Validate amount.
+     */
+    if (
+      !Number.isFinite(amount) ||
+      amount <= 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Please enter a valid amount."
+      });
+    }
+
+    /*
+     * Optional minimum deposit.
+     *
+     * Change this later if you want.
+     */
+    if (amount < 100) {
+      return res.status(400).json({
+        success: false,
+        message: "Minimum deposit is ₦100."
+      });
+    }
+
+    /*
+     * Unique Zavora transaction reference.
      */
     const txRef =
       "ZAVORA-" +
       Date.now() +
       "-" +
-      Math.random().toString(36).substring(2, 8).toUpperCase();
+      Math.random()
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
 
     /*
-     * Save the deposit as pending BEFORE sending
-     * the customer to Flutterwave.
+     * Create pending deposit.
      */
-    const depositRef = db.ref("deposits").push();
+    const depositRef =
+      db.ref("deposits").push();
 
     await depositRef.set({
       uid,
       email,
-      amount: numericAmount,
+
+      amount,
+
       currency: "NGN",
+
       payment: "Flutterwave",
-      transactionReference: txRef,
+
+      transactionReference:
+        txRef,
+
       status: "pending",
-      createdAt: Date.now()
+
+      createdAt:
+        Date.now()
     });
 
     /*
-     * Create Flutterwave Checkout payment.
+     * Create Flutterwave Checkout.
      */
-    const flutterwaveResponse = await fetch(
-      "https://api.flutterwave.com/v3/payments",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.FLW_SECRET_KEY}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          tx_ref: txRef,
-          amount: numericAmount,
-          currency: "NGN",
+    const flutterwaveResponse =
+      await fetch(
+        "https://api.flutterwave.com/v3/payments",
+        {
+          method: "POST",
 
-          redirect_url:
-            `${process.env.APP_URL}/api/flutterwave/callback`,
+          headers: {
+            Authorization:
+              `Bearer ${process.env.FLW_SECRET_KEY}`,
 
-          customer: {
-            email
+            "Content-Type":
+              "application/json"
           },
 
-          customizations: {
-            title: "Zavora Social",
-            description: "Fund Zavora Social Wallet"
-          },
+          body: JSON.stringify({
 
-          meta: {
-            uid,
-            depositId: depositRef.key
-          }
-        })
-      }
-    );
+            tx_ref:
+              txRef,
 
-    const data = await flutterwaveResponse.json();
+            amount,
 
-    if (!flutterwaveResponse.ok || data.status !== "success") {
+            currency:
+              "NGN",
+
+            redirect_url:
+              `${process.env.APP_URL}/api/flutterwave/callback`,
+
+            customer: {
+              email
+            },
+
+            customizations: {
+              title:
+                "Zavora Social",
+
+              description:
+                "Fund your Zavora Social wallet"
+            },
+
+            meta: {
+              uid,
+              depositId:
+                depositRef.key
+            }
+
+          })
+        }
+      );
+
+    const data =
+      await flutterwaveResponse.json();
+
+    if (
+      !flutterwaveResponse.ok ||
+      data.status !== "success" ||
+      !data.data?.link
+    ) {
+
       await depositRef.update({
         status: "rejected",
-        error: data.message || "Flutterwave payment creation failed"
+
+        error:
+          data.message ||
+          "Unable to create Flutterwave payment",
+
+        updatedAt:
+          Date.now()
       });
 
       return res.status(400).json({
         success: false,
-        message: data.message || "Unable to create payment"
+
+        message:
+          data.message ||
+          "Unable to create payment."
       });
     }
 
     /*
-     * Store Flutterwave's transaction information.
+     * Save Flutterwave checkout information.
      */
     await depositRef.update({
-      flutterwaveLink: data.data.link,
-      flutterwaveStatus: "created"
+
+      flutterwaveLink:
+        data.data.link,
+
+      flutterwaveStatus:
+        "created",
+
+      updatedAt:
+        Date.now()
+
     });
 
     return res.status(200).json({
+
       success: true,
-      paymentLink: data.data.link,
+
+      paymentLink:
+        data.data.link,
+
       txRef,
-      depositId: depositRef.key
+
+      depositId:
+        depositRef.key
+
     });
 
   } catch (error) {
-    console.error("Flutterwave create payment error:", error);
+
+    console.error(
+      "Create payment error:",
+      error
+    );
 
     return res.status(500).json({
+
       success: false,
-      message: "Server error"
+
+      message:
+        "Unable to create payment."
     });
   }
 }
