@@ -1,0 +1,199 @@
+import { getApps, initializeApp, cert } from "firebase-admin/app";
+import { getDatabase } from "firebase-admin/database";
+
+if (!getApps().length) {
+  initializeApp({
+    credential: cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n")
+    }),
+    databaseURL: process.env.FIREBASE_DATABASE_URL
+  });
+}
+
+const db = getDatabase();
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      message: "Method not allowed"
+    });
+  }
+
+  try {
+    /*
+     * Flutterwave sends its webhook hash in this header.
+     *
+     * We compare it with the secret hash configured
+     * in our Vercel environment variables.
+     */
+    const webhookHash = req.headers["verif-hash"];
+
+    if (
+      !webhookHash ||
+      webhookHash !== process.env.FLW_WEBHOOK_SECRET_HASH
+    ) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized"
+      });
+    }
+
+    const payload = req.body || {};
+
+    /*
+     * We only care about successful transaction events.
+     */
+    if (payload.event !== "charge.completed") {
+      return res.status(200).json({
+        success: true
+      });
+    }
+
+    const transactionId =
+      payload.data?.id;
+
+    const txRef =
+      payload.data?.tx_ref;
+
+    if (!transactionId || !txRef) {
+      return res.status(200).json({
+        success: true
+      });
+    }
+
+    /*
+     * Find the pending Zavora deposit.
+     */
+    const snapshot = await db
+      .ref("deposits")
+      .orderByChild("transactionReference")
+      .equalTo(txRef)
+      .once("value");
+
+    if (!snapshot.exists()) {
+      return res.status(200).json({
+        success: true
+      });
+    }
+
+    let depositId;
+    let deposit;
+
+    snapshot.forEach(child => {
+      depositId = child.key;
+      deposit = child.val();
+    });
+
+    /*
+     * IMPORTANT:
+     * If this deposit was already approved by the callback,
+     * do not credit the wallet again.
+     */
+    if (deposit.status === "approved") {
+      return res.status(200).json({
+        success: true
+      });
+    }
+
+    /*
+     * Verify the transaction directly with Flutterwave.
+     */
+    const verifyResponse = await fetch(
+      `https://api.flutterwave.com/v3/transactions/${transactionId}/verify`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            `Bearer ${process.env.FLW_SECRET_KEY}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    const verifyData = await verifyResponse.json();
+
+    if (
+      !verifyResponse.ok ||
+      verifyData.status !== "success" ||
+      !verifyData.data
+    ) {
+      return res.status(200).json({
+        success: true
+      });
+    }
+
+    const transaction = verifyData.data;
+
+    /*
+     * Verify every important payment detail.
+     */
+    const validPayment =
+      transaction.status === "successful" &&
+      transaction.tx_ref === deposit.transactionReference &&
+      transaction.currency === deposit.currency &&
+      Number(transaction.amount) >= Number(deposit.amount);
+
+    if (!validPayment) {
+      await db
+        .ref(`deposits/${depositId}`)
+        .update({
+          status: "rejected",
+          flutterwaveStatus: "verification_mismatch",
+          flutterwaveTransactionId: transactionId,
+          updatedAt: Date.now()
+        });
+
+      return res.status(200).json({
+        success: true
+      });
+    }
+
+    /*
+     * Mark the deposit as approved.
+     */
+    await db
+      .ref(`deposits/${depositId}`)
+      .update({
+        status: "approved",
+        flutterwaveStatus: "successful",
+        flutterwaveTransactionId: transactionId,
+        verifiedAmount: Number(transaction.amount),
+        verifiedAt: Date.now(),
+        updatedAt: Date.now()
+      });
+
+    /*
+     * Credit the customer's wallet.
+     */
+    const walletRef = db.ref(
+      `users/${deposit.uid}/walletBalance`
+    );
+
+    await walletRef.transaction(currentBalance => {
+      const balance = Number(currentBalance || 0);
+
+      return balance + Number(deposit.amount);
+    });
+
+    return res.status(200).json({
+      success: true
+    });
+
+  } catch (error) {
+    console.error(
+      "Flutterwave webhook error:",
+      error
+    );
+
+    /*
+     * Return 200 so Flutterwave does not repeatedly
+     * retry a malformed/unexpected request forever.
+     */
+    return res.status(200).json({
+      success: false
+    });
+  }
+}
