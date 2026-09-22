@@ -194,7 +194,9 @@ header{
 }
 
 
-/* MENU PANEL */
+/* ==========================================
+   MENU PANEL
+========================================== */
 
 .menu-panel{
     position:absolute;
@@ -1331,6 +1333,8 @@ footer{
                     id="menuPanel"
                 >
 
+                    <!-- API -->
+
                     <a
                         href="api.html"
                         class="menu-api"
@@ -1957,7 +1961,7 @@ const searchResultCount =
 
 
 /* ==========================================
-   MENU
+   THREE BAR MENU
 ========================================== */
 
 const menuBtn =
@@ -2049,8 +2053,6 @@ onAuthStateChanged(
         }
 
 
-        /* CUSTOMER NAME */
-
         let displayName =
             user.displayName;
 
@@ -2073,13 +2075,9 @@ onAuthStateChanged(
             displayName;
 
 
-        /* SHOW DASHBOARD */
-
         loadingScreen.style.display =
             "none";
 
-
-        /* LIVE DATA */
 
         loadWallet(
             user.uid
@@ -2345,11 +2343,6 @@ function loadProducts(){
                         }
 
 
-                        /*
-                           Only active products
-                           are displayed.
-                        */
-
                         if(
                             product.active === false
                         ){
@@ -2364,13 +2357,6 @@ function loadProducts(){
                                 product.stock
                             );
 
-
-                        /*
-                           Keep product even if
-                           stock is zero.
-
-                           It will show "Out of stock".
-                        */
 
                         allProducts.push({
 
@@ -2411,11 +2397,6 @@ function loadProducts(){
 
             }
 
-
-            /*
-               Sort alphabetically by
-               category first.
-            */
 
             allProducts.sort(
                 (a,b) => {
@@ -3382,4 +3363,4 @@ document.getElementById(
 
 </body>
 
-   </html>
+</html>
