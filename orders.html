@@ -24,6 +24,8 @@ body{
     color:#111827;
 
     min-height:100vh;
+
+    padding-bottom:90px;
 }
 
 header{
@@ -480,7 +482,100 @@ footer{
     padding:0 20px 30px;
 }
 
+
+/* ============================= */
+/* FIXED BOTTOM NAVIGATION */
+/* ============================= */
+
+.bottom-nav{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    background:#ffffff;
+
+    border-top:1px solid #e5e7eb;
+
+    box-shadow:0 -8px 25px rgba(17,24,39,.08);
+
+    padding:9px 7px
+        calc(9px + env(safe-area-inset-bottom));
+}
+
+.bottom-nav a{
+    flex:1;
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    color:#6b7280;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    line-height:1.2;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    transition:.2s ease;
+}
+
+.bottom-nav a .nav-icon{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:25px;
+
+    height:25px;
+
+    font-size:20px;
+
+    line-height:1;
+}
+
+.bottom-nav a.active{
+    color:#7e22ce;
+}
+
+.bottom-nav a:hover{
+    color:#7e22ce;
+}
+
+.bottom-nav a:active{
+    transform:scale(.94);
+}
+
+
 @media(max-width:700px){
+
+    body{
+        padding-bottom:95px;
+    }
 
     .navbar{
         min-height:64px;
@@ -516,6 +611,37 @@ footer{
 
     .delivery-meta{
         grid-template-columns:1fr;
+    }
+
+    .bottom-nav{
+        padding-top:10px;
+
+        padding-bottom:
+            calc(
+                10px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .bottom-nav a{
+        font-size:9px;
+    }
+
+    .bottom-nav a .nav-icon{
+        font-size:19px;
+    }
+
+}
+
+
+@media(max-width:390px){
+
+    .bottom-nav a{
+        font-size:8.5px;
+    }
+
+    .bottom-nav a .nav-icon{
+        font-size:18px;
     }
 
 }
@@ -574,6 +700,80 @@ Zavora Social. All rights reserved.
 
 </footer>
 
+
+<!-- ============================= -->
+<!-- FIXED BOTTOM NAVIGATION -->
+<!-- ============================= -->
+
+<nav class="bottom-nav" aria-label="Main navigation">
+
+<a href="dashboard.html">
+
+    <span class="nav-icon">
+        🏠
+    </span>
+
+    <span>
+        Home
+    </span>
+
+</a>
+
+
+<a href="wallet.html">
+
+    <span class="nav-icon">
+        💳
+    </span>
+
+    <span>
+        Fund Wallet
+    </span>
+
+</a>
+
+
+<a href="orders.html" class="active">
+
+    <span class="nav-icon">
+        📦
+    </span>
+
+    <span>
+        My Orders
+    </span>
+
+</a>
+
+
+<a href="profile.html">
+
+    <span class="nav-icon">
+        👤
+    </span>
+
+    <span>
+        Profile
+    </span>
+
+</a>
+
+
+<a href="#" id="logoutNav">
+
+    <span class="nav-icon">
+        🚪
+    </span>
+
+    <span>
+        Logout
+    </span>
+
+</a>
+
+</nav>
+
+
 <script type="module">
 
 import {
@@ -584,7 +784,8 @@ from
 
 import {
     getAuth,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 }
 from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
@@ -643,6 +844,11 @@ const db =
 const ordersArea =
     document.getElementById(
         "ordersArea"
+    );
+
+const logoutNav =
+    document.getElementById(
+        "logoutNav"
     );
 
 
@@ -1217,6 +1423,47 @@ function renderOrders(orders){
     );
 
 }
+
+
+/* ============================= */
+/* BOTTOM NAV LOGOUT */
+/* ============================= */
+
+logoutNav.addEventListener(
+    "click",
+    async event => {
+
+        event.preventDefault();
+
+        logoutNav.style.pointerEvents =
+            "none";
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "login.html";
+
+        }
+        catch(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            logoutNav.style.pointerEvents =
+                "auto";
+
+            alert(
+                "Unable to log out. Please try again."
+            );
+
+        }
+
+    }
+);
 
 
 onAuthStateChanged(
