@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -978,9 +979,13 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {
     getDatabase,
     ref,
-    onValue
+    onValue,
+    query,
+    orderByChild,
+    equalTo
 }
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
 
 const firebaseConfig = {
 
@@ -1010,6 +1015,7 @@ const firebaseConfig = {
 
 };
 
+
 const app =
     initializeApp(firebaseConfig);
 
@@ -1018,6 +1024,7 @@ const auth =
 
 const db =
     getDatabase(app);
+
 
 const walletView =
     document.getElementById("walletView");
@@ -1052,30 +1059,44 @@ const payBtn =
 const paymentError =
     document.getElementById("paymentError");
 
+
 let currentUser = null;
+
 
 document.getElementById("year").textContent =
     new Date().getFullYear();
 
+
 function hideAllPages(){
 
-    walletView.style.display = "none";
+    walletView.style.display =
+        "none";
 
-    pageDeposit.classList.remove("active");
+    pageDeposit.classList.remove(
+        "active"
+    );
 
-    pageLoading.classList.remove("active");
+    pageLoading.classList.remove(
+        "active"
+    );
 
-    pageSuccess.classList.remove("active");
+    pageSuccess.classList.remove(
+        "active"
+    );
 
-    pageFailed.classList.remove("active");
+    pageFailed.classList.remove(
+        "active"
+    );
 
 }
+
 
 function showWallet(){
 
     hideAllPages();
 
-    walletView.style.display = "block";
+    walletView.style.display =
+        "block";
 
     window.scrollTo({
         top:0,
@@ -1083,12 +1104,15 @@ function showWallet(){
     });
 
 }
+
 
 function showPage(page){
 
     hideAllPages();
 
-    page.classList.add("active");
+    page.classList.add(
+        "active"
+    );
 
     window.scrollTo({
         top:0,
@@ -1097,9 +1121,12 @@ function showPage(page){
 
 }
 
+
 function formatMoney(amount){
 
-    return Number(amount || 0).toLocaleString(
+    return Number(
+        amount || 0
+    ).toLocaleString(
         "en-NG",
         {
             minimumFractionDigits:2,
@@ -1109,13 +1136,16 @@ function formatMoney(amount){
 
 }
 
+
 function formatDate(timestamp){
 
     if(!timestamp){
         return "Date unavailable";
     }
 
-    return new Date(timestamp).toLocaleString(
+    return new Date(
+        timestamp
+    ).toLocaleString(
         "en-NG",
         {
             year:"numeric",
@@ -1128,16 +1158,20 @@ function formatDate(timestamp){
 
 }
 
+
 function escapeHtml(value){
 
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    return String(
+        value ?? ""
+    )
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
+
 
 function loadWallet(uid){
 
@@ -1154,11 +1188,15 @@ function loadWallet(uid){
         snapshot => {
 
             const balance =
-                Number(snapshot.val()) || 0;
+                Number(
+                    snapshot.val()
+                ) || 0;
 
             walletBalance.textContent =
                 "₦" +
-                formatMoney(balance);
+                formatMoney(
+                    balance
+                );
 
         },
         error => {
@@ -1176,10 +1214,24 @@ function loadWallet(uid){
 
 }
 
+
 function loadDepositHistory(uid){
 
+    /*
+     * IMPORTANT:
+     * Query only this user's deposits.
+     * This matches the Firebase security rule:
+     *
+     * query.orderByChild == 'uid'
+     */
+
     const depositsRef =
-        ref(db,"deposits");
+        query(
+            ref(db,"deposits"),
+            orderByChild("uid"),
+            equalTo(uid)
+        );
+
 
     onValue(
         depositsRef,
@@ -1190,56 +1242,57 @@ function loadDepositHistory(uid){
 
             const deposits = [];
 
+
             if(data){
 
-                Object.entries(data).forEach(
+                Object.entries(data)
+                .forEach(
                     ([id,deposit]) => {
 
-                        if(
-                            deposit &&
-                            deposit.uid === uid
-                        ){
-
-                            deposits.push({
-
-                                id,
-
-                                amount:
-                                    Number(
-                                        deposit.amount
-                                    ) || 0,
-
-                                payment:
-                                    deposit.payment ||
-                                    "Flutterwave",
-
-                                transactionReference:
-                                    deposit.transactionReference ||
-                                    "-",
-
-                                status:
-                                    deposit.status ||
-                                    "pending",
-
-                                createdAt:
-                                    Number(
-                                        deposit.createdAt
-                                    ) || 0
-
-                            });
-
+                        if(!deposit){
+                            return;
                         }
+
+                        deposits.push({
+
+                            id,
+
+                            amount:
+                                Number(
+                                    deposit.amount
+                                ) || 0,
+
+                            payment:
+                                deposit.payment ||
+                                "Flutterwave",
+
+                            transactionReference:
+                                deposit.transactionReference ||
+                                "-",
+
+                            status:
+                                deposit.status ||
+                                "pending",
+
+                            createdAt:
+                                Number(
+                                    deposit.createdAt
+                                ) || 0
+
+                        });
 
                     }
                 );
 
             }
 
+
             deposits.sort(
                 (a,b) =>
                     b.createdAt -
                     a.createdAt
             );
+
 
             renderDepositHistory(
                 deposits
@@ -1264,7 +1317,10 @@ function loadDepositHistory(uid){
 
 }
 
-function renderDepositHistory(deposits){
+
+function renderDepositHistory(
+    deposits
+){
 
     if(!deposits.length){
 
@@ -1278,6 +1334,7 @@ function renderDepositHistory(deposits){
 
     }
 
+
     depositHistory.innerHTML =
         deposits.map(
             deposit => {
@@ -1288,23 +1345,42 @@ function renderDepositHistory(deposits){
                         "pending"
                     ).toLowerCase();
 
+
                 let statusClass = "";
 
-                if(status === "pending"){
-                    statusClass = "pending";
+
+                if(
+                    status ===
+                    "pending"
+                ){
+
+                    statusClass =
+                        "pending";
+
                 }
                 else if(
-                    status === "approved" ||
-                    status === "completed"
+                    status ===
+                    "approved" ||
+                    status ===
+                    "completed"
                 ){
-                    statusClass = "approved";
+
+                    statusClass =
+                        "approved";
+
                 }
                 else if(
-                    status === "rejected" ||
-                    status === "failed"
+                    status ===
+                    "rejected" ||
+                    status ===
+                    "failed"
                 ){
-                    statusClass = "rejected";
+
+                    statusClass =
+                        "rejected";
+
                 }
+
 
                 return `
                     <div class="history-item">
@@ -1312,11 +1388,15 @@ function renderDepositHistory(deposits){
                         <div class="history-main">
 
                             <div class="history-amount">
-                                ₦${formatMoney(deposit.amount)}
+                                ₦${formatMoney(
+                                    deposit.amount
+                                )}
                             </div>
 
                             <div class="status ${statusClass}">
-                                ${escapeHtml(status)}
+                                ${escapeHtml(
+                                    status
+                                )}
                             </div>
 
                         </div>
@@ -1324,12 +1404,18 @@ function renderDepositHistory(deposits){
                         <div class="history-details">
 
                             <div>
-                                <strong>Payment:</strong>
-                                ${escapeHtml(deposit.payment)}
+                                <strong>
+                                    Payment:
+                                </strong>
+                                ${escapeHtml(
+                                    deposit.payment
+                                )}
                             </div>
 
                             <div>
-                                <strong>Date:</strong>
+                                <strong>
+                                    Date:
+                                </strong>
                                 ${escapeHtml(
                                     formatDate(
                                         deposit.createdAt
@@ -1338,15 +1424,21 @@ function renderDepositHistory(deposits){
                             </div>
 
                             <div>
-                                <strong>Reference:</strong>
+                                <strong>
+                                    Reference:
+                                </strong>
                                 ${escapeHtml(
                                     deposit.transactionReference
                                 )}
                             </div>
 
                             <div>
-                                <strong>Deposit ID:</strong>
-                                ${escapeHtml(deposit.id)}
+                                <strong>
+                                    Deposit ID:
+                                </strong>
+                                ${escapeHtml(
+                                    deposit.id
+                                )}
                             </div>
 
                         </div>
@@ -1359,39 +1451,56 @@ function renderDepositHistory(deposits){
 
 }
 
+
 fundWalletBtn.addEventListener(
     "click",
     () => {
-        showPage(pageDeposit);
+
+        showPage(
+            pageDeposit
+        );
+
     }
 );
+
 
 document.getElementById(
     "depositBackBtn"
 ).addEventListener(
     "click",
     () => {
+
         showWallet();
+
     }
 );
 
-function showPaymentError(message){
+
+function showPaymentError(
+    message
+){
 
     paymentError.textContent =
         message;
 
-    paymentError.classList.add("show");
+    paymentError.classList.add(
+        "show"
+    );
 
 }
+
 
 function clearPaymentError(){
 
     paymentError.textContent =
         "";
 
-    paymentError.classList.remove("show");
+    paymentError.classList.remove(
+        "show"
+    );
 
 }
+
 
 paymentForm.addEventListener(
     "submit",
@@ -1400,6 +1509,7 @@ paymentForm.addEventListener(
         event.preventDefault();
 
         clearPaymentError();
+
 
         if(!currentUser){
 
@@ -1411,12 +1521,14 @@ paymentForm.addEventListener(
 
         }
 
+
         const amount =
             Number(
                 document.getElementById(
                     "amount"
                 ).value
             );
+
 
         if(
             !Number.isFinite(amount) ||
@@ -1431,15 +1543,21 @@ paymentForm.addEventListener(
 
         }
 
-        payBtn.disabled = true;
+
+        payBtn.disabled =
+            true;
 
         payBtn.textContent =
             "PREPARING PAYMENT...";
 
+
         try{
 
             const idToken =
-                await currentUser.getIdToken(true);
+                await currentUser.getIdToken(
+                    true
+                );
+
 
             const response =
                 await fetch(
@@ -1461,23 +1579,20 @@ paymentForm.addEventListener(
                     }
                 );
 
-            /*
-             * Read the response as text first.
-             * This prevents the old:
-             *
-             * Unexpected token 'A'
-             *
-             * error when Vercel returns a server error page.
-             */
+
             const responseText =
                 await response.text();
 
+
             let data = {};
+
 
             try{
 
                 data =
-                    JSON.parse(responseText);
+                    JSON.parse(
+                        responseText
+                    );
 
             }
             catch(parseError){
@@ -1493,6 +1608,7 @@ paymentForm.addEventListener(
 
             }
 
+
             if(
                 !response.ok ||
                 !data.success ||
@@ -1506,10 +1622,15 @@ paymentForm.addEventListener(
 
             }
 
-            showPage(pageLoading);
+
+            showPage(
+                pageLoading
+            );
+
 
             window.location.href =
                 data.paymentLink;
+
 
         }
         catch(error){
@@ -1519,11 +1640,13 @@ paymentForm.addEventListener(
                 error
             );
 
+
             payBtn.disabled =
                 false;
 
             payBtn.textContent =
                 "CONTINUE TO FLUTTERWAVE";
+
 
             showPaymentError(
                 error.message ||
@@ -1534,6 +1657,7 @@ paymentForm.addEventListener(
 
     }
 );
+
 
 document.getElementById(
     "successDashboardBtn"
@@ -1547,16 +1671,20 @@ document.getElementById(
     }
 );
 
+
 document.getElementById(
     "failedTryAgainBtn"
 ).addEventListener(
     "click",
     () => {
 
-        showPage(pageDeposit);
+        showPage(
+            pageDeposit
+        );
 
     }
 );
+
 
 document.getElementById(
     "failedDashboardBtn"
@@ -1569,6 +1697,7 @@ document.getElementById(
     }
 );
 
+
 onAuthStateChanged(
     auth,
     user => {
@@ -1578,25 +1707,38 @@ onAuthStateChanged(
             currentUser =
                 user;
 
+
             loadWallet(
                 user.uid
             );
 
+
             loadDepositHistory(
                 user.uid
             );
+
 
             const params =
                 new URLSearchParams(
                     window.location.search
                 );
 
+
             const payment =
-                params.get("payment");
+                params.get(
+                    "payment"
+                );
 
-            if(payment === "success"){
 
-                showPage(pageSuccess);
+            if(
+                payment ===
+                "success"
+            ){
+
+                showPage(
+                    pageSuccess
+                );
+
 
                 window.history.replaceState(
                     {},
@@ -1605,9 +1747,15 @@ onAuthStateChanged(
                 );
 
             }
-            else if(payment === "failed"){
+            else if(
+                payment ===
+                "failed"
+            ){
 
-                showPage(pageFailed);
+                showPage(
+                    pageFailed
+                );
+
 
                 window.history.replaceState(
                     {},
@@ -1625,6 +1773,7 @@ onAuthStateChanged(
             return;
 
         }
+
 
         window.location.replace(
             "login.html"
