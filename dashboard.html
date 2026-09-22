@@ -204,7 +204,7 @@ header{
     top:54px;
     right:0;
 
-    width:220px;
+    width:260px;
 
     background:#ffffff;
 
@@ -220,13 +220,21 @@ header{
     display:none;
 
     z-index:500;
+
+    max-height:calc(100vh - 85px);
+    overflow-y:auto;
 }
 
 .menu-panel.show{
     display:block;
 }
 
-.menu-api{
+
+/* ==========================================
+   MENU ITEMS
+========================================== */
+
+.menu-item{
     display:flex;
 
     align-items:center;
@@ -235,7 +243,7 @@ header{
 
     width:100%;
 
-    padding:13px 12px;
+    padding:12px;
 
     border-radius:11px;
 
@@ -244,14 +252,16 @@ header{
     color:#111827;
 
     transition:.2s ease;
+
+    margin-bottom:3px;
 }
 
-.menu-api:hover{
+.menu-item:hover{
     background:#f5f3ff;
     color:#5b21b6;
 }
 
-.menu-api-icon{
+.menu-item-icon{
     width:40px;
     height:40px;
 
@@ -274,19 +284,37 @@ header{
     flex-shrink:0;
 }
 
-.menu-api-text{
+.menu-item-text{
     display:flex;
     flex-direction:column;
     gap:3px;
+
+    min-width:0;
 }
 
-.menu-api-text strong{
+.menu-item-text strong{
     font-size:14px;
+    color:#111827;
 }
 
-.menu-api-text small{
+.menu-item-text small{
     font-size:11px;
     color:#777777;
+}
+
+.menu-item:hover .menu-item-text strong{
+    color:#5b21b6;
+}
+
+
+/* ==========================================
+   MENU DIVIDER
+========================================== */
+
+.menu-divider{
+    height:1px;
+    background:#eeeeee;
+    margin:7px 5px;
 }
 
 
@@ -342,7 +370,7 @@ header{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:16px;
-    margin-bottom:30px;
+    margin-bottom:42px;
 }
 
 .stat-card{
@@ -389,80 +417,6 @@ header{
     color:#ffffff;
     font-size:25px;
     font-weight:900;
-}
-
-
-/* ==========================================
-   QUICK ACTIONS
-========================================== */
-
-.section-title{
-    font-size:21px;
-    margin-bottom:16px;
-    color:#111111;
-}
-
-.quick-actions{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:42px;
-}
-
-.quick-card{
-    min-width:0;
-
-    text-decoration:none;
-    color:#ffffff;
-
-    background:linear-gradient(
-        135deg,
-        #7e22ce,
-        #2563eb
-    );
-
-    border:1px solid #5b21b6;
-    border-radius:16px;
-    padding:20px;
-
-    transition:.2s ease;
-
-    box-shadow:
-        0 7px 22px rgba(79,70,229,.12);
-}
-
-.quick-card:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 12px 30px rgba(79,70,229,.20);
-}
-
-.quick-icon{
-    width:45px;
-    height:45px;
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#ffffff;
-    color:#5b21b6;
-
-    font-size:23px;
-    margin-bottom:12px;
-}
-
-.quick-card strong{
-    display:block;
-    margin-bottom:5px;
-    color:#ffffff;
-}
-
-.quick-card small{
-    color:#ffffff;
-    opacity:.85;
 }
 
 
@@ -1009,10 +963,6 @@ footer{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .quick-actions{
-        grid-template-columns:repeat(4,1fr);
-    }
-
 }
 
 
@@ -1048,7 +998,7 @@ footer{
     .menu-panel{
         top:52px;
         right:0;
-        width:210px;
+        width:250px;
     }
 
     .container{
@@ -1074,6 +1024,7 @@ footer{
     .stats{
         grid-template-columns:repeat(2,1fr);
         gap:10px;
+        margin-bottom:35px;
     }
 
     .stat-card{
@@ -1094,47 +1045,6 @@ footer{
 
     .stat-value{
         font-size:20px;
-    }
-
-    .quick-actions{
-        grid-template-columns:repeat(4,minmax(0,1fr));
-        gap:7px;
-
-        margin-bottom:35px;
-    }
-
-    .quick-card{
-        padding:12px 6px;
-
-        border-radius:12px;
-
-        text-align:center;
-    }
-
-    .quick-icon{
-        width:36px;
-        height:36px;
-
-        border-radius:10px;
-
-        font-size:18px;
-
-        margin:
-            0
-            auto
-            8px;
-    }
-
-    .quick-card strong{
-        font-size:10px;
-        line-height:1.2;
-        margin-bottom:4px;
-    }
-
-    .quick-card small{
-        display:block;
-        font-size:8px;
-        line-height:1.2;
     }
 
     .marketplace-header h2{
@@ -1309,7 +1219,9 @@ footer{
             </span>
 
 
-            <!-- THREE BAR MENU -->
+            <!-- ==================================
+                 THREE BAR MENU
+            =================================== -->
 
             <div class="menu-wrap">
 
@@ -1333,18 +1245,230 @@ footer{
                     id="menuPanel"
                 >
 
+
+                    <!-- DASHBOARD -->
+
+                    <a
+                        href="dashboard.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            🏠
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                Dashboard
+                            </strong>
+
+                            <small>
+                                Your main dashboard
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- BROWSE PRODUCTS -->
+
+                    <a
+                        href="products.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            🛒
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                Browse Products
+                            </strong>
+
+                            <small>
+                                Explore marketplace
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- FUND WALLET -->
+
+                    <a
+                        href="wallet.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            💳
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                Fund Wallet
+                            </strong>
+
+                            <small>
+                                Add money
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- MY PROFILE -->
+
+                    <a
+                        href="profile.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            👤
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                My Profile
+                            </strong>
+
+                            <small>
+                                Manage account
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- MY ORDERS -->
+
+                    <a
+                        href="orders.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            📦
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                My Orders
+                            </strong>
+
+                            <small>
+                                View purchases
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- BUY NUMBER -->
+
+                    <a
+                        href="numbers.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            ♻️
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                Buy Number
+                            </strong>
+
+                            <small>
+                                Get a number
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- SEND GIFTS -->
+
+                    <a
+                        href="gifts.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            🎁
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                Send Gifts
+                            </strong>
+
+                            <small>
+                                Send gifts
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- BOOST SOCIAL MEDIA -->
+
+                    <a
+                        href="boost.html"
+                        class="menu-item"
+                    >
+
+                        <div class="menu-item-icon">
+                            😁
+                        </div>
+
+                        <div class="menu-item-text">
+
+                            <strong>
+                                Boost Social Media
+                            </strong>
+
+                            <small>
+                                Boost likes, views &amp; others
+                            </small>
+
+                        </div>
+
+                    </a>
+
+
+                    <div class="menu-divider"></div>
+
+
                     <!-- API -->
 
                     <a
                         href="api.html"
-                        class="menu-api"
+                        class="menu-item"
                     >
 
-                        <div class="menu-api-icon">
+                        <div class="menu-item-icon">
                             💎
                         </div>
 
-                        <div class="menu-api-text">
+                        <div class="menu-item-text">
 
                             <strong>
                                 API
@@ -1358,10 +1482,13 @@ footer{
 
                     </a>
 
+
                 </div>
 
             </div>
 
+
+            <!-- LOGOUT -->
 
             <button
                 class="logout-btn"
@@ -1508,186 +1635,6 @@ footer{
 
         </div>
 
-
-    </section>
-
-
-
-    <!-- ======================================
-         QUICK ACTIONS
-    ======================================= -->
-
-    <section>
-
-        <h2 class="section-title">
-            Quick Actions
-        </h2>
-
-
-        <div class="quick-actions">
-
-
-            <!-- BROWSE PRODUCTS -->
-
-            <a
-                href="products.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    🛒
-                </div>
-
-                <strong>
-                    Browse Products
-                </strong>
-
-                <small>
-                    Explore marketplace
-                </small>
-
-            </a>
-
-
-
-            <!-- FUND WALLET -->
-
-            <a
-                href="wallet.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    💳
-                </div>
-
-                <strong>
-                    Fund Wallet
-                </strong>
-
-                <small>
-                    Add money
-                </small>
-
-            </a>
-
-
-
-            <!-- PROFILE -->
-
-            <a
-                href="profile.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    👤
-                </div>
-
-                <strong>
-                    My Profile
-                </strong>
-
-                <small>
-                    Manage account
-                </small>
-
-            </a>
-
-
-
-            <!-- ORDERS -->
-
-            <a
-                href="orders.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    📦
-                </div>
-
-                <strong>
-                    My Orders
-                </strong>
-
-                <small>
-                    View purchases
-                </small>
-
-            </a>
-
-
-
-            <!-- NUMBERS -->
-
-            <a
-                href="numbers.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    ♻️
-                </div>
-
-                <strong>
-                    Buy Number
-                </strong>
-
-                <small>
-                    Get a number
-                </small>
-
-            </a>
-
-
-
-            <!-- GIFTS -->
-
-            <a
-                href="gifts.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    🎁
-                </div>
-
-                <strong>
-                    Send Gifts
-                </strong>
-
-                <small>
-                    Send gifts
-                </small>
-
-            </a>
-
-
-
-            <!-- BOOST -->
-
-            <a
-                href="boost.html"
-                class="quick-card"
-            >
-
-                <div class="quick-icon">
-                    😁
-                </div>
-
-                <strong>
-                    Boost Social Media
-                </strong>
-
-                <small>
-                    Boost likes, views & others
-                </small>
-
-            </a>
-
-
-        </div>
 
     </section>
 
@@ -2023,13 +1970,40 @@ document.addEventListener(
 );
 
 
+/* ==========================================
+   CLOSE MENU AFTER CLICKING A MENU ITEM
+========================================== */
+
+document.querySelectorAll(
+    ".menu-item"
+).forEach(
+    (item) => {
+
+        item.addEventListener(
+            "click",
+            () => {
+
+                menuPanel.classList.remove(
+                    "show"
+                );
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+        );
+
+    }
+);
+
 
 /* ==========================================
    GLOBAL PRODUCT DATA
 ========================================== */
 
 let allProducts = [];
-
 
 
 /* ==========================================
@@ -2041,7 +2015,6 @@ onAuthStateChanged(
     auth,
 
     (user) => {
-
 
         if(!user){
 
@@ -2099,7 +2072,6 @@ onAuthStateChanged(
 );
 
 
-
 /* ==========================================
    LOAD WALLET
 ========================================== */
@@ -2154,7 +2126,6 @@ function loadWallet(uid){
     );
 
 }
-
 
 
 /* ==========================================
@@ -2214,7 +2185,6 @@ function loadCustomerOrders(uid){
     );
 
 }
-
 
 
 /* ==========================================
@@ -2298,7 +2268,6 @@ function loadAvailableProducts(){
     );
 
 }
-
 
 
 /* ==========================================
@@ -2410,6 +2379,7 @@ function loadProducts(){
                             )
                         );
 
+
                     if(
                         categoryCompare !== 0
                     ){
@@ -2470,7 +2440,6 @@ function loadProducts(){
     );
 
 }
-
 
 
 /* ==========================================
@@ -2557,7 +2526,6 @@ function renderProducts(
 
     categories.forEach(
         (category) => {
-
 
             const section =
                 document.createElement(
@@ -2665,7 +2633,6 @@ function renderProducts(
     );
 
 }
-
 
 
 /* ==========================================
@@ -2954,7 +2921,6 @@ function createProductCard(
 }
 
 
-
 /* ==========================================
    SEARCH
 ========================================== */
@@ -3089,7 +3055,6 @@ productSearch.addEventListener(
 );
 
 
-
 /* ==========================================
    CLEAR SEARCH
 ========================================== */
@@ -3117,7 +3082,6 @@ clearSearch.addEventListener(
 );
 
 
-
 /* ==========================================
    OPEN PRODUCT
 ========================================== */
@@ -3133,7 +3097,6 @@ function openProduct(
         );
 
 }
-
 
 
 /* ==========================================
@@ -3162,7 +3125,6 @@ function formatMoney(
     );
 
 }
-
 
 
 /* ==========================================
@@ -3254,7 +3216,6 @@ function getProductEmoji(
 }
 
 
-
 /* ==========================================
    ESCAPE HTML
 ========================================== */
@@ -3293,7 +3254,6 @@ function escapeHtml(
     );
 
 }
-
 
 
 /* ==========================================
@@ -3346,7 +3306,6 @@ logoutBtn.addEventListener(
 
     }
 );
-
 
 
 /* ==========================================
