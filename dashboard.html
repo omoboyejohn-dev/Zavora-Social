@@ -25,6 +25,9 @@ body{
     background:#ffffff;
     color:#111111;
     min-height:100vh;
+
+    /* Space for fixed bottom navigation */
+    padding-bottom:76px;
 }
 
 
@@ -83,17 +86,21 @@ header{
     margin:auto;
     min-height:72px;
     padding:0 20px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:20px;
 }
 
 .logo{
     text-decoration:none;
     color:#111111;
+
     font-size:22px;
     font-weight:900;
+
     letter-spacing:-.5px;
 }
 
@@ -144,7 +151,6 @@ header{
     display:inline-flex;
 
     align-items:center;
-
     justify-content:center;
 
     white-space:nowrap;
@@ -159,139 +165,16 @@ header{
 
 
 /* ==========================================
-   DASHBOARD NAVIGATION CARDS
-========================================== */
-
-.dashboard-nav{
-    display:grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    gap:14px;
-
-    margin-bottom:38px;
-}
-
-.nav-card{
-    text-decoration:none;
-
-    background:#ffffff;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:17px;
-
-    padding:17px 14px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    min-height:125px;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.045);
-
-    transition:.2s ease;
-
-    cursor:pointer;
-}
-
-.nav-card:hover{
-    transform:translateY(-3px);
-
-    border-color:#c4b5fd;
-
-    box-shadow:
-        0 10px 25px rgba(79,70,229,.12);
-}
-
-.nav-card-icon{
-    width:52px;
-    height:52px;
-
-    border-radius:15px;
-
-    background:linear-gradient(
-        135deg,
-        #7e22ce,
-        #2563eb
-    );
-
-    color:#ffffff;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:24px;
-
-    margin-bottom:11px;
-
-    box-shadow:
-        0 6px 16px rgba(79,70,229,.16);
-}
-
-.nav-card-title{
-    color:#111827;
-
-    font-size:14px;
-
-    font-weight:900;
-
-    margin-bottom:3px;
-}
-
-.nav-card-description{
-    color:#777777;
-
-    font-size:11px;
-
-    line-height:1.3;
-}
-
-
-/* ==========================================
-   LOGOUT CARD
-========================================== */
-
-.logout-card{
-    border-color:#fecaca;
-}
-
-.logout-card .nav-card-icon{
-    background:linear-gradient(
-        135deg,
-        #ef4444,
-        #dc2626
-    );
-}
-
-.logout-card:hover{
-    border-color:#fca5a5;
-
-    box-shadow:
-        0 10px 25px rgba(239,68,68,.10);
-}
-
-
-/* ==========================================
    MAIN
 ========================================== */
 
 .container{
     max-width:1250px;
+
     margin:auto;
-    padding:35px 20px 60px;
+
+    padding:
+        35px 20px 60px;
 }
 
 
@@ -305,8 +188,11 @@ header{
 
 .welcome h1{
     font-size:34px;
+
     line-height:1.2;
+
     margin-bottom:8px;
+
     color:#111111;
 }
 
@@ -319,11 +205,13 @@ header{
 
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+
     background-clip:text;
 }
 
 .welcome p{
     color:#666666;
+
     font-size:15px;
 }
 
@@ -334,8 +222,12 @@ header{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:16px;
+
     margin-bottom:42px;
 }
 
@@ -347,7 +239,9 @@ header{
     );
 
     border:1px solid #5b21b6;
+
     border-radius:18px;
+
     padding:22px;
 
     box-shadow:
@@ -359,29 +253,38 @@ header{
 .stat-icon{
     width:42px;
     height:42px;
+
     border-radius:12px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     background:#ffffff;
+
     color:#5b21b6;
 
     font-size:20px;
+
     margin-bottom:15px;
 }
 
 .stat-title{
     color:#ffffff;
+
     opacity:.9;
+
     font-size:13px;
+
     margin-bottom:7px;
 }
 
 .stat-value{
     color:#ffffff;
+
     font-size:25px;
+
     font-weight:900;
 }
 
@@ -400,12 +303,15 @@ header{
 
 .marketplace-header h2{
     font-size:30px;
+
     color:#111111;
+
     margin-bottom:5px;
 }
 
 .marketplace-header p{
     color:#777777;
+
     font-size:15px;
 }
 
@@ -416,14 +322,17 @@ header{
 
 .search-box{
     position:relative;
+
     margin-bottom:30px;
 }
 
 .search-box input{
     width:100%;
+
     height:56px;
 
     border:1px solid #d1d5db;
+
     border-radius:14px;
 
     padding:
@@ -437,6 +346,7 @@ header{
     outline:none;
 
     background:#ffffff;
+
     color:#111111;
 
     transition:.2s ease;
@@ -460,6 +370,7 @@ header{
     position:absolute;
 
     left:18px;
+
     top:50%;
 
     transform:translateY(-50%);
@@ -475,6 +386,7 @@ header{
     position:absolute;
 
     right:14px;
+
     top:50%;
 
     transform:translateY(-50%);
@@ -483,6 +395,7 @@ header{
     height:32px;
 
     border:none;
+
     border-radius:50%;
 
     background:#f3f4f6;
@@ -494,11 +407,13 @@ header{
     display:none;
 
     font-size:17px;
+
     font-weight:800;
 }
 
 .clear-search:hover{
     background:#ede9fe;
+
     color:#6d28d9;
 }
 
@@ -511,6 +426,7 @@ header{
     display:none;
 
     margin-top:-18px;
+
     margin-bottom:20px;
 
     color:#6b7280;
@@ -533,6 +449,7 @@ header{
 
 .category-header{
     width:100%;
+
     min-height:55px;
 
     padding:10px 15px;
@@ -548,7 +465,9 @@ header{
     border:1px solid #5b21b6;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:15px;
@@ -563,6 +482,7 @@ header{
     color:#ffffff;
 
     font-size:18px;
+
     font-weight:900;
 
     text-transform:uppercase;
@@ -584,6 +504,7 @@ header{
     border-radius:20px;
 
     font-size:14px;
+
     font-weight:800;
 
     transition:.2s ease;
@@ -591,6 +512,7 @@ header{
 
 .view-all-btn:hover{
     background:#ffffff;
+
     color:#4c1d95;
 }
 
@@ -601,7 +523,9 @@ header{
 
 .product-list{
     display:flex;
+
     flex-direction:column;
+
     gap:10px;
 }
 
@@ -612,6 +536,7 @@ header{
 
 .product-card{
     width:100%;
+
     min-height:108px;
 
     background:#ffffff;
@@ -623,6 +548,7 @@ header{
     padding:14px 16px;
 
     display:flex;
+
     align-items:center;
 
     gap:15px;
@@ -660,6 +586,7 @@ header{
     border:1px solid #ddd6fe;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -684,6 +611,7 @@ header{
 
 .product-content{
     flex:1;
+
     min-width:0;
 }
 
@@ -691,6 +619,7 @@ header{
     color:#374151;
 
     font-size:16px;
+
     font-weight:500;
 
     line-height:1.35;
@@ -700,6 +629,7 @@ header{
 
 .product-bottom{
     display:flex;
+
     align-items:center;
 
     flex-wrap:wrap;
@@ -722,6 +652,7 @@ header{
     border-radius:20px;
 
     font-size:15px;
+
     font-weight:900;
 
     white-space:nowrap;
@@ -731,6 +662,7 @@ header{
     color:#777777;
 
     font-weight:900;
+
     font-size:18px;
 }
 
@@ -749,6 +681,7 @@ header{
     border-radius:20px;
 
     font-size:15px;
+
     font-weight:900;
 
     white-space:nowrap;
@@ -763,6 +696,7 @@ header{
     flex-shrink:0;
 
     min-width:72px;
+
     min-height:48px;
 
     padding:8px 13px;
@@ -780,6 +714,7 @@ header{
     color:#ffffff;
 
     font-size:14px;
+
     font-weight:900;
 
     cursor:pointer;
@@ -803,8 +738,11 @@ header{
 
 .buy-btn:disabled{
     background:#9ca3af;
+
     cursor:not-allowed;
+
     box-shadow:none;
+
     transform:none;
 }
 
@@ -833,11 +771,13 @@ header{
 
 .empty-marketplace .big{
     font-size:40px;
+
     margin-bottom:10px;
 }
 
 .empty-marketplace h3{
     color:#111111;
+
     margin-bottom:7px;
 }
 
@@ -860,11 +800,13 @@ header{
 
 .search-empty .big{
     font-size:38px;
+
     margin-bottom:10px;
 }
 
 .search-empty h3{
     color:#111111;
+
     margin-bottom:7px;
 }
 
@@ -893,6 +835,7 @@ header{
 
 .products-loading .big{
     font-size:35px;
+
     margin-bottom:10px;
 }
 
@@ -916,6 +859,153 @@ footer{
     font-size:13px;
 
     text-align:center;
+
+    padding-bottom:105px;
+}
+
+
+/* ==========================================
+   FIXED BOTTOM NAVIGATION
+========================================== */
+
+.bottom-nav{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:76px;
+
+    background:rgba(255,255,255,.97);
+
+    border-top:1px solid #e5e7eb;
+
+    box-shadow:
+        0 -5px 25px rgba(0,0,0,.08);
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    align-items:stretch;
+
+    z-index:1000;
+
+    backdrop-filter:blur(12px);
+}
+
+.bottom-nav-item{
+    border:none;
+
+    background:transparent;
+
+    text-decoration:none;
+
+    color:#8b8f98;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    transition:.2s ease;
+
+    min-width:0;
+
+    padding:6px 3px;
+
+    position:relative;
+}
+
+.bottom-nav-item:hover{
+    color:#6d28d9;
+}
+
+.bottom-nav-item.active{
+    color:#6d28d9;
+}
+
+.bottom-nav-item.active::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:38px;
+
+    height:3px;
+
+    border-radius:0 0 5px 5px;
+
+    background:linear-gradient(
+        90deg,
+        #7e22ce,
+        #2563eb
+    );
+}
+
+.bottom-nav-icon{
+    font-size:22px;
+
+    line-height:1;
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    filter:grayscale(15%);
+}
+
+.bottom-nav-item span{
+    font-size:11px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    max-width:100%;
+}
+
+.bottom-nav-item.active .bottom-nav-icon{
+    transform:translateY(-1px);
+}
+
+.logout-nav-item{
+    color:#8b8f98;
+}
+
+.logout-nav-item:hover{
+    color:#dc2626;
+}
+
+.logout-nav-item:disabled{
+    opacity:.6;
+
+    cursor:not-allowed;
 }
 
 
@@ -926,11 +1016,8 @@ footer{
 @media(max-width:1000px){
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .dashboard-nav{
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
 }
@@ -942,8 +1029,13 @@ footer{
 
 @media(max-width:650px){
 
+    body{
+        padding-bottom:72px;
+    }
+
     .navbar{
         min-height:65px;
+
         padding:0 15px;
     }
 
@@ -957,54 +1049,48 @@ footer{
 
     .browse-btn{
         padding:9px 13px;
+
         font-size:12px;
+
         border-radius:11px;
     }
 
 
-    /* NAVIGATION */
+    /* ======================================
+       BOTTOM NAV MOBILE
+    ====================================== */
 
-    .dashboard-nav{
-        grid-template-columns:repeat(2,1fr);
-
-        gap:10px;
-
-        margin-bottom:32px;
+    .bottom-nav{
+        height:72px;
     }
 
-    .nav-card{
-        min-height:112px;
+    .bottom-nav-item{
+        gap:4px;
 
-        padding:14px 9px;
-
-        border-radius:15px;
+        padding:5px 2px;
     }
 
-    .nav-card-icon{
-        width:46px;
-        height:46px;
-
+    .bottom-nav-icon{
         font-size:21px;
 
-        border-radius:13px;
-
-        margin-bottom:9px;
+        width:27px;
+        height:27px;
     }
 
-    .nav-card-title{
-        font-size:13px;
-    }
-
-    .nav-card-description{
+    .bottom-nav-item span{
         font-size:10px;
     }
 
+
+    /* ======================================
+       MAIN
+    ====================================== */
 
     .container{
         padding:
             28px
             15px
-            50px;
+            100px;
     }
 
     .welcome{
@@ -1017,24 +1103,31 @@ footer{
 
     .welcome p{
         font-size:14px;
+
         line-height:1.5;
     }
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
+
         gap:10px;
+
         margin-bottom:35px;
     }
 
     .stat-card{
         padding:17px;
+
         border-radius:15px;
     }
 
     .stat-icon{
         width:38px;
         height:38px;
+
         font-size:18px;
+
         margin-bottom:11px;
     }
 
@@ -1060,12 +1153,15 @@ footer{
 
     .search-box input{
         height:52px;
+
         font-size:15px;
     }
 
     .category-header{
         min-height:53px;
+
         padding:9px 12px;
+
         border-radius:12px;
     }
 
@@ -1075,12 +1171,15 @@ footer{
 
     .view-all-btn{
         padding:7px 14px;
+
         font-size:12px;
     }
 
     .product-card{
         min-height:105px;
+
         padding:13px 12px;
+
         gap:11px;
     }
 
@@ -1091,6 +1190,7 @@ footer{
 
     .product-name{
         font-size:15px;
+
         margin-bottom:8px;
     }
 
@@ -1101,6 +1201,7 @@ footer{
     .product-price,
     .product-stock{
         padding:7px 11px;
+
         font-size:13px;
     }
 
@@ -1110,45 +1211,55 @@ footer{
 
     .buy-btn{
         min-width:60px;
+
         min-height:43px;
+
         padding:7px 9px;
+
         font-size:12px;
+    }
+
+    footer{
+        padding-bottom:100px;
     }
 
 }
 
 
 /* ==========================================
-   SMALL MOBILE
+   VERY SMALL PHONES
 ========================================== */
 
 @media(max-width:390px){
 
+    .bottom-nav{
+        height:70px;
+    }
+
+    .bottom-nav-icon{
+        font-size:19px;
+
+        width:25px;
+        height:25px;
+    }
+
+    .bottom-nav-item span{
+        font-size:9px;
+    }
+
+    body{
+        padding-bottom:70px;
+    }
+
     .browse-btn{
         padding:8px 10px;
+
         font-size:11px;
-    }
-
-    .dashboard-nav{
-        gap:8px;
-    }
-
-    .nav-card{
-        min-height:105px;
-    }
-
-    .nav-card-icon{
-        width:42px;
-        height:42px;
-        font-size:19px;
-    }
-
-    .nav-card-title{
-        font-size:12px;
     }
 
     .product-card{
         gap:8px;
+
         padding:12px 9px;
     }
 
@@ -1164,12 +1275,15 @@ footer{
     .product-price,
     .product-stock{
         padding:6px 9px;
+
         font-size:12px;
     }
 
     .buy-btn{
         min-width:55px;
+
         min-height:40px;
+
         font-size:11px;
     }
 
@@ -1179,6 +1293,7 @@ footer{
 
     .view-all-btn{
         padding:6px 11px;
+
         font-size:11px;
     }
 
@@ -1212,7 +1327,6 @@ footer{
     </div>
 
 </div>
-
 
 
 <!-- ==========================================
@@ -1257,138 +1371,11 @@ footer{
 </header>
 
 
-
 <!-- ==========================================
      MAIN
 ========================================== -->
 
 <main class="container">
-
-
-    <!-- ======================================
-         DASHBOARD NAVIGATION
-    ======================================= -->
-
-    <section class="dashboard-nav">
-
-
-        <!-- HOME -->
-
-        <a
-            href="dashboard.html"
-            class="nav-card"
-        >
-
-            <div class="nav-card-icon">
-                🏠
-            </div>
-
-            <div class="nav-card-title">
-                Home
-            </div>
-
-            <div class="nav-card-description">
-                Main dashboard
-            </div>
-
-        </a>
-
-
-
-        <!-- FUND WALLET -->
-
-        <a
-            href="wallet.html"
-            class="nav-card"
-        >
-
-            <div class="nav-card-icon">
-                💳
-            </div>
-
-            <div class="nav-card-title">
-                Fund Wallet
-            </div>
-
-            <div class="nav-card-description">
-                Add money
-            </div>
-
-        </a>
-
-
-
-        <!-- MY ORDERS -->
-
-        <a
-            href="orders.html"
-            class="nav-card"
-        >
-
-            <div class="nav-card-icon">
-                📦
-            </div>
-
-            <div class="nav-card-title">
-                My Orders
-            </div>
-
-            <div class="nav-card-description">
-                View purchases
-            </div>
-
-        </a>
-
-
-
-        <!-- PROFILE -->
-
-        <a
-            href="profile.html"
-            class="nav-card"
-        >
-
-            <div class="nav-card-icon">
-                👤
-            </div>
-
-            <div class="nav-card-title">
-                Profile
-            </div>
-
-            <div class="nav-card-description">
-                Manage account
-            </div>
-
-        </a>
-
-
-
-        <!-- LOGOUT -->
-
-        <button
-            type="button"
-            class="nav-card logout-card"
-            id="logoutCard"
-        >
-
-            <div class="nav-card-icon">
-                🚪
-            </div>
-
-            <div class="nav-card-title">
-                Logout
-            </div>
-
-            <div class="nav-card-description">
-                Sign out
-            </div>
-
-        </button>
-
-
-    </section>
-
 
 
     <!-- ======================================
@@ -1414,7 +1401,6 @@ footer{
         </p>
 
     </section>
-
 
 
     <!-- ======================================
@@ -1446,7 +1432,6 @@ footer{
         </div>
 
 
-
         <!-- ORDERS -->
 
         <div class="stat-card">
@@ -1467,7 +1452,6 @@ footer{
             </div>
 
         </div>
-
 
 
         <!-- AVAILABLE PRODUCTS -->
@@ -1492,7 +1476,6 @@ footer{
         </div>
 
 
-
         <!-- NOTIFICATIONS -->
 
         <div class="stat-card">
@@ -1501,9 +1484,7 @@ footer{
                 🔔
             </div>
 
-            <div
-                class="stat-title"
-            >
+            <div class="stat-title">
                 Notifications
             </div>
 
@@ -1518,7 +1499,6 @@ footer{
 
 
     </section>
-
 
 
     <!-- ======================================
@@ -1539,7 +1519,6 @@ footer{
             </p>
 
         </div>
-
 
 
         <!-- SEARCH BAR -->
@@ -1582,12 +1561,9 @@ footer{
         </div>
 
 
-
         <!-- PRODUCTS -->
 
-        <div
-            id="productSections"
-        >
+        <div id="productSections">
 
             <div class="products-loading">
 
@@ -1608,7 +1584,6 @@ footer{
 </main>
 
 
-
 <!-- ==========================================
      FOOTER
 ========================================== -->
@@ -1622,6 +1597,106 @@ footer{
 
 </footer>
 
+
+<!-- ==========================================
+     FIXED BOTTOM NAVIGATION
+========================================== -->
+
+<nav class="bottom-nav">
+
+
+    <!-- HOME -->
+
+    <a
+        href="dashboard.html"
+        class="bottom-nav-item active"
+    >
+
+        <div class="bottom-nav-icon">
+            🏠
+        </div>
+
+        <span>
+            Home
+        </span>
+
+    </a>
+
+
+    <!-- FUND WALLET -->
+
+    <a
+        href="wallet.html"
+        class="bottom-nav-item"
+    >
+
+        <div class="bottom-nav-icon">
+            💳
+        </div>
+
+        <span>
+            Fund Wallet
+        </span>
+
+    </a>
+
+
+    <!-- MY ORDERS -->
+
+    <a
+        href="orders.html"
+        class="bottom-nav-item"
+    >
+
+        <div class="bottom-nav-icon">
+            📦
+        </div>
+
+        <span>
+            My Orders
+        </span>
+
+    </a>
+
+
+    <!-- PROFILE -->
+
+    <a
+        href="profile.html"
+        class="bottom-nav-item"
+    >
+
+        <div class="bottom-nav-icon">
+            👤
+        </div>
+
+        <span>
+            Profile
+        </span>
+
+    </a>
+
+
+    <!-- LOGOUT -->
+
+    <button
+        type="button"
+        class="bottom-nav-item logout-nav-item"
+        id="logoutCard"
+    >
+
+        <div class="bottom-nav-icon">
+            🚪
+        </div>
+
+        <span id="logoutText">
+            Logout
+        </span>
+
+    </button>
+
+
+</nav>
 
 
 <script type="module">
@@ -1656,7 +1731,6 @@ import {
 from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
-
 const firebaseConfig = {
 
     apiKey:
@@ -1686,7 +1760,6 @@ const firebaseConfig = {
 };
 
 
-
 const app =
     initializeApp(
         firebaseConfig
@@ -1699,7 +1772,6 @@ const auth =
 
 const db =
     getDatabase(app);
-
 
 
 /* ==========================================
@@ -1727,6 +1799,12 @@ const welcomeName =
 const logoutCard =
     document.getElementById(
         "logoutCard"
+    );
+
+
+const logoutText =
+    document.getElementById(
+        "logoutText"
     );
 
 
@@ -1784,13 +1862,11 @@ const searchResultCount =
     );
 
 
-
 /* ==========================================
    GLOBAL PRODUCT DATA
 ========================================== */
 
 let allProducts = [];
-
 
 
 /* ==========================================
@@ -1859,7 +1935,6 @@ onAuthStateChanged(
 );
 
 
-
 /* ==========================================
    LOAD WALLET
 ========================================== */
@@ -1906,6 +1981,7 @@ function loadWallet(uid){
                 error
             );
 
+
             walletBalance.textContent =
                 "₦0.00";
 
@@ -1914,7 +1990,6 @@ function loadWallet(uid){
     );
 
 }
-
 
 
 /* ==========================================
@@ -1966,6 +2041,7 @@ function loadCustomerOrders(uid){
                 error
             );
 
+
             ordersCount.textContent =
                 "0";
 
@@ -1974,7 +2050,6 @@ function loadCustomerOrders(uid){
     );
 
 }
-
 
 
 /* ==========================================
@@ -2050,6 +2125,7 @@ function loadAvailableProducts(){
                 error
             );
 
+
             availableProducts.textContent =
                 "0";
 
@@ -2058,7 +2134,6 @@ function loadAvailableProducts(){
     );
 
 }
-
 
 
 /* ==========================================
@@ -2233,7 +2308,6 @@ function loadProducts(){
 }
 
 
-
 /* ==========================================
    RENDER PRODUCTS
 ========================================== */
@@ -2266,8 +2340,10 @@ function renderProducts(
 
         `;
 
+
         searchResultInfo.style.display =
             "none";
+
 
         return;
 
@@ -2425,7 +2501,6 @@ function renderProducts(
     );
 
 }
-
 
 
 /* ==========================================
@@ -2666,8 +2741,10 @@ function createProductCard(
         buyBtn.textContent =
             "Sold Out";
 
+
         buyBtn.disabled =
             true;
+
 
         buyBtn.classList.add(
             "out"
@@ -2714,7 +2791,6 @@ function createProductCard(
 }
 
 
-
 /* ==========================================
    SEARCH
 ========================================== */
@@ -2736,12 +2812,15 @@ productSearch.addEventListener(
             clearSearch.style.display =
                 "none";
 
+
             searchResultInfo.style.display =
                 "none";
+
 
             renderProducts(
                 allProducts
             );
+
 
             return;
 
@@ -2836,6 +2915,7 @@ productSearch.addEventListener(
 
             `;
 
+
             return;
 
         }
@@ -2849,7 +2929,6 @@ productSearch.addEventListener(
 );
 
 
-
 /* ==========================================
    CLEAR SEARCH
 ========================================== */
@@ -2861,21 +2940,24 @@ clearSearch.addEventListener(
         productSearch.value =
             "";
 
+
         clearSearch.style.display =
             "none";
 
+
         searchResultInfo.style.display =
             "none";
+
 
         renderProducts(
             allProducts
         );
 
+
         productSearch.focus();
 
     }
 );
-
 
 
 /* ==========================================
@@ -2893,7 +2975,6 @@ function openProduct(
         );
 
 }
-
 
 
 /* ==========================================
@@ -2922,7 +3003,6 @@ function formatMoney(
     );
 
 }
-
 
 
 /* ==========================================
@@ -3014,7 +3094,6 @@ function getProductEmoji(
 }
 
 
-
 /* ==========================================
    ESCAPE HTML
 ========================================== */
@@ -3055,7 +3134,6 @@ function escapeHtml(
 }
 
 
-
 /* ==========================================
    LOGOUT
 ========================================== */
@@ -3067,9 +3145,8 @@ logoutCard.addEventListener(
         logoutCard.disabled =
             true;
 
-        logoutCard.querySelector(
-            ".nav-card-title"
-        ).textContent =
+
+        logoutText.textContent =
             "Logging out...";
 
 
@@ -3096,9 +3173,7 @@ logoutCard.addEventListener(
                 false;
 
 
-            logoutCard.querySelector(
-                ".nav-card-title"
-            ).textContent =
+            logoutText.textContent =
                 "Logout";
 
 
@@ -3112,7 +3187,6 @@ logoutCard.addEventListener(
 );
 
 
-
 /* ==========================================
    YEAR
 ========================================== */
@@ -3121,7 +3195,6 @@ document.getElementById(
     "year"
 ).textContent =
     new Date().getFullYear();
-
 
 </script>
 
