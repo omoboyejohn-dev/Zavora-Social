@@ -17,6 +17,7 @@
             background: #ffffff;
             color: #111111;
             min-height: 100vh;
+            padding-bottom: 90px;
         }
 
         a {
@@ -389,6 +390,71 @@
             border-top: 1px solid #f3f4f6;
         }
 
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 76px;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 8px 10px;
+            z-index: 5000;
+            box-shadow: 0 -6px 25px rgba(17, 24, 39, 0.08);
+        }
+
+        .bottom-nav a,
+        .bottom-nav button {
+            flex: 1;
+            max-width: 110px;
+            height: 58px;
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-family: inherit;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+
+        .bottom-nav .nav-icon {
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        .bottom-nav .nav-text {
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .bottom-nav a:hover,
+        .bottom-nav button:hover {
+            color: #7e22ce;
+            background: #faf5ff;
+        }
+
+        .bottom-nav a.active {
+            color: #7e22ce;
+            background: #f5f3ff;
+        }
+
+        .bottom-nav button.logout-nav:hover {
+            color: #dc2626;
+            background: #fef2f2;
+        }
+
         /* MOBILE */
         @media (max-width: 800px) {
             .content-grid {
@@ -409,6 +475,10 @@
         }
 
         @media (max-width: 520px) {
+            body {
+                padding-bottom: 95px;
+            }
+
             header {
                 height: 65px;
                 padding: 0 15px;
@@ -470,6 +540,34 @@
 
             .links-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .bottom-nav {
+                height: 82px;
+                padding: 7px 5px;
+            }
+
+            .bottom-nav a,
+            .bottom-nav button {
+                height: 62px;
+            }
+
+            .bottom-nav .nav-icon {
+                font-size: 19px;
+            }
+
+            .bottom-nav .nav-text {
+                font-size: 9px;
+            }
+        }
+
+        @media (min-width: 521px) {
+            .bottom-nav {
+                display: none;
+            }
+
+            body {
+                padding-bottom: 0;
             }
         }
     </style>
@@ -762,6 +860,37 @@
 </footer>
 
 
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+
+    <a href="dashboard.html">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-text">Home</span>
+    </a>
+
+    <a href="wallet.html">
+        <span class="nav-icon">💳</span>
+        <span class="nav-text">Fund Wallet</span>
+    </a>
+
+    <a href="orders.html">
+        <span class="nav-icon">📦</span>
+        <span class="nav-text">My Orders</span>
+    </a>
+
+    <a href="profile.html" class="active">
+        <span class="nav-icon">👤</span>
+        <span class="nav-text">Profile</span>
+    </a>
+
+    <button type="button" class="logout-nav" id="logoutNav">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-text">Logout</span>
+    </button>
+
+</nav>
+
+
 <script type="module">
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
@@ -857,23 +986,32 @@
     });
 
 
-    /* LOGOUT */
+    /* LOGOUT FUNCTION */
+    async function logoutUser() {
+
+        try {
+
+            await signOut(auth);
+
+            window.location.href = "login.html";
+
+        } catch (error) {
+
+            console.error("Logout error:", error);
+
+        }
+
+    }
+
+
+    /* TOP LOGOUT */
     document.getElementById("logoutBtn")
-        .addEventListener("click", async () => {
+        .addEventListener("click", logoutUser);
 
-            try {
 
-                await signOut(auth);
-
-                window.location.href = "login.html";
-
-            } catch (error) {
-
-                console.error("Logout error:", error);
-
-            }
-
-        });
+    /* BOTTOM LOGOUT */
+    document.getElementById("logoutNav")
+        .addEventListener("click", logoutUser);
 
 
     /* CHANGE PASSWORD */
